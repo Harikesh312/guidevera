@@ -10,22 +10,22 @@ export default function RoleSelection() {
 
   const roles = [
     {
-      id: "counselor",
-      title: "Counselor",
+      id: "student",
+      title: "Student",
       description: "Manage student guidance, schedule sessions, and track performance.",
       icon: <Users className="w-5 h-5 text-black" />
     },
 
     {
-      id: "student",
-      title: "Student",
+      id: "admin",
+      title: "Admin",
       description: "Access learning materials, track your progress, and connect with peers.",
       icon: <GraduationCap className="w-5 h-5 text-white/70" />
     },
 
     {
-      id: "admin",
-      title: "Admin",
+      id: "counselor",
+      title: "Counselor",
       description: "Oversee platform settings, manage users, and configure integrations.",
       icon: <Shield className="w-5 h-5 text-white/70" />
     }
