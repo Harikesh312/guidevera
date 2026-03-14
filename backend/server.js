@@ -16,6 +16,8 @@ mongoose.connect(process.env.MONGO_URI)
 
 // Routes
 app.use('/api/auth', require('./routes/auth'));
+app.use('/api/counseling', require('./routes/counseling'));
+app.use('/api/roadmap', require('./routes/roadmap'));
 
 app.get('/', (req, res) => {
   res.send('Guidevera API is running...');

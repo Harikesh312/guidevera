@@ -4,28 +4,40 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, ChevronDown, LogOut, Settings } from "lucide-react";
+import { Menu, X, ChevronDown, LogOut, Settings, Map, Brain } from "lucide-react";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [user, setUser] = useState(null);
+  const [hasRoadmap, setHasRoadmap] = useState(false);
+  const [testCompleted, setTestCompleted] = useState(false);
   const pathname = usePathname();
 
   React.useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
-      try {
-        setUser(JSON.parse(storedUser));
-      } catch (e) {
-        console.error("Failed to parse user session");
-      }
+      try { setUser(JSON.parse(storedUser)); } catch (e) { console.error("Failed to parse user session"); }
+    }
+    // Check test completed flag from localStorage
+    setTestCompleted(!!localStorage.getItem("testCompleted"));
+
+    // Check if user has a roadmap in DB (auth-protected)
+    const token = localStorage.getItem("token");
+    if (token) {
+      fetch("http://localhost:5000/api/roadmap/has", {
+        headers: { "Authorization": `Bearer ${token}` },
+      })
+        .then(r => r.json())
+        .then(json => { if (json.success) setHasRoadmap(json.hasRoadmap); })
+        .catch(() => {}); // fail silently — button just stays hidden
     }
   }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
+    localStorage.removeItem("testCompleted");
     setUser(null);
     setIsProfileOpen(false);
     window.location.href = "/login";
@@ -48,6 +60,7 @@ export default function Navbar() {
             <div className="hidden md:flex items-center gap-8">
               <Link href="/" className={`text-sm font-medium transition-colors ${pathname === "/" ? "text-white" : "text-white/60 hover:text-[#0EB4A6]"}`}>Home</Link>
               <Link href="/colleges" className={`text-sm font-medium transition-colors ${pathname === "/colleges" ? "text-white" : "text-white/60 hover:text-[#0EB4A6]"}`}>Colleges</Link>
+              <Link href="/counseling" className={`text-sm font-medium transition-colors ${pathname === "/counseling" ? "text-white" : "text-white/60 hover:text-[#0EB4A6]"}`}>Counseling</Link>
               <a href="#" className="text-sm font-medium text-white/60 hover:text-[#0EB4A6] transition-colors">Exams</a>
               <a href="#" className="text-sm font-medium text-white/60 hover:text-[#0EB4A6] transition-colors">Courses</a>
               <a href="#" className="text-sm font-medium text-white/60 hover:text-[#0EB4A6] transition-colors">Study Abroad</a>
@@ -70,7 +83,7 @@ export default function Navbar() {
 
                   {/* Dropdown */}
                   {isProfileOpen && (
-                    <div className="absolute right-0 mt-2 w-52 bg-[#111113] border border-white/10 rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.5)] z-50 overflow-hidden cursor-pointer">
+                    <div className="absolute right-0 mt-2 w-56 bg-[#111113] border border-white/10 rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.5)] z-50 overflow-hidden cursor-pointer">
 
                       {/* User Info */}
                       <div className="px-4 pt-4 pb-3 border-b border-white/8">
@@ -82,11 +95,41 @@ export default function Navbar() {
                       <div className="p-1.5">
                         <Link
                           href="#"
+                          onClick={() => setIsProfileOpen(false)}
                           className="flex items-center gap-2.5 px-3 py-2 text-sm text-white/60 hover:text-white hover:bg-white/5 rounded-xl transition-colors"
                         >
                           <Settings className="w-4 h-4 shrink-0" />
-                          Profile & Settings
+                          Profile &amp; Settings
                         </Link>
+
+                        {/* My Roadmap – only if roadmap exists */}
+                        {hasRoadmap && (
+                          <Link
+                            href="/ability-test/roadmap"
+                            onClick={() => setIsProfileOpen(false)}
+                            className="flex items-center gap-2.5 px-3 py-2 text-sm text-[#0EB4A6] hover:text-[#0c9c90] hover:bg-[#0EB4A6]/5 rounded-xl transition-colors"
+                          >
+                            <Map className="w-4 h-4 shrink-0" />
+                            My Roadmap
+                          </Link>
+                        )}
+
+                        {/* Ability Test – disabled if already completed */}
+                        {testCompleted ? (
+                          <div className="flex items-center gap-2.5 px-3 py-2 text-sm text-white/20 rounded-xl cursor-not-allowed select-none">
+                            <Brain className="w-4 h-4 shrink-0" />
+                            Test Completed ✓
+                          </div>
+                        ) : (
+                          <Link
+                            href="/ability-test"
+                            onClick={() => setIsProfileOpen(false)}
+                            className="flex items-center gap-2.5 px-3 py-2 text-sm text-white/60 hover:text-white hover:bg-white/5 rounded-xl transition-colors"
+                          >
+                            <Brain className="w-4 h-4 shrink-0" />
+                            Start Ability Test
+                          </Link>
+                        )}
 
                         <div className="border-t border-white/5 my-1" />
 
@@ -124,6 +167,7 @@ export default function Navbar() {
           <div className="md:hidden bg-[#09090b] border-b border-white/5 absolute w-full left-0 p-4 flex flex-col gap-4">
             <Link href="/" className={`text-sm font-medium transition-colors ${pathname === "/" ? "text-white" : "text-white/60 hover:text-[#0EB4A6]"}`} onClick={() => setIsMenuOpen(false)}>Home</Link>
             <Link href="/colleges" className={`text-sm font-medium transition-colors ${pathname === "/colleges" ? "text-white" : "text-white/60 hover:text-[#0EB4A6]"}`} onClick={() => setIsMenuOpen(false)}>Colleges</Link>
+            <Link href="/counseling" className={`text-sm font-medium transition-colors ${pathname === "/counseling" ? "text-white" : "text-white/60 hover:text-[#0EB4A6]"}`} onClick={() => setIsMenuOpen(false)}>Counseling</Link>
             <a href="#" className="text-sm font-medium text-white/60 hover:text-[#0EB4A6] transition-colors">Exams</a>
             <a href="#" className="text-sm font-medium text-white/60 hover:text-[#0EB4A6] transition-colors">Courses</a>
             <a href="#" className="text-sm font-medium text-white/60 hover:text-[#0EB4A6] transition-colors">Study Abroad</a>
@@ -140,8 +184,22 @@ export default function Navbar() {
                   </div>
                 </div>
                 <Link href="#" className="text-sm text-white/60 hover:text-white transition-colors flex items-center gap-2" onClick={() => setIsMenuOpen(false)}>
-                  <Settings className="w-4 h-4" /> Profile & Settings
+                  <Settings className="w-4 h-4" /> Profile &amp; Settings
                 </Link>
+                {hasRoadmap && (
+                  <Link href="/ability-test/roadmap" className="text-sm text-[#0EB4A6] flex items-center gap-2" onClick={() => setIsMenuOpen(false)}>
+                    <Map className="w-4 h-4" /> My Roadmap
+                  </Link>
+                )}
+                {testCompleted ? (
+                  <span className="text-sm text-white/20 flex items-center gap-2 cursor-not-allowed">
+                    <Brain className="w-4 h-4" /> Test Completed ✓
+                  </span>
+                ) : (
+                  <Link href="/ability-test" className="text-sm text-white/60 hover:text-white transition-colors flex items-center gap-2" onClick={() => setIsMenuOpen(false)}>
+                    <Brain className="w-4 h-4" /> Start Ability Test
+                  </Link>
+                )}
                 <button
                   onClick={() => { handleLogout(); setIsMenuOpen(false); }}
                   className="text-sm text-red-400 transition-colors flex items-center gap-2 text-left"
