@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import CollegesClient from './CollegesClient';
 
 export const metadata = {
@@ -6,5 +7,13 @@ export const metadata = {
 };
 
 export default function Page() {
-  return <CollegesClient />;
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-[#09090b] flex items-center justify-center">
+        <div className="w-10 h-10 border-2 border-[#0EB4A6] border-t-transparent rounded-full animate-spin" />
+      </div>
+    }>
+      <CollegesClient />
+    </Suspense>
+  );
 }

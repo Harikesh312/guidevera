@@ -30,7 +30,7 @@ export default function SignupClient() {
       });
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.user));
-      window.location.href = "/role-selection";
+      window.location.href = "/";
     } catch (err) {
       alert(err.response?.data?.msg || "Registration failed");
     } finally {

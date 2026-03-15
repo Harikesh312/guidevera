@@ -42,16 +42,16 @@ export default function AbilityTestClient() {
               <div className="flex flex-col sm:flex-row gap-4 mb-10">
                 <button
                   onClick={handleStartTest}
-                  className="px-8 py-4 bg-[#0EB4A6] hover:bg-[#0c9c90] text-white rounded-full font-bold transition-all shadow-[0_0_20px_rgba(14,180,166,0.4)] flex items-center gap-2 justify-center"
+                  className="px-8 py-4 bg-[#0EB4A6] hover:bg-[#0c9c90] text-white rounded-full font-bold transition-all shadow-[0_0_20px_rgba(14,180,166,0.4)] flex items-center gap-2 justify-center cursor-pointer"
                 >
                   Start Ability Test <ArrowRight className="w-5 h-5" />
                 </button>
-                <a
-                  href="#how-it-works"
-                  className="px-8 py-4 bg-transparent border border-white/20 hover:bg-white/5 text-white rounded-full font-bold transition-all flex items-center gap-2 justify-center"
+                <button
+                  onClick={() => document.getElementById("how-it-works").scrollIntoView({ behavior: "smooth" })}
+                  className="px-8 py-4 bg-transparent border border-white/20 hover:bg-white/5 text-white rounded-full font-bold transition-all flex items-center gap-2 justify-center cursor-pointer"
                 >
                   How It Works
-                </a>
+                </button>
               </div>
 
               {/* Social Proof */}
@@ -293,7 +293,7 @@ export default function AbilityTestClient() {
           >
             <button
               onClick={handleStartTest}
-              className="px-12 py-5 bg-[#0EB4A6] hover:bg-[#0c9c90] text-white rounded-full font-bold text-lg transition-all shadow-[0_0_30px_rgba(14,180,166,0.4)] inline-flex items-center gap-2"
+              className="px-12 py-5 bg-[#0EB4A6] hover:bg-[#0c9c90] text-white rounded-full font-bold text-lg transition-all shadow-[0_0_30px_rgba(14,180,166,0.4)] inline-flex items-center gap-2 cursor-pointer"
             >
               Start Your Free Test Now 🚀
             </button>

@@ -62,9 +62,7 @@ export default function CounselingClient() {
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-12">
           {/* Badge + Heading + Subtext + CTA */}
           <div className="mb-8">
-            <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-red-500/10 border border-red-500/20 text-xs font-bold text-red-400 tracking-widest mb-5 block w-fit">
-              LIMITED SLOTS AVAILABLE
-            </span>
+          
             <h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight leading-tight max-w-2xl">
               Book a Personalized <span className="text-[#0EB4A6]">Career Counseling Session</span>
             </h1>
@@ -73,7 +71,7 @@ export default function CounselingClient() {
             </p>
             <button
               onClick={() => document.getElementById("counseling-form").scrollIntoView({ behavior: "smooth" })}
-              className="px-8 py-4 bg-[#0EB4A6] hover:bg-[#0c9c90] text-white rounded-full font-bold transition-all shadow-[0_0_20px_rgba(14,180,166,0.3)]"
+              className="px-8 py-4 bg-[#0EB4A6] hover:bg-[#0c9c90] text-white rounded-full font-bold transition-all shadow-[0_0_20px_rgba(14,180,166,0.3)] cursor-pointer"
             >
               Schedule Your Session
             </button>
@@ -160,7 +158,7 @@ export default function CounselingClient() {
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full py-4 bg-[#0EB4A6] hover:bg-[#0c9c90] text-white font-bold rounded-xl transition-all disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                  className="w-full py-4 bg-[#0EB4A6] hover:bg-[#0c9c90] text-white font-bold rounded-xl transition-all disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer"
                 >
                   {isLoading ? (
                     <><div className="w-4 h-4 border-2 border-black/40 border-t-black rounded-full animate-spin" /> Confirming...</>

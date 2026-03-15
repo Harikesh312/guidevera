@@ -275,7 +275,7 @@ export default function CollegesPage() {
                   <button className="py-2.5 rounded-lg border border-white/10 text-xs font-semibold hover:bg-white/5 transition-colors text-white">
                     View Details
                   </button>
-                  <button className="py-2.5 rounded-lg bg-[#0EB4A6] hover:bg-[#0c9c90] text-xs font-semibold text-white transition-colors shadow-[0_4px_14px_rgba(14,180,166,0.3)]">
+                  <button className="py-2.5 rounded-lg bg-[#0EB4A6] hover:bg-[#0c9c90] text-xs font-semibold text-white transition-colors shadow-[0_4px_14px_rgba(14,180,166,0.3)] cursor-pointer">
                     Start Ability Test
                   </button>
                 </div>

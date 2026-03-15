@@ -61,9 +61,8 @@ export default function Navbar() {
               <Link href="/" className={`text-sm font-medium transition-colors ${pathname === "/" ? "text-white" : "text-white/60 hover:text-[#0EB4A6]"}`}>Home</Link>
               <Link href="/colleges" className={`text-sm font-medium transition-colors ${pathname === "/colleges" ? "text-white" : "text-white/60 hover:text-[#0EB4A6]"}`}>Colleges</Link>
               <Link href="/counseling" className={`text-sm font-medium transition-colors ${pathname === "/counseling" ? "text-white" : "text-white/60 hover:text-[#0EB4A6]"}`}>Counseling</Link>
-              <a href="#" className="text-sm font-medium text-white/60 hover:text-[#0EB4A6] transition-colors">Exams</a>
-              <a href="#" className="text-sm font-medium text-white/60 hover:text-[#0EB4A6] transition-colors">Courses</a>
-              <a href="#" className="text-sm font-medium text-white/60 hover:text-[#0EB4A6] transition-colors">Study Abroad</a>
+              <Link href="/ability-test" className={`text-sm font-medium transition-colors ${pathname === "/ability-test" ? "text-white" : "text-white/60 hover:text-[#0EB4A6]"}`}>Exams</Link>
+              <Link href="/about" className={`text-sm font-medium transition-colors ${pathname === "/about" ? "text-white" : "text-white/60 hover:text-[#0EB4A6]"}`}>About Us</Link>
             </div>
 
             {/* Actions / Auth */}
@@ -168,9 +167,8 @@ export default function Navbar() {
             <Link href="/" className={`text-sm font-medium transition-colors ${pathname === "/" ? "text-white" : "text-white/60 hover:text-[#0EB4A6]"}`} onClick={() => setIsMenuOpen(false)}>Home</Link>
             <Link href="/colleges" className={`text-sm font-medium transition-colors ${pathname === "/colleges" ? "text-white" : "text-white/60 hover:text-[#0EB4A6]"}`} onClick={() => setIsMenuOpen(false)}>Colleges</Link>
             <Link href="/counseling" className={`text-sm font-medium transition-colors ${pathname === "/counseling" ? "text-white" : "text-white/60 hover:text-[#0EB4A6]"}`} onClick={() => setIsMenuOpen(false)}>Counseling</Link>
-            <a href="#" className="text-sm font-medium text-white/60 hover:text-[#0EB4A6] transition-colors">Exams</a>
-            <a href="#" className="text-sm font-medium text-white/60 hover:text-[#0EB4A6] transition-colors">Courses</a>
-            <a href="#" className="text-sm font-medium text-white/60 hover:text-[#0EB4A6] transition-colors">Study Abroad</a>
+            <Link href="/ability-test" className={`text-sm font-medium transition-colors ${pathname === "/ability-test" ? "text-white" : "text-white/60 hover:text-[#0EB4A6]"}`} onClick={() => setIsMenuOpen(false)}>Exams</Link>
+            <Link href="/about" className={`text-sm font-medium transition-colors ${pathname === "/about" ? "text-white" : "text-white/60 hover:text-[#0EB4A6]"}`} onClick={() => setIsMenuOpen(false)}>About Us</Link>
             <hr className="border-white/10" />
             {user ? (
               <>

@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -26,16 +26,26 @@ import { requireAuth } from "../lib/authGuard";
 
 export default function HomeClient() {
   const router = useRouter();
+  const [homeSearch, setHomeSearch] = useState("");
+
+  const handleHomeSearch = () => {
+    const query = homeSearch.trim();
+    if (query) {
+      router.push(`/colleges?search=${encodeURIComponent(query)}`);
+    } else {
+      router.push('/colleges');
+    }
+  };
 
   const colleges = [
-    { id: 1, name: "Dbuu", courses: "B.Tech | MBA | BHM | BAMS", image: "/images/dbuu.jpg", rating: "4.9" },
-    { id: 2, name: "Uttranchal University", courses: "B.Tech | MBA | Law", image: "/images/Uttranchal-University.jpg", rating: "4.8" },
-    { id: 3, name: "Tulas Institute", courses: "Engineering", image: "/images/Tulas-Institute.jpg", rating: "4.7" },
-    { id: 4, name: "DBS", courses: "Commerce | MBA", image: "/images/DBS.jpg", rating: "4.8" },
-    { id: 5, name: "UPES", courses: "B.Tech | Law", image: "/images/UPES.jpg", rating: "4.9" },
-    { id: 6, name: "Shivalik College", courses: "Engineering Institute", image: "/images/shivalik-college.jpg", rating: "4.6" },
-    { id: 7, name: "Dolphin College", courses: "Allied Sciences", image: "/images/Dolphin-college.jpg", rating: "4.7" },
-    { id: 8, name: "Kukreja Institute", courses: "Hotel Management", image: "/images/DBS.jpg", rating: "4.5" },
+    { id: 1, slug: "dbuu", name: "Dbuu", courses: "B.Tech | MBA | BHM | BAMS", image: "/images/dbuu.jpg", rating: "4.9" },
+    { id: 2, slug: "uttranchal-university", name: "Uttranchal University", courses: "B.Tech | MBA | Law", image: "/images/Uttranchal-University.jpg", rating: "4.8" },
+    { id: 3, slug: null, name: "Tulas Institute", courses: "Engineering", image: "/images/Tulas-Institute.jpg", rating: "4.7" },
+    { id: 4, slug: null, name: "DBS", courses: "Commerce | MBA", image: "/images/DBS.jpg", rating: "4.8" },
+    { id: 5, slug: null, name: "UPES", courses: "B.Tech | Law", image: "/images/UPES.jpg", rating: "4.9" },
+    { id: 6, slug: null, name: "Shivalik College", courses: "Engineering Institute", image: "/images/shivalik-college.jpg", rating: "4.6" },
+    { id: 7, slug: null, name: "Dolphin College", courses: "Allied Sciences", image: "/images/Dolphin-college.jpg", rating: "4.7" },
+    { id: 8, slug: null, name: "Kukreja Institute", courses: "Hotel Management", image: "/images/DBS.jpg", rating: "4.5" },
   ];
 
   const fadeIn = {
@@ -105,11 +115,12 @@ export default function HomeClient() {
                 type="text" 
                 placeholder="Search colleges, courses, universities..." 
                 className="w-full bg-transparent border-none outline-none text-white placeholder:text-white/40 focus:ring-0 text-sm md:text-base" 
-                onClick={() => router.push('/colleges')}
-                onChange={() => router.push('/colleges')}
+                value={homeSearch}
+                onChange={(e) => setHomeSearch(e.target.value)}
+                onKeyDown={(e) => { if (e.key === 'Enter') handleHomeSearch(); }}
               />
             </div>
-            <button onClick={() => router.push('/colleges')} className="bg-[#0EB4A6] hover:bg-[#0c9c90] text-white px-8 py-3.5 rounded-full font-medium transition-all shadow-[0_0_15px_rgba(14,180,166,0.4)] w-full sm:w-auto">
+            <button onClick={handleHomeSearch} className="bg-[#0EB4A6] hover:bg-[#0c9c90] text-white px-8 py-3.5 rounded-full font-medium transition-all shadow-[0_0_15px_rgba(14,180,166,0.4)] w-full sm:w-auto cursor-pointer">
               Search
             </button>
           </motion.div>
@@ -182,12 +193,24 @@ export default function HomeClient() {
                   </div>
                   
                   <div className="grid grid-cols-2 gap-2">
-                    <button className="py-2.5 rounded-xl border border-white/10 text-sm font-medium hover:bg-white/10 transition-colors flex justify-center items-center gap-2">
-                      View Details
-                    </button>
+                    {college.slug ? (
+                      <Link
+                        href={`/colleges/${college.slug}`}
+                        className="w-full py-2.5 rounded-xl border border-white/10 text-sm font-medium hover:bg-white/10 transition-colors flex justify-center items-center gap-2"
+                      >
+                        View Details
+                      </Link>
+                    ) : (
+                      <button
+                        disabled
+                        className="w-full py-2.5 rounded-xl border border-white/5 text-sm font-medium text-white/20 cursor-not-allowed"
+                      >
+                        Coming Soon
+                      </button>
+                    )}
                     <button 
                       onClick={() => { if (requireAuth('/ability-test')) router.push('/ability-test'); }}
-                      className="py-2.5 rounded-xl bg-[#0EB4A6] hover:bg-[#0c9c90] text-sm font-medium text-white transition-colors shadow-[0_4px_14px_rgba(14,180,166,0.3)]"
+                      className="py-2.5 rounded-xl bg-[#0EB4A6] hover:bg-[#0c9c90] text-sm font-medium text-white transition-colors shadow-[0_4px_14px_rgba(14,180,166,0.3)] cursor-pointer"
                     >
                       Ability Test
                     </button>
@@ -366,7 +389,7 @@ export default function HomeClient() {
           >
             <button 
               onClick={() => { if (requireAuth('/ability-test')) router.push('/ability-test'); }}
-              className="w-full sm:w-auto px-10 py-4 bg-[#0EB4A6] hover:bg-[#0c9c90] text-white rounded-full font-bold transition-all shadow-[0_0_20px_rgba(14,180,166,0.3)] border border-[#0EB4A6]"
+              className="w-full sm:w-auto px-10 py-4 bg-[#0EB4A6] hover:bg-[#0c9c90] text-white rounded-full font-bold transition-all shadow-[0_0_20px_rgba(14,180,166,0.3)] border border-[#0EB4A6] cursor-pointer"
             >
               Start Ability Test
             </button>

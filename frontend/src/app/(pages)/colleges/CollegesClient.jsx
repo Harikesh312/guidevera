@@ -1,8 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
 import { MapPin, Star, ChevronDown, ArrowRight, Filter, Search as SearchIcon, ChevronLeft } from "lucide-react";
 import { motion } from "framer-motion";
 import Navbar from "../../../components/Navbar";
@@ -11,18 +12,27 @@ import { requireAuth } from "../../../lib/authGuard";
 
 export default function CollegesClient() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [searchInput, setSearchInput] = useState("");
   const [appliedSearchQuery, setAppliedSearchQuery] = useState("");
 
+  useEffect(() => {
+    const query = searchParams.get('search');
+    if (query) {
+      setSearchInput(query);
+      setAppliedSearchQuery(query);
+    }
+  }, [searchParams]);
+
   const colleges = [
-    { id: 1, name: "DBUU", location: "Uttarakhand, Dehradun", description: "A premier university offering diverse programs in B.Tech, MBA, BHM, and BAMS.", feeLabel: "Annual Fees", fee: "₹1,50,000", image: "/images/dbuu.jpg", rating: "4.9", tag: "TOP RANKED" },
-    { id: 2, name: "Uttranchal University", location: "Uttarakhand, Dehradun", description: "Known for academic excellence in B.Tech, MBA, and Law across the region.", feeLabel: "Semester Fees", fee: "₹85,000", image: "/images/Uttranchal-University.jpg", rating: "4.8", tag: "POPULAR" },
-    { id: 3, name: "Tulas Institute", location: "Uttarakhand, Dehradun", description: "A top engineering college with state-of-the-art infrastructure and placements.", feeLabel: "Annual Fees", fee: "₹1,20,000", image: "/images/Tulas-Institute.jpg", rating: "4.7", tag: "TOP RATED" },
-    { id: 4, name: "DBS", location: "Uttarakhand, Dehradun", description: "Leading business school focusing on holistic Commerce and MBA education.", feeLabel: "Annual Fees", fee: "₹2,10,000", image: "/images/DBS.jpg", rating: "4.8", tag: "TOP ROI" },
-    { id: 5, name: "UPES", location: "Uttarakhand, Dehradun", description: "A specialized university offering premium programs in B.Tech and Law.", feeLabel: "Semester Fees", fee: "₹1,80,000", image: "/images/UPES.jpg", rating: "4.9", tag: "TOP RANKED" },
-    { id: 6, name: "Shivalik College", location: "Uttarakhand, Dehradun", description: "A growing engineering institute with strong industry ties and modern facilities.", feeLabel: "Annual Fees", fee: "₹1,10,000", image: "/images/shivalik-college.jpg", rating: "4.6", tag: "AFFORDABLE" },
-    { id: 7, name: "Dolphin College", location: "Uttarakhand, Dehradun", description: "A specialized institution dedicated to advanced education in Allied Sciences.", feeLabel: "Annual Fees", fee: "₹95,000", image: "/images/Dolphin-college.jpg", rating: "4.7", tag: "TOP RATED" },
-    { id: 8, name: "Kukreja Institute", location: "Uttarakhand, Dehradun", description: "A prominent institution for aspiring professionals in Hotel Management.", feeLabel: "Annual Fees", fee: "₹1,05,000", image: "/images/DBS.jpg", rating: "4.5", tag: "POPULAR" },
+    { id: 1, slug: "dbuu", name: "DBUU", location: "Uttarakhand, Dehradun", description: "A premier university offering diverse programs in B.Tech, MBA, BHM, and BAMS.", feeLabel: "Annual Fees", fee: "₹1,50,000", image: "/images/dbuu.jpg", rating: "4.9", tag: "TOP RANKED" },
+    { id: 2, slug: "uttranchal-university", name: "Uttranchal University", location: "Uttarakhand, Dehradun", description: "Known for academic excellence in B.Tech, MBA, and Law across the region.", feeLabel: "Semester Fees", fee: "₹85,000", image: "/images/Uttranchal-University.jpg", rating: "4.8", tag: "POPULAR" },
+    { id: 3, slug: null, name: "Tulas Institute", location: "Uttarakhand, Dehradun", description: "A top engineering college with state-of-the-art infrastructure and placements.", feeLabel: "Annual Fees", fee: "₹1,20,000", image: "/images/Tulas-Institute.jpg", rating: "4.7", tag: "TOP RATED" },
+    { id: 4, slug: null, name: "DBS", location: "Uttarakhand, Dehradun", description: "Leading business school focusing on holistic Commerce and MBA education.", feeLabel: "Annual Fees", fee: "₹2,10,000", image: "/images/DBS.jpg", rating: "4.8", tag: "TOP ROI" },
+    { id: 5, slug: null, name: "UPES", location: "Uttarakhand, Dehradun", description: "A specialized university offering premium programs in B.Tech and Law.", feeLabel: "Semester Fees", fee: "₹1,80,000", image: "/images/UPES.jpg", rating: "4.9", tag: "TOP RANKED" },
+    { id: 6, slug: null, name: "Shivalik College", location: "Uttarakhand, Dehradun", description: "A growing engineering institute with strong industry ties and modern facilities.", feeLabel: "Annual Fees", fee: "₹1,10,000", image: "/images/shivalik-college.jpg", rating: "4.6", tag: "AFFORDABLE" },
+    { id: 7, slug: null, name: "Dolphin College", location: "Uttarakhand, Dehradun", description: "A specialized institution dedicated to advanced education in Allied Sciences.", feeLabel: "Annual Fees", fee: "₹95,000", image: "/images/Dolphin-college.jpg", rating: "4.7", tag: "TOP RATED" },
+    { id: 8, slug: null, name: "Kukreja Institute", location: "Uttarakhand, Dehradun", description: "A prominent institution for aspiring professionals in Hotel Management.", feeLabel: "Annual Fees", fee: "₹1,05,000", image: "/images/DBS.jpg", rating: "4.5", tag: "POPULAR" },
   ];
 
   const handleSearch = () => {
@@ -51,7 +61,7 @@ export default function CollegesClient() {
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
             onClick={handleBackToAll}
-            className="mb-6 bg-transparent border border-white/10 text-white/60 hover:text-white hover:border-white/20 rounded-full px-4 py-2 text-sm flex items-center gap-2 transition-all"
+            className="mb-6 bg-transparent border border-white/10 text-white/60 hover:text-white hover:border-white/20 rounded-full px-4 py-2 text-sm flex items-center gap-2 transition-all cursor-pointer"
           >
             <ChevronLeft className="w-4 h-4" />
             Back to All Colleges
@@ -189,12 +199,24 @@ export default function CollegesClient() {
                 </div>
                 
                 <div className="grid grid-cols-2 gap-3 mt-auto">
-                  <button className="py-2.5 rounded-lg border border-white/10 text-xs font-semibold hover:bg-white/5 transition-colors text-white">
-                    View Details
-                  </button>
+                  {college.slug ? (
+                    <Link
+                      href={`/colleges/${college.slug}`}
+                      className="py-2.5 rounded-lg border border-white/10 text-xs font-semibold hover:bg-white/5 transition-colors text-white text-center flex items-center justify-center"
+                    >
+                      View Details
+                    </Link>
+                  ) : (
+                    <button
+                      disabled
+                      className="py-2.5 rounded-lg border border-white/5 text-xs font-semibold text-white/20 cursor-not-allowed"
+                    >
+                      Coming Soon
+                    </button>
+                  )}
                   <button 
                     onClick={() => { if (requireAuth('/ability-test')) router.push('/ability-test'); }}
-                    className="py-2.5 rounded-lg bg-[#0EB4A6] hover:bg-[#0c9c90] text-xs font-semibold text-white transition-colors shadow-[0_4px_14px_rgba(14,180,166,0.3)]"
+                    className="py-2.5 rounded-lg bg-[#0EB4A6] hover:bg-[#0c9c90] text-xs font-semibold text-white transition-colors shadow-[0_4px_14px_rgba(14,180,166,0.3)] cursor-pointer"
                   >
                     Start Ability Test
                   </button>
