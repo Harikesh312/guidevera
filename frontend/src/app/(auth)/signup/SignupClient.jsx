@@ -5,6 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { User, Mail, Phone, Lock, Eye, EyeOff, CheckCircle, Check } from "lucide-react";
 import axios from "axios";
+import API_URL from "@/lib/api";
+
 
 export default function SignupClient() {
   const [showPassword, setShowPassword] = useState(false);
@@ -25,7 +27,7 @@ export default function SignupClient() {
     if (!formData.agreed) { alert("Please agree to the Terms of Service"); return; }
     setIsLoading(true);
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/register", {
+      const res = await axios.post(`${API_URL}/api/auth/register`, {
         name: formData.name, email: formData.email, password: formData.password, role: "student"
       });
       localStorage.setItem("token", res.data.token);

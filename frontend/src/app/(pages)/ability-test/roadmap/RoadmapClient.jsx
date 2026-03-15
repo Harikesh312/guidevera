@@ -9,6 +9,7 @@ import "react-circular-progressbar/dist/styles.css";
 import { CheckCircle, Download, Phone, ChevronRight, Quote } from "lucide-react";
 import Navbar from "../../../../components/Navbar";
 import Footer from "../../../../components/Footer";
+import API_URL from "@/lib/api";
 
 const growthColor = (outlook) => {
   if (!outlook) return "text-white/50 bg-white/5 border-white/10";
@@ -49,7 +50,7 @@ export default function RoadmapClient() {
         }
 
         // 2. Fetch from MongoDB
-        const res = await fetch("http://localhost:5000/api/roadmap/my", {
+        const res = await fetch(`${API_URL}/api/roadmap/my`, {
           headers: { "Authorization": `Bearer ${token}` },
         });
         const json = await res.json();

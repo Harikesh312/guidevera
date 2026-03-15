@@ -6,6 +6,8 @@ import Link from "next/link";
 import { Eye, EyeOff } from "lucide-react";
 import axios from "axios";
 import { useSearchParams } from "next/navigation";
+import API_URL from "@/lib/api";
+
 
 export default function LoginClient() {
   const [showPassword, setShowPassword] = useState(false);
@@ -21,7 +23,7 @@ export default function LoginClient() {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/login", {
+      const res = await axios.post(`${API_URL}/api/auth/login`, {
         email: formData.email,
         password: formData.password,
       });

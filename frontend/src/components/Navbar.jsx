@@ -5,6 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X, ChevronDown, LogOut, Settings, Map, Brain } from "lucide-react";
+import API_URL from "@/lib/api";
+
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -25,7 +27,7 @@ export default function Navbar() {
     // Check if user has a roadmap in DB (auth-protected)
     const token = localStorage.getItem("token");
     if (token) {
-      fetch("http://localhost:5000/api/roadmap/has", {
+      fetch(`${API_URL}/api/roadmap/has`, {
         headers: { "Authorization": `Bearer ${token}` },
       })
         .then(r => r.json())

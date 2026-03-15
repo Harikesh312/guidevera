@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { Route, GraduationCap, BookOpen, Target, Check, Shield } from "lucide-react";
 import Navbar from "../../../components/Navbar";
 import Footer from "../../../components/Footer";
+import API_URL from "@/lib/api";
 
 const inputClass = "bg-[#1A1A1D] border border-white/5 rounded-xl py-3 px-4 text-sm text-white placeholder:text-white/25 focus:outline-none focus:border-[#0EB4A6]/50 focus:ring-1 focus:ring-[#0EB4A6]/50 w-full transition-all";
 
@@ -34,7 +35,7 @@ export default function CounselingClient() {
     setIsLoading(true);
     setError("");
     try {
-      const res = await fetch("http://localhost:5000/api/counseling/book", {
+      const res = await fetch(`${API_URL}/api/counseling/book`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

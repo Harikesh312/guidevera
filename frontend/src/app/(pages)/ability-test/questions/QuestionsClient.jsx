@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, CheckCircle, Map, Phone } from "lucide-react";
 import { generateCareerRoadmap } from "../../../../lib/gemini";
 import Image from "next/image";
+import API_URL from "@/lib/api";
 
 const questions = [
   {
@@ -191,7 +192,7 @@ export default function QuestionsClient() {
 
       // 2. Persist to MongoDB (user-specific, auth-protected)
       const token = localStorage.getItem("token");
-      await fetch("http://localhost:5000/api/roadmap/save", {
+      await fetch(`${API_URL}/api/roadmap/save`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
