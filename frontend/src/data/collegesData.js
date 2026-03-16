@@ -114,6 +114,66 @@ export const collegesData = {
       { label: "PhD Programs", date: "Rolling Admissions" },
     ],
   },
+
+  "graphic-era": {
+    slug: "graphic-era",
+    name: "Graphic Era University",
+    shortName: "Graphic Era",
+    location: "Dehradun, Uttarakhand",
+    established: "1993",
+    campus: "100+ Acres",
+    ranking: "NAAC A+ Accredited University",
+    guarantee: "95% Placement Record",
+    tag: "TOP RATED",
+    rating: "4.7",
+    totalStudents: "15,000+",
+    programs: "75+",
+    heroImage: "/images/graphic-era.jpg",
+    websiteUrl: "https://www.geu.ac.in/",
+    applyUrl: "https://www.geu.ac.in/admission/",
+    about: "Graphic Era University is one of the most prestigious universities in Uttarakhand, established in 1993. It is a NAAC A+ accredited institution recognized for excellence in engineering, management, and technology education. The university has a strong focus on research, innovation, and industry-integrated curriculum. With over 15,000 students and 75+ programs, Graphic Era is known for outstanding placements and a vibrant campus life in the heart of Dehradun.",
+    badges: [
+      "NAAC A+ Accredited",
+      "UGC Recognized University",
+      "Top Engineering College in Uttarakhand",
+      "Strong Industry & Placement Network",
+    ],
+    stats: [
+      { label: "Established", value: "1993" },
+      { label: "Campus Area", value: "100+ Acres" },
+      { label: "Total Students", value: "15,000+" },
+      { label: "Programs Offered", value: "75+" },
+    ],
+    courses: [
+      { name: "B.Tech Computer Science & Engineering", type: "Full-Time Undergraduate", duration: "4 Years", fee: "₹1,25,000/yr", description: "Industry-aligned CSE program with AI, ML, Data Science and Cloud specializations." },
+      { name: "B.Tech Electronics & Communication", type: "Full-Time Undergraduate", duration: "4 Years", fee: "₹1,15,000/yr", description: "Comprehensive ECE program with embedded systems and VLSI design focus." },
+      { name: "MBA Management", type: "Full-Time Postgraduate", duration: "2 Years", fee: "₹95,000/yr", description: "Industry-focused MBA with Marketing, Finance and HR specializations." },
+      { name: "BCA Computer Applications", type: "Full-Time Undergraduate", duration: "3 Years", fee: "₹75,000/yr", description: "Modern computer applications program with hands-on project based learning." },
+      { name: "B.Sc Data Science", type: "Full-Time Undergraduate", duration: "3 Years", fee: "₹80,000/yr", description: "Emerging data science program with Python, ML and analytics focus." },
+      { name: "M.Tech", type: "Full-Time Postgraduate", duration: "2 Years", fee: "₹90,000/yr", description: "Advanced engineering research program with strong industry collaboration." },
+    ],
+    placements: {
+      highest: "₹42 LPA",
+      average: "₹7.2 LPA",
+      offers: "1,200+",
+      companies: "300+",
+      description: "Graphic Era University has a dedicated Training and Placement Cell that maintains strong ties with top MNCs and startups, ensuring excellent career opportunities for every graduate.",
+      topRecruiters: ["TCS", "Infosys", "Wipro", "Amazon", "Microsoft", "IBM", "HCL", "Cognizant"],
+    },
+    infrastructure: [
+      { label: "State-of-the-Art Labs", description: "Advanced computing, electronics and research laboratories with latest equipment", image: "/images/graphic-era.jpg" },
+      { label: "Central Library", description: "Digital library with 50,000+ books, journals and online resources", image: "/images/graphic-era.jpg" },
+      { label: "Sports Complex", description: "Cricket ground, basketball courts and indoor sports facilities", image: "/images/graphic-era.jpg" },
+    ],
+    amenities: [
+      "Free Wi-Fi Campus", "Modern Mess & Cafeteria", "Gymnasium", "Health Care Centre", "Boys & Girls Hostel", "Transport Facility", "NCC & NSS Units", "Innovation Lab"
+    ],
+    admissionUpdates: [
+      { label: "B.Tech Admissions 2025", date: "Open Now" },
+      { label: "MBA Admissions 2025", date: "Open Now" },
+      { label: "Lateral Entry (LEET)", date: "Open Now" },
+    ],
+  },
 };
 
 export function getCollegeBySlug(slug) {

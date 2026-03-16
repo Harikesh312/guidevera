@@ -47,9 +47,9 @@ export default function SignupClient() {
       <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-[#0EB4A6]/5 blur-[120px] rounded-full pointer-events-none" />
       <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-[#0EB4A6]/5 blur-[100px] rounded-full pointer-events-none" />
 
-      <div className="bg-[#121214] border border-white/5 rounded-3xl p-8 md:p-10 w-full max-w-2xl relative z-10 shadow-2xl fade-up">
+      <div className="bg-[#121214] border border-white/5 rounded-3xl p-6 md:p-12 w-full max-w-2xl relative z-10 shadow-2xl fade-up">
         <div className="flex flex-col items-center mb-7">
-          <Image src="/guidevera-logo.png" alt="Guidevera" width={140} height={140} className="object-contain" />
+          <Image src="/guidevera-logo.png" alt="Guidevera" width={140} height={140} className="object-contain" style={{ width: "auto", height: "auto" }} />
           <h1 className="text-2xl font-bold text-white mb-1 tracking-tight fade-up delay-1">Create Your Account</h1>
           <p className="text-white/40 text-sm text-center fade-up delay-2">Join the leading platform for educational excellence.</p>
         </div>

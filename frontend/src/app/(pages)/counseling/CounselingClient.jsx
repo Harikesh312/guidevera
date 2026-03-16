@@ -64,7 +64,7 @@ export default function CounselingClient() {
           {/* Badge + Heading + Subtext + CTA */}
           <div className="mb-8">
           
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight leading-tight max-w-2xl">
+            <h1 className="text-2xl md:text-4xl font-bold mb-4 tracking-tight leading-tight max-w-2xl">
               Book a Personalized <span className="text-[#0EB4A6]">Career Counseling Session</span>
             </h1>
             <p className="text-white/60 text-base mb-6 leading-relaxed max-w-xl">
@@ -79,7 +79,7 @@ export default function CounselingClient() {
           </div>
 
           {/* Feature Mini Cards – 4-column row */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
             {features.map((f, i) => (
               <div key={i} className="bg-[#121214] border border-white/5 rounded-xl p-4">
                 <div className="w-8 h-8 rounded-lg bg-[#0EB4A6]/10 flex items-center justify-center mb-3">{f.icon}</div>
@@ -116,17 +116,17 @@ export default function CounselingClient() {
                   <label className="text-xs text-white/50 mb-1 block">Email Address</label>
                   <input name="email" type="email" required placeholder="john@example.com" onChange={handleChange} value={formData.email} className={inputClass} />
                 </div>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="text-xs text-white/50 mb-1 block">Phone Number</label>
-                    <input name="phone" type="tel" required placeholder="+91 98765 43210" onChange={handleChange} value={formData.phone} className={inputClass} />
+                    <input name="phone" type="tel" required placeholder="+91 89794 85801" onChange={handleChange} value={formData.phone} className={inputClass} />
                   </div>
                   <div>
                     <label className="text-xs text-white/50 mb-1 block">City</label>
                     <input name="city" type="text" required placeholder="Mumbai" onChange={handleChange} value={formData.city} className={inputClass} />
                   </div>
                 </div>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="text-xs text-white/50 mb-1 block">Qualification</label>
                     <select name="qualification" required onChange={handleChange} value={formData.qualification} className={inputClass}>
@@ -142,7 +142,7 @@ export default function CounselingClient() {
                     </select>
                   </div>
                 </div>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="text-xs text-white/50 mb-1 block">Preferred Date</label>
                     <input name="preferredDate" type="date" required onChange={handleChange} value={formData.preferredDate} className={inputClass} />
@@ -181,7 +181,7 @@ export default function CounselingClient() {
               <h2 className="font-bold text-xl mb-6">What You&apos;ll Get</h2>
               <div className="space-y-4 mb-8">
                 {[
-                  "60-minute 1-on-1 session with a certified career counselor",
+                  "30-minute 1-on-1 session with a certified career counselor",
                   "Detailed Psychometric Assessment report",
                   "Personalised college & course recommendations list",
                   "Post-session recording and action plan document",
@@ -203,7 +203,7 @@ export default function CounselingClient() {
                   <span className="text-3xl font-black text-[#0EB4A6]">₹0</span>
                   <span className="text-xs bg-green-600 text-white font-bold px-2 py-1 rounded-md">FREE</span>
                 </div>
-                <p className="text-xs text-white/30">* Limited time offer · No credit card required</p>
+                <p className="text-xs text-white/30">* Free for early 100 students · No credit card required</p>
               </div>
             </div>
 
@@ -213,7 +213,7 @@ export default function CounselingClient() {
                 <Shield className="w-5 h-5 text-[#0EB4A6]" />
               </div>
               <p className="text-sm text-white/60">
-                <span className="text-white font-semibold">100% Satisfaction Guarantee.</span> Trusted by 10,000+ students
+                <span className="text-white font-semibold">90% Satisfaction Guarantee.</span> Trusted by 500+ students
               </p>
             </div>
           </motion.div>

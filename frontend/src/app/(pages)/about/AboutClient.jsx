@@ -24,7 +24,7 @@ export default function AboutClient() {
             <span className="inline-block px-3 py-1.5 rounded-full bg-[#0EB4A6]/10 border border-[#0EB4A6]/20 text-xs font-bold text-[#0EB4A6] tracking-wider mb-6">
               OUR STORY
             </span>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight tracking-tight">
+            <h1 className="text-3xl md:text-6xl font-extrabold mb-6 leading-tight tracking-tight">
               We Believe Every Student Deserves <br />
               <span className="text-[#0EB4A6]">Honest Guidance</span>
             </h1>
@@ -33,7 +33,7 @@ export default function AboutClient() {
             </p>
             <div className="flex flex-wrap items-center justify-center gap-4">
               <span className="bg-[#121214] border border-white/5 rounded-full px-5 py-2 text-sm text-white/80 font-medium">
-                <Users className="w-4 h-4 inline-block mr-2 text-[#0EB4A6]" /> 1,000+ Students Guided Personally
+                <Users className="w-4 h-4 inline-block mr-2 text-[#0EB4A6]" /> 500+ Students Guided Personally
               </span>
               <span className="bg-[#121214] border border-white/5 rounded-full px-5 py-2 text-sm text-white/80 font-medium">
                 <Target className="w-4 h-4 inline-block mr-2 text-[#0EB4A6]" /> Founded with Purpose
@@ -82,7 +82,7 @@ export default function AboutClient() {
               
               {/* Left Side: Founder Image */}
               <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="relative flex justify-center lg:justify-end">
-                <div className="relative w-full max-w-md aspect-[4/5] rounded-2xl shadow-[0_0_60px_rgba(14,180,166,0.2)] overflow-hidden border border-white/10 group">
+                <div className="relative w-full max-w-sm mx-auto md:max-w-md aspect-[4/5] rounded-2xl shadow-[0_0_60px_rgba(14,180,166,0.2)] overflow-hidden border border-white/10 group">
                   <Image 
                     src="/guidevera.png" 
                     alt="Digamber Singh Rana, Founder & CEO" 
@@ -179,11 +179,11 @@ export default function AboutClient() {
         {/* SECTION 5: BY THE NUMBERS */}
         <section className="py-24 bg-[#121214] border-y border-white/5">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
               {[
-                { number: "1,000+", label: "Students Personally Guided by Founder" },
-                { number: "10,000+", label: "Students Helped Through Platform" },
-                { number: "95%", label: "Student Satisfaction Rate" }
+                { number: "500+", label: "Students Personally Guided by Founder" },
+                { number: "500+", label: "Students Helped Through Platform" },
+                { number: "90%", label: "Student Satisfaction Rate" }
               ].map((stat, i) => (
                 <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="bg-[#09090b] border border-white/5 rounded-2xl p-8 md:p-12 text-center group hover:border-[#0EB4A6]/30 transition-all">
                   <p className="text-5xl md:text-6xl font-black text-[#0EB4A6] mb-4 group-hover:scale-110 transition-transform duration-300">{stat.number}</p>
@@ -201,10 +201,10 @@ export default function AboutClient() {
             <h2 className="text-4xl md:text-5xl font-bold mb-6">Join the Movement</h2>
             <p className="text-xl text-white/60 mb-10">Be part of a generation that chooses careers with clarity, purpose, and confidence.</p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Link href="/ability-test" className="px-8 py-4 bg-[#0EB4A6] hover:bg-[#0c9c90] text-black font-bold rounded-full transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(14,180,166,0.3)]">
+              <Link href="/ability-test" className="px-8 py-4 bg-[#0EB4A6] hover:bg-[#0c9c90] text-black font-bold rounded-full transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(14,180,166,0.3)] w-full sm:w-auto">
                 Start Ability Test <ArrowRight className="w-5 h-5" />
               </Link>
-              <Link href="/counseling" className="px-8 py-4 bg-transparent border border-white/20 hover:bg-white/5 text-white font-medium rounded-full transition-all flex items-center justify-center">
+              <Link href="/counseling" className="px-8 py-4 bg-transparent border border-white/20 hover:bg-white/5 text-white font-medium rounded-full transition-all flex items-center justify-center w-full sm:w-auto">
                 Book Counseling
               </Link>
             </div>

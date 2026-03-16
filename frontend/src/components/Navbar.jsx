@@ -19,20 +19,34 @@ export default function Navbar() {
   React.useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
-      try { setUser(JSON.parse(storedUser)); } catch (e) { console.error("Failed to parse user session"); }
+      try { setUser(JSON.parse(storedUser)); } catch (e) { 
+        console.error("Failed to parse user session"); 
+      }
     }
-    // Check test completed flag from localStorage
-    setTestCompleted(!!localStorage.getItem("testCompleted"));
 
-    // Check if user has a roadmap in DB (auth-protected)
     const token = localStorage.getItem("token");
     if (token) {
       fetch(`${API_URL}/api/roadmap/has`, {
         headers: { "Authorization": `Bearer ${token}` },
       })
         .then(r => r.json())
-        .then(json => { if (json.success) setHasRoadmap(json.hasRoadmap); })
-        .catch(() => {}); // fail silently — button just stays hidden
+        .then(json => {
+          if (json.success) {
+            // Use backend as single source of truth for both
+            setHasRoadmap(json.hasRoadmap);
+            setTestCompleted(json.hasRoadmap);
+            // Sync localStorage to match
+            if (json.hasRoadmap) {
+              localStorage.setItem("testCompleted", "true");
+            } else {
+              localStorage.removeItem("testCompleted");
+            }
+          }
+        })
+        .catch(() => {
+          // Fall back to localStorage if backend unreachable
+          setTestCompleted(!!localStorage.getItem("testCompleted"));
+        });
     }
   }, []);
 
@@ -54,7 +68,7 @@ export default function Navbar() {
             {/* Logo */}
             <div className="flex-shrink-0 flex items-center">
               <Link href="/">
-                <Image src="/guidevera-logo.png" alt="Guidevera Logo" width={160} height={160} className="object-contain" />
+                <Image src="/guidevera-logo.png" alt="Guidevera Logo" width={160} height={160} className="object-contain" style={{ width: "auto", height: "auto" }} />
               </Link>
             </div>
 

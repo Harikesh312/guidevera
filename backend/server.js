@@ -7,7 +7,12 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: process.env.FRONTEND_URL || "https://guidevera.vercel.app"
+  origin: [
+    "http://localhost:3000", 
+    "https://guidevera.vercel.app", 
+    "https://guidevera.onrender.com"
+  ],
+  credentials: true
 }));
 app.use(express.json());
 

@@ -38,14 +38,10 @@ export default function HomeClient() {
   };
 
   const colleges = [
-    { id: 1, slug: "dbuu", name: "Dbuu", courses: "B.Tech | MBA | BHM | BAMS", image: "/images/dbuu.jpg", rating: "4.9" },
+    { id: 1, slug: "dbuu", name: "DBUU", courses: "B.Tech | MBA | BHM | BAMS", image: "/images/dbuu.jpg", rating: "4.9" },
     { id: 2, slug: "uttranchal-university", name: "Uttranchal University", courses: "B.Tech | MBA | Law", image: "/images/Uttranchal-University.jpg", rating: "4.8" },
-    { id: 3, slug: null, name: "Tulas Institute", courses: "Engineering", image: "/images/Tulas-Institute.jpg", rating: "4.7" },
     { id: 4, slug: null, name: "DBS", courses: "Commerce | MBA", image: "/images/DBS.jpg", rating: "4.8" },
-    { id: 5, slug: null, name: "UPES", courses: "B.Tech | Law", image: "/images/UPES.jpg", rating: "4.9" },
-    { id: 6, slug: null, name: "Shivalik College", courses: "Engineering Institute", image: "/images/shivalik-college.jpg", rating: "4.6" },
-    { id: 7, slug: null, name: "Dolphin College", courses: "Allied Sciences", image: "/images/Dolphin-college.jpg", rating: "4.7" },
-    { id: 8, slug: null, name: "Kukreja Institute", courses: "Hotel Management", image: "/images/DBS.jpg", rating: "4.5" },
+    { id: 3, slug: null, name: "Tulas Institute", courses: "Engineering", image: "/images/Tulas-Institute.jpg", rating: "4.7" },
   ];
 
   const fadeIn = {
@@ -81,26 +77,26 @@ export default function HomeClient() {
             className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-[#0EB4A6] mb-6"
           >
             <Star className="w-3.5 h-3.5 fill-current" />
-            <span>#1 College Discovery Platform in India</span>
+            <span>#1 Student-Centric Career Guidance Platform | Solving India's Career Confusion Crisis</span>
           </motion.div>
           
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-5xl md:text-7xl font-bold tracking-tight mb-6"
+            className="text-3xl md:text-5xl lg:text-7xl font-bold tracking-tight mb-6"
           >
-            Find the Right <span className="text-[#0EB4A6]">College</span> &<br />
-            Career Path for You
+            Choose the Right <span className="text-[#0EB4A6]">College</span> for the<br />
+            Bright Future
           </motion.h1>
           
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="mt-4 text-lg md:text-xl text-white/60 max-w-2xl text-center mb-12"
+            className="mt-4 text-base md:text-xl text-white/60 max-w-2xl text-center mb-12"
           >
-            Discover the top colleges and universities that suit your goals and equip yourself with personalized guidance to unlock your true potential.
+            Get expert guidance to select the college and course that matches your goals.
           </motion.p>
           
           <motion.div 
@@ -118,9 +114,10 @@ export default function HomeClient() {
                 value={homeSearch}
                 onChange={(e) => setHomeSearch(e.target.value)}
                 onKeyDown={(e) => { if (e.key === 'Enter') handleHomeSearch(); }}
+                suppressHydrationWarning
               />
             </div>
-            <button onClick={handleHomeSearch} className="bg-[#0EB4A6] hover:bg-[#0c9c90] text-white px-8 py-3.5 rounded-full font-medium transition-all shadow-[0_0_15px_rgba(14,180,166,0.4)] w-full sm:w-auto cursor-pointer">
+            <button onClick={handleHomeSearch} suppressHydrationWarning className="bg-[#0EB4A6] hover:bg-[#0c9c90] text-white px-8 py-3.5 rounded-full font-medium transition-all shadow-[0_0_15px_rgba(14,180,166,0.4)] w-full sm:w-auto cursor-pointer">
               Search
             </button>
           </motion.div>
@@ -131,10 +128,10 @@ export default function HomeClient() {
             transition={{ duration: 0.8, delay: 0.5 }}
             className="flex flex-wrap items-center justify-center gap-6 text-sm text-white/60"
           >
-            <div className="flex items-center gap-2 hover:text-white transition-colors cursor-pointer"><GraduationCap size={18} /> B.Tech</div>
-            <div className="flex items-center gap-2 hover:text-white transition-colors cursor-pointer"><Brain size={18} /> Science</div>
-            <div className="flex items-center gap-2 hover:text-white transition-colors cursor-pointer"><Briefcase size={18} /> Law</div>
-            <div className="flex items-center gap-2 hover:text-white transition-colors cursor-pointer"><BookOpen size={18} /> MBA</div>
+            <div onClick={() => router.push('/colleges')} className="flex items-center gap-2 hover:text-white transition-colors cursor-pointer"><GraduationCap size={18} /> B.Tech</div>
+            <div onClick={() => router.push('/colleges')} className="flex items-center gap-2 hover:text-white transition-colors cursor-pointer"><Brain size={18} /> Science</div>
+            <div onClick={() => router.push('/colleges')} className="flex items-center gap-2 hover:text-white transition-colors cursor-pointer"><Briefcase size={18} /> Law</div>
+            <div onClick={() => router.push('/colleges')} className="flex items-center gap-2 hover:text-white transition-colors cursor-pointer"><BookOpen size={18} /> MBA</div>
           </motion.div>
         </div>
       </section>
@@ -160,7 +157,7 @@ export default function HomeClient() {
             initial="initial"
             whileInView="animate"
             viewport={{ once: true, margin: "-100px" }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
           >
             {colleges.map((college) => (
               <motion.div 
@@ -211,6 +208,7 @@ export default function HomeClient() {
                     <button 
                       onClick={() => { if (requireAuth('/ability-test')) router.push('/ability-test'); }}
                       className="py-2.5 rounded-xl bg-[#0EB4A6] hover:bg-[#0c9c90] text-sm font-medium text-white transition-colors shadow-[0_4px_14px_rgba(14,180,166,0.3)] cursor-pointer"
+                      suppressHydrationWarning
                     >
                       Ability Test
                     </button>
@@ -218,6 +216,12 @@ export default function HomeClient() {
                 </div>
               </motion.div>
             ))}
+            <motion.div 
+              variants={fadeIn}
+              className="col-span-1 md:col-span-2 lg:col-span-4 bg-[#121214] border border-dashed border-white/20 rounded-2xl p-8 text-center text-white/40 text-lg font-medium flex items-center justify-center"
+            >
+              More Colleges Coming Soon 🚀
+            </motion.div>
           </motion.div>
         </div>
       </section>
@@ -232,7 +236,7 @@ export default function HomeClient() {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.7 }}
               viewport={{ once: true }}
-              className="relative h-[400px] md:h-[500px] w-full rounded-4xl overflow-hidden border border-white/10 bg-white/5 p-8 flex flex-col justify-end"
+              className="order-last lg:order-first relative h-[400px] md:h-[500px] w-full rounded-4xl overflow-hidden border border-white/10 bg-white/5 p-8 flex flex-col justify-end"
             >
               <div className="absolute inset-0 z-0 overflow-hidden rounded-4xl bg-[#e5e7eb] dark:bg-zinc-900 border border-white/5">
                 <Image src="/images/students.png" alt="Students learning" fill className="object-cover pl-8 pt-8" />
@@ -255,6 +259,7 @@ export default function HomeClient() {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.7 }}
               viewport={{ once: true }}
+              className="order-first lg:order-last"
             >
               <h2 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">
                 What is <span className="text-[#0EB4A6]">Guidevera</span>?
@@ -302,7 +307,7 @@ export default function HomeClient() {
           <div className="relative">
             <div className="hidden md:block absolute top-[45px] left-[10%] right-[10%] h-[2px] border-t-2 border-dashed border-white/20" />
             
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-10 relative z-10">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-10 relative z-10">
               {[
                 { step: "1", title: "Apply Test", desc: "Take our advanced psychometric test to analyze your profile.", icon: <FileText className="w-8 h-8 text-[#0EB4A6]" /> },
                 { step: "2", title: "Get Report", desc: "Receive detailed insights into your strengths and career fit.", icon: <ClipboardList className="w-8 h-8 text-[#0EB4A6]" /> },
@@ -334,11 +339,11 @@ export default function HomeClient() {
       {/* Stats Section */}
       <section className="py-20 border-y border-white/5 bg-white/[0.02]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 divide-y md:divide-y-0 md:divide-x divide-white/10">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 divide-y sm:divide-y-0 sm:divide-x divide-white/10">
             {[
-              { stat: "10k+", label: "Counseling Sessions" },
-              { stat: "500+", label: "Admission Colleges" },
-              { stat: "95%", label: "Satisfaction Rate" },
+              { stat: "500", label: "Admission Sessions" },
+              { stat: "20+", label: "College Options" },
+              { stat: "90%", label: "Admission Satisfaction Rate" },
             ].map((item, i) => (
               <motion.div 
                 key={i}
@@ -390,6 +395,7 @@ export default function HomeClient() {
             <button 
               onClick={() => { if (requireAuth('/ability-test')) router.push('/ability-test'); }}
               className="w-full sm:w-auto px-10 py-4 bg-[#0EB4A6] hover:bg-[#0c9c90] text-white rounded-full font-bold transition-all shadow-[0_0_20px_rgba(14,180,166,0.3)] border border-[#0EB4A6] cursor-pointer"
+              suppressHydrationWarning
             >
               Start Ability Test
             </button>

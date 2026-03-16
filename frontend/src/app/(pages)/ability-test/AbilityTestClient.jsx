@@ -39,16 +39,16 @@ export default function AbilityTestClient() {
                 Our scientifically designed ability test analyses your cognitive strengths to map out the perfect career path and college majors for your future.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4 mb-10">
+              <div className="flex flex-col sm:flex-row w-full gap-4 mb-10">
                 <button
                   onClick={handleStartTest}
-                  className="px-8 py-4 bg-[#0EB4A6] hover:bg-[#0c9c90] text-white rounded-full font-bold transition-all shadow-[0_0_20px_rgba(14,180,166,0.4)] flex items-center gap-2 justify-center cursor-pointer"
+                  className="w-full sm:w-auto px-6 py-4 bg-[#0EB4A6] hover:bg-[#0c9c90] text-white rounded-full font-bold transition-all shadow-[0_0_20px_rgba(14,180,166,0.4)] flex items-center gap-2 justify-center cursor-pointer"
                 >
                   Start Ability Test <ArrowRight className="w-5 h-5" />
                 </button>
                 <button
                   onClick={() => document.getElementById("how-it-works").scrollIntoView({ behavior: "smooth" })}
-                  className="px-8 py-4 bg-transparent border border-white/20 hover:bg-white/5 text-white rounded-full font-bold transition-all flex items-center gap-2 justify-center cursor-pointer"
+                  className="w-full sm:w-auto px-6 py-4 bg-transparent border border-white/20 hover:bg-white/5 text-white rounded-full font-bold transition-all flex items-center gap-2 justify-center cursor-pointer"
                 >
                   How It Works
                 </button>
@@ -63,7 +63,7 @@ export default function AbilityTestClient() {
                     </div>
                   ))}
                 </div>
-                <span className="text-white/50 text-sm">10,000+ students clarified this week</span>
+                <span className="text-white/50 text-sm">100+ students clarified this week</span>
               </div>
             </motion.div>
 
@@ -108,7 +108,7 @@ export default function AbilityTestClient() {
       <section id="how-it-works" className="py-24 bg-[#09090b]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold mb-4 tracking-tight">How It Works</h2>
+            <h2 className="text-2xl md:text-5xl font-bold mb-4 tracking-tight">How It Works</h2>
             <p className="text-white/60 text-lg max-w-2xl mx-auto">Three simple steps to unlock a detailed report of your cognitive abilities and suitable career paths.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -143,7 +143,7 @@ export default function AbilityTestClient() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-10">
             <span className="text-xs text-[#0EB4A6] font-bold tracking-widest mb-3 block">TRY A SAMPLE QUESTION</span>
-            <h2 className="text-3xl md:text-5xl font-bold tracking-tight">Experience the Assessment</h2>
+            <h2 className="text-2xl md:text-5xl font-bold tracking-tight">Experience the Assessment</h2>
           </div>
           <div className="bg-[#121214] border border-white/10 rounded-2xl p-6 max-w-2xl mx-auto">
             {/* Progress */}
@@ -190,7 +190,7 @@ export default function AbilityTestClient() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             {/* Left – Benefits */}
             <div>
-              <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-10">Why Take Our Ability Test?</h2>
+              <h2 className="text-2xl md:text-5xl font-bold tracking-tight mb-10">Why Take Our Ability Test?</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {[
                   { icon: <Brain className="w-5 h-5 text-[#0EB4A6]" />, title: "Scientifically Validated", desc: "Built on proven psychological frameworks and validated models." },
@@ -293,7 +293,7 @@ export default function AbilityTestClient() {
           >
             <button
               onClick={handleStartTest}
-              className="px-12 py-5 bg-[#0EB4A6] hover:bg-[#0c9c90] text-white rounded-full font-bold text-lg transition-all shadow-[0_0_30px_rgba(14,180,166,0.4)] inline-flex items-center gap-2 cursor-pointer"
+              className="w-full sm:w-auto px-6 py-4 md:px-12 md:py-5 bg-[#0EB4A6] hover:bg-[#0c9c90] text-white rounded-full font-bold text-lg transition-all shadow-[0_0_30px_rgba(14,180,166,0.4)] flex sm:inline-flex justify-center items-center gap-2 cursor-pointer"
             >
               Start Your Free Test Now 🚀
             </button>

@@ -27,12 +27,9 @@ export default function CollegesClient() {
   const colleges = [
     { id: 1, slug: "dbuu", name: "DBUU", location: "Uttarakhand, Dehradun", description: "A premier university offering diverse programs in B.Tech, MBA, BHM, and BAMS.", feeLabel: "Annual Fees", fee: "₹1,50,000", image: "/images/dbuu.jpg", rating: "4.9", tag: "TOP RANKED" },
     { id: 2, slug: "uttranchal-university", name: "Uttranchal University", location: "Uttarakhand, Dehradun", description: "Known for academic excellence in B.Tech, MBA, and Law across the region.", feeLabel: "Semester Fees", fee: "₹85,000", image: "/images/Uttranchal-University.jpg", rating: "4.8", tag: "POPULAR" },
-    { id: 3, slug: null, name: "Tulas Institute", location: "Uttarakhand, Dehradun", description: "A top engineering college with state-of-the-art infrastructure and placements.", feeLabel: "Annual Fees", fee: "₹1,20,000", image: "/images/Tulas-Institute.jpg", rating: "4.7", tag: "TOP RATED" },
+    { id: 3, slug: "graphic-era", name: "Graphic Era University", location: "Uttarakhand, Dehradun", description: "A NAAC A+ accredited university known for excellence in engineering, technology and management with outstanding placement records.", feeLabel: "Annual Fees", fee: "₹1,25,000", image: "/images/graphic-era.jpg", rating: "4.7", tag: "TOP RATED" },
     { id: 4, slug: null, name: "DBS", location: "Uttarakhand, Dehradun", description: "Leading business school focusing on holistic Commerce and MBA education.", feeLabel: "Annual Fees", fee: "₹2,10,000", image: "/images/DBS.jpg", rating: "4.8", tag: "TOP ROI" },
-    { id: 5, slug: null, name: "UPES", location: "Uttarakhand, Dehradun", description: "A specialized university offering premium programs in B.Tech and Law.", feeLabel: "Semester Fees", fee: "₹1,80,000", image: "/images/UPES.jpg", rating: "4.9", tag: "TOP RANKED" },
-    { id: 6, slug: null, name: "Shivalik College", location: "Uttarakhand, Dehradun", description: "A growing engineering institute with strong industry ties and modern facilities.", feeLabel: "Annual Fees", fee: "₹1,10,000", image: "/images/shivalik-college.jpg", rating: "4.6", tag: "AFFORDABLE" },
-    { id: 7, slug: null, name: "Dolphin College", location: "Uttarakhand, Dehradun", description: "A specialized institution dedicated to advanced education in Allied Sciences.", feeLabel: "Annual Fees", fee: "₹95,000", image: "/images/Dolphin-college.jpg", rating: "4.7", tag: "TOP RATED" },
-    { id: 8, slug: null, name: "Kukreja Institute", location: "Uttarakhand, Dehradun", description: "A prominent institution for aspiring professionals in Hotel Management.", feeLabel: "Annual Fees", fee: "₹1,05,000", image: "/images/DBS.jpg", rating: "4.5", tag: "POPULAR" },
+    { id: 5, slug: null, name: "Tulas Institute", location: "Uttarakhand, Dehradun", description: "A top engineering college with state-of-the-art infrastructure and placements.", feeLabel: "Annual Fees", fee: "₹1,20,000", image: "/images/Tulas-Institute.jpg", rating: "4.7", tag: "TOP RATED" },
   ];
 
   const handleSearch = () => {
@@ -76,7 +73,7 @@ export default function CollegesClient() {
             <motion.h1 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="text-4xl md:text-5xl font-bold mb-4 tracking-tight relative z-10"
+              className="text-3xl md:text-5xl font-bold mb-4 tracking-tight relative z-10"
             >
               Explore Top Colleges
             </motion.h1>
@@ -126,8 +123,8 @@ export default function CollegesClient() {
             className="flex flex-wrap items-center justify-center gap-3 mb-16"
           >
             {["City", "Course", "Fees Range (₹)", "Rating", "Public/Private"].map((filter) => (
-              <button key={filter} className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm hover:bg-white/10 transition-colors flex items-center gap-2">
-                {filter} <ChevronDown className="w-4 h-4 text-white/40" />
+              <button key={filter} className="px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-white/5 border border-white/10 text-xs md:text-sm hover:bg-white/10 transition-colors flex items-center gap-2">
+                {filter} <ChevronDown className="w-3 h-3 md:w-4 md:h-4 text-white/40" />
               </button>
             ))}
             
@@ -163,7 +160,7 @@ export default function CollegesClient() {
               transition={{ delay: 0.05 * index }}
               className="bg-[#121214] border border-white/5 rounded-2xl overflow-hidden flex flex-col hover:border-white/10 transition-all shadow-lg hover:shadow-[0_0_20px_rgba(14,180,166,0.05)]"
             >
-              <div className="relative h-[240px] w-full bg-[#1a1a1c] overflow-hidden group">
+              <div className="relative h-[180px] md:h-[240px] w-full bg-[#1a1a1c] overflow-hidden group">
                 <Image 
                   src={college.image} 
                   alt={college.name} 
@@ -224,6 +221,14 @@ export default function CollegesClient() {
               </div>
             </motion.div>
           ))}
+          <div className="col-span-1 md:col-span-2 lg:col-span-3 bg-[#121214] border-2 border-dashed border-white/10 rounded-2xl p-12 text-center">
+            <p className="text-2xl font-bold text-white/20 mb-2">
+              🚀 More Colleges Coming Soon
+            </p>
+            <p className="text-white/30 text-sm">
+              We are adding more top colleges from across India. Stay tuned!
+            </p>
+          </div>
         </div>
 
         {/* Empty State */}

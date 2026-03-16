@@ -12,9 +12,10 @@ import { requireAuth } from "../../../../lib/authGuard";
 
 export default function CollegeDetailClient({ college }) {
   const router = useRouter();
-  const [activeTab, setActiveTab] = useState("Overview");
+  const [activeTab, setActiveTab] = useState("College Info");
+  const [showAllCourses, setShowAllCourses] = useState(false);
 
-  const tabs = ["Overview", "Courses & Fees", "Placements", "Infrastructure", "Reviews"];
+  const tabs = ["College Info", "Placements", "Infrastructure", "Reviews"];
 
   // Mapping string amenities to icons (approximate)
   const getAmenityIcon = (text) => {
@@ -41,7 +42,7 @@ export default function CollegeDetailClient({ college }) {
 
       <main className="pt-24 pb-20">
         {/* Full-width hero image */}
-        <div className="relative w-full h-[50vh] md:h-[60vh] min-h-[400px]">
+        <div className="relative w-full h-[40vh] md:h-[60vh] min-h-[400px]">
           <Image src={college.heroImage} alt={college.name} fill className="object-cover" priority />
           <div className="absolute inset-0 bg-gradient-to-t from-[#09090b] via-[#09090b]/80 to-[#09090b]/30" />
           
@@ -62,7 +63,7 @@ export default function CollegeDetailClient({ college }) {
                   <span className="bg-white/10 backdrop-blur-md px-3 py-1.5 rounded border border-white/10 text-xs text-white/80 font-medium">{college.ranking}</span>
                 </div>
                 
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-3 tracking-tight">{college.name}</h1>
+                <h1 className="text-2xl md:text-5xl font-bold mb-3 tracking-tight">{college.name}</h1>
                 
                 <div className="flex items-center gap-4 text-white/60 text-sm md:text-base">
                   <div className="flex items-center gap-1.5"><MapPin className="w-4 h-4" /> {college.location}</div>
@@ -70,14 +71,14 @@ export default function CollegeDetailClient({ college }) {
                 </div>
               </div>
               
-              <div className="flex items-center gap-3 shrink-0">
+              <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0 w-full sm:w-auto">
                 <button
                   onClick={() => { if (requireAuth('/ability-test')) router.push('/ability-test'); }}
-                  className="px-6 py-3.5 bg-[#0EB4A6] hover:bg-[#0c9c90] text-black font-bold rounded-xl transition-all shadow-[0_0_20px_rgba(14,180,166,0.3)]"
+                  className="w-full sm:w-auto px-6 py-3.5 bg-[#0EB4A6] hover:bg-[#0c9c90] text-black font-bold rounded-xl transition-all shadow-[0_0_20px_rgba(14,180,166,0.3)]"
                 >
                   Start Ability Test
                 </button>
-                <a href={college.applyUrl} target="_blank" rel="noopener noreferrer" className="px-6 py-3.5 bg-white text-black font-bold rounded-xl hover:bg-white/90 transition-all flex items-center gap-2">
+                <a href={college.applyUrl} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto justify-center px-6 py-3.5 bg-white text-black font-bold rounded-xl hover:bg-white/90 transition-all flex items-center gap-2">
                   Apply Now <ExternalLink className="w-4 h-4" />
                 </a>
               </div>
@@ -106,7 +107,10 @@ export default function CollegeDetailClient({ college }) {
             {tabs.map(tab => (
               <button
                 key={tab}
-                onClick={() => setActiveTab(tab)}
+                onClick={() => {
+                  setActiveTab(tab);
+                  setShowAllCourses(false);
+                }}
                 className={`pb-4 font-medium whitespace-nowrap whitespace-nowrap border-b-2 transition-colors ${activeTab === tab ? 'border-[#0EB4A6] text-[#0EB4A6]' : 'border-transparent text-white/50 hover:text-white'}`}
               >
                 {tab}
@@ -118,7 +122,7 @@ export default function CollegeDetailClient({ college }) {
             {/* Left Content (2/3) */}
             <div className="flex-1 w-full min-w-0">
               
-              {activeTab === "Overview" && (
+              {activeTab === "College Info" && (
                 <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-8">
                   <div className="bg-[#121214] border border-white/5 rounded-2xl p-6 md:p-8">
                     <h2 className="text-2xl font-bold mb-4">About {college.shortName}</h2>
@@ -145,32 +149,74 @@ export default function CollegeDetailClient({ college }) {
                       ))}
                     </div>
                   </div>
-                </motion.div>
-              )}
 
-              {activeTab === "Courses & Fees" && (
-                <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
-                  {college.courses.map((course, i) => (
-                    <div key={i} className="bg-[#121214] border border-white/5 rounded-2xl p-6 flex flex-col md:flex-row md:items-center justify-between gap-6 hover:border-white/10 transition-colors">
-                      <div className="flex items-start gap-4">
-                        <div className="w-12 h-12 rounded-xl bg-[#0EB4A6]/10 flex items-center justify-center shrink-0">
-                          <GraduationCap className="w-6 h-6 text-[#0EB4A6]" />
-                        </div>
-                        <div>
-                          <h3 className="text-lg font-bold text-white mb-1">{course.name}</h3>
-                          <p className="text-sm text-white/50 mb-3">{course.description}</p>
-                          <div className="flex items-center gap-4 text-xs font-medium text-white/60 flex-wrap">
-                            <span className="bg-white/5 px-2 py-1 rounded">{course.type}</span>
-                            <span className="flex items-center gap-1"><Clock className="w-3.5 h-3.5" /> {course.duration}</span>
+                  {/* ── COURSES SECTION inside College Info tab ── */}
+                  <div className="bg-[#121214] border border-white/5 rounded-2xl p-6 md:p-8">
+                    
+                    <div className="flex items-center justify-between mb-6">
+                      <h2 className="text-xl font-bold">Top Courses & Fees</h2>
+                      <span className="text-xs text-white/40 bg-white/5 border border-white/5 px-3 py-1 rounded-full">
+                        All Fees are Approximate
+                      </span>
+                    </div>
+
+                    {/* Show first 3 courses, or all if expanded */}
+                    <div className="space-y-4">
+                      {(showAllCourses 
+                        ? college.courses 
+                        : college.courses.slice(0, 3)
+                      ).map((course, i) => (
+                        <div key={i} className="bg-[#09090b] border border-white/5 rounded-xl p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:border-white/10 transition-colors">
+                          <div className="flex items-start gap-4">
+                            <div className="w-10 h-10 rounded-xl bg-[#0EB4A6]/10 border border-[#0EB4A6]/20 flex items-center justify-center flex-shrink-0">
+                              <GraduationCap className="w-5 h-5 text-[#0EB4A6]" />
+                            </div>
+                            <div>
+                              <h3 className="font-semibold text-white mb-1">
+                                {course.name}
+                              </h3>
+                              <p className="text-xs text-white/50 mb-2">
+                                {course.description}
+                              </p>
+                              <div className="flex items-center gap-3 flex-wrap">
+                                <span className="text-xs bg-white/5 border border-white/5 px-2 py-1 rounded text-white/50">
+                                  {course.type}
+                                </span>
+                                <span className="flex items-center gap-1 text-xs text-white/50">
+                                  <Clock className="w-3.5 h-3.5" /> 
+                                  {course.duration}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="flex flex-col items-start md:items-end shrink-0 pl-14 md:pl-0 border-t border-white/5 pt-3 md:border-none md:pt-0">
+                            <span className="text-xs text-white/40 mb-1">
+                              Estimated Fee
+                            </span>
+                            <span className="text-lg font-bold text-[#0EB4A6]">
+                              {course.fee}
+                            </span>
                           </div>
                         </div>
-                      </div>
-                      <div className="flex flex-col items-start md:items-end shrink-0 pl-16 md:pl-0 border-t border-white/5 pt-4 md:border-none md:pt-0">
-                        <span className="text-xs text-white/40 mb-1">Estimated Fee</span>
-                        <div className="text-xl font-bold text-[#0EB4A6] flex items-center gap-1">{course.fee}</div>
-                      </div>
+                      ))}
                     </div>
-                  ))}
+
+                    {/* Show More / Show Less button */}
+                    {college.courses.length > 3 && (
+                      <div className="mt-5 text-center">
+                        <button
+                          onClick={() => setShowAllCourses(!showAllCourses)}
+                          className="px-6 py-2.5 border border-white/10 rounded-full text-sm font-medium text-white/60 hover:text-white hover:border-white/20 hover:bg-white/5 transition-all flex items-center gap-2 mx-auto"
+                        >
+                          {showAllCourses ? (
+                            <>Show Less ↑</>
+                          ) : (
+                            <>Show All {college.courses.length} Courses ↓</>
+                          )}
+                        </button>
+                      </div>
+                    )}
+                  </div>
                 </motion.div>
               )}
 
@@ -319,7 +365,7 @@ export default function CollegeDetailClient({ college }) {
                   </div>
                   <div>
                     <p className="text-xs text-white/50 mb-0.5">Admissions Helpline</p>
-                    <a href="tel:+919876543210" className="text-sm font-bold text-white hover:text-[#0EB4A6]">+91-98765-43210</a>
+                    <a href="tel:+918979485801" className="text-sm font-bold text-white hover:text-[#0EB4A6]">+91 89794 85801</a>
                   </div>
                 </div>
 

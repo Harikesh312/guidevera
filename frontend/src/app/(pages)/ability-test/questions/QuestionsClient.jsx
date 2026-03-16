@@ -11,8 +11,13 @@ import API_URL from "@/lib/api";
 
 const questions = [
   {
-    q: "Which subject did you enjoy the most in school?",
-    opts: ["Mathematics & Logic", "Science & Technology", "Arts & Creativity", "Commerce & Economics"],
+    q: "Which type of subject or activity naturally interests you the most?",
+    opts: [
+      "Medical / Life Sciences",
+      "Technology / Engineering / Mathematics", 
+      "Commerce / Business / Management",
+      "Humanities / Creative / Social Sciences"
+    ],
   },
   {
     q: "How do you prefer to solve problems?",
@@ -107,10 +112,31 @@ export default function QuestionsClient() {
       router.replace("/login?redirect=/ability-test/questions");
       return;
     }
-    if (localStorage.getItem("testCompleted") === "true") {
-      setTestAlreadyTaken(true);
-    }
-    setAuthChecked(true);
+
+    // Always verify against backend MongoDB — not just localStorage
+    // This ensures the check works after logout/login and across devices
+    fetch(`${API_URL}/api/roadmap/has`, {
+      headers: { "Authorization": `Bearer ${token}` },
+    })
+      .then(r => r.json())
+      .then(json => {
+        if (json.success && json.hasRoadmap) {
+          // Sync localStorage to match backend truth
+          localStorage.setItem("testCompleted", "true");
+          setTestAlreadyTaken(true);
+        } else {
+          // Backend says no roadmap — allow test
+          setTestAlreadyTaken(false);
+        }
+        setAuthChecked(true);
+      })
+      .catch(() => {
+        // If backend check fails, fall back to localStorage
+        if (localStorage.getItem("testCompleted") === "true") {
+          setTestAlreadyTaken(true);
+        }
+        setAuthChecked(true);
+      });
   }, [router]);
 
   if (!authChecked) {
@@ -230,9 +256,9 @@ export default function QuestionsClient() {
       {/* Top Bar */}
       <div className="fixed top-0 left-0 right-0 z-40 bg-[#09090b]/90 backdrop-blur-md border-b border-white/5">
         <div className="max-w-4xl mx-auto px-4 h-16 flex items-center justify-between">
-          <Image src="/guidevera-logo.png" alt="Guidevera" width={120} height={40} className="object-contain" />
-          <span className="text-sm text-white/50 font-medium">Question {currentQ + 1} of {questions.length}</span>
-          <span className="text-sm text-[#0EB4A6] font-bold">{Math.round(progress)}% complete</span>
+          <Image src="/guidevera-logo.png" alt="Guidevera" width={120} height={40} className="object-contain" style={{ width: "auto", height: "auto" }} />
+          <span className="text-xs md:text-sm text-white/50 font-medium">Question {currentQ + 1} of {questions.length}</span>
+          <span className="text-xs md:text-sm text-[#0EB4A6] font-bold">{Math.round(progress)}% complete</span>
         </div>
         {/* Progress bar */}
         <div className="h-1 bg-white/5">
@@ -256,7 +282,7 @@ export default function QuestionsClient() {
             transition={{ duration: 0.3 }}
             className="w-full max-w-2xl"
           >
-            <div className="bg-[#121214] border border-white/10 rounded-2xl p-8">
+            <div className="bg-[#121214] border border-white/10 rounded-2xl p-4 md:p-8">
               <p className="text-xs text-white/30 font-medium mb-4">QUESTION {currentQ + 1} OF {questions.length}</p>
               <h2 className="text-xl md:text-2xl font-bold mb-8 leading-snug">{questions[currentQ].q}</h2>
 
@@ -280,26 +306,26 @@ export default function QuestionsClient() {
                 <button
                   onClick={goPrev}
                   disabled={currentQ === 0}
-                  className="flex items-center gap-2 px-5 py-2.5 text-sm border border-white/10 rounded-full text-white/50 hover:text-white hover:border-white/20 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                  className="flex items-center gap-1 md:gap-2 px-3 py-2 text-xs md:px-6 md:py-2.5 md:text-sm border border-white/10 rounded-full text-white/50 hover:text-white hover:border-white/20 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
                 >
-                  <ChevronLeft className="w-4 h-4" /> Previous
+                  <ChevronLeft className="w-3 h-3 md:w-4 md:h-4" /> Previous
                 </button>
 
                 {isLast ? (
                   <button
                     onClick={handleSubmit}
                     disabled={!hasAnswer || isSubmitting}
-                    className="flex items-center gap-2 px-6 py-2.5 text-sm bg-[#0EB4A6] hover:bg-[#0c9c90] text-white rounded-full font-bold transition-all disabled:opacity-40 disabled:cursor-not-allowed shadow-[0_0_20px_rgba(14,180,166,0.3)]"
+                    className="flex items-center gap-1 md:gap-2 px-3 py-2 text-xs md:px-6 md:py-2.5 md:text-sm bg-[#0EB4A6] hover:bg-[#0c9c90] text-white rounded-full font-bold transition-all disabled:opacity-40 disabled:cursor-not-allowed shadow-[0_0_20px_rgba(14,180,166,0.3)]"
                   >
-                    Submit & Generate Roadmap 🚀
+                    Submit <span className="hidden sm:inline"> & Generate </span> 🚀
                   </button>
                 ) : (
                   <button
                     onClick={goNext}
                     disabled={!hasAnswer}
-                    className="flex items-center gap-2 px-6 py-2.5 text-sm bg-[#0EB4A6] hover:bg-[#0c9c90] text-white rounded-full font-medium transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+                    className="flex items-center gap-1 md:gap-2 px-3 py-2 text-xs md:px-6 md:py-2.5 md:text-sm bg-[#0EB4A6] hover:bg-[#0c9c90] text-white rounded-full font-medium transition-all disabled:opacity-40 disabled:cursor-not-allowed"
                   >
-                    Next <ChevronRight className="w-4 h-4" />
+                    Next <ChevronRight className="w-3 h-3 md:w-4 md:h-4" />
                   </button>
                 )}
               </div>
