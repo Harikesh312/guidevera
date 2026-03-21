@@ -10,6 +10,8 @@ app.use(cors({
   origin: [
     "http://localhost:3000", 
     "https://guidevera.vercel.app", 
+    'https://guidevera.com',      
+    'https://www.guidevera.com',
     "https://guidevera.onrender.com"
   ],
   credentials: true
