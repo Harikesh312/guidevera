@@ -1,179 +1,151 @@
 export const collegesData = {
-  "dbuu": {
+  dbuu: {
     slug: "dbuu",
     name: "Dev Bhoomi Uttarakhand University",
     shortName: "DBUU",
     location: "Dehradun, Uttarakhand",
-    established: "2011",
-    campus: "52+ Acres",
-    ranking: "#1 in Uttarakhand",
-    guarantee: "100% Placement Support",
-    tag: "TOP RANKED",
-    rating: "4.9",
+    established: "2005",
+    campus: "42 Acres",
+    ranking: "Top Private University in Uttarakhand",
+    guarantee: "Strong Placement Support",
+    tag: "TOP PRIVATE UNIVERSITY",
+    rating: "4.3",
     totalStudents: "10,000+",
-    programs: "50+",
+    programs: "120+",
     heroImage: "/images/dbuu.jpg",
     websiteUrl: "https://www.dbuu.ac.in/",
-    applyUrl: "https://www.dbuu.ac.in/",
-    about: "Dev Bhoomi Uttarakhand University (DBUU) is one of the leading private universities in the Uttarakhand region, offering a wide range of undergraduate and postgraduate programs. The university is committed to providing quality education that blends academic excellence with practical skills. Established in 2011, DBUU has rapidly grown into a premier institution known for its modern infrastructure, experienced faculty, and strong industry connections. DBUU is approved by UGC and recognized by various statutory bodies at both state and national levels.",
+    applyUrl: "https://apply.dbuu.ac.in/",
+
+    // ✅ FIXED (template string used)
+    about: `Dev Bhoomi Uttarakhand University (DBUU), Dehradun is a private university established in 2005 under the Uttarakhand Uthan Samiti. It evolved from Dev Bhoomi Institute of Technology (DBIT) to Dev Bhoomi Group of Institutions (DBGI) and later became a university. The university is recognized by UGC and approved by regulatory bodies like PCI, INC, BCI, and CoA.
+
+DBUU offers 120+ programs across 11 schools in Engineering, Management, Pharmacy, Law, Agriculture, Design, Medical, and more. The university focuses on industry-oriented education, practical exposure, and skill development with modern infrastructure and strong placement support.`,
+
     badges: [
       "UGC Approved University",
-      "Strong Alumni Network – 10,000+ Professionals",
+      "Approved by PCI, INC, BCI, CoA",
+      "120+ Programs Across 11 Schools",
       "Industry-Integrated Curriculum",
-      "NAAC Accredited",
     ],
+
     stats: [
-      { label: "Established", value: "2011" },
-      { label: "Campus Area", value: "52+ Acres" },
+      { label: "Established", value: "2005" },
+      { label: "Campus Area", value: "42 Acres" },
       { label: "Total Students", value: "10,000+" },
-      { label: "Programs Offered", value: "50+" },
+      { label: "Programs Offered", value: "120+" },
     ],
+
     courses: [
-      { name: "B.Tech Computer Science & Engineering", type: "Full-Time Undergraduate", duration: "4 Years", fee: "₹1,20,000/yr", description: "Cutting-edge curriculum covering AI, ML, Data Science, and Software Engineering." },
-      { name: "MBA Management", type: "Full-Time Postgraduate", duration: "2 Years", fee: "₹90,000/yr", description: "Industry-focused MBA with specializations in Marketing, Finance, and HR." },
-      { name: "BHM Hotel Management", type: "Full-Time Undergraduate", duration: "3 Years", fee: "₹80,000/yr", description: "Comprehensive hospitality management program with hands-on training." },
-      { name: "BAMS Ayurvedic Medicine", type: "Full-Time Undergraduate", duration: "5.5 Years", fee: "₹1,10,000/yr", description: "Bachelor of Ayurvedic Medicine and Surgery with clinical training." },
-      { name: "B.Com Commerce", type: "Full-Time Undergraduate", duration: "3 Years", fee: "₹60,000/yr", description: "Comprehensive commerce program with accounting and finance focus." },
-      { name: "M.Tech", type: "Full-Time Postgraduate", duration: "2 Years", fee: "₹85,000/yr", description: "Advanced engineering program with research and industry project opportunities." },
+      { name: "B.Tech (CSE, AI/ML, Data Science, Robotics, Civil, Mechanical, Electrical, ECE, Aerospace)", type: "UG", duration: "4 Years", fee: "₹1.4–1.8L/yr", description: "Core + emerging engineering programs." },
+      { name: "M.Tech", type: "PG", duration: "2 Years", fee: "₹1L+/yr", description: "Advanced engineering specialization." },
+
+      { name: "BBA", type: "UG", duration: "3 Years", fee: "₹90K+/yr", description: "Business and management fundamentals." },
+      { name: "MBA", type: "PG", duration: "2 Years", fee: "₹1.2L+/yr", description: "Industry-oriented MBA programs." },
+      { name: "B.Com / B.Com (Hons.)", type: "UG", duration: "3 Years", fee: "₹60K+/yr", description: "Finance and accounting." },
+
+      { name: "BCA / MCA", type: "UG & PG", duration: "3 / 2 Years", fee: "₹80K–₹1.2L/yr", description: "Programming & advanced computing." },
+
+      { name: "B.Pharm / D.Pharm / M.Pharm", type: "UG & Diploma & PG", duration: "2–4 Years", fee: "₹80K–₹1.5L/yr", description: "Pharmaceutical sciences." },
+
+      { name: "BAMS", type: "UG", duration: "5.5 Years", fee: "₹1.1L+/yr", description: "Ayurvedic medicine." },
+      { name: "B.Sc Nursing / Paramedical", type: "UG", duration: "3–4 Years", fee: "₹1L+/yr", description: "Healthcare programs." },
+
+      { name: "B.Sc Agriculture / M.Sc Agriculture", type: "UG & PG", duration: "4 / 2 Years", fee: "₹90K+/yr", description: "Agriculture programs." },
+
+      { name: "LLB / BA LLB / LLM", type: "UG & PG", duration: "3–5 Years", fee: "₹80K+/yr", description: "Law programs." },
+
+      { name: "B.Des / B.Arch", type: "UG", duration: "4–5 Years", fee: "₹1.2L+/yr", description: "Design & architecture." },
+
+      { name: "B.Sc / M.Sc / BA / MA", type: "UG & PG", duration: "3 / 2 Years", fee: "₹50K–₹90K/yr", description: "Science & arts programs." },
+
+      { name: "BHM", type: "UG", duration: "3–4 Years", fee: "₹80K+/yr", description: "Hotel management." },
+
+      { name: "Diploma Programs", type: "Diploma", duration: "1–3 Years", fee: "₹30K–₹40K/yr", description: "Skill-based programs." },
+
+      { name: "Ph.D Programs", type: "Doctorate", duration: "3–5 Years", fee: "₹1L+/yr", description: "Research programs." }
     ],
+
     placements: {
-      highest: "₹18 LPA",
-      average: "₹6.5 LPA",
-      offers: "800+",
-      companies: "200+",
-      description: "DBUU Career Development Cell works closely with top companies to ensure strong placement outcomes for every student.",
-      topRecruiters: ["TCS", "Infosys", "Wipro", "HCL Technologies", "Cognizant", "Amazon", "Deloitte", "HDFC Bank"],
+      highest: "₹43 LPA",
+      average: "₹5–6 LPA",
+      offers: "15,000+",
+      companies: "800+",
+      description: "Strong placement support with top recruiters across industries.",
+      topRecruiters: ["TCS", "Infosys", "Wipro", "Accenture", "IBM", "Amazon", "Capgemini"],
     },
+
     infrastructure: [
-      { label: "High-Speed Digital Library", description: "10,000+ books, digital journals, and e-resources", image: "/images/dbuu.jpg" },
-      { label: "Modern Sports Complex", description: "Cricket ground, basketball court, and indoor games", image: "/images/dbuu.jpg" },
-      { label: "State-of-the-Art Labs", description: "Advanced computer, chemistry, and engineering labs", image: "/images/dbuu.jpg" },
+      { label: "Modern Library", description: "Digital + physical resources", image: "/images/dbuu.jpg" },
+      { label: "Advanced Labs", description: "Engineering & medical labs", image: "/images/dbuu.jpg" },
+      { label: "Sports Complex", description: "Indoor & outdoor facilities", image: "/images/dbuu.jpg" },
+      { label: "Smart Classrooms", description: "Tech-enabled learning", image: "/images/dbuu.jpg" },
     ],
-    amenities: ["Free Wi-Fi Campus", "Modern Mess & Cafeteria", "Gymnasium", "Health Care Centre", "Boys & Girls Hostel", "Transport Facility", "24x7 Security", "ATM on Campus"],
+
+    amenities: [
+      "Wi-Fi Campus",
+      "Hostel (Boys & Girls)",
+      "Medical Facilities",
+      "Cafeteria",
+      "Transport",
+      "Gym",
+      "24x7 Security",
+    ],
+
     admissionUpdates: [
-      { label: "JEE Advanced Registration", date: "Open Now" },
-      { label: "MBA Round 1 Results", date: "Releasing Soon" },
-      { label: "BAMS Counselling", date: "July 2025" },
+      { label: "Admissions Open 2026", date: "Apply Now" },
+      { label: "Scholarship Test", date: "August 2026" },
+      { label: "BAMS Admission (NEET)", date: "Ongoing" },
     ],
   },
 
   "uttranchal-university": {
     slug: "uttranchal-university",
     name: "Uttaranchal University",
-    shortName: "Uttranchal University",
+    shortName: "UU",
     location: "Dehradun, Uttarakhand",
     established: "2013",
     campus: "75+ Acres",
-    ranking: "Top 5% Universities in India (NAAC A+)",
+    ranking: "NAAC A+ Accredited",
     guarantee: "100% Placement Assistance",
     tag: "POPULAR",
-    rating: "4.8",
+    rating: "4.5",
     totalStudents: "8,000+",
     programs: "100+",
     heroImage: "/images/Uttranchal-University.jpg",
     websiteUrl: "https://www.uudoon.in/",
     applyUrl: "https://www.uudoon.in/admissions/",
-    about: "Uttaranchal University came into establishment in 2013, vide Uttaranchal University Act, 2012 (Uttarakhand Act No. 11 of 2013) as a Private University. Uttaranchal University is recognized by the UGC under sections 2(f) and 12(B) of the UGC Act, 1956. The University has achieved the prestigious A+ Grade accreditation from NAAC, positioning it among the top 5% of higher education institutions in the country. With 24+ years of educational experience, 100+ multidisciplinary programs, and 8,000+ students from India and abroad, the university is committed to academic excellence and transforming lives.",
+    about: `Uttaranchal University was established in 2013 under the Uttaranchal University Act. It is recognized by UGC and accredited with NAAC A+ grade. The university offers multidisciplinary programs with strong industry exposure and modern infrastructure.`,
+
     badges: [
-      "NAAC A+ Grade Accredited",
-      "UGC Recognized (2f & 12B)",
-      "Top 5% Universities in India",
-      "24+ Years of Educational Experience",
+      "NAAC A+ Accredited",
+      "UGC Recognized",
+      "Top Private University",
     ],
+
     stats: [
       { label: "Established", value: "2013" },
       { label: "Campus Area", value: "75+ Acres" },
       { label: "Students", value: "8,000+" },
       { label: "Programs", value: "100+" },
     ],
+
     courses: [
-      { name: "B.Tech Computer Science & Engineering", type: "Full-Time Undergraduate", duration: "4 Years", fee: "₹85,000/sem", description: "Industry-aligned engineering with AI, Cloud Computing, and Cybersecurity specializations." },
-      { name: "MBA Business Analytics", type: "Full-Time Postgraduate", duration: "2 Years", fee: "₹75,000/sem", description: "Data-driven MBA with focus on analytics, strategy, and leadership." },
-      { name: "LLB Law", type: "Full-Time Undergraduate", duration: "3 Years", fee: "₹65,000/sem", description: "Comprehensive legal education with moot court and industry exposure." },
-      { name: "B.Pharma Pharmaceutical Sciences", type: "Full-Time Undergraduate", duration: "4 Years", fee: "₹70,000/sem", description: "Modern pharmaceutical program with research lab access and industry tie-ups." },
-      { name: "B.Sc Agriculture", type: "Full-Time Undergraduate", duration: "4 Years", fee: "₹55,000/sem", description: "Practical agriculture science program with field training and research." },
-      { name: "BHM Hotel & Hospitality Management", type: "Full-Time Undergraduate", duration: "3 Years", fee: "₹72,000/sem", description: "Hospitality program with international exposure and hands-on training." },
+      { name: "B.Tech", type: "UG", duration: "4 Years" },
+      { name: "MBA", type: "PG", duration: "2 Years" },
+      { name: "LLB", type: "UG", duration: "3 Years" },
+      { name: "B.Pharm", type: "UG", duration: "4 Years" },
+      { name: "B.Sc Agriculture", type: "UG", duration: "4 Years" },
     ],
+
     placements: {
-      highest: "₹1.50 CR (International Package)",
-      average: "₹50 LPA (Domestic Highest)",
+      highest: "₹50 LPA",
+      average: "₹5–6 LPA",
       offers: "7,000+",
       companies: "750+",
-      description: "The Corporate Resource Centre at Uttaranchal University is dedicated to collaborating with corporates and industrial associations to help students secure their dream placements.",
-      topRecruiters: ["TCS", "Wipro", "Infosys", "Amazon", "IBM", "Capgemini", "Accenture", "L&T"],
+      description: "Strong placement support across industries.",
+      topRecruiters: ["TCS", "Wipro", "Infosys", "Amazon", "IBM"],
     },
-    infrastructure: [
-      { label: "High-Speed Digital Library", description: "Vast collection of books, journals, and digital resources", image: "/images/Uttranchal-University.jpg" },
-      { label: "Advanced Research Labs", description: "State-of-the-art labs for engineering, pharma, and science research", image: "/images/Uttranchal-University.jpg" },
-      { label: "Modern Sports Facilities", description: "Cricket ground, football field, indoor sports complex", image: "/images/Uttranchal-University.jpg" },
-    ],
-    amenities: ["Free Wi-Fi Campus", "Modern Mess & Cafeteria", "Gymnasium", "Health Care Centre", "Boys & Girls Hostel", "Transport Facility", "NCC & NSS Units", "Cultural Activity Centre"],
-    admissionUpdates: [
-      { label: "UG Admissions 2025", date: "Open Now" },
-      { label: "PG Admissions 2025", date: "Open Now" },
-      { label: "PhD Programs", date: "Rolling Admissions" },
-    ],
-  },
-
-  "graphic-era": {
-    slug: "graphic-era",
-    name: "Graphic Era University",
-    shortName: "Graphic Era",
-    location: "Dehradun, Uttarakhand",
-    established: "1993",
-    campus: "100+ Acres",
-    ranking: "NAAC A+ Accredited University",
-    guarantee: "95% Placement Record",
-    tag: "TOP RATED",
-    rating: "4.7",
-    totalStudents: "15,000+",
-    programs: "75+",
-    heroImage: "/images/graphic-era.jpg",
-    websiteUrl: "https://www.geu.ac.in/",
-    applyUrl: "https://www.geu.ac.in/admission/",
-    about: "Graphic Era University is one of the most prestigious universities in Uttarakhand, established in 1993. It is a NAAC A+ accredited institution recognized for excellence in engineering, management, and technology education. The university has a strong focus on research, innovation, and industry-integrated curriculum. With over 15,000 students and 75+ programs, Graphic Era is known for outstanding placements and a vibrant campus life in the heart of Dehradun.",
-    badges: [
-      "NAAC A+ Accredited",
-      "UGC Recognized University",
-      "Top Engineering College in Uttarakhand",
-      "Strong Industry & Placement Network",
-    ],
-    stats: [
-      { label: "Established", value: "1993" },
-      { label: "Campus Area", value: "100+ Acres" },
-      { label: "Total Students", value: "15,000+" },
-      { label: "Programs Offered", value: "75+" },
-    ],
-    courses: [
-      { name: "B.Tech Computer Science & Engineering", type: "Full-Time Undergraduate", duration: "4 Years", fee: "₹1,25,000/yr", description: "Industry-aligned CSE program with AI, ML, Data Science and Cloud specializations." },
-      { name: "B.Tech Electronics & Communication", type: "Full-Time Undergraduate", duration: "4 Years", fee: "₹1,15,000/yr", description: "Comprehensive ECE program with embedded systems and VLSI design focus." },
-      { name: "MBA Management", type: "Full-Time Postgraduate", duration: "2 Years", fee: "₹95,000/yr", description: "Industry-focused MBA with Marketing, Finance and HR specializations." },
-      { name: "BCA Computer Applications", type: "Full-Time Undergraduate", duration: "3 Years", fee: "₹75,000/yr", description: "Modern computer applications program with hands-on project based learning." },
-      { name: "B.Sc Data Science", type: "Full-Time Undergraduate", duration: "3 Years", fee: "₹80,000/yr", description: "Emerging data science program with Python, ML and analytics focus." },
-      { name: "M.Tech", type: "Full-Time Postgraduate", duration: "2 Years", fee: "₹90,000/yr", description: "Advanced engineering research program with strong industry collaboration." },
-    ],
-    placements: {
-      highest: "₹42 LPA",
-      average: "₹7.2 LPA",
-      offers: "1,200+",
-      companies: "300+",
-      description: "Graphic Era University has a dedicated Training and Placement Cell that maintains strong ties with top MNCs and startups, ensuring excellent career opportunities for every graduate.",
-      topRecruiters: ["TCS", "Infosys", "Wipro", "Amazon", "Microsoft", "IBM", "HCL", "Cognizant"],
-    },
-    infrastructure: [
-      { label: "State-of-the-Art Labs", description: "Advanced computing, electronics and research laboratories with latest equipment", image: "/images/graphic-era.jpg" },
-      { label: "Central Library", description: "Digital library with 50,000+ books, journals and online resources", image: "/images/graphic-era.jpg" },
-      { label: "Sports Complex", description: "Cricket ground, basketball courts and indoor sports facilities", image: "/images/graphic-era.jpg" },
-    ],
-    amenities: [
-      "Free Wi-Fi Campus", "Modern Mess & Cafeteria", "Gymnasium", "Health Care Centre", "Boys & Girls Hostel", "Transport Facility", "NCC & NSS Units", "Innovation Lab"
-    ],
-    admissionUpdates: [
-      { label: "B.Tech Admissions 2025", date: "Open Now" },
-      { label: "MBA Admissions 2025", date: "Open Now" },
-      { label: "Lateral Entry (LEET)", date: "Open Now" },
-    ],
-  },
+  }
 };
 
 export function getCollegeBySlug(slug) {

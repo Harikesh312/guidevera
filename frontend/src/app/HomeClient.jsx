@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { motion } from "framer-motion";
+import { motion, useInView, animate } from "framer-motion";
 import {
   Search,
   MapPin,
@@ -23,6 +23,39 @@ import {
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { requireAuth } from "../lib/authGuard";
+
+const AnimatedCounter = ({ value }) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const [displayValue, setDisplayValue] = useState(0);
+
+  const numericValue = parseInt(value.replace(/\D/g, "")) || 0;
+  const suffix = value.replace(/[0-9]/g, "");
+
+  useEffect(() => {
+    if (isInView) {
+      if (numericValue === 0) {
+        setDisplayValue(0);
+        return;
+      }
+      const controls = animate(0, numericValue, {
+        duration: 2,
+        ease: "easeOut",
+        onUpdate: (val) => {
+          setDisplayValue(Math.round(val));
+        },
+      });
+      return () => controls.stop();
+    }
+  }, [isInView, numericValue]);
+
+  return (
+    <span ref={ref}>
+      {displayValue}
+      {suffix}
+    </span>
+  );
+};
 
 export default function HomeClient() {
   const router = useRouter();
@@ -339,10 +372,11 @@ export default function HomeClient() {
       {/* Stats Section */}
       <section className="py-20 border-y border-white/5 bg-white/[0.02]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 divide-y sm:divide-y-0 sm:divide-x divide-white/10">
+          <div className="grid grid-cols-1 sm:grid-cols-4 gap-10 divide-y sm:divide-y-0 sm:divide-x divide-white/10">
             {[
-              { stat: "500", label: "Admission Sessions" },
+              { stat: "500+", label: "Admission Sessions" },
               { stat: "20+", label: "College Options" },
+              { stat: "250+", label: "Courses" },
               { stat: "90%", label: "Admission Satisfaction Rate" },
             ].map((item, i) => (
               <motion.div 
@@ -353,7 +387,7 @@ export default function HomeClient() {
                 transition={{ delay: i * 0.1 }}
                 className="flex flex-col items-center justify-center text-center pt-8 md:pt-0"
               >
-                <h3 className="text-5xl md:text-6xl font-bold text-[#0EB4A6] mb-3">{item.stat}</h3>
+                <h3 className="text-5xl md:text-6xl font-bold text-[#0EB4A6] mb-3"><AnimatedCounter value={item.stat} /></h3>
                 <p className="text-lg font-medium text-white/80">{item.label}</p>
               </motion.div>
             ))}
