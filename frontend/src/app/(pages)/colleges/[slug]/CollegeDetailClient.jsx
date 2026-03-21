@@ -90,7 +90,7 @@ export default function CollegeDetailClient({ college }) {
         <div className="bg-[#121214] border-y border-white/5 py-6">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 divide-x divide-white/5">
-              {college.stats.map((stat, i) => (
+              {(college.stats || []).map((stat, i) => (
                 <div key={i} className={`flex flex-col ${i !== 0 ? 'pl-6' : ''}`}>
                   <span className="text-white/40 text-sm mb-1">{stat.label}</span>
                   <span className="text-xl md:text-2xl font-bold text-white">{stat.value}</span>
@@ -130,7 +130,7 @@ export default function CollegeDetailClient({ college }) {
                   </div>
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {college.badges.map((badge, i) => (
+                    {(college.badges || []).map((badge, i) => (
                       <div key={i} className="bg-[#121214] border border-white/5 rounded-2xl p-5 flex items-start gap-3">
                         <CheckCircle className="w-5 h-5 text-[#0EB4A6] shrink-0 mt-0.5" />
                         <span className="font-medium text-white/90">{badge}</span>
@@ -138,17 +138,19 @@ export default function CollegeDetailClient({ college }) {
                     ))}
                   </div>
                   
-                  <div className="bg-[#121214] border border-white/5 rounded-2xl p-6 md:p-8">
-                    <h2 className="text-xl font-bold mb-6">Campus Amenities</h2>
-                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-                      {college.amenities.map((amenity, i) => (
-                        <div key={i} className="flex flex-col items-center justify-center text-center p-4 rounded-xl bg-white/5 border border-white/5 gap-3">
-                          {getAmenityIcon(amenity)}
-                          <span className="text-xs text-white/70">{amenity}</span>
-                        </div>
-                      ))}
+                  {college.amenities && college.amenities.length > 0 && (
+                    <div className="bg-[#121214] border border-white/5 rounded-2xl p-6 md:p-8">
+                      <h2 className="text-xl font-bold mb-6">Campus Amenities</h2>
+                      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                        {college.amenities.map((amenity, i) => (
+                          <div key={i} className="flex flex-col items-center justify-center text-center p-4 rounded-xl bg-white/5 border border-white/5 gap-3">
+                            {getAmenityIcon(amenity)}
+                            <span className="text-xs text-white/70">{amenity}</span>
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                  </div>
+                  )}
 
                   {/* ── COURSES SECTION inside College Info tab ── */}
                   <div className="bg-[#121214] border border-white/5 rounded-2xl p-6 md:p-8">
@@ -163,8 +165,8 @@ export default function CollegeDetailClient({ college }) {
                     {/* Show first 3 courses, or all if expanded */}
                     <div className="space-y-4">
                       {(showAllCourses 
-                        ? college.courses 
-                        : college.courses.slice(0, 3)
+                        ? (college.courses || []) 
+                        : (college.courses || []).slice(0, 3)
                       ).map((course, i) => (
                         <div key={i} className="bg-[#09090b] border border-white/5 rounded-xl p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:border-white/10 transition-colors">
                           <div className="flex items-start gap-4">
@@ -202,7 +204,7 @@ export default function CollegeDetailClient({ college }) {
                     </div>
 
                     {/* Show More / Show Less button */}
-                    {college.courses.length > 3 && (
+                    {(college.courses || []).length > 3 && (
                       <div className="mt-5 text-center">
                         <button
                           onClick={() => setShowAllCourses(!showAllCourses)}
@@ -211,7 +213,7 @@ export default function CollegeDetailClient({ college }) {
                           {showAllCourses ? (
                             <>Show Less ↑</>
                           ) : (
-                            <>Show All {college.courses.length} Courses ↓</>
+                            <>Show All {(college.courses || []).length} Courses ↓</>
                           )}
                         </button>
                       </div>
@@ -220,7 +222,7 @@ export default function CollegeDetailClient({ college }) {
                 </motion.div>
               )}
 
-              {activeTab === "Placements" && (
+              {activeTab === "Placements" && college.placements && (
                 <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-8">
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                     <div className="bg-[#121214] border border-white/5 rounded-2xl p-6 text-center shadow-lg">
@@ -259,7 +261,7 @@ export default function CollegeDetailClient({ college }) {
                     
                     <h4 className="text-sm font-semibold text-white/50 uppercase tracking-wider mb-4">Top Recruiters</h4>
                     <div className="flex flex-wrap gap-3">
-                      {college.placements.topRecruiters.map((recruiter, i) => (
+                      {(college.placements.topRecruiters || []).map((recruiter, i) => (
                         <span key={i} className="bg-white/5 border border-white/10 px-4 py-2 rounded-lg text-sm font-medium hover:bg-white/10 transition-colors">
                           {recruiter}
                         </span>
@@ -271,7 +273,7 @@ export default function CollegeDetailClient({ college }) {
 
               {activeTab === "Infrastructure" && (
                 <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
-                  {college.infrastructure.map((item, i) => (
+                  {(college.infrastructure || []).map((item, i) => (
                     <div key={i} className="bg-[#121214] border border-white/5 rounded-2xl overflow-hidden flex flex-col sm:flex-row group">
                       <div className="w-full sm:w-1/3 h-48 sm:h-auto relative overflow-hidden">
                         <Image src={item.image} alt={item.label} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
@@ -286,7 +288,7 @@ export default function CollegeDetailClient({ college }) {
                   <div className="bg-[#121214] border border-white/5 rounded-2xl p-6 md:p-8 mt-4">
                     <h2 className="text-xl font-bold mb-6">All Facilities</h2>
                     <ul className="grid grid-cols-2 sm:grid-cols-3 gap-y-4 gap-x-6">
-                      {college.amenities.map((amenity, i) => (
+                      {(college.amenities || []).map((amenity, i) => (
                         <li key={i} className="flex items-center gap-2 text-sm text-white/70">
                           <CheckCircle className="w-4 h-4 text-[#0EB4A6]" /> {amenity}
                         </li>
@@ -345,17 +347,19 @@ export default function CollegeDetailClient({ college }) {
               </div>
 
               {/* Sidebar Card 2 - Admission Updates */}
-              <div className="bg-[#121214] border border-white/5 rounded-2xl p-6">
-                <h3 className="font-bold text-lg mb-4 flex items-center gap-2"><Clock className="w-5 h-5 text-[#0EB4A6]" /> Admission Updates</h3>
-                <div className="space-y-4">
-                  {college.admissionUpdates.map((update, i) => (
-                    <div key={i} className="flex flex-col pt-3 border-t border-white/5 first:border-0 first:pt-0">
-                      <span className="text-sm font-medium text-white/90">{update.label}</span>
-                      <span className="text-xs text-[#0EB4A6] mt-1">{update.date}</span>
-                    </div>
-                  ))}
+              {college.admissionUpdates && college.admissionUpdates.length > 0 && (
+                <div className="bg-[#121214] border border-white/5 rounded-2xl p-6">
+                  <h3 className="font-bold text-lg mb-4 flex items-center gap-2"><Clock className="w-5 h-5 text-[#0EB4A6]" /> Admission Updates</h3>
+                  <div className="space-y-4">
+                    {college.admissionUpdates.map((update, i) => (
+                      <div key={i} className="flex flex-col pt-3 border-t border-white/5 first:border-0 first:pt-0">
+                        <span className="text-sm font-medium text-white/90">{update.label}</span>
+                        <span className="text-xs text-[#0EB4A6] mt-1">{update.date}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
 
               {/* Sidebar Card 3 & 4 */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">

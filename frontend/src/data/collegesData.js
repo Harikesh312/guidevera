@@ -145,6 +145,27 @@ DBUU offers 120+ programs across 11 schools in Engineering, Management, Pharmacy
       description: "Strong placement support across industries.",
       topRecruiters: ["TCS", "Wipro", "Infosys", "Amazon", "IBM"],
     },
+    
+    infrastructure: [
+      { label: "Modern Library", description: "Vast collection of resources", image: "/images/Uttranchal-University.jpg" },
+      { label: "Computer Labs", description: "Advanced computing facilities", image: "/images/Uttranchal-University.jpg" },
+      { label: "Sports Facilities", description: "Indoor & outdoor sports", image: "/images/Uttranchal-University.jpg" },
+      { label: "Auditorium", description: "Spacious with modern audio-visual setup", image: "/images/Uttranchal-University.jpg" },
+    ],
+
+    amenities: [
+      "Wi-Fi Campus",
+      "Hostel (Boys & Girls)",
+      "Medical Facilities",
+      "Cafeteria",
+      "Transport",
+      "Gym",
+      "24x7 Security",
+    ],
+
+    admissionUpdates: [
+      { label: "Admissions Open 2026", date: "Apply Now" },
+    ],
   }
 };
 
