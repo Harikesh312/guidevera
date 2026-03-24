@@ -30,6 +30,7 @@ export default function CollegesClient() {
     { id: 3, slug: "graphic-era", name: "Graphic Era University", location: "Uttarakhand, Dehradun", description: "A NAAC A+ accredited university known for excellence in engineering, technology and management with outstanding placement records.", feeLabel: "Annual Fees", fee: "₹1,25,000", image: "/images/graphic-era.jpg", rating: "4.7", tag: "TOP RATED" },
     { id: 4, slug: null, name: "DBS", location: "Uttarakhand, Dehradun", description: "Leading business school focusing on holistic Commerce and MBA education.", feeLabel: "Annual Fees", fee: "₹2,10,000", image: "/images/DBS.jpg", rating: "4.8", tag: "TOP ROI" },
     { id: 5, slug: null, name: "Tulas Institute", location: "Uttarakhand, Dehradun", description: "A top engineering college with state-of-the-art infrastructure and placements.", feeLabel: "Annual Fees", fee: "₹1,20,000", image: "/images/Tulas-Institute.jpg", rating: "4.7", tag: "TOP RATED" },
+    { id: 6, slug: "itm-dehradun", name: "ITM Dehradun", location: "Uttarakhand, Dehradun", description: "Uttarakhand's pioneering IT institution since 2002. AICTE approved, Microsoft Lead Institute of Academic Excellence, and TCS iON certification partner.", feeLabel: "Annual Fees", fee: "₹35,000", image: "/images/itm.jpg", rating: "4.5", tag: "AICTE APPROVED" },
   ];
 
   const handleSearch = () => {

@@ -289,6 +289,99 @@ GEU has 50,000+ alumni working at marquee brands like Apple, Google, Microsoft, 
       { label: "Online Degree Programs", date: "geuonline.com" },
     ],
   },
+
+  // ─────────────────────────────────────────────────────────────────────
+  // ITM DEHRADUN
+  // ─────────────────────────────────────────────────────────────────────
+  "itm-dehradun": {
+    slug: "itm-dehradun",
+    name: "Institute of Technology and Management",
+    shortName: "ITM",
+    location: "Dehradun, Uttarakhand",
+    established: "2002",
+    campus: "Central Dehradun",
+    ranking: "AICTE Approved | Microsoft Lead Institute of Academic Excellence",
+    guarantee: "90%+ Placement Record",
+    tag: "AICTE APPROVED",
+    rating: "4.5",
+    totalStudents: "5,000+",
+    programs: "25+",
+    heroImage: "/images/itm.jpg",
+    websiteUrl: "https://itmddn.in/",
+    applyUrl: "https://applynow.itmddn.in/",
+
+    about: `Institute of Technology and Management (ITM) is Uttarakhand's pioneering IT education institution, established in 2002 — when the state's education ecosystem had yet to embrace the IT sector. Affiliated with Hemwati Nandan Bahuguna Garhwal (Central University) Srinagar Garhwal and Sri Dev Suman Uttarakhand Vishwavidyalaya, and approved by AICTE, New Delhi, ITM was the first and only resident alma-mater for professional IT courses in the state, designing its programs with active guidance of the Uttarakhand Education Ministry. Over more than two decades, ITM has established dominance as the lead institute for professional courses in IT, Management, Commerce, Animation, Library Sciences, Hotel Management, Journalism, and Fine Arts. ITM holds the prestigious title of "Lead Institute of Academic Excellence" awarded by Microsoft. It is also a recognized Skill Development Partner under the Skill India Programme by NSDC, Government of India, and an official Study Center of Uttarakhand Open University. ITM partners with TCS iON to provide six industry certifications — in Data Science, Artificial Intelligence & Machine Learning, Data Engineering, Cyber Security, Design Thinking, and Data Analysis — one per semester to every student, significantly boosting employability.`,
+
+    badges: [
+      "AICTE Approved, New Delhi",
+      "Microsoft Lead Institute of Academic Excellence",
+      "Skill Development Partner – Skill India Programme (NSDC, Govt. of India)",
+      "TCS iON Certification Partner – AI, Data Science, Cyber Security & More",
+    ],
+
+    stats: [
+      { label: "Established", value: "2002" },
+      { label: "Placement Rate", value: "90%+" },
+      { label: "Recruiting Companies", value: "50+" },
+      { label: "Programs Offered", value: "25+" },
+    ],
+
+    courses: [
+      { name: "BCA – Bachelor of Computer Applications", type: "UG", duration: "3 Years", fee: "₹35K–₹45K/yr", description: "Flagship IT program affiliated with HNB Garhwal Central University." },
+      { name: "B.Sc IT – Bachelor of Science in Information Technology", type: "UG", duration: "3 Years", fee: "₹35K–₹45K/yr", description: "Core IT curriculum with TCS iON certifications every semester." },
+      { name: "B.Sc Computer Science", type: "UG", duration: "3 Years", fee: "₹35K–₹45K/yr", description: "Computer science fundamentals with applied programming." },
+      { name: "BBA – Bachelor of Business Administration", type: "UG", duration: "3 Years", fee: "₹35K–₹45K/yr", description: "Management program with industry training and strong placement support." },
+      { name: "B.Com / B.Com (Hons.)", type: "UG", duration: "3 Years", fee: "₹25K–₹35K/yr", description: "Commerce programs affiliated with Sri Dev Suman Uttarakhand University." },
+      { name: "BA (Hons.) Journalism and Mass Communication", type: "UG", duration: "3 Years", fee: "₹30K–₹40K/yr", description: "Media and communications degree with industry exposure." },
+      { name: "BHM – Bachelor in Hotel Management", type: "UG", duration: "3 Years", fee: "₹40K–₹50K/yr", description: "Hospitality training with a dedicated hotel management production area." },
+      { name: "Diploma in Hotel Management (DHM)", type: "Diploma", duration: "1 Year", fee: "₹30K–₹40K/yr", description: "Short-term practical hospitality management program." },
+      { name: "B.Sc Animation in Multimedia", type: "UG", duration: "3 Years", fee: "₹40K–₹50K/yr", description: "Creative animation with dedicated multimedia and animation labs." },
+      { name: "Bachelor in Fine Arts (BFA)", type: "UG", duration: "4 Years", fee: "₹25K–₹35K/yr", description: "Fine arts program with dedicated fine arts lab." },
+      { name: "BA – Bachelor of Arts (All Streams)", type: "UG", duration: "3 Years", fee: "₹20K–₹30K/yr", description: "Arts program with multiple streams affiliated with Sri Dev Suman University." },
+      { name: "B.Lib – Bachelor of Library Science", type: "UG", duration: "1 Year", fee: "₹20K–₹25K/yr", description: "Library and information science undergraduate program." },
+      { name: "M.Sc IT – Master of Science in Information Technology", type: "PG", duration: "2 Years", fee: "₹40K–₹50K/yr", description: "Advanced IT postgraduate program with research and industry projects." },
+      { name: "M.Sc Animation in Multimedia", type: "PG", duration: "2 Years", fee: "₹40K–₹50K/yr", description: "Advanced animation and digital media postgraduate degree." },
+      { name: "M.Com – Master of Commerce", type: "PG", duration: "2 Years", fee: "₹25K–₹35K/yr", description: "Advanced commerce and finance postgraduate program." },
+      { name: "M.Lib – Master of Library Science", type: "PG", duration: "1 Year", fee: "₹20K–₹25K/yr", description: "Library science postgraduate program." },
+    ],
+
+    placements: {
+      highest: "₹8 LPA",
+      average: "₹3–4 LPA",
+      offers: "1,000+ (since 2017)",
+      companies: "50+",
+      description: "ITM's dedicated Training and Placement Cell has consistently delivered 90%+ placement rates. In 2024–25, 121 students were placed through campus drives across 28 companies. In 2022–23, a record 255 students were placed across 42 companies. The cell organizes Student Development Programs covering Communication Skills, Soft Skills, Aptitude, and Corporate Training to prepare students for the industry.",
+      topRecruiters: ["Infosys", "Amazon", "Wipro", "Deloitte", "Capgemini", "HCL", "Concentrix", "Genpact", "IndiGo", "Axis Bank", "State Bank of India", "Maruti Suzuki", "Teleperformance", "Hindustan Times", "Extramarks"],
+    },
+
+    infrastructure: [
+      { label: "Computer Labs", description: "State-of-the-art computer labs supporting BCA, B.Sc IT, and MCA programs with high-speed internet.", image: "/images/itm.jpg" },
+      { label: "Animation & Multimedia Labs", description: "Dedicated labs for B.Sc and M.Sc Animation students with professional-grade software.", image: "/images/itm.jpg" },
+      { label: "Library", description: "Well-stocked library with digital and physical resources across all disciplines.", image: "/images/itm.jpg" },
+      { label: "Hotel Management Production Area", description: "Industry-standard kitchen and hospitality training area for BHM and DHM students.", image: "/images/itm.jpg" },
+    ],
+
+    amenities: [
+      "Computer Labs",
+      "Library",
+      "Hostel",
+      "Canteen",
+      "Sports & Games",
+      "NSS",
+      "Yoga Room",
+      "Fine Arts Lab",
+      "Animation & Multimedia Lab",
+      "Software Development Cell",
+      "24x7 Security",
+      "Transport",
+    ],
+
+    admissionUpdates: [
+      { label: "Admissions Open 2026–27", date: "Apply Now" },
+      { label: "TCS iON Certifications", date: "Every Semester" },
+      { label: "Campus Placement Drives", date: "Ongoing" },
+    ],
+  },
 };
 
 export function getCollegeBySlug(slug) {
