@@ -5,15 +5,27 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { MapPin, Star, ExternalLink, ChevronLeft, GraduationCap, Clock, IndianRupee, Users, Building2, Wifi, Utensils, Dumbbell, HeartPulse, BedDouble, Bus, Shield, BadgeCheck, TrendingUp, BookOpen, Phone, CheckCircle } from "lucide-react";
+import { MapPin, Star, ExternalLink, ChevronLeft, GraduationCap, Clock, IndianRupee, Users, Building2, Wifi, Utensils, Dumbbell, HeartPulse, BedDouble, Bus, Shield, BadgeCheck, TrendingUp, BookOpen, Phone, CheckCircle, X } from "lucide-react";
+import { AnimatePresence } from "framer-motion";
 import Navbar from "../../../../components/Navbar";
 import Footer from "../../../../components/Footer";
 import { requireAuth } from "../../../../lib/authGuard";
+import API_URL from "@/lib/api";
+
+const INDIAN_STATES = [
+  "Andhra Pradesh","Arunachal Pradesh","Assam","Bihar","Chhattisgarh","Goa","Gujarat","Haryana",
+  "Himachal Pradesh","Jharkhand","Karnataka","Kerala","Madhya Pradesh","Maharashtra","Manipur",
+  "Meghalaya","Mizoram","Nagaland","Odisha","Punjab","Rajasthan","Sikkim","Tamil Nadu","Telangana",
+  "Tripura","Uttar Pradesh","Uttarakhand","West Bengal","Delhi","Other"
+];
 
 export default function CollegeDetailClient({ college }) {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState("College Info");
   const [showAllCourses, setShowAllCourses] = useState(false);
+  const [applyModalOpen, setApplyModalOpen] = useState(false);
+  const [form, setForm] = useState({ name: "", phone: "", course: "", email: "", state: "" });
+  const [formStatus, setFormStatus] = useState("idle");
 
   const tabs = ["College Info", "Placements", "Infrastructure", "Reviews"];
 
@@ -30,15 +42,87 @@ export default function CollegeDetailClient({ college }) {
     return <Building2 className="w-5 h-5 text-white/60" />;
   };
 
-  const reviews = [
-    { name: "Aarav Sharma", course: "B.Tech CSE", rating: 5, text: "Excellent faculty and great placement support. The campus life is amazing." },
-    { name: "Priya Singh", course: "MBA", rating: 4, text: "Good infrastructure and industry exposure. The curriculum is very well updated." },
-    { name: "Rohan Verma", course: "BHM", rating: 5, text: "Best decision of my life! The labs and practical training sessions are top notch." },
-  ];
+  const reviews = college.reviews || [];
+
+  const openApplyModal = () => {
+    setApplyModalOpen(true);
+    setForm({ name: "", phone: "", course: college.courses?.[0]?.name || "", email: "", state: "" });
+    setFormStatus("idle");
+  };
+
+  const closeApplyModal = () => {
+    setApplyModalOpen(false);
+    setFormStatus("idle");
+  };
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    setFormStatus("loading");
+    try {
+      const res = await fetch(`${API_URL}/api/college-apply`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...form, collegeName: college.name }),
+      });
+      const data = await res.json();
+      if (data.success) setFormStatus("success");
+      else setFormStatus("error");
+    } catch { setFormStatus("error"); }
+  };
 
   return (
     <div className="min-h-screen bg-[#09090b] text-white font-sans overflow-x-hidden selection:bg-[#0EB4A6] selection:text-white pb-0">
       <Navbar />
+
+      {/* Apply Now Modal */}
+      <AnimatePresence>
+        {applyModalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
+            onClick={(e) => e.target === e.currentTarget && closeApplyModal()}
+          >
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.95, opacity: 0 }}
+              className="bg-[#121214] border border-white/10 rounded-2xl p-6 md:p-8 w-full max-w-md relative"
+            >
+              <button onClick={closeApplyModal} className="absolute top-4 right-4 text-white/40 hover:text-white transition-colors">
+                <X className="w-5 h-5" />
+              </button>
+
+              {formStatus === "success" ? (
+                <div className="text-center py-6">
+                  <CheckCircle className="w-16 h-16 text-[#0EB4A6] mx-auto mb-4" />
+                  <h3 className="text-xl font-bold mb-2">Application Submitted!</h3>
+                  <p className="text-white/60">We'll call you within 24 hours!</p>
+                  <button onClick={closeApplyModal} className="mt-6 px-6 py-2.5 bg-[#0EB4A6] text-black font-semibold rounded-full">Done</button>
+                </div>
+              ) : (
+                <>
+                  <h3 className="text-xl font-bold mb-1">Apply Now</h3>
+                  <p className="text-white/50 text-sm mb-6">{college.name}</p>
+                  <form onSubmit={handleFormSubmit} className="space-y-4">
+                    <input required className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#0EB4A6]/50" placeholder="Full Name" value={form.name} onChange={e => setForm(f => ({...f, name: e.target.value}))} />
+                    <input required type="tel" pattern="[0-9]{10}" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#0EB4A6]/50" placeholder="Phone Number (10 digits)" value={form.phone} onChange={e => setForm(f => ({...f, phone: e.target.value}))} />
+                    <select required className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#0EB4A6]/50" value={form.course} onChange={e => setForm(f => ({...f, course: e.target.value}))}>
+                      {college.courses?.map(c => <option key={c.name} value={c.name} className="bg-[#121214]">{c.name}</option>)}
+                    </select>
+                    <input required type="email" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#0EB4A6]/50" placeholder="Email Address" value={form.email} onChange={e => setForm(f => ({...f, email: e.target.value}))} />
+                    <select required className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#0EB4A6]/50" value={form.state} onChange={e => setForm(f => ({...f, state: e.target.value}))}>
+                      <option value="" className="bg-[#121214]">Select State</option>
+                      {INDIAN_STATES.map(s => <option key={s} value={s} className="bg-[#121214]">{s}</option>)}
+                    </select>
+                    {formStatus === "error" && <p className="text-red-400 text-xs">Failed to submit. Please try again.</p>}
+                    <button type="submit" disabled={formStatus === "loading"} className="w-full py-3.5 bg-[#0EB4A6] hover:bg-[#0c9c90] text-black font-bold rounded-xl transition-all shadow-[0_0_20px_rgba(14,180,166,0.3)] disabled:opacity-50 cursor-pointer">
+                      {formStatus === "loading" ? "Submitting..." : "Request Callback"}
+                    </button>
+                  </form>
+                </>
+              )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <main className="pt-24 pb-20">
         {/* Full-width hero image */}
@@ -78,9 +162,9 @@ export default function CollegeDetailClient({ college }) {
                 >
                   Start Ability Test
                 </button>
-                <a href={college.applyUrl} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto justify-center px-6 py-3.5 bg-white text-black font-bold rounded-xl hover:bg-white/90 transition-all flex items-center gap-2">
+                <button onClick={openApplyModal} className="w-full sm:w-auto justify-center px-6 py-3.5 bg-white text-black font-bold rounded-xl hover:bg-white/90 transition-all flex items-center gap-2 cursor-pointer">
                   Apply Now <ExternalLink className="w-4 h-4" />
-                </a>
+                </button>
               </div>
             </div>
           </div>
@@ -300,7 +384,7 @@ export default function CollegeDetailClient({ college }) {
 
               {activeTab === "Reviews" && (
                 <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
-                  {reviews.map((review, i) => (
+                  {reviews.length > 0 ? reviews.map((review, i) => (
                     <div key={i} className="bg-[#121214] border border-white/5 rounded-2xl p-6">
                       <div className="flex items-start justify-between mb-4">
                         <div className="flex items-center gap-3">
@@ -320,7 +404,9 @@ export default function CollegeDetailClient({ college }) {
                       </div>
                       <p className="text-white/80 text-sm leading-relaxed">&ldquo;{review.text}&rdquo;</p>
                     </div>
-                  ))}
+                  )) : (
+                    <div className="text-white/50 text-center py-10">No reviews available yet.</div>
+                  )}
                 </motion.div>
               )}
             </div>

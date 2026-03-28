@@ -148,19 +148,19 @@ export default function AbilityTestClient() {
           <div className="bg-[#121214] border border-white/10 rounded-2xl p-6 max-w-2xl mx-auto">
             {/* Progress */}
             <div className="flex items-center justify-between text-xs text-white/40 mb-3">
-              <span>Question 3/20</span>
-              <span>15% (demo only)</span>
+              <span>Question 1/20</span>
+              <span>5%</span>
             </div>
             <div className="h-1.5 rounded-full bg-white/10 mb-6">
-              <div className="h-full w-[15%] rounded-full bg-[#0EB4A6]" />
+              <div className="h-full w-[5%] rounded-full bg-[#0EB4A6]" />
             </div>
-            <h3 className="text-lg font-semibold mb-6 text-center">Which of these environments do you thrive in the most?</h3>
-            <div className="grid grid-cols-2 gap-3 mb-6">
+            <h3 className="text-lg font-semibold mb-6 text-center">Which type of subject or activity naturally interests you the most?</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
               {[
-                { label: "Structured & Organised", selected: false },
-                { label: "Creative & Fluid", selected: true },
-                { label: "Collaborative & Social", selected: false },
-                { label: "Analytical & Data Driven", selected: false },
+                { label: "Medical / Life Sciences", selected: false },
+                { label: "Technology / Engineering / Mathematics", selected: true },
+                { label: "Commerce / Business / Management", selected: false },
+                { label: "Humanities / Creative / Social Sciences", selected: false },
               ].map((opt, i) => (
                 <div
                   key={i}
@@ -176,8 +176,8 @@ export default function AbilityTestClient() {
             </div>
             <div className="flex items-center justify-between">
               <button className="px-5 py-2 text-sm text-white/40 border border-white/10 rounded-full hover:bg-white/5 transition-colors">← Previous</button>
-              <button className="px-5 py-2 text-sm bg-[#0EB4A6] text-white rounded-full font-medium flex items-center gap-2 hover:bg-[#0c9c90] transition-colors">
-                Next Question <ChevronRight className="w-4 h-4" />
+              <button onClick={handleStartTest} className="px-5 py-2 text-sm bg-[#0EB4A6] text-white rounded-full font-medium flex items-center gap-2 hover:bg-[#0c9c90] transition-colors cursor-pointer">
+                Start Real Test <ChevronRight className="w-4 h-4" />
               </button>
             </div>
           </div>

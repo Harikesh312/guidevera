@@ -12,9 +12,9 @@ const generationConfig = {
   responseMimeType: "text/plain",
 };
 
-export async function generateCareerRoadmap(studentAnswers) {
+export async function generateCareerRoadmap(studentAnswers, streamName = "General") {
   const prompt = `
-You are a professional career counselor and educational advisor. Based on the following student responses to a career aptitude assessment, generate a detailed, personalised career roadmap.
+You are a professional career counselor and educational advisor. Based on the following student responses to a career aptitude assessment focused on the ${streamName} stream, generate a detailed, personalised career roadmap.
 
 Student Answers:
 ${studentAnswers}
