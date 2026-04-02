@@ -98,8 +98,12 @@ export default function HomeClient() {
           0% { transform: translateX(0%); }
           100% { transform: translateX(-50%); }
         }
-        .animate-marquee { animation: marquee 25s linear infinite; }
-        .animate-marquee-slow { animation: marquee 35s linear infinite; }
+        @keyframes marquee-reverse {
+          0% { transform: translateX(-50%); }
+          100% { transform: translateX(0%); }
+        }
+        .animate-marquee { animation: marquee 30s linear infinite; }
+        .animate-marquee-reverse { animation: marquee-reverse 35s linear infinite; }
         .marquee-group { display: flex; min-width: max-content; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
@@ -107,7 +111,7 @@ export default function HomeClient() {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-20 overflow-hidden">
+      <section className="relative pt-32 pb-14 lg:pt-48 lg:pb-20 overflow-hidden">
         <div className="absolute inset-0 z-0 opacity-20">
           <div className="absolute inset-0 bg-gradient-to-b from-[#09090b] via-transparent to-[#09090b] z-10" />
           <div className="absolute inset-0 bg-[#0EB4A6]/5 z-0" />
@@ -180,7 +184,7 @@ export default function HomeClient() {
       </section>
 
       {/* Top Rated Colleges */}
-      <section className="py-24 bg-[#09090b] relative">
+      <section className="pt-12 pb-30 md:py-24 bg-[#09090b] relative">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#0EB4A6]/5 rounded-full blur-[100px] pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
@@ -190,7 +194,7 @@ export default function HomeClient() {
                 Browse through our curated list of premier colleges and universities across the region, recognized for academic excellence.
               </p>
             </div>
-            <Link href="/colleges" className="flex items-center gap-2 text-[#0EB4A6] hover:text-[#0c9c90] font-medium transition-colors whitespace-nowrap">
+            <Link href="/colleges" className="hidden md:flex items-center gap-2 text-[#0EB4A6] hover:text-[#0c9c90] font-medium transition-colors whitespace-nowrap">
               View All Colleges <ChevronRight size={18} />
             </Link>
           </div>
@@ -267,104 +271,128 @@ export default function HomeClient() {
             </motion.div>
           </motion.div>
 
-          {/* Mobile-Only College Marquee */}
-          <div className="md:hidden mt-2 overflow-hidden w-full relative">
-            <h3 className="text-center font-semibold text-[#0EB4A6] mb-4">🎓 Top Rated Colleges – Swipe to Explore</h3>
-            
-            {/* List 1 Marquee */}
-            <div className="flex w-[200%] animate-marquee marquee-group pb-4">
-              {[
-                { name: "DBUU", img: "/images/dbuu.jpg" },
-                { name: "Uttranchal University", img: "/images/Uttranchal-University.jpg" },
-                { name: "Tulas Institute", img: "/images/Tulas-Institute.jpg" },
-                { name: "IMS Unision", img: "/images/DBS.jpg" },
-                { name: "Dolphin College", img: "/images/Dolphin-college.jpg" },
-                { name: "Shivalik College", img: "/images/shivalik-college.jpg" },
-                { name: "JBIT Dehradun", img: "/images/Tulas-Institute.jpg" }
-              ].map((col, idx) => (
-                <div key={idx} onClick={() => router.push('/colleges')} className="flex items-center gap-2 bg-[#121214] border border-[#0EB4A6]/20 rounded-full py-1.5 px-2 pr-4 mx-1.5 shadow-[0_0_10px_rgba(14,180,166,0.05)] cursor-pointer active:scale-95 transition-transform flex-shrink-0">
-                  <div className="w-8 h-8 rounded-full overflow-hidden relative shrink-0 border border-white/10">
-                    <Image src={col.img} alt={col.name} fill sizes="32px" className="object-cover" />
-                  </div>
-                  <span className="text-white text-sm font-medium whitespace-nowrap">{col.name}</span>
-                </div>
-              ))}
-              {/* Duplicate for infinite loop effect */}
-              {[
-                { name: "DBUU", img: "/images/dbuu.jpg" },
-                { name: "Uttranchal University", img: "/images/Uttranchal-University.jpg" },
-                { name: "Tulas Institute", img: "/images/Tulas-Institute.jpg" },
-                { name: "IMS Unision", img: "/images/DBS.jpg" },
-                { name: "Dolphin College", img: "/images/Dolphin-college.jpg" },
-                { name: "Shivalik College", img: "/images/shivalik-college.jpg" },
-                { name: "JBIT Dehradun", img: "/images/Tulas-Institute.jpg" }
-              ].map((col, idx) => (
-                <div key={`dup-${idx}`} onClick={() => router.push('/colleges')} className="flex items-center gap-2 bg-[#121214] border border-[#0EB4A6]/20 rounded-full py-1.5 px-2 pr-4 mx-1.5 shadow-[0_0_10px_rgba(14,180,166,0.05)] cursor-pointer active:scale-95 transition-transform flex-shrink-0">
-                  <div className="w-8 h-8 rounded-full overflow-hidden relative shrink-0 border border-white/10">
-                    <Image src={col.img} alt={col.name} fill sizes="32px" className="object-cover" />
-                  </div>
-                  <span className="text-white text-sm font-medium whitespace-nowrap">{col.name}</span>
-                </div>
-              ))}
-            </div>
+          {/* Mobile-Only College Cards – Two auto-scrolling rows */}
+          <div className="md:hidden mt-4 overflow-hidden w-full relative">
+            <h3 className="text-center font-semibold text-[#0EB4A6] mb-5 text-sm tracking-wide uppercase">🎓 Top Rated Colleges</h3>
 
-            {/* List 2 Marquee */}
-            <div className="flex w-[200%] animate-marquee-slow marquee-group pt-1 pb-2">
-              {[
-                { name: "DBS Global University", img: "/images/DBS.jpg" },
-                { name: "Graphic Era", img: "/images/graphic-era.jpg" },
-                { name: "ITM Dehradun", img: "/images/itm.jpg" },
-                { name: "Alpine College", img: "/images/DBS.jpg" }
-              ].map((col, idx) => (
-                <div key={idx} onClick={() => router.push('/colleges')} className="flex items-center gap-2 bg-[#121214] border border-[#0EB4A6]/20 rounded-full py-1.5 px-2 pr-4 mx-1.5 shadow-[0_0_10px_rgba(14,180,166,0.05)] cursor-pointer active:scale-95 transition-transform flex-shrink-0">
-                  <div className="w-8 h-8 rounded-full overflow-hidden relative shrink-0 border border-white/10">
-                    <Image src={col.img} alt={col.name} fill sizes="32px" className="object-cover" />
-                  </div>
-                  <span className="text-white text-sm font-medium whitespace-nowrap">{col.name}</span>
+            {/* Fade edges left and right */}
+            <div className="pointer-events-none absolute left-0 top-8 bottom-0 w-10 bg-gradient-to-r from-[#09090b] to-transparent z-10" />
+            <div className="pointer-events-none absolute right-0 top-8 bottom-0 w-10 bg-gradient-to-l from-[#09090b] to-transparent z-10" />
+
+            {/* Row 1 — scrolls LEFT */}
+            {(() => {
+              const row1 = [
+                { name: "DBUU", img: "/images/dbuu.jpg", rating: "4.3", tag: "Top Ranked" },
+                { name: "Uttranchal University", img: "/images/Uttranchal-University.jpg", rating: "4.5", tag: "NAAC A+" },
+                { name: "Tulas Institute", img: "/images/Tulas-Institute.jpg", rating: "4.7", tag: "NAAC A+" },
+                { name: "IMS Unision", img: "/images/DBS.jpg", rating: "4.6", tag: "Top B-School" },
+                { name: "Dolphin College", img: "/images/Dolphin-college.jpg", rating: "4.7", tag: "NAAC A+" },
+              ];
+              const doubled = [...row1, ...row1];
+              return (
+                <div className="flex marquee-group animate-marquee pb-3">
+                  {doubled.map((col, idx) => (
+                    <div
+                      key={idx}
+                      onClick={() => router.push('/colleges')}
+                      className="flex-shrink-0 mx-2 w-36 bg-[#121214] border border-white/10 rounded-2xl overflow-hidden cursor-pointer active:scale-95 transition-transform shadow-lg"
+                    >
+                      <div className="relative w-full h-20 bg-white/5">
+                        <Image src={col.img} alt={col.name} fill sizes="144px" className="object-cover" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#121214] via-transparent to-transparent opacity-70" />
+                        <span className="absolute top-1.5 left-1.5 text-[9px] font-bold bg-[#0EB4A6] text-black px-1.5 py-0.5 rounded tracking-wide">{col.tag}</span>
+                      </div>
+                      <div className="p-2.5">
+                        <p className="text-white text-xs font-semibold leading-tight line-clamp-2">{col.name}</p>
+                        <div className="flex items-center gap-1 mt-1.5">
+                          <Star className="w-3 h-3 fill-[#fbbf24] text-[#fbbf24]" />
+                          <span className="text-[10px] text-white/60 font-medium">{col.rating}</span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              ))}
-              {/* Duplicate for infinite loop effect */}
-              {[
-                { name: "DBS Global University", img: "/images/DBS.jpg" },
-                { name: "Graphic Era", img: "/images/graphic-era.jpg" },
-                { name: "ITM Dehradun", img: "/images/itm.jpg" },
-                { name: "Alpine College", img: "/images/DBS.jpg" }
-              ].map((col, idx) => (
-                <div key={`dup-${idx}`} onClick={() => router.push('/colleges')} className="flex items-center gap-2 bg-[#121214] border border-[#0EB4A6]/20 rounded-full py-1.5 px-2 pr-4 mx-1.5 shadow-[0_0_10px_rgba(14,180,166,0.05)] cursor-pointer active:scale-95 transition-transform flex-shrink-0">
-                  <div className="w-8 h-8 rounded-full overflow-hidden relative shrink-0 border border-white/10">
-                    <Image src={col.img} alt={col.name} fill sizes="32px" className="object-cover" />
-                  </div>
-                  <span className="text-white text-sm font-medium whitespace-nowrap">{col.name}</span>
+              );
+            })()}
+
+            {/* Row 2 — scrolls RIGHT (reverse direction) */}
+            {(() => {
+              const row2 = [
+                { name: "Shivalik College", img: "/images/shivalik-college.jpg", rating: "4.6", tag: "NAAC A+" },
+                { name: "JBIT Dehradun", img: "/images/Tulas-Institute.jpg", rating: "4.5", tag: "AICTE" },
+                { name: "DBS Global University", img: "/images/DBS.jpg", rating: "4.8", tag: "Top B-School" },
+                { name: "Graphic Era", img: "/images/graphic-era.jpg", rating: "4.7", tag: "NIRF Top 50" },
+                { name: "ITM Dehradun", img: "/images/itm.jpg", rating: "4.5", tag: "AICTE" },
+              ];
+              const doubled = [...row2, ...row2];
+              return (
+                <div className="flex marquee-group animate-marquee-reverse pb-2">
+                  {doubled.map((col, idx) => (
+                    <div
+                      key={idx}
+                      onClick={() => router.push('/colleges')}
+                      className="flex-shrink-0 mx-2 w-36 bg-[#121214] border border-white/10 rounded-2xl overflow-hidden cursor-pointer active:scale-95 transition-transform shadow-lg"
+                    >
+                      <div className="relative w-full h-20 bg-white/5">
+                        <Image src={col.img} alt={col.name} fill sizes="144px" className="object-cover" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#121214] via-transparent to-transparent opacity-70" />
+                        <span className="absolute top-1.5 left-1.5 text-[9px] font-bold bg-[#0EB4A6] text-black px-1.5 py-0.5 rounded tracking-wide">{col.tag}</span>
+                      </div>
+                      <div className="p-2.5">
+                        <p className="text-white text-xs font-semibold leading-tight line-clamp-2">{col.name}</p>
+                        <div className="flex items-center gap-1 mt-1.5">
+                          <Star className="w-3 h-3 fill-[#fbbf24] text-[#fbbf24]" />
+                          <span className="text-[10px] text-white/60 font-medium">{col.rating}</span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              ))}
+              );
+            })()}
+
+            <div className="flex justify-center mt-4 pb-2 relative z-20">
+              <Link href="/colleges" className="flex items-center gap-2 text-sm font-medium text-[#0EB4A6] hover:text-[#0c9c90] bg-[#0EB4A6]/5 border border-[#0EB4A6]/20 hover:bg-[#0EB4A6]/10 px-6 py-2.5 rounded-full transition-all active:scale-95">
+                View All Colleges <ChevronRight size={16} />
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
       {/* What is Guidevera? */}
-      <section className="py-24 relative overflow-hidden bg-[#09090b]">
+      <section className="pt-8 pb-24 md:py-24 relative overflow-hidden bg-[#09090b]">
         <div className="absolute right-0 top-1/2 -translate-y-1/2 w-1/2 h-full bg-[#0EB4A6]/5 blur-[120px] rounded-full pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            viewport={{ once: true }}
+            className="block lg:hidden text-4xl sm:text-5xl font-bold mb-8 tracking-tight"
+          >
+            What is <span className="text-[#0EB4A6]">Guidevera</span>?
+          </motion.h2>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <motion.div 
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.7 }}
               viewport={{ once: true }}
-              className="order-last lg:order-first relative h-[400px] md:h-[500px] w-full rounded-4xl overflow-hidden border border-white/10 bg-white/5 p-8 flex flex-col justify-end"
+              className="relative h-[350px] md:h-[500px] w-full rounded-4xl overflow-hidden border border-white/10 bg-white/5 p-5 sm:p-8 flex flex-col justify-end"
             >
               <div className="absolute inset-0 z-0 overflow-hidden rounded-4xl bg-[#e5e7eb] dark:bg-zinc-900 border border-white/5">
-                <Image src="/images/students.png" alt="Students learning" fill className="object-cover pl-8 pt-8" />
+                <Image src="/images/students.png" alt="Students learning" fill className="object-cover object-top sm:object-center sm:pl-8 sm:pt-8" />
               </div>
-              <div className="relative z-10 bg-[#09090b]/80 backdrop-blur-xl border border-white/10 p-5 rounded-2xl max-w-sm shadow-2xl">
+              <div className="relative z-10 bg-[#09090b]/80 backdrop-blur-xl border border-white/10 p-4 sm:p-5 rounded-2xl max-w-[240px] sm:max-w-sm shadow-2xl">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-[#0EB4A6]/20 flex items-center justify-center">
-                    <MessageCircle className="w-5 h-5 text-[#0EB4A6]" />
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#0EB4A6]/20 flex items-center justify-center">
+                    <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5 text-[#0EB4A6]" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-sm">Live Counseling</h4>
-                    <p className="text-xs text-white/60">Talk to our experts now</p>
+                    <h4 className="font-semibold text-xs sm:text-sm">Live Counseling</h4>
+                    <p className="text-[10px] sm:text-xs text-white/60">Talk to our experts now</p>
                   </div>
                 </div>
               </div>
@@ -375,9 +403,8 @@ export default function HomeClient() {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.7 }}
               viewport={{ once: true }}
-              className="order-first lg:order-last"
             >
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">
+              <h2 className="hidden lg:block text-4xl md:text-5xl font-bold mb-6 tracking-tight">
                 What is <span className="text-[#0EB4A6]">Guidevera</span>?
               </h2>
               <p className="text-lg text-white/60 mb-10 leading-relaxed">
@@ -496,39 +523,46 @@ export default function HomeClient() {
             </p>
           </div>
 
-          <div className="flex overflow-x-auto md:grid md:grid-cols-3 gap-6 pb-8 md:pb-0 snap-x snap-mandatory no-scrollbar text-left scroll-smooth">
-            {[
-              { name: "Riya Sharma", detail: "B.Tech CSE, DBUU", stars: 5, quote: "I was completely confused between engineering and design. Guidevera's ability test gave me clarity about where my true skills lie." },
-              { name: "Arjun Mehta", detail: "MBA, DBS Global University", stars: 5, quote: "The counseling session helped me choose between 3 MBA colleges. Best decision of my life, got into an amazing corporate role." },
-              { name: "Priya Negi", detail: "BHM, Graphic Era", stars: 4, quote: "Coming from a small town, I had no idea which hospitality college to pick. Guidevera mapped it perfectly according to my budget and goals." },
-              { name: "Karan Bisht", detail: "BCA, ITM Dehradun", stars: 5, quote: "The AI roadmap showed me which certifications to do alongside my BCA. Got placed at ₹4 LPA directly from campus!" },
-              { name: "Sneha Rawat", detail: "BAMS, Uttranchal University", stars: 4, quote: "I was being pushed toward engineering by family. Guidevera helped me stand my ground with data. I'm thriving in medicine now." }
-            ].map((story, i) => (
-              <motion.div 
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="min-w-[85vw] sm:min-w-[400px] md:min-w-0 snap-center bg-[#09090b] border border-white/10 rounded-2xl p-6 md:p-8 flex flex-col justify-between hover:border-[#0EB4A6]/30 transition-colors shadow-lg"
-              >
-                <div>
-                  <div className="flex items-center gap-1 mb-4">
-                    {[...Array(story.stars)].map((_, starId) => (
-                      <Star key={starId} className="w-4 h-4 fill-[#0EB4A6] text-[#0EB4A6]" />
-                    ))}
-                    {[...Array(5 - story.stars)].map((_, starId) => (
-                      <Star key={starId} className="w-4 h-4 text-white/20" />
-                    ))}
+          <div className="overflow-hidden w-full relative">
+            <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-r from-[#121214] to-transparent z-10" />
+            <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-l from-[#121214] to-transparent z-10" />
+            
+            <div className="flex marquee-group animate-marquee hover:[animation-play-state:paused] pb-4">
+              {[...[
+                { name: "Riya Sharma", detail: "B.Tech CSE, DBUU", stars: 5, quote: "I was completely confused between engineering and design. Guidevera's ability test gave me clarity about where my true skills lie." },
+                { name: "Arjun Mehta", detail: "MBA, DBS Global University", stars: 5, quote: "The counseling session helped me choose between 3 MBA colleges. Best decision of my life, got into an amazing corporate role." },
+                { name: "Priya Negi", detail: "BHM, Graphic Era", stars: 4, quote: "Coming from a small town, I had no idea which hospitality college to pick. Guidevera mapped it perfectly according to my budget and goals." },
+                { name: "Karan Bisht", detail: "BCA, ITM Dehradun", stars: 5, quote: "The AI roadmap showed me which certifications to do alongside my BCA. Got placed at ₹4 LPA directly from campus!" },
+                { name: "Sneha Rawat", detail: "BAMS, Uttranchal University", stars: 4, quote: "I was being pushed toward engineering by family. Guidevera helped me stand my ground with data. I'm thriving in medicine now." }
+              ], ...[
+                { name: "Riya Sharma", detail: "B.Tech CSE, DBUU", stars: 5, quote: "I was completely confused between engineering and design. Guidevera's ability test gave me clarity about where my true skills lie." },
+                { name: "Arjun Mehta", detail: "MBA, DBS Global University", stars: 5, quote: "The counseling session helped me choose between 3 MBA colleges. Best decision of my life, got into an amazing corporate role." },
+                { name: "Priya Negi", detail: "BHM, Graphic Era", stars: 4, quote: "Coming from a small town, I had no idea which hospitality college to pick. Guidevera mapped it perfectly according to my budget and goals." },
+                { name: "Karan Bisht", detail: "BCA, ITM Dehradun", stars: 5, quote: "The AI roadmap showed me which certifications to do alongside my BCA. Got placed at ₹4 LPA directly from campus!" },
+                { name: "Sneha Rawat", detail: "BAMS, Uttranchal University", stars: 4, quote: "I was being pushed toward engineering by family. Guidevera helped me stand my ground with data. I'm thriving in medicine now." }
+              ]].map((story, i) => (
+                <div 
+                  key={i}
+                  className="flex-shrink-0 w-[85vw] sm:w-[400px] mx-3 bg-[#09090b] border border-white/10 rounded-2xl p-6 md:p-8 flex flex-col justify-between hover:border-[#0EB4A6]/30 transition-colors shadow-lg"
+                >
+                  <div>
+                    <div className="flex items-center gap-1 mb-4">
+                      {[...Array(story.stars)].map((_, starId) => (
+                        <Star key={starId} className="w-4 h-4 fill-[#0EB4A6] text-[#0EB4A6]" />
+                      ))}
+                      {[...Array(5 - story.stars)].map((_, starId) => (
+                        <Star key={starId} className="w-4 h-4 text-white/20" />
+                      ))}
+                    </div>
+                    <p className="text-white/80 leading-relaxed mb-6 italic">&ldquo;{story.quote}&rdquo;</p>
                   </div>
-                  <p className="text-white/80 leading-relaxed mb-6 italic">&ldquo;{story.quote}&rdquo;</p>
+                  <div>
+                    <h4 className="font-bold text-white text-lg">{story.name}</h4>
+                    <p className="text-sm text-[#0EB4A6]">{story.detail}</p>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="font-bold text-white text-lg">{story.name}</h4>
-                  <p className="text-sm text-[#0EB4A6]">{story.detail}</p>
-                </div>
-              </motion.div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>

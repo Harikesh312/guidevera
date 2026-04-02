@@ -84,7 +84,7 @@ export default function CollegeDetailClient({ college }) {
           >
             <motion.div
               initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.95, opacity: 0 }}
-              className="bg-[#121214] border border-white/10 rounded-2xl p-6 md:p-8 w-full max-w-md relative"
+              className="bg-[#121214] border border-white/10 rounded-2xl p-6 md:p-8 w-full max-w-md relative max-h-[90vh] overflow-y-auto"
             >
               <button onClick={closeApplyModal} className="absolute top-4 right-4 text-white/40 hover:text-white transition-colors">
                 <X className="w-5 h-5" />
@@ -131,11 +131,11 @@ export default function CollegeDetailClient({ college }) {
           <div className="absolute inset-0 bg-gradient-to-t from-[#09090b] via-[#09090b]/80 to-[#09090b]/30" />
           
           <div className="absolute inset-0 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-end pb-12">
-            <Link href="/colleges" className="absolute top-8 left-4 sm:left-6 lg:left-8 flex items-center gap-2 text-white/70 hover:text-white transition-colors text-sm bg-black/40 px-4 py-2 rounded-full border border-white/10 backdrop-blur-md">
+            <Link href="/colleges" className="hidden sm:flex absolute top-8 sm:left-6 lg:left-8 items-center gap-2 text-white/70 hover:text-white transition-colors text-sm bg-black/40 px-4 py-2 rounded-full border border-white/10 backdrop-blur-md">
               <ChevronLeft className="w-4 h-4" /> Back to Colleges
             </Link>
 
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mt-14 sm:mt-0">
               <div className="max-w-3xl">
                 <div className="flex items-center gap-3 mb-4 flex-wrap">
                   <span className="bg-[#0EB4A6] text-black text-xs font-bold px-3 py-1.5 rounded tracking-widest">{college.tag}</span>
@@ -171,13 +171,13 @@ export default function CollegeDetailClient({ college }) {
         </div>
 
         {/* Quick Stats Bar */}
-        <div className="bg-[#121214] border-y border-white/5 py-6">
+        <div className="bg-[#121214] border-y border-white/5 py-5 md:py-6">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 divide-x divide-white/5">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-y-8 gap-x-4">
               {(college.stats || []).map((stat, i) => (
-                <div key={i} className={`flex flex-col ${i !== 0 ? 'pl-6' : ''}`}>
-                  <span className="text-white/40 text-sm mb-1">{stat.label}</span>
-                  <span className="text-xl md:text-2xl font-bold text-white">{stat.value}</span>
+                <div key={i} className={`flex flex-col border-white/10 ${i % 2 !== 0 ? 'border-l pl-4 md:pl-6' : ''} ${i > 0 && i % 2 === 0 ? 'md:border-l md:pl-6' : ''}`}>
+                  <span className="text-white/40 text-xs sm:text-sm mb-1">{stat.label}</span>
+                  <span className="text-lg sm:text-xl md:text-2xl font-bold text-white">{stat.value}</span>
                 </div>
               ))}
             </div>
@@ -195,7 +195,7 @@ export default function CollegeDetailClient({ college }) {
                   setActiveTab(tab);
                   setShowAllCourses(false);
                 }}
-                className={`pb-4 font-medium whitespace-nowrap whitespace-nowrap border-b-2 transition-colors ${activeTab === tab ? 'border-[#0EB4A6] text-[#0EB4A6]' : 'border-transparent text-white/50 hover:text-white'}`}
+                className={`pb-4 font-medium whitespace-nowrap border-b-2 transition-colors ${activeTab === tab ? 'border-[#0EB4A6] text-[#0EB4A6]' : 'border-transparent text-white/50 hover:text-white'}`}
               >
                 {tab}
               </button>
@@ -275,7 +275,7 @@ export default function CollegeDetailClient({ college }) {
                               </div>
                             </div>
                           </div>
-                          <div className="flex flex-col items-start md:items-end shrink-0 pl-14 md:pl-0 border-t border-white/5 pt-3 md:border-none md:pt-0">
+                          <div className="flex flex-col items-start md:items-end shrink-0 pl-14 md:pl-0 border-t border-white/5 pt-3 md:border-none md:pt-0 w-full md:w-auto mt-3 md:mt-0">
                             <span className="text-xs text-white/40 mb-1">
                               Estimated Fee
                             </span>
@@ -309,33 +309,33 @@ export default function CollegeDetailClient({ college }) {
               {activeTab === "Placements" && college.placements && (
                 <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-8">
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <div className="bg-[#121214] border border-white/5 rounded-2xl p-6 text-center shadow-lg">
+                    <div className="bg-[#121214] border border-white/5 rounded-2xl p-4 sm:p-6 text-center shadow-lg flex flex-col justify-center items-center">
                       <div className="w-10 h-10 mx-auto rounded-full bg-[#0EB4A6]/10 flex items-center justify-center mb-3">
-                        <TrendingUp className="w-5 h-5 text-[#0EB4A6]" />
+                        <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5 text-[#0EB4A6]" />
                       </div>
-                      <p className="text-2xl font-bold text-white mb-1">{college.placements.highest}</p>
-                      <p className="text-xs text-white/50 uppercase tracking-wider">Highest Package</p>
+                      <p className="text-lg sm:text-2xl font-bold text-white mb-1 truncate w-full">{college.placements.highest}</p>
+                      <p className="text-[10px] sm:text-xs text-white/50 uppercase tracking-wider">Highest Pkg</p>
                     </div>
-                    <div className="bg-[#121214] border border-white/5 rounded-2xl p-6 text-center shadow-lg">
+                    <div className="bg-[#121214] border border-white/5 rounded-2xl p-4 sm:p-6 text-center shadow-lg flex flex-col justify-center items-center">
                       <div className="w-10 h-10 mx-auto rounded-full bg-white/5 flex items-center justify-center mb-3">
-                        <IndianRupee className="w-5 h-5 text-white/70" />
+                        <IndianRupee className="w-4 h-4 sm:w-5 sm:h-5 text-white/70" />
                       </div>
-                      <p className="text-2xl font-bold text-white mb-1">{college.placements.average}</p>
-                      <p className="text-xs text-white/50 uppercase tracking-wider">Average Package</p>
+                      <p className="text-lg sm:text-2xl font-bold text-white mb-1 truncate w-full">{college.placements.average}</p>
+                      <p className="text-[10px] sm:text-xs text-white/50 uppercase tracking-wider">Average Pkg</p>
                     </div>
-                    <div className="bg-[#121214] border border-white/5 rounded-2xl p-6 text-center shadow-lg">
+                    <div className="bg-[#121214] border border-white/5 rounded-2xl p-4 sm:p-6 text-center shadow-lg flex flex-col justify-center items-center">
                       <div className="w-10 h-10 mx-auto rounded-full bg-white/5 flex items-center justify-center mb-3">
-                        <BadgeCheck className="w-5 h-5 text-white/70" />
+                        <BadgeCheck className="w-4 h-4 sm:w-5 sm:h-5 text-white/70" />
                       </div>
-                      <p className="text-2xl font-bold text-white mb-1">{college.placements.offers}</p>
-                      <p className="text-xs text-white/50 uppercase tracking-wider">Total Offers</p>
+                      <p className="text-lg sm:text-2xl font-bold text-white mb-1 truncate w-full">{college.placements.offers}</p>
+                      <p className="text-[10px] sm:text-xs text-white/50 uppercase tracking-wider">Offers</p>
                     </div>
-                    <div className="bg-[#121214] border border-white/5 rounded-2xl p-6 text-center shadow-lg">
+                    <div className="bg-[#121214] border border-white/5 rounded-2xl p-4 sm:p-6 text-center shadow-lg flex flex-col justify-center items-center">
                       <div className="w-10 h-10 mx-auto rounded-full bg-white/5 flex items-center justify-center mb-3">
-                        <Building2 className="w-5 h-5 text-white/70" />
+                        <Building2 className="w-4 h-4 sm:w-5 sm:h-5 text-white/70" />
                       </div>
-                      <p className="text-2xl font-bold text-white mb-1">{college.placements.companies}</p>
-                      <p className="text-xs text-white/50 uppercase tracking-wider">Companies</p>
+                      <p className="text-lg sm:text-2xl font-bold text-white mb-1 truncate w-full">{college.placements.companies}</p>
+                      <p className="text-[10px] sm:text-xs text-white/50 uppercase tracking-wider">Companies</p>
                     </div>
                   </div>
                   
