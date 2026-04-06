@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { motion, useInView, animate } from "framer-motion";
+import { motion, useInView, animate, AnimatePresence } from "framer-motion";
 import {
   Search,
   MapPin,
@@ -19,10 +19,20 @@ import {
   BookOpen,
   Briefcase,
   ChevronRight,
+  X,
+  CheckCircle,
 } from "lucide-react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { requireAuth } from "../lib/authGuard";
+import API_URL from "../lib/api";
+
+const INDIAN_STATES = [
+  "Andhra Pradesh","Arunachal Pradesh","Assam","Bihar","Chhattisgarh","Goa","Gujarat","Haryana",
+  "Himachal Pradesh","Jharkhand","Karnataka","Kerala","Madhya Pradesh","Maharashtra","Manipur",
+  "Meghalaya","Mizoram","Nagaland","Odisha","Punjab","Rajasthan","Sikkim","Tamil Nadu","Telangana",
+  "Tripura","Uttar Pradesh","Uttarakhand","West Bengal","Delhi","Other"
+];
 
 const AnimatedCounter = ({ value }) => {
   const ref = useRef(null);
@@ -70,11 +80,49 @@ export default function HomeClient() {
     }
   };
 
-  const colleges = [
-    { id: 1, slug: "dbuu", name: "DBUU", courses: "B.Tech | MBA | BHM | BAMS", image: "/images/dbuu.jpg", rating: "4.9" },
-    { id: 2, slug: "uttranchal-university", name: "Uttranchal University", courses: "B.Tech | MBA | Law", image: "/images/Uttranchal-University.jpg", rating: "4.8" },
-    { id: 4, slug: null, name: "DBS", courses: "Commerce | MBA", image: "/images/DBS.jpg", rating: "4.8" },
-    { id: 3, slug: null, name: "Tulas Institute", courses: "Engineering", image: "/images/Tulas-Institute.jpg", rating: "4.7" },
+  const [applyModal, setApplyModal] = useState(null);
+  const [form, setForm] = useState({ name: "", phone: "", course: "", customCourse: "", email: "", state: "" });
+  const [formStatus, setFormStatus] = useState("idle");
+
+  const openApplyModal = (college) => {
+    setApplyModal(college);
+    setForm({ name: "", phone: "", course: (college.coursesList && college.coursesList.length > 0) ? college.coursesList[0] : "Other (Please Specify)", customCourse: "", email: "", state: "" });
+    setFormStatus("idle");
+  };
+
+  const closeApplyModal = () => { setApplyModal(null); setFormStatus("idle"); };
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    setFormStatus("loading");
+    try {
+      const finalCourse = form.course === "Other (Please Specify)" ? form.customCourse : form.course;
+      const res = await fetch(`${API_URL}/api/college-apply`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...form, course: finalCourse, collegeName: applyModal.name }),
+      });
+      const data = await res.json();
+      if (data.success) setFormStatus("success");
+      else setFormStatus("error");
+    } catch { setFormStatus("error"); }
+  };
+
+  const row1 = [
+    { id: 1, name: "DBUU", slug: "dbuu", img: "/images/dbuu.jpg", rating: "4.3", tag: "TOP RANKED", courses: "B.Tech | MBA | BHM | BAMS", coursesList: ["B.Tech","MBA","BHM","BAMS","BCA","B.Pharm","LLB","B.Sc Agriculture"] },
+    { id: 2, name: "Uttranchal University", slug: "uttranchal-university", img: "/images/Uttranchal-University.jpg", rating: "4.5", tag: "NAAC A+", courses: "B.Tech | MBA | Law", coursesList: ["B.Tech","MBA","BA LLB","B.Pharm","B.Sc Agriculture","BCA","BHM","B.Sc Nursing"] },
+    { id: 3, name: "Graphic Era", slug: "graphic-era", img: "/images/graphic-era.jpg", rating: "4.7", tag: "NIRF TOP 50", courses: "B.Tech | BCA | BHM", coursesList: ["B.Tech","MBA","BHM","BCA","BBA","B.Des","LLB","M.Tech"] },
+    { id: 4, name: "DBS Global", slug: "dbs-global", img: "/images/DBS.jpg", rating: "4.8", tag: "TOP B-SCHOOL", courses: "MBA | BBA | B.Tech", coursesList: ["MBA","BBA","B.Tech AI/ML","BCA","B.Com","B.Sc Agriculture","LLB","B.Pharm"] },
+    { id: 5, name: "Tulas Institute", slug: "tulas-institute", img: "/images/Tulas-Institute.jpg", rating: "4.7", tag: "NAAC A+", courses: "B.Tech | BCA | MBA", coursesList: ["B.Tech","MBA","BBA","BCA","MCA","B.Sc Agriculture","B.Pharm"] },
+    { id: 6, name: "ITM Dehradun", slug: "itm-dehradun", img: "/images/itm.jpg", rating: "4.5", tag: "AICTE APPROVED", courses: "BCA | B.Sc IT | MBA", coursesList: ["BCA","BBA","B.Sc IT","BHM","B.Sc Animation","B.Com","MCA","M.Sc IT"] }
+  ];
+
+  const row2 = [
+    { id: 7, name: "Shivalik College", slug: "shivalik-college", img: "/images/shivalik-college.jpg", rating: "4.6", tag: "NAAC A+", courses: "B.Tech | M.Tech | BCA", coursesList: ["B.Tech","M.Tech","BCA","MBA","BBA","B.Pharm","B.Sc Agriculture","B.Ed"] },
+    { id: 8, name: "IMS Unision", slug: "ims-unision", img: "/images/DBS.jpg", rating: "4.6", tag: "TOP B-SCHOOL", courses: "MBA | BBA | BA LLB", coursesList: ["MBA","BBA","BA LLB","BBA LLB","LLM","BHM","BCA","BAJMC","B.Com"] },
+    { id: 9, name: "Dolphin Institute", slug: "dolphin-institute", img: "/images/Dolphin-college.jpg", rating: "4.7", tag: "NAAC A+", courses: "BPT | B.Sc Agriculture", coursesList: ["BPT","B.Sc Biotechnology","B.Sc Agriculture","B.Sc Forestry","B.Sc MLT","B.Ed","MPT","M.Sc Microbiology"] },
+    { id: 10, name: "JBIT Dehradun", slug: "jbit-dehradun", img: "/images/Tulas-Institute.jpg", rating: "4.5", tag: "AICTE APPROVED", courses: "B.Tech | BCA | Pharmacy", coursesList: ["B.Tech","M.Tech","MBA","BBA","B.Pharm","D.Pharm","B.Sc Agriculture","Diploma"] },
+    { id: 11, name: "Alpine College", slug: null, img: "/images/DBS.jpg", rating: "4.4", tag: "COMING SOON", courses: "Diploma | Engineering", coursesList: [] },
   ];
 
   const fadeIn = {
@@ -109,6 +157,60 @@ export default function HomeClient() {
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
       `}</style>
       <Navbar />
+
+      {/* Apply Now Modal */}
+      <AnimatePresence>
+        {applyModal && (
+          <motion.div
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
+            onClick={(e) => e.target === e.currentTarget && closeApplyModal()}
+          >
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.95, opacity: 0 }}
+              className="bg-[#121214] border border-white/10 rounded-2xl p-6 md:p-8 w-full max-w-md relative"
+            >
+              <button onClick={closeApplyModal} className="absolute top-4 right-4 text-white/40 hover:text-white transition-colors">
+                <X className="w-5 h-5" />
+              </button>
+
+              {formStatus === "success" ? (
+                <div className="text-center py-6">
+                  <CheckCircle className="w-16 h-16 text-[#0EB4A6] mx-auto mb-4" />
+                  <h3 className="text-xl font-bold mb-2">Application Submitted!</h3>
+                  <p className="text-white/60">We'll call you within 24 hours!</p>
+                  <button onClick={closeApplyModal} className="mt-6 px-6 py-2.5 bg-[#0EB4A6] text-black font-semibold rounded-full">Done</button>
+                </div>
+              ) : (
+                <>
+                  <h3 className="text-xl font-bold mb-1">Apply Now</h3>
+                  <p className="text-white/50 text-sm mb-6">{applyModal.name}</p>
+                  <form onSubmit={handleFormSubmit} className="space-y-4">
+                    <input required className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#0EB4A6]/50" placeholder="Full Name" value={form.name} onChange={e => setForm(f => ({...f, name: e.target.value}))} />
+                    <input required type="tel" pattern="[0-9]{10}" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#0EB4A6]/50" placeholder="Phone Number (10 digits)" value={form.phone} onChange={e => setForm(f => ({...f, phone: e.target.value}))} />
+                    <select required className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#0EB4A6]/50 min-touch" value={form.course} onChange={e => setForm(f => ({...f, course: e.target.value}))}>
+                      {(applyModal.coursesList || []).map(c => <option key={c} value={c} className="bg-[#121214]">{c}</option>)}
+                      <option value="Other (Please Specify)" className="bg-[#121214]">Other (Please Specify)</option>
+                    </select>
+                    {form.course === "Other (Please Specify)" && (
+                      <input required type="text" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#0EB4A6]/50 min-touch" placeholder="Please specify your course" value={form.customCourse} onChange={e => setForm(f => ({...f, customCourse: e.target.value}))} />
+                    )}
+                    <input required type="email" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#0EB4A6]/50" placeholder="Email Address" value={form.email} onChange={e => setForm(f => ({...f, email: e.target.value}))} />
+                    <select required className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#0EB4A6]/50" value={form.state} onChange={e => setForm(f => ({...f, state: e.target.value}))}>
+                      <option value="" className="bg-[#121214]">Select State</option>
+                      {INDIAN_STATES.map(s => <option key={s} value={s} className="bg-[#121214]">{s}</option>)}
+                    </select>
+                    {formStatus === "error" && <p className="text-red-400 text-xs">Failed to submit. Please try again.</p>}
+                    <button type="submit" disabled={formStatus === "loading"} className="w-full py-3.5 bg-[#0EB4A6] hover:bg-[#0c9c90] text-black font-bold rounded-xl transition-all shadow-[0_0_20px_rgba(14,180,166,0.3)] disabled:opacity-50">
+                      {formStatus === "loading" ? "Submitting..." : "Request Callback"}
+                    </button>
+                  </form>
+                </>
+              )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-14 lg:pt-48 lg:pb-20 overflow-hidden">
@@ -184,7 +286,7 @@ export default function HomeClient() {
       </section>
 
       {/* Top Rated Colleges */}
-      <section className="pt-12 pb-30 md:py-24 bg-[#09090b] relative">
+      <section className="pt-12 pb-22 md:py-24 bg-[#09090b] relative">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#0EB4A6]/5 rounded-full blur-[100px] pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
@@ -199,161 +301,155 @@ export default function HomeClient() {
             </Link>
           </div>
 
-          <motion.div 
-            variants={staggerContainer}
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true, margin: "-100px" }}
-            className="hidden md:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
-          >
-            {colleges.map((college) => (
-              <motion.div 
-                key={college.id}
-                variants={fadeIn}
-                className="group flex flex-col bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover:bg-white/[0.07] transition-all hover:border-white/20 hover:shadow-[0_0_30px_rgba(14,180,166,0.1)]"
+          {/* Desktop Static Grid (4 Colleges) */}
+          <div className="hidden md:grid grid-cols-2 lg:grid-cols-4 gap-6 mt-4">
+            {[row1[0], row1[1], row1[2], row2[1]].map((col, idx) => (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                viewport={{ once: true }}
+                key={idx}
+                className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden shadow-lg flex flex-col group hover:bg-white/[0.07] transition-all hover:border-white/20"
               >
-                <div className="relative h-48 w-full overflow-hidden bg-white/5">
-                  <Image 
-                    src={college.image} 
-                    alt={college.name} 
-                    fill 
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-                    className="object-cover transition-transform duration-700 group-hover:scale-110" 
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#09090b] to-transparent opacity-80" />
-                  <div className="absolute top-3 right-3 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-lg flex items-center gap-1.5 border border-white/10">
-                    <Star className="w-3.5 h-3.5 fill-[#fbbf24] text-[#fbbf24]" />
-                    <span className="text-xs font-bold text-white tracking-wide">{college.rating}</span>
+                <div className="relative w-full h-40 bg-[#121214] overflow-hidden">
+                  <Image src={col.img} alt={col.name} fill sizes="288px" className="object-cover transition-transform duration-700 group-hover:scale-110" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#09090b] via-[#09090b]/50 to-transparent opacity-90" />
+                  <span className="absolute top-2 left-2 text-[10px] font-bold bg-[#0EB4A6] text-black px-2 py-0.5 rounded tracking-wide z-10">{col.tag}</span>
+                  <div className="absolute top-2 right-2 bg-black/60 backdrop-blur-md px-2 py-0.5 rounded border border-white/10 flex items-center gap-1 z-10">
+                    <Star className="w-3 h-3 fill-[#fbbf24] text-[#fbbf24]" />
+                    <span className="text-[10px] text-white/90 font-bold">{col.rating}</span>
                   </div>
                 </div>
-                
-                <div className="p-5 flex-1 flex flex-col">
-                  <h3 className="text-xl font-bold mb-1 group-hover:text-[#0EB4A6] transition-colors">{college.name}</h3>
-                  <p className="text-[#0EB4A6] text-sm font-medium mb-3">{college.courses}</p>
+                <div className="p-4 flex-1 flex flex-col">
+                  <h3 className="text-white text-lg font-bold leading-tight line-clamp-1 mb-1">{col.name}</h3>
+                  <p className="text-[#0EB4A6] text-xs font-medium mb-4">{col.courses}</p>
                   
-                  <div className="flex items-center gap-2 text-white/50 text-sm mb-6 mt-auto">
-                    <MapPin className="w-4 h-4" />
-                    <span>Uttarakhand Dehradun</span>
-                  </div>
-                  
-                  <div className="grid grid-cols-2 gap-2">
-                    {college.slug ? (
-                      <Link
-                        href={`/colleges/${college.slug}`}
-                        className="w-full py-2.5 rounded-xl border border-white/10 text-sm font-medium hover:bg-white/10 transition-colors flex justify-center items-center gap-2"
-                      >
+                  <div className="grid grid-cols-2 gap-2 mt-auto">
+                    {col.slug ? (
+                      <Link href={`/colleges/${col.slug}`} className="w-full py-2 rounded-lg border border-white/10 text-xs font-medium hover:bg-white/10 transition-colors text-center cursor-pointer min-touch flex items-center justify-center">
                         View Details
                       </Link>
                     ) : (
-                      <button
-                        disabled
-                        className="w-full py-2.5 rounded-xl border border-white/5 text-sm font-medium text-white/20 cursor-not-allowed"
-                      >
+                      <button disabled className="w-full py-2 rounded-lg border border-white/5 text-xs font-medium text-white/20 cursor-not-allowed">
                         Coming Soon
                       </button>
                     )}
-                    <button 
-                      onClick={() => { if (requireAuth('/ability-test')) router.push('/ability-test'); }}
-                      className="py-2.5 rounded-xl bg-[#0EB4A6] hover:bg-[#0c9c90] text-sm font-medium text-white transition-colors shadow-[0_4px_14px_rgba(14,180,166,0.3)] cursor-pointer"
-                      suppressHydrationWarning
-                    >
-                      Ability Test
-                    </button>
+                    
+                    {col.slug ? (
+                      <button onClick={() => openApplyModal(col)} className="w-full py-2 rounded-lg bg-[#0EB4A6] hover:bg-[#0c9c90] text-black text-xs font-bold transition-colors shadow-[0_2px_10px_rgba(14,180,166,0.3)] min-touch flex items-center justify-center cursor-pointer">
+                        Apply Now
+                      </button>
+                    ) : (
+                      <button disabled className="w-full py-2 rounded-lg bg-white/5 text-black text-xs font-bold cursor-not-allowed text-white/20">
+                        Waitlist
+                      </button>
+                    )}
                   </div>
                 </div>
               </motion.div>
             ))}
-            <motion.div 
-              variants={fadeIn}
-              className="col-span-1 md:col-span-2 lg:col-span-4 bg-[#121214] border border-dashed border-white/20 rounded-2xl p-8 text-center text-white/40 text-lg font-medium flex items-center justify-center"
-            >
-              More Colleges Coming Soon 🚀
-            </motion.div>
-          </motion.div>
+          </div>
 
-          {/* Mobile-Only College Cards – Two auto-scrolling rows */}
           <div className="md:hidden mt-4 overflow-hidden w-full relative">
-            <h3 className="text-center font-semibold text-[#0EB4A6] mb-5 text-sm tracking-wide uppercase">🎓 Top Rated Colleges</h3>
-
-            {/* Fade edges left and right */}
-            <div className="pointer-events-none absolute left-0 top-8 bottom-0 w-10 bg-gradient-to-r from-[#09090b] to-transparent z-10" />
-            <div className="pointer-events-none absolute right-0 top-8 bottom-0 w-10 bg-gradient-to-l from-[#09090b] to-transparent z-10" />
+            <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-[#09090b] to-transparent z-10" />
+            <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-[#09090b] to-transparent z-10" />
 
             {/* Row 1 — scrolls LEFT */}
-            {(() => {
-              const row1 = [
-                { name: "DBUU", img: "/images/dbuu.jpg", rating: "4.3", tag: "Top Ranked" },
-                { name: "Uttranchal University", img: "/images/Uttranchal-University.jpg", rating: "4.5", tag: "NAAC A+" },
-                { name: "Tulas Institute", img: "/images/Tulas-Institute.jpg", rating: "4.7", tag: "NAAC A+" },
-                { name: "IMS Unision", img: "/images/DBS.jpg", rating: "4.6", tag: "Top B-School" },
-                { name: "Dolphin College", img: "/images/Dolphin-college.jpg", rating: "4.7", tag: "NAAC A+" },
-              ];
-              const doubled = [...row1, ...row1];
-              return (
-                <div className="flex marquee-group animate-marquee pb-3">
-                  {doubled.map((col, idx) => (
-                    <div
-                      key={idx}
-                      onClick={() => router.push('/colleges')}
-                      className="flex-shrink-0 mx-2 w-36 bg-[#121214] border border-white/10 rounded-2xl overflow-hidden cursor-pointer active:scale-95 transition-transform shadow-lg"
-                    >
-                      <div className="relative w-full h-20 bg-white/5">
-                        <Image src={col.img} alt={col.name} fill sizes="144px" className="object-cover" />
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#121214] via-transparent to-transparent opacity-70" />
-                        <span className="absolute top-1.5 left-1.5 text-[9px] font-bold bg-[#0EB4A6] text-black px-1.5 py-0.5 rounded tracking-wide">{col.tag}</span>
-                      </div>
-                      <div className="p-2.5">
-                        <p className="text-white text-xs font-semibold leading-tight line-clamp-2">{col.name}</p>
-                        <div className="flex items-center gap-1 mt-1.5">
-                          <Star className="w-3 h-3 fill-[#fbbf24] text-[#fbbf24]" />
-                          <span className="text-[10px] text-white/60 font-medium">{col.rating}</span>
-                        </div>
-                      </div>
+            <div className="flex marquee-group animate-marquee hover:[animation-play-state:paused] pb-4">
+              {[...row1, ...row1].map((col, idx) => (
+                <div
+                  key={idx}
+                  className="flex-shrink-0 w-64 md:w-72 mx-3 bg-white/5 border border-white/10 rounded-2xl overflow-hidden shadow-lg flex flex-col group hover:bg-white/[0.07] transition-all hover:border-white/20"
+                >
+                  <div className="relative w-full h-36 md:h-40 bg-[#121214] overflow-hidden">
+                    <Image src={col.img} alt={col.name} fill sizes="288px" className="object-cover transition-transform duration-700 group-hover:scale-110" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#09090b] via-[#09090b]/50 to-transparent opacity-90" />
+                    <span className="absolute top-2 left-2 text-[10px] font-bold bg-[#0EB4A6] text-black px-2 py-0.5 rounded tracking-wide z-10">{col.tag}</span>
+                    <div className="absolute top-2 right-2 bg-black/60 backdrop-blur-md px-2 py-0.5 rounded border border-white/10 flex items-center gap-1 z-10">
+                      <Star className="w-3 h-3 fill-[#fbbf24] text-[#fbbf24]" />
+                      <span className="text-[10px] text-white/90 font-bold">{col.rating}</span>
                     </div>
-                  ))}
-                </div>
-              );
-            })()}
-
-            {/* Row 2 — scrolls RIGHT (reverse direction) */}
-            {(() => {
-              const row2 = [
-                { name: "Shivalik College", img: "/images/shivalik-college.jpg", rating: "4.6", tag: "NAAC A+" },
-                { name: "JBIT Dehradun", img: "/images/Tulas-Institute.jpg", rating: "4.5", tag: "AICTE" },
-                { name: "DBS Global University", img: "/images/DBS.jpg", rating: "4.8", tag: "Top B-School" },
-                { name: "Graphic Era", img: "/images/graphic-era.jpg", rating: "4.7", tag: "NIRF Top 50" },
-                { name: "ITM Dehradun", img: "/images/itm.jpg", rating: "4.5", tag: "AICTE" },
-              ];
-              const doubled = [...row2, ...row2];
-              return (
-                <div className="flex marquee-group animate-marquee-reverse pb-2">
-                  {doubled.map((col, idx) => (
-                    <div
-                      key={idx}
-                      onClick={() => router.push('/colleges')}
-                      className="flex-shrink-0 mx-2 w-36 bg-[#121214] border border-white/10 rounded-2xl overflow-hidden cursor-pointer active:scale-95 transition-transform shadow-lg"
-                    >
-                      <div className="relative w-full h-20 bg-white/5">
-                        <Image src={col.img} alt={col.name} fill sizes="144px" className="object-cover" />
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#121214] via-transparent to-transparent opacity-70" />
-                        <span className="absolute top-1.5 left-1.5 text-[9px] font-bold bg-[#0EB4A6] text-black px-1.5 py-0.5 rounded tracking-wide">{col.tag}</span>
-                      </div>
-                      <div className="p-2.5">
-                        <p className="text-white text-xs font-semibold leading-tight line-clamp-2">{col.name}</p>
-                        <div className="flex items-center gap-1 mt-1.5">
-                          <Star className="w-3 h-3 fill-[#fbbf24] text-[#fbbf24]" />
-                          <span className="text-[10px] text-white/60 font-medium">{col.rating}</span>
-                        </div>
-                      </div>
+                  </div>
+                  <div className="p-4 flex-1 flex flex-col">
+                    <h3 className="text-white text-base md:text-lg font-bold leading-tight line-clamp-1 mb-1">{col.name}</h3>
+                    <p className="text-[#0EB4A6] text-xs font-medium mb-4">{col.courses}</p>
+                    
+                    <div className="grid grid-cols-2 gap-2 mt-auto">
+                      {col.slug ? (
+                        <Link href={`/colleges/${col.slug}`} className="w-full py-2 rounded-lg border border-white/10 text-[11px] md:text-xs font-medium hover:bg-white/10 transition-colors text-center cursor-pointer min-touch flex items-center justify-center">
+                          View Details
+                        </Link>
+                      ) : (
+                        <button disabled className="w-full py-2 rounded-lg border border-white/5 text-[11px] md:text-xs font-medium text-white/20 cursor-not-allowed">
+                          Coming Soon
+                        </button>
+                      )}
+                      
+                      {col.slug ? (
+                        <button onClick={() => router.push(`/colleges/${col.slug}`)} className="w-full py-2 rounded-lg bg-[#0EB4A6] hover:bg-[#0c9c90] text-black text-[11px] md:text-xs font-bold transition-colors shadow-[0_2px_10px_rgba(14,180,166,0.3)] min-touch flex items-center justify-center cursor-pointer">
+                          Apply Now
+                        </button>
+                      ) : (
+                        <button disabled className="w-full py-2 rounded-lg bg-white/5 text-black text-[11px] md:text-xs font-bold cursor-not-allowed text-white/20">
+                          Waitlist
+                        </button>
+                      )}
                     </div>
-                  ))}
+                  </div>
                 </div>
-              );
-            })()}
+              ))}
+            </div>
 
-            <div className="flex justify-center mt-4 pb-2 relative z-20">
-              <Link href="/colleges" className="flex items-center gap-2 text-sm font-medium text-[#0EB4A6] hover:text-[#0c9c90] bg-[#0EB4A6]/5 border border-[#0EB4A6]/20 hover:bg-[#0EB4A6]/10 px-6 py-2.5 rounded-full transition-all active:scale-95">
-                View All Colleges <ChevronRight size={16} />
+            {/* Row 2 — scrolls RIGHT */}
+            <div className="flex marquee-group animate-marquee-reverse hover:[animation-play-state:paused] pb-2">
+              {[...row2, ...row2].map((col, idx) => (
+                <div
+                  key={idx}
+                  className="flex-shrink-0 w-64 md:w-72 mx-3 bg-white/5 border border-white/10 rounded-2xl overflow-hidden shadow-lg flex flex-col group hover:bg-white/[0.07] transition-all hover:border-white/20"
+                >
+                  <div className="relative w-full h-36 md:h-40 bg-[#121214] overflow-hidden">
+                    <Image src={col.img} alt={col.name} fill sizes="288px" className="object-cover transition-transform duration-700 group-hover:scale-110" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#09090b] via-[#09090b]/50 to-transparent opacity-90" />
+                    <span className="absolute top-2 left-2 text-[10px] font-bold bg-[#0EB4A6] text-black px-2 py-0.5 rounded tracking-wide z-10">{col.tag}</span>
+                    <div className="absolute top-2 right-2 bg-black/60 backdrop-blur-md px-2 py-0.5 rounded border border-white/10 flex items-center gap-1 z-10">
+                      <Star className="w-3 h-3 fill-[#fbbf24] text-[#fbbf24]" />
+                      <span className="text-[10px] text-white/90 font-bold">{col.rating}</span>
+                    </div>
+                  </div>
+                  <div className="p-4 flex-1 flex flex-col">
+                    <h3 className="text-white text-base md:text-lg font-bold leading-tight line-clamp-1 mb-1">{col.name}</h3>
+                    <p className="text-[#0EB4A6] text-xs font-medium mb-4">{col.courses}</p>
+                    
+                    <div className="grid grid-cols-2 gap-2 mt-auto">
+                      {col.slug ? (
+                        <Link href={`/colleges/${col.slug}`} className="w-full py-2 rounded-lg border border-white/10 text-[11px] md:text-xs font-medium hover:bg-white/10 transition-colors text-center cursor-pointer min-touch flex items-center justify-center">
+                          View Details
+                        </Link>
+                      ) : (
+                        <button disabled className="w-full py-2 rounded-lg border border-white/5 text-[11px] md:text-xs font-medium text-white/20 cursor-not-allowed">
+                          Coming Soon
+                        </button>
+                      )}
+                      
+                      {col.slug ? (
+                        <button onClick={() => router.push(`/colleges/${col.slug}`)} className="w-full py-2 rounded-lg bg-[#0EB4A6] hover:bg-[#0c9c90] text-black text-[11px] md:text-xs font-bold transition-colors shadow-[0_2px_10px_rgba(14,180,166,0.3)] min-touch flex items-center justify-center cursor-pointer">
+                          Apply Now
+                        </button>
+                      ) : (
+                        <button disabled className="w-full py-2 rounded-lg bg-white/5 text-black text-[11px] md:text-xs font-bold cursor-not-allowed text-white/20">
+                          Waitlist
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="md:hidden flex justify-center mt-6 pb-2 relative z-20">
+              <Link href="/colleges" className="flex items-center gap-2 text-sm font-medium text-[#0EB4A6] hover:text-[#0c9c90] bg-[#0EB4A6]/5 border border-[#0EB4A6]/20 hover:bg-[#0EB4A6]/10 px-8 py-3 rounded-full transition-all active:scale-95 cursor-pointer">
+                View All Colleges <ChevronRight size={18} />
               </Link>
             </div>
           </div>
@@ -361,7 +457,7 @@ export default function HomeClient() {
       </section>
 
       {/* What is Guidevera? */}
-      <section className="pt-8 pb-24 md:py-24 relative overflow-hidden bg-[#09090b]">
+      <section className="pt-2 pb-24 md:py-24 relative overflow-hidden bg-[#09090b]">
         <div className="absolute right-0 top-1/2 -translate-y-1/2 w-1/2 h-full bg-[#0EB4A6]/5 blur-[120px] rounded-full pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.h2 

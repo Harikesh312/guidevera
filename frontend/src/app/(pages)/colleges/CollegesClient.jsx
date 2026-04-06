@@ -23,7 +23,7 @@ export default function CollegesClient() {
   const [searchInput, setSearchInput] = useState("");
   const [appliedSearchQuery, setAppliedSearchQuery] = useState("");
   const [applyModal, setApplyModal] = useState(null); // college object
-  const [form, setForm] = useState({ name: "", phone: "", course: "", email: "", state: "" });
+  const [form, setForm] = useState({ name: "", phone: "", course: "", customCourse: "", email: "", state: "" });
   const [formStatus, setFormStatus] = useState("idle"); // idle | loading | success | error
 
   useEffect(() => {
@@ -66,12 +66,6 @@ export default function CollegesClient() {
       courses: ["B.Tech","MBA","BBA","BCA","MCA","B.Sc Agriculture","B.Pharm"]
     },
     {
-      id: 6, slug: "itm-dehradun", name: "ITM Dehradun", location: "Uttarakhand, Dehradun",
-      description: "Uttarakhand's pioneering IT institution since 2002. AICTE approved, Microsoft Lead Institute of Academic Excellence.",
-      feeLabel: "Average Fees", fee: "₹90K – 1.0L/yr", image: "/images/itm.jpg", rating: "4.5", tag: "AICTE APPROVED",
-      courses: ["BCA","BBA","B.Sc IT","BHM","B.Sc Animation","B.Com","MCA","M.Sc IT"]
-    },
-    {
       id: 7, slug: "shivalik-college", name: "Shivalik College of Engineering", location: "Uttarakhand, Dehradun",
       description: "IIT Roorkee, IIT Bombay, IIT Ropar partnerships. 92% placement, Highest ₹42 LPA.",
       feeLabel: "Average Fees", fee: "₹1.2L – 1.8L/yr", image: "/images/shivalik-college.jpg", rating: "4.6", tag: "NAAC A+",
@@ -96,6 +90,12 @@ export default function CollegesClient() {
       courses: ["B.Tech","M.Tech","MBA","BBA","B.Pharm","D.Pharm","B.Sc Agriculture","Diploma"]
     },
     {
+      id: 6, slug: "itm-dehradun", name: "ITM Dehradun", location: "Uttarakhand, Dehradun",
+      description: "Uttarakhand's pioneering IT institution since 2002. AICTE approved, Microsoft Lead Institute of Academic Excellence.",
+      feeLabel: "Average Fees", fee: "₹90K – 1.0L/yr", image: "/images/itm.jpg", rating: "4.5", tag: "AICTE APPROVED",
+      courses: ["BCA","BBA","B.Sc IT","BHM","B.Sc Animation","B.Com","MCA","M.Sc IT"]
+    },
+    {
       id: 11, slug: null, name: "Alpine College", location: "Uttarakhand, Dehradun",
       description: "Coming soon on Guidevera. Contact the college directly for admission details.",
       feeLabel: "Average Fees", fee: "Contact College", image: "/images/DBS.jpg", rating: "4.4", tag: "COMING SOON",
@@ -113,7 +113,7 @@ export default function CollegesClient() {
 
   const openApplyModal = (college) => {
     setApplyModal(college);
-    setForm({ name: "", phone: "", course: college.courses[0] || "", email: "", state: "" });
+    setForm({ name: "", phone: "", course: college.courses[0] || "Other (Please Specify)", customCourse: "", email: "", state: "" });
     setFormStatus("idle");
   };
 
@@ -123,10 +123,11 @@ export default function CollegesClient() {
     e.preventDefault();
     setFormStatus("loading");
     try {
+      const finalCourse = form.course === "Other (Please Specify)" ? form.customCourse : form.course;
       const res = await fetch(`${API_URL}/api/college-apply`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, collegeName: applyModal.name }),
+        body: JSON.stringify({ ...form, course: finalCourse, collegeName: applyModal.name }),
       });
       const data = await res.json();
       if (data.success) setFormStatus("success");
@@ -168,9 +169,13 @@ export default function CollegesClient() {
                   <form onSubmit={handleFormSubmit} className="space-y-4">
                     <input required className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#0EB4A6]/50" placeholder="Full Name" value={form.name} onChange={e => setForm(f => ({...f, name: e.target.value}))} />
                     <input required type="tel" pattern="[0-9]{10}" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#0EB4A6]/50" placeholder="Phone Number (10 digits)" value={form.phone} onChange={e => setForm(f => ({...f, phone: e.target.value}))} />
-                    <select required className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#0EB4A6]/50" value={form.course} onChange={e => setForm(f => ({...f, course: e.target.value}))}>
+                    <select required className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#0EB4A6]/50 min-touch" value={form.course} onChange={e => setForm(f => ({...f, course: e.target.value}))}>
                       {applyModal.courses.map(c => <option key={c} value={c} className="bg-[#121214]">{c}</option>)}
+                      <option value="Other (Please Specify)" className="bg-[#121214]">Other (Please Specify)</option>
                     </select>
+                    {form.course === "Other (Please Specify)" && (
+                      <input required type="text" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#0EB4A6]/50 min-touch" placeholder="Please specify your course" value={form.customCourse} onChange={e => setForm(f => ({...f, customCourse: e.target.value}))} />
+                    )}
                     <input required type="email" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#0EB4A6]/50" placeholder="Email Address" value={form.email} onChange={e => setForm(f => ({...f, email: e.target.value}))} />
                     <select required className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#0EB4A6]/50" value={form.state} onChange={e => setForm(f => ({...f, state: e.target.value}))}>
                       <option value="" className="bg-[#121214]">Select State</option>

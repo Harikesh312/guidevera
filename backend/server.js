@@ -28,6 +28,7 @@ app.use('/api/auth', require('./routes/auth'));
 app.use('/api/counseling', require('./routes/counseling'));
 app.use('/api/roadmap', require('./routes/roadmap'));
 app.use('/api/college-apply', require('./routes/collegeApply'));
+app.use('/api/leads', require('./routes/leads'));
 
 app.get('/', (req, res) => {
   res.send('Guidevera API is running...');

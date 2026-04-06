@@ -108,16 +108,7 @@ export default function LoginClient() {
           </div>
         </form>
 
-        <div className="flex items-center my-6 fade-up delay-4">
-          <div className="flex-1 border-t border-white/8"></div>
-          <span className="px-4 text-white/25 text-xs">OR</span>
-          <div className="flex-1 border-t border-white/8"></div>
-        </div>
 
-        <button className="fade-up delay-4 w-full py-3.5 bg-transparent border border-white/10 text-white/70 text-sm font-medium rounded-xl hover:bg-white/5 hover:text-white hover:border-white/20 transition-all flex items-center justify-center gap-2">
-          <Image src="https://www.svgrepo.com/show/303108/google-icon-logo.svg" alt="Google" width={18} height={18} />
-          Continue with Google
-        </button>
 
         <div className="mt-7 text-center fade-up delay-4">
           <p className="text-white/40 text-sm">

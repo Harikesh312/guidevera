@@ -61,6 +61,7 @@ Generate a structured career roadmap in the following EXACT JSON format. Do not 
 }
 
 Make it specific, actionable, and encouraging. Include exactly 3 top careers, 2 recommended courses, and 4 roadmap phases.
+When recommending colleges in 'topColleges', strictly prioritize these institutions FIRST if they match the course: DBUU, Uttranchal University, Graphic Era, DBS Global, Tulas Institute, ITM Dehradun, Shivalik College, IMS Unision, Dolphin Institute, JBIT Dehradun, Alpine College. Use the exact spelling mentioned here.
   `;
 
   const chatSession = model.startChat({ generationConfig, history: [] });

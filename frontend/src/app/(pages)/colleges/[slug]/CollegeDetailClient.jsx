@@ -24,7 +24,7 @@ export default function CollegeDetailClient({ college }) {
   const [activeTab, setActiveTab] = useState("College Info");
   const [showAllCourses, setShowAllCourses] = useState(false);
   const [applyModalOpen, setApplyModalOpen] = useState(false);
-  const [form, setForm] = useState({ name: "", phone: "", course: "", email: "", state: "" });
+  const [form, setForm] = useState({ name: "", phone: "", course: "", customCourse: "", email: "", state: "" });
   const [formStatus, setFormStatus] = useState("idle");
 
   const tabs = ["College Info", "Placements", "Infrastructure", "Reviews"];
@@ -46,7 +46,7 @@ export default function CollegeDetailClient({ college }) {
 
   const openApplyModal = () => {
     setApplyModalOpen(true);
-    setForm({ name: "", phone: "", course: college.courses?.[0]?.name || "", email: "", state: "" });
+    setForm({ name: "", phone: "", course: college.courses?.[0]?.name || "Other (Please Specify)", customCourse: "", email: "", state: "" });
     setFormStatus("idle");
   };
 
@@ -59,10 +59,11 @@ export default function CollegeDetailClient({ college }) {
     e.preventDefault();
     setFormStatus("loading");
     try {
+      const finalCourse = form.course === "Other (Please Specify)" ? form.customCourse : form.course;
       const res = await fetch(`${API_URL}/api/college-apply`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, collegeName: college.name }),
+        body: JSON.stringify({ ...form, course: finalCourse, collegeName: college.name }),
       });
       const data = await res.json();
       if (data.success) setFormStatus("success");
@@ -104,9 +105,13 @@ export default function CollegeDetailClient({ college }) {
                   <form onSubmit={handleFormSubmit} className="space-y-4">
                     <input required className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#0EB4A6]/50" placeholder="Full Name" value={form.name} onChange={e => setForm(f => ({...f, name: e.target.value}))} />
                     <input required type="tel" pattern="[0-9]{10}" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#0EB4A6]/50" placeholder="Phone Number (10 digits)" value={form.phone} onChange={e => setForm(f => ({...f, phone: e.target.value}))} />
-                    <select required className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#0EB4A6]/50" value={form.course} onChange={e => setForm(f => ({...f, course: e.target.value}))}>
+                    <select required className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#0EB4A6]/50 min-touch" value={form.course} onChange={e => setForm(f => ({...f, course: e.target.value}))}>
                       {college.courses?.map(c => <option key={c.name} value={c.name} className="bg-[#121214]">{c.name}</option>)}
+                      <option value="Other (Please Specify)" className="bg-[#121214]">Other (Please Specify)</option>
                     </select>
+                    {form.course === "Other (Please Specify)" && (
+                      <input required type="text" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#0EB4A6]/50 min-touch" placeholder="Please specify your course" value={form.customCourse} onChange={e => setForm(f => ({...f, customCourse: e.target.value}))} />
+                    )}
                     <input required type="email" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#0EB4A6]/50" placeholder="Email Address" value={form.email} onChange={e => setForm(f => ({...f, email: e.target.value}))} />
                     <select required className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#0EB4A6]/50" value={form.state} onChange={e => setForm(f => ({...f, state: e.target.value}))}>
                       <option value="" className="bg-[#121214]">Select State</option>
@@ -126,12 +131,14 @@ export default function CollegeDetailClient({ college }) {
 
       <main className="pt-24 pb-20">
         {/* Full-width hero image */}
-        <div className="relative w-full h-[40vh] md:h-[60vh] min-h-[400px]">
-          <Image src={college.heroImage} alt={college.name} fill className="object-cover" priority />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#09090b] via-[#09090b]/80 to-[#09090b]/30" />
+        <div className="relative w-full h-auto min-h-[450px] md:min-h-[500px] md:h-[60vh] flex flex-col justify-end">
+          <div className="absolute inset-0 z-0">
+            <Image src={college.heroImage} alt={college.name} fill className="object-cover" priority />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#09090b] via-[#09090b]/80 to-[#09090b]/30" />
+          </div>
           
-          <div className="absolute inset-0 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-end pb-12">
-            <Link href="/colleges" className="hidden sm:flex absolute top-8 sm:left-6 lg:left-8 items-center gap-2 text-white/70 hover:text-white transition-colors text-sm bg-black/40 px-4 py-2 rounded-full border border-white/10 backdrop-blur-md">
+          <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10 pt-28">
+            <Link href="/colleges" className="flex absolute top-0 left-4 sm:left-6 lg:left-8 items-center gap-2 text-white/70 hover:text-white transition-colors text-sm bg-black/40 px-4 py-2 rounded-full border border-white/10 backdrop-blur-md w-max">
               <ChevronLeft className="w-4 h-4" /> Back to Colleges
             </Link>
 
@@ -309,33 +316,33 @@ export default function CollegeDetailClient({ college }) {
               {activeTab === "Placements" && college.placements && (
                 <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-8">
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <div className="bg-[#121214] border border-white/5 rounded-2xl p-4 sm:p-6 text-center shadow-lg flex flex-col justify-center items-center">
-                      <div className="w-10 h-10 mx-auto rounded-full bg-[#0EB4A6]/10 flex items-center justify-center mb-3">
+                    <div className="bg-[#121214] border border-white/5 rounded-2xl p-4 sm:p-6 text-center shadow-lg flex flex-col justify-center items-center overflow-hidden min-w-0">
+                      <div className="w-10 h-10 mx-auto rounded-full bg-[#0EB4A6]/10 flex items-center justify-center mb-3 shrink-0">
                         <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5 text-[#0EB4A6]" />
                       </div>
                       <p className="text-lg sm:text-2xl font-bold text-white mb-1 truncate w-full">{college.placements.highest}</p>
-                      <p className="text-[10px] sm:text-xs text-white/50 uppercase tracking-wider">Highest Pkg</p>
+                      <p className="text-[10px] sm:text-xs text-white/50 uppercase tracking-wider truncate w-full">Highest Pkg</p>
                     </div>
-                    <div className="bg-[#121214] border border-white/5 rounded-2xl p-4 sm:p-6 text-center shadow-lg flex flex-col justify-center items-center">
-                      <div className="w-10 h-10 mx-auto rounded-full bg-white/5 flex items-center justify-center mb-3">
+                    <div className="bg-[#121214] border border-white/5 rounded-2xl p-4 sm:p-6 text-center shadow-lg flex flex-col justify-center items-center overflow-hidden min-w-0">
+                      <div className="w-10 h-10 mx-auto rounded-full bg-white/5 flex items-center justify-center mb-3 shrink-0">
                         <IndianRupee className="w-4 h-4 sm:w-5 sm:h-5 text-white/70" />
                       </div>
                       <p className="text-lg sm:text-2xl font-bold text-white mb-1 truncate w-full">{college.placements.average}</p>
-                      <p className="text-[10px] sm:text-xs text-white/50 uppercase tracking-wider">Average Pkg</p>
+                      <p className="text-[10px] sm:text-xs text-white/50 uppercase tracking-wider truncate w-full">Average Pkg</p>
                     </div>
-                    <div className="bg-[#121214] border border-white/5 rounded-2xl p-4 sm:p-6 text-center shadow-lg flex flex-col justify-center items-center">
-                      <div className="w-10 h-10 mx-auto rounded-full bg-white/5 flex items-center justify-center mb-3">
+                    <div className="bg-[#121214] border border-white/5 rounded-2xl p-4 sm:p-6 text-center shadow-lg flex flex-col justify-center items-center overflow-hidden min-w-0">
+                      <div className="w-10 h-10 mx-auto rounded-full bg-white/5 flex items-center justify-center mb-3 shrink-0">
                         <BadgeCheck className="w-4 h-4 sm:w-5 sm:h-5 text-white/70" />
                       </div>
                       <p className="text-lg sm:text-2xl font-bold text-white mb-1 truncate w-full">{college.placements.offers}</p>
-                      <p className="text-[10px] sm:text-xs text-white/50 uppercase tracking-wider">Offers</p>
+                      <p className="text-[10px] sm:text-xs text-white/50 uppercase tracking-wider truncate w-full">Offers</p>
                     </div>
-                    <div className="bg-[#121214] border border-white/5 rounded-2xl p-4 sm:p-6 text-center shadow-lg flex flex-col justify-center items-center">
-                      <div className="w-10 h-10 mx-auto rounded-full bg-white/5 flex items-center justify-center mb-3">
+                    <div className="bg-[#121214] border border-white/5 rounded-2xl p-4 sm:p-6 text-center shadow-lg flex flex-col justify-center items-center overflow-hidden min-w-0">
+                      <div className="w-10 h-10 mx-auto rounded-full bg-white/5 flex items-center justify-center mb-3 shrink-0">
                         <Building2 className="w-4 h-4 sm:w-5 sm:h-5 text-white/70" />
                       </div>
                       <p className="text-lg sm:text-2xl font-bold text-white mb-1 truncate w-full">{college.placements.companies}</p>
-                      <p className="text-[10px] sm:text-xs text-white/50 uppercase tracking-wider">Companies</p>
+                      <p className="text-[10px] sm:text-xs text-white/50 uppercase tracking-wider truncate w-full">Companies</p>
                     </div>
                   </div>
                   
