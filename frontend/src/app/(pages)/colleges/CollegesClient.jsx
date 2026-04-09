@@ -74,7 +74,7 @@ export default function CollegesClient() {
     {
       id: 8, slug: "ims-unision", name: "IMS Unision University", location: "Uttarakhand, Dehradun",
       description: "28 years of legacy. Times B-School #8 Private, #5 Placements. 95% placement, Highest ₹16.65 LPA.",
-      feeLabel: "Average Fees", fee: "₹2.0L – 3.0L/yr", image: "/images/DBS.jpg", rating: "4.6", tag: "TOP B-SCHOOL",
+      feeLabel: "Average Fees", fee: "₹2.0L – 3.0L/yr", image: "/images/ims.jpg", rating: "4.6", tag: "TOP B-SCHOOL",
       courses: ["MBA","BBA","BA LLB","BBA LLB","LLM","BHM","BCA","BAJMC","B.Com"]
     },
     {
@@ -86,7 +86,7 @@ export default function CollegesClient() {
     {
       id: 10, slug: "jbit-dehradun", name: "JBIT Dehradun", location: "Uttarakhand, Dehradun",
       description: "25-acre campus. B.Tech, BCA, B.Pharma, Agriculture, MBA. 83%+ placement. Highest ₹30 LPA, 150+ MNC recruiters.",
-      feeLabel: "Average Fees", fee: "₹1.0L – 1.8L/yr", image: "/images/Tulas-Institute.jpg", rating: "4.5", tag: "AICTE APPROVED",
+      feeLabel: "Average Fees", fee: "₹1.0L – 1.8L/yr", image: "/images/jbit.jpg", rating: "4.5", tag: "AICTE APPROVED",
       courses: ["B.Tech","M.Tech","MBA","BBA","B.Pharm","D.Pharm","B.Sc Agriculture","Diploma"]
     },
     {
@@ -98,7 +98,7 @@ export default function CollegesClient() {
     {
       id: 11, slug: null, name: "Alpine College", location: "Uttarakhand, Dehradun",
       description: "Coming soon on Guidevera. Contact the college directly for admission details.",
-      feeLabel: "Average Fees", fee: "Contact College", image: "/images/DBS.jpg", rating: "4.4", tag: "COMING SOON",
+      feeLabel: "Average Fees", fee: "Contact College", image: "/images/alpine.jpg", rating: "4.4", tag: "COMING SOON",
       courses: []
     },
   ];
