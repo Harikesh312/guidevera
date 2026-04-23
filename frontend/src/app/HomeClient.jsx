@@ -40,11 +40,12 @@ const FAQItem = ({ question, answer }) => {
   return (
     <div className="border border-white/10 bg-white/5 rounded-2xl overflow-hidden mb-4">
       <button 
+        suppressHydrationWarning
         onClick={() => setIsOpen(!isOpen)} 
         className="w-full flex items-center justify-between p-6 text-left hover:bg-white/5 transition-colors"
       >
-        <span className="font-semibold text-lg text-white">{question}</span>
-        <ChevronDown className={`w-5 h-5 text-[#0EB4A6] transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`} />
+        <span className="font-semibold text-base text-white">{question}</span>
+        <ChevronDown className={`w-5 h-5 text-[#0EB4A6] transition-transform duration-300 flex-shrink-0 ml-4 ${isOpen ? "rotate-180" : ""}`} />
       </button>
       <AnimatePresence>
         {isOpen && (
@@ -264,9 +265,15 @@ export default function HomeClient() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-3xl md:text-5xl lg:text-7xl font-bold tracking-tight mb-6"
+            className="text-2xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-6 leading-tight"
           >
-            India's #1 <span className="text-[#0EB4A6]">Career Guidance</span> Platform — Find the Right College & Course
+            India&apos;s #1{" "}
+            <span className="relative inline-block">
+              <span className="text-[#0EB4A6]">Career Guidance</span>
+            </span>{" "}
+            Platform
+            <br className="hidden sm:block" />
+            <span className="text-white/70 font-semibold">Find the Right College &amp; Course</span>
           </motion.h1>
           
           <motion.p 
@@ -321,7 +328,7 @@ export default function HomeClient() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
             <div className="max-w-2xl">
-              <h2 className="text-3xl md:text-5xl font-bold mb-4 tracking-tight">Top Rated Colleges in Uttarakhand & India</h2>
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 tracking-tight">Top Rated Colleges <span className="text-[#0EB4A6]">in Uttarakhand</span> &amp; India</h2>
               <p className="text-white/60 text-lg">
                 Explore our handpicked list of NAAC A+, NIRF-ranked, and AICTE-approved colleges across Uttarakhand offering B.Tech, MBA, BCA, Law, and more.
               </p>
@@ -567,7 +574,7 @@ export default function HomeClient() {
       <section className="py-24 bg-[#09090b]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold mb-4 tracking-tight">How We Guide You</h2>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 tracking-tight">How We <span className="text-[#0EB4A6]">Guide</span> You</h2>
             <p className="text-white/60 text-lg max-w-2xl mx-auto">
               Our proven process helps you navigate the confusing world of admissions with confidence and clarity.
             </p>
@@ -643,7 +650,7 @@ export default function HomeClient() {
         <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-[#0EB4A6]/5 rounded-full blur-[120px] pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold mb-4 tracking-tight">What Our Students Say 💬</h2>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 tracking-tight">What Our <span className="text-[#0EB4A6]">Students</span> Say 💬</h2>
             <p className="text-white/60 text-lg max-w-2xl mx-auto">
               Real stories from students who found their true calling with Guidevera.
             </p>
@@ -697,7 +704,7 @@ export default function HomeClient() {
       <section className="py-24 bg-[#09090b]">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold mb-4 tracking-tight">Frequently Asked Questions</h2>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 tracking-tight">Frequently Asked <span className="text-[#0EB4A6]">Questions</span></h2>
             <p className="text-white/60 text-lg">
               Everything you need to know about Guidevera.
             </p>
@@ -734,9 +741,11 @@ export default function HomeClient() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-4xl md:text-6xl font-bold mb-6 tracking-tight"
+            className="text-2xl md:text-4xl font-bold mb-6 tracking-tight"
           >
-            Start Your Career Journey Today — Free Ability Test & Expert Counseling
+            Start Your Career Journey <span className="text-[#0EB4A6]">Today</span>
+            <br />
+            <span className="text-white/60 text-xl md:text-2xl font-medium">Free Ability Test &amp; Expert Counseling</span>
           </motion.h2>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}

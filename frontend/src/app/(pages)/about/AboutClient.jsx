@@ -24,7 +24,7 @@ export default function AboutClient() {
             <span className="inline-block px-3 py-1.5 rounded-full bg-[#0EB4A6]/10 border border-[#0EB4A6]/20 text-xs font-bold text-[#0EB4A6] tracking-wider mb-6">
               OUR STORY
             </span>
-            <h1 className="text-3xl md:text-6xl font-extrabold mb-6 leading-tight tracking-tight">
+            <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight tracking-tight">
               We Believe Every Student Deserves <br />
               <span className="text-[#0EB4A6]">Honest Guidance</span>
             </h1>

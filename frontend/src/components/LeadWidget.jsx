@@ -30,6 +30,7 @@ export default function LeadWidget() {
   return (
     <>
       <button
+        suppressHydrationWarning
         onClick={() => setIsOpen(true)}
         className={`fixed bottom-6 right-6 z-50 bg-[#0EB4A6] hover:bg-[#0c9c90] text-white p-4 rounded-full shadow-[0_0_20px_rgba(14,180,166,0.4)] transition-all transform hover:scale-110 items-center justify-center min-touch ${isOpen ? "hidden" : "flex"}`}
         aria-label="Quick Enquiry"

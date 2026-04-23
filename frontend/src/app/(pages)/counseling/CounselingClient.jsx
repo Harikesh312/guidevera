@@ -64,8 +64,8 @@ export default function CounselingClient() {
           {/* Badge + Heading + Subtext + CTA */}
           <div className="mb-8">
           
-            <h1 className="text-2xl md:text-4xl font-bold mb-4 tracking-tight leading-tight max-w-2xl">
-              Book a Personalized <span className="text-[#0EB4A6]">Career Counseling Session</span>
+            <h1 className="text-xl md:text-3xl font-bold mb-4 tracking-tight leading-tight max-w-2xl">
+              Book a Personalized <span className="text-[#0EB4A6]">Career Counseling</span> Session
             </h1>
             <p className="text-white/60 text-base mb-6 leading-relaxed max-w-xl">
               Unlock your true potential with expert guidance. Get a clear roadmap for your future from India&apos;s top career counselors.

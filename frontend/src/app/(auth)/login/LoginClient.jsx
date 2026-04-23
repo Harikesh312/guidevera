@@ -57,7 +57,7 @@ export default function LoginClient() {
       <div className="bg-[#121214] border border-white/5 rounded-3xl p-6 md:p-12 w-full max-w-[420px] relative z-10 shadow-2xl fade-up">
         <div className="flex flex-col items-center mb-8">
           <Image src="/guidevera-logo.png" alt="Guidevera" width={140} height={140} className="object-contain" style={{ width: "auto", height: "auto" }} />
-          <h1 className="text-3xl font-bold text-white mb-1.5 tracking-tight fade-up delay-1">Welcome Back</h1>
+          <h1 className="text-2xl font-bold text-white mb-1.5 tracking-tight fade-up delay-1">Welcome Back</h1>
           <p className="text-white/40 text-sm text-center fade-up delay-2">Please enter your details to sign in.</p>
         </div>
 

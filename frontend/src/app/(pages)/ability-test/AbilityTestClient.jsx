@@ -32,7 +32,7 @@ export default function AbilityTestClient() {
               <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#0EB4A6]/10 border border-[#0EB4A6]/20 text-xs font-bold text-[#0EB4A6] tracking-widest mb-6">
                 SCIENTIFIC CAREER GUIDANCE
               </span>
-              <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-6 leading-tight">
+              <h1 className="text-3xl md:text-5xl font-bold tracking-tight mb-6 leading-tight">
                 Discover Your <span className="text-[#0EB4A6]">True Potential</span>
               </h1>
               <p className="text-lg text-white/60 mb-10 leading-relaxed max-w-lg">

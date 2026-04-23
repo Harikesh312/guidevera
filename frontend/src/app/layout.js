@@ -17,9 +17,9 @@ export const metadata = {
   title: "Guidevera - Your Career Guide",
   description: "Guidevera is a comprehensive platform built to provide students with end-to-end support throughout their academic journey.",
   icons: {
-    icon: '/guidevera-icon.png',
-    shortcut: '/guidevera-icon.png',
-    apple: '/guidevera-icon.png',
+    icon: '/guidevera-header.png',
+    shortcut: '/guidevera-header.png',
+    apple: '/guidevera-header.png',
   },
 };
 
@@ -27,7 +27,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <link rel="icon" href="/guidevera-icon.png" />
+        <link rel="icon" href="/guidevera-header.png" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
