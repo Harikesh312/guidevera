@@ -19,6 +19,7 @@ import {
   BookOpen,
   Briefcase,
   ChevronRight,
+  ChevronDown,
   X,
   CheckCircle,
 } from "lucide-react";
@@ -33,6 +34,35 @@ const INDIAN_STATES = [
   "Meghalaya","Mizoram","Nagaland","Odisha","Punjab","Rajasthan","Sikkim","Tamil Nadu","Telangana",
   "Tripura","Uttar Pradesh","Uttarakhand","West Bengal","Delhi","Other"
 ];
+
+const FAQItem = ({ question, answer }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <div className="border border-white/10 bg-white/5 rounded-2xl overflow-hidden mb-4">
+      <button 
+        onClick={() => setIsOpen(!isOpen)} 
+        className="w-full flex items-center justify-between p-6 text-left hover:bg-white/5 transition-colors"
+      >
+        <span className="font-semibold text-lg text-white">{question}</span>
+        <ChevronDown className={`w-5 h-5 text-[#0EB4A6] transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`} />
+      </button>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div 
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            className="overflow-hidden"
+          >
+            <div className="p-6 pt-0 text-white/60 leading-relaxed">
+              {answer}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
 
 const AnimatedCounter = ({ value }) => {
   const ref = useRef(null);
@@ -109,20 +139,20 @@ export default function HomeClient() {
   };
 
   const row1 = [
-    { id: 1, name: "DBUU", slug: "dbuu", img: "/images/dbuu.jpg", rating: "4.3", tag: "TOP RANKED", courses: "B.Tech | MBA | BHM | BAMS", coursesList: ["B.Tech","MBA","BHM","BAMS","BCA","B.Pharm","LLB","B.Sc Agriculture"] },
-    { id: 2, name: "Uttranchal University", slug: "uttranchal-university", img: "/images/Uttranchal-University.jpg", rating: "4.5", tag: "NAAC A+", courses: "B.Tech | MBA | Law", coursesList: ["B.Tech","MBA","BA LLB","B.Pharm","B.Sc Agriculture","BCA","BHM","B.Sc Nursing"] },
-    { id: 3, name: "Graphic Era", slug: "graphic-era", img: "/images/graphic-era.jpg", rating: "4.7", tag: "NIRF TOP 50", courses: "B.Tech | BCA | BHM", coursesList: ["B.Tech","MBA","BHM","BCA","BBA","B.Des","LLB","M.Tech"] },
-    { id: 4, name: "DBS Global", slug: "dbs-global", img: "/images/DBS.jpg", rating: "4.8", tag: "TOP B-SCHOOL", courses: "MBA | BBA | B.Tech", coursesList: ["MBA","BBA","B.Tech AI/ML","BCA","B.Com","B.Sc Agriculture","LLB","B.Pharm"] },
-    { id: 5, name: "Tulas Institute", slug: "tulas-institute", img: "/images/Tulas-Institute.jpg", rating: "4.7", tag: "NAAC A+", courses: "B.Tech | BCA | MBA", coursesList: ["B.Tech","MBA","BBA","BCA","MCA","B.Sc Agriculture","B.Pharm"] },
-    { id: 6, name: "ITM Dehradun", slug: "itm-dehradun", img: "/images/itm.jpg", rating: "4.5", tag: "AICTE APPROVED", courses: "BCA | B.Sc IT | MBA", coursesList: ["BCA","BBA","B.Sc IT","BHM","B.Sc Animation","B.Com","MCA","M.Sc IT"] }
+    { id: 1, name: "DBUU", slug: "dbuu", img: "/images/dbuu.jpg", alt: "DBUU campus - Dev Bhoomi Uttarakhand University Dehradun", rating: "4.3", tag: "TOP RANKED", courses: "B.Tech | MBA | BHM | BAMS", coursesList: ["B.Tech","MBA","BHM","BAMS","BCA","B.Pharm","LLB","B.Sc Agriculture"] },
+    { id: 2, name: "Uttranchal University", slug: "uttranchal-university", img: "/images/Uttranchal-University.jpg", alt: "Uttranchal University campus - NAAC A+ college Dehradun", rating: "4.5", tag: "NAAC A+", courses: "B.Tech | MBA | Law", coursesList: ["B.Tech","MBA","BA LLB","B.Pharm","B.Sc Agriculture","BCA","BHM","B.Sc Nursing"] },
+    { id: 3, name: "Graphic Era", slug: "graphic-era", img: "/images/graphic-era.jpg", alt: "Graphic Era University campus - NIRF Top 50 college Dehradun", rating: "4.7", tag: "NIRF TOP 50", courses: "B.Tech | BCA | BHM", coursesList: ["B.Tech","MBA","BHM","BCA","BBA","B.Des","LLB","M.Tech"] },
+    { id: 4, name: "DBS Global", slug: "dbs-global", img: "/images/DBS.jpg", alt: "DBS Global University campus - Top B-School Dehradun", rating: "4.8", tag: "TOP B-SCHOOL", courses: "MBA | BBA | B.Tech", coursesList: ["MBA","BBA","B.Tech AI/ML","BCA","B.Com","B.Sc Agriculture","LLB","B.Pharm"] },
+    { id: 5, name: "Tulas Institute", slug: "tulas-institute", img: "/images/Tulas-Institute.jpg", alt: "Tulas Institute campus - NAAC A+ engineering college Dehradun", rating: "4.7", tag: "NAAC A+", courses: "B.Tech | BCA | MBA", coursesList: ["B.Tech","MBA","BBA","BCA","MCA","B.Sc Agriculture","B.Pharm"] },
+    { id: 6, name: "ITM Dehradun", slug: "itm-dehradun", img: "/images/itm.jpg", alt: "ITM Dehradun campus - AICTE approved IT college", rating: "4.5", tag: "AICTE APPROVED", courses: "BCA | B.Sc IT | MBA", coursesList: ["BCA","BBA","B.Sc IT","BHM","B.Sc Animation","B.Com","MCA","M.Sc IT"] }
   ];
 
   const row2 = [
-    { id: 7, name: "Shivalik College", slug: "shivalik-college", img: "/images/shivalik-college.jpg", rating: "4.6", tag: "NAAC A+", courses: "B.Tech | M.Tech | BCA", coursesList: ["B.Tech","M.Tech","BCA","MBA","BBA","B.Pharm","B.Sc Agriculture","B.Ed"] },
-    { id: 8, name: "IMS Unision", slug: "ims-unision", img: "/images/DBS.jpg", rating: "4.6", tag: "TOP B-SCHOOL", courses: "MBA | BBA | BA LLB", coursesList: ["MBA","BBA","BA LLB","BBA LLB","LLM","BHM","BCA","BAJMC","B.Com"] },
-    { id: 9, name: "Dolphin Institute", slug: "dolphin-institute", img: "/images/Dolphin-college.jpg", rating: "4.7", tag: "NAAC A+", courses: "BPT | B.Sc Agriculture", coursesList: ["BPT","B.Sc Biotechnology","B.Sc Agriculture","B.Sc Forestry","B.Sc MLT","B.Ed","MPT","M.Sc Microbiology"] },
-    { id: 10, name: "JBIT Dehradun", slug: "jbit-dehradun", img: "/images/Tulas-Institute.jpg", rating: "4.5", tag: "AICTE APPROVED", courses: "B.Tech | BCA | Pharmacy", coursesList: ["B.Tech","M.Tech","MBA","BBA","B.Pharm","D.Pharm","B.Sc Agriculture","Diploma"] },
-    { id: 11, name: "Alpine College", slug: null, img: "/images/DBS.jpg", rating: "4.4", tag: "COMING SOON", courses: "Diploma | Engineering", coursesList: [] },
+    { id: 7, name: "Shivalik College", slug: "shivalik-college", img: "/images/shivalik-college.jpg", alt: "Shivalik College of Engineering campus - Dehradun", rating: "4.6", tag: "NAAC A+", courses: "B.Tech | M.Tech | BCA", coursesList: ["B.Tech","M.Tech","BCA","MBA","BBA","B.Pharm","B.Sc Agriculture","B.Ed"] },
+    { id: 8, name: "IMS Unision", slug: "ims-unision", img: "/images/DBS.jpg", alt: "IMS Unision University campus - Top B-School Dehradun", rating: "4.6", tag: "TOP B-SCHOOL", courses: "MBA | BBA | BA LLB", coursesList: ["MBA","BBA","BA LLB","BBA LLB","LLM","BHM","BCA","BAJMC","B.Com"] },
+    { id: 9, name: "Dolphin Institute", slug: "dolphin-institute", img: "/images/Dolphin-college.jpg", alt: "Dolphin Institute campus - NAAC A+ Dehradun", rating: "4.7", tag: "NAAC A+", courses: "BPT | B.Sc Agriculture", coursesList: ["BPT","B.Sc Biotechnology","B.Sc Agriculture","B.Sc Forestry","B.Sc MLT","B.Ed","MPT","M.Sc Microbiology"] },
+    { id: 10, name: "JBIT Dehradun", slug: "jbit-dehradun", img: "/images/Tulas-Institute.jpg", alt: "JBIT Dehradun campus - engineering college Uttarakhand", rating: "4.5", tag: "AICTE APPROVED", courses: "B.Tech | BCA | Pharmacy", coursesList: ["B.Tech","M.Tech","MBA","BBA","B.Pharm","D.Pharm","B.Sc Agriculture","Diploma"] },
+    { id: 11, name: "Alpine College", slug: null, img: "/images/DBS.jpg", alt: "Alpine College campus - Dehradun", rating: "4.4", tag: "COMING SOON", courses: "Diploma | Engineering", coursesList: [] },
   ];
 
   const fadeIn = {
@@ -236,7 +266,7 @@ export default function HomeClient() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-3xl md:text-5xl lg:text-7xl font-bold tracking-tight mb-6"
           >
-            Your True <span className="text-[#0EB4A6]">Guide</span> for Career Clarity
+            India's #1 <span className="text-[#0EB4A6]">Career Guidance</span> Platform — Find the Right College & Course
           </motion.h1>
           
           <motion.p 
@@ -245,7 +275,7 @@ export default function HomeClient() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="mt-4 text-base md:text-xl text-white/60 max-w-2xl text-center mb-12"
           >
-            Get expert guidance to select the college and course that matches your goals.
+            Get expert career counseling, take a psychometric ability test, and discover the best colleges in Uttarakhand & across India — all in one place.
           </motion.p>
           
           <motion.div 
@@ -291,9 +321,9 @@ export default function HomeClient() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
             <div className="max-w-2xl">
-              <h2 className="text-3xl md:text-5xl font-bold mb-4 tracking-tight">Top Rated Colleges</h2>
+              <h2 className="text-3xl md:text-5xl font-bold mb-4 tracking-tight">Top Rated Colleges in Uttarakhand & India</h2>
               <p className="text-white/60 text-lg">
-                Browse through our curated list of premier colleges and universities across the region, recognized for academic excellence.
+                Explore our handpicked list of NAAC A+, NIRF-ranked, and AICTE-approved colleges across Uttarakhand offering B.Tech, MBA, BCA, Law, and more.
               </p>
             </div>
             <Link href="/colleges" className="hidden md:flex items-center gap-2 text-[#0EB4A6] hover:text-[#0c9c90] font-medium transition-colors whitespace-nowrap">
@@ -313,7 +343,7 @@ export default function HomeClient() {
                 className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden shadow-lg flex flex-col group hover:bg-white/[0.07] transition-all hover:border-white/20"
               >
                 <div className="relative w-full h-40 bg-[#121214] overflow-hidden">
-                  <Image src={col.img} alt={col.name} fill sizes="288px" className="object-cover transition-transform duration-700 group-hover:scale-110" />
+                  <Image src={col.img} alt={col.alt || col.name} fill sizes="288px" className="object-cover transition-transform duration-700 group-hover:scale-110" />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#09090b] via-[#09090b]/50 to-transparent opacity-90" />
                   <span className="absolute top-2 left-2 text-[10px] font-bold bg-[#0EB4A6] text-black px-2 py-0.5 rounded tracking-wide z-10">{col.tag}</span>
                   <div className="absolute top-2 right-2 bg-black/60 backdrop-blur-md px-2 py-0.5 rounded border border-white/10 flex items-center gap-1 z-10">
@@ -363,7 +393,7 @@ export default function HomeClient() {
                   className="flex-shrink-0 w-64 md:w-72 mx-3 bg-white/5 border border-white/10 rounded-2xl overflow-hidden shadow-lg flex flex-col group hover:bg-white/[0.07] transition-all hover:border-white/20"
                 >
                   <div className="relative w-full h-36 md:h-40 bg-[#121214] overflow-hidden">
-                    <Image src={col.img} alt={col.name} fill sizes="288px" className="object-cover transition-transform duration-700 group-hover:scale-110" />
+                    <Image src={col.img} alt={col.alt || col.name} fill sizes="288px" className="object-cover transition-transform duration-700 group-hover:scale-110" />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#09090b] via-[#09090b]/50 to-transparent opacity-90" />
                     <span className="absolute top-2 left-2 text-[10px] font-bold bg-[#0EB4A6] text-black px-2 py-0.5 rounded tracking-wide z-10">{col.tag}</span>
                     <div className="absolute top-2 right-2 bg-black/60 backdrop-blur-md px-2 py-0.5 rounded border border-white/10 flex items-center gap-1 z-10">
@@ -409,7 +439,7 @@ export default function HomeClient() {
                   className="flex-shrink-0 w-64 md:w-72 mx-3 bg-white/5 border border-white/10 rounded-2xl overflow-hidden shadow-lg flex flex-col group hover:bg-white/[0.07] transition-all hover:border-white/20"
                 >
                   <div className="relative w-full h-36 md:h-40 bg-[#121214] overflow-hidden">
-                    <Image src={col.img} alt={col.name} fill sizes="288px" className="object-cover transition-transform duration-700 group-hover:scale-110" />
+                    <Image src={col.img} alt={col.alt || col.name} fill sizes="288px" className="object-cover transition-transform duration-700 group-hover:scale-110" />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#09090b] via-[#09090b]/50 to-transparent opacity-90" />
                     <span className="absolute top-2 left-2 text-[10px] font-bold bg-[#0EB4A6] text-black px-2 py-0.5 rounded tracking-wide z-10">{col.tag}</span>
                     <div className="absolute top-2 right-2 bg-black/60 backdrop-blur-md px-2 py-0.5 rounded border border-white/10 flex items-center gap-1 z-10">
@@ -479,7 +509,7 @@ export default function HomeClient() {
               className="relative h-[350px] md:h-[500px] w-full rounded-4xl overflow-hidden border border-white/10 bg-white/5 p-5 sm:p-8 flex flex-col justify-end"
             >
               <div className="absolute inset-0 z-0 overflow-hidden rounded-4xl bg-[#e5e7eb] dark:bg-zinc-900 border border-white/5">
-                <Image src="/images/students.png" alt="Students learning" fill className="object-cover object-top sm:object-center sm:pl-8 sm:pt-8" />
+                <Image src="/images/students.png" alt="Students getting career guidance at Guidevera" fill className="object-cover object-top sm:object-center sm:pl-8 sm:pt-8" />
               </div>
               <div className="relative z-10 bg-[#09090b]/80 backdrop-blur-xl border border-white/10 p-4 sm:p-5 rounded-2xl max-w-[240px] sm:max-w-sm shadow-2xl">
                 <div className="flex items-center gap-3">
@@ -504,14 +534,14 @@ export default function HomeClient() {
                 What is <span className="text-[#0EB4A6]">Guidevera</span>?
               </h2>
               <p className="text-lg text-white/60 mb-10 leading-relaxed">
-                We are more than just a college search engine. Guidevera is a comprehensive platform built to provide students with end-to-end support throughout their academic journey, backed by data-driven insights and expert human counseling.
+                Guidevera is India's most student-focused career guidance platform. We help Class 12 pass-outs, graduates, and confused students identify the right career path using scientifically designed psychometric tests, expert one-on-one counseling, and a curated database of top colleges across Uttarakhand and India. Whether you're choosing between B.Tech, MBA, BCA, Law, or Medicine — Guidevera gives you the data and guidance to decide with confidence.
               </p>
               
               <div className="space-y-8 mb-10">
                 {[
-                  { icon: <UserCheck className="w-6 h-6 text-[#0EB4A6]" />, title: "Self Discovery", desc: "Understand your strengths, weaknesses, and true passions through our robust assessments." },
-                  { icon: <ClipboardList className="w-6 h-6 text-[#0EB4A6]" />, title: "Expert Testing", desc: "Take our carefully crafted psychometric tests to pinpoint the best career options for you." },
-                  { icon: <MessageCircle className="w-6 h-6 text-[#0EB4A6]" />, title: "Personal Counseling", desc: "Get one-on-one guidance from expert counselors who understand the academic landscape deeply." },
+                  { icon: <UserCheck className="w-6 h-6 text-[#0EB4A6]" />, title: "Career Self Discovery Test", desc: "Understand your strengths, weaknesses, and true passions through our robust assessments." },
+                  { icon: <ClipboardList className="w-6 h-6 text-[#0EB4A6]" />, title: "Psychometric Ability Test for Students", desc: "Take our carefully crafted psychometric tests to pinpoint the best career options for you." },
+                  { icon: <MessageCircle className="w-6 h-6 text-[#0EB4A6]" />, title: "One-on-One Career Counseling by Experts", desc: "Get one-on-one guidance from expert counselors who understand the academic landscape deeply." },
                 ].map((item, i) => (
                   <div key={i} className="flex gap-5">
                     <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[#0EB4A6]/10 flex items-center justify-center border border-[#0EB4A6]/20">
@@ -548,10 +578,10 @@ export default function HomeClient() {
             
             <div className="grid grid-cols-2 md:grid-cols-4 gap-10 relative z-10">
               {[
-                { step: "1", title: "Apply Test", desc: "Take our advanced psychometric test to analyze your profile.", icon: <FileText className="w-8 h-8 text-[#0EB4A6]" /> },
-                { step: "2", title: "Get Report", desc: "Receive detailed insights into your strengths and career fit.", icon: <ClipboardList className="w-8 h-8 text-[#0EB4A6]" /> },
-                { step: "3", title: "Counseling", desc: "Discuss your report with our expert admission counselors.", icon: <MessageCircle className="w-8 h-8 text-[#0EB4A6]" /> },
-                { step: "4", title: "Choose College", desc: "Select the best-fit college with absolute confidence and clarity.", icon: <BadgeCheck className="w-8 h-8 text-[#0EB4A6]" /> },
+                { step: "1", title: "Take the Ability Test", desc: "Take Guidevera's scientifically designed psychometric test to analyze your skills, interests, and personality traits.", icon: <FileText className="w-8 h-8 text-[#0EB4A6]" /> },
+                { step: "2", title: "Get Your Career Report", desc: "Receive a detailed, personalized report highlighting your strongest career options and best-fit college streams.", icon: <ClipboardList className="w-8 h-8 text-[#0EB4A6]" /> },
+                { step: "3", title: "Talk to a Counselor", desc: "Book a one-on-one session with our expert admission counselors who understand colleges across India deeply.", icon: <MessageCircle className="w-8 h-8 text-[#0EB4A6]" /> },
+                { step: "4", title: "Choose Your College", desc: "Select the right college and course with full confidence — backed by data, expert advice, and real student outcomes.", icon: <BadgeCheck className="w-8 h-8 text-[#0EB4A6]" /> },
               ].map((item, index) => (
                 <motion.div 
                   key={index}
@@ -663,6 +693,37 @@ export default function HomeClient() {
         </div>
       </section>
 
+      {/* FAQ Section */}
+      <section className="py-24 bg-[#09090b]">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-bold mb-4 tracking-tight">Frequently Asked Questions</h2>
+            <p className="text-white/60 text-lg">
+              Everything you need to know about Guidevera.
+            </p>
+          </div>
+          
+          <div className="space-y-4">
+            <FAQItem 
+              question="What is Guidevera?" 
+              answer="Guidevera is India's #1 student-centric career guidance platform that helps students find the right college and career path through psychometric tests, data-driven insights, and expert one-on-one counseling." 
+            />
+            <FAQItem 
+              question="How does the ability test work?" 
+              answer="You take a carefully crafted psychometric test that analyzes your strengths, interests, and personality. You then receive a detailed report and can discuss it one-on-one with an expert counselor." 
+            />
+            <FAQItem 
+              question="Which colleges are listed on Guidevera?" 
+              answer="We list top-rated colleges across Uttarakhand and India — including Graphic Era (NIRF Top 50), Uttranchal University (NAAC A+), DBS Global, Tulas Institute, and more." 
+            />
+            <FAQItem 
+              question="Is Guidevera free to use?" 
+              answer="College browsing and platform exploration are completely free. Premium one-on-one counseling sessions are also available — visit our Counseling page for details." 
+            />
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="py-32 relative overflow-hidden bg-[#09090b]">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#0EB4A6]/10 z-0" />
@@ -675,7 +736,7 @@ export default function HomeClient() {
             viewport={{ once: true }}
             className="text-4xl md:text-6xl font-bold mb-6 tracking-tight"
           >
-            Ready to Find Your Destination?
+            Start Your Career Journey Today — Free Ability Test & Expert Counseling
           </motion.h2>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
@@ -684,7 +745,7 @@ export default function HomeClient() {
             transition={{ delay: 0.1 }}
             className="text-xl text-white/60 mb-12 max-w-2xl mx-auto"
           >
-            Start shaping your future in advance with the standard college search and discovery framework created specifically for dedicated students.
+            Join thousands of students across India who found their perfect college and career path with Guidevera. Take the free ability test now or book a counseling session today.
           </motion.p>
           
           <motion.div 

@@ -17,7 +17,7 @@ export default function Footer() {
               <Image src="/guidevera-logo.png" alt="Guidevera Logo" width={160} height={160} className="object-contain" style={{ width: "auto", height: "auto" }} />
             </div>
             <p className="text-white/60 text-sm leading-relaxed mb-8 max-w-[300px]">
-              Empowering students to find the best colleges and careers in India through data-driven insights.
+              Guidevera is India's #1 student-centric career guidance platform — helping students find the best colleges in Uttarakhand & across India through psychometric tests, expert counseling, and data-driven insights.
             </p>
             <div className="flex flex-wrap items-center gap-2 mt-4">
               <a href="https://www.linkedin.com/company/guidevera" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:border-[#0A66C2] transition-colors group">
