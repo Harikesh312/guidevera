@@ -27,6 +27,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <meta name="google-site-verification" content="43d51a787e50b79d" />
         <link rel="icon" href="/guidevera-header.png" />
         <script
           type="application/ld+json"
@@ -132,13 +133,6 @@ export default function RootLayout({ children }) {
             })
           }}
         />
-      </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        suppressHydrationWarning
-      >
-        {children}
-        <LeadWidget />
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-MYEVQF4QFX"
           strategy="afterInteractive"
@@ -151,6 +145,13 @@ export default function RootLayout({ children }) {
             gtag('config', 'G-MYEVQF4QFX');
           `}
         </Script>
+      </head>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        suppressHydrationWarning
+      >
+        {children}
+        <LeadWidget />
       </body>
     </html>
   );
