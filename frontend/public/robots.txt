@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+# Block private/user-specific pages from indexing
+Disallow: /ability-test/questions
+Disallow: /ability-test/roadmap
+Disallow: /admin
+Disallow: /counselor
+Disallow: /api/
+
+Sitemap: https://guidevera.com/sitemap.xml

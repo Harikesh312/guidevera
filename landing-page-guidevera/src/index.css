@@ -1,0 +1,7 @@
+@import "tailwindcss";
+
+@layer base {
+  html {
+    font-size: 14px; /* Makes all rem-based sizes smaller */
+  }
+}
