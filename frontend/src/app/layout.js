@@ -45,7 +45,7 @@ export default function RootLayout({ children }) {
                 "streetAddress": "Dushera Ground premnagar",
                 "addressLocality": "Dehradun",
                 "addressRegion": "Uttarakhand",
-                "postalCode": "248001",
+                "postalCode": "248007",
                 "addressCountry": "IN"
               },
               "contactPoint": {
@@ -91,7 +91,7 @@ export default function RootLayout({ children }) {
                 "streetAddress": "Dushera Ground premnagar",
                 "addressLocality": "Dehradun",
                 "addressRegion": "Uttarakhand",
-                "postalCode": "248001",
+                "postalCode": "248007",
                 "addressCountry": "IN"
               },
               "hasOfferCatalog": {

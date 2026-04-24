@@ -512,6 +512,86 @@ export default function GuideveraLandingPage() {
         </div>
       </section>
 
+      {/* SECTION 7: COLLEGES SECTION */}
+      <section id="colleges" className="py-24 px-4 bg-[#121214] border-y border-white/5">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">10+ Top Colleges — All in One Place</h2>
+            <p className="text-xl text-white/60">Browse Dehradun's best colleges with verified fees, ratings & placements</p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+            {colleges.slice(0, showAllColleges ? colleges.length : 6).map((college) => (
+              <div key={college.id} className="bg-[#1A1A1D] border border-white/10 rounded-2xl overflow-hidden hover:border-[#0EB4A6]/50 transition-all hover:-translate-y-1 hover:shadow-[0_10px_40px_-5px_rgba(14,180,166,0.2)] duration-300 flex flex-col h-full group">
+                <div className="h-56 relative overflow-hidden">
+                  <img src={college.image} alt={college.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1D] via-black/20 to-transparent"></div>
+                  <div className="absolute top-4 left-4">
+                    <span className="bg-[#0EB4A6] text-black text-xs font-black px-3 py-1.5 rounded-full uppercase tracking-wider shadow-lg">
+                      {college.tag}
+                    </span>
+                  </div>
+                  <div className="absolute top-4 right-4 flex items-center text-[#fbbf24] bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-xl text-sm font-bold shadow-lg border border-white/10">
+                    <Star size={14} className="fill-[#fbbf24] mr-1.5" />
+                    {college.rating}
+                  </div>
+                </div>
+                <div className="p-6 flex-grow relative -mt-4 bg-[#1A1A1D] rounded-t-3xl border-t border-white/5">
+                  <h3 className="text-2xl font-bold mb-1">{college.name}</h3>
+                  <p className="text-[#0EB4A6] font-medium mb-4">{college.fee}</p>
+                  
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {college.courses.slice(0, 3).map((course, idx) => (
+                      <span key={idx} className="bg-white/5 border border-white/10 text-white/70 text-xs px-2 py-1 rounded">
+                        {course}
+                      </span>
+                    ))}
+                    {college.courses.length > 3 && (
+                      <span className="bg-white/5 border border-white/10 text-white/70 text-xs px-2 py-1 rounded">
+                        +{college.courses.length - 3} more
+                      </span>
+                    )}
+                  </div>
+                </div>
+                <div className="p-6 pt-0 mt-auto">
+                  <button 
+                    onClick={() => {
+                      setApplyModal(college);
+                      setApplyForm({ name:'', phone:'', course: college.courses[0] || 'Other (Please Specify)', email:'', state:'' });
+                      setApplyStatus('idle');
+                    }}
+                    className="w-full bg-[#0EB4A6] hover:bg-[#0c9c90] text-black font-bold py-3 rounded-xl transition-colors shadow-[0_4px_14px_rgba(14,180,166,0.2)] hover:shadow-[0_4px_20px_rgba(14,180,166,0.4)]"
+                  >
+                    Apply Now
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {!showAllColleges && colleges.length > 6 && (
+            <div className="text-center mt-[-2rem] mb-16 relative z-10">
+              <button 
+                onClick={() => setShowAllColleges(true)} 
+                className="bg-[#1A1A1D] border border-white/20 hover:border-[#0EB4A6] hover:bg-white/5 text-white font-bold py-3.5 px-8 rounded-full transition-all duration-300 shadow-lg hover:shadow-[0_0_20px_rgba(14,180,166,0.2)]"
+              >
+                View More Colleges
+              </button>
+            </div>
+          )}
+
+          <div className="max-w-4xl mx-auto bg-gradient-to-r from-[#0EB4A6]/20 to-transparent border border-[#0EB4A6]/30 rounded-2xl p-8 md:p-12 text-center md:text-left flex flex-col md:flex-row items-center justify-between gap-6">
+            <div>
+              <h3 className="text-2xl md:text-3xl font-bold mb-2">🎉 FREE Expert Counseling — Limited Slots</h3>
+              <p className="text-white/70 text-lg">Don't pay ₹1,499. Get your counseling session absolutely free. Only for the first 100 students.</p>
+            </div>
+            <button onClick={scrollToLeadForm} className="bg-[#0EB4A6] hover:bg-[#0c9c90] text-black shrink-0 font-bold py-4 px-8 rounded-full text-lg shadow-[0_0_20px_rgba(14,180,166,0.3)] transition-transform hover:scale-105">
+              Book Free Session
+            </button>
+          </div>
+        </div>
+      </section>
+
       {/* SECTION 5: SOLUTION SECTION */}
       <section id="about" className="py-24 px-4 bg-[#121214] border-y border-white/5 relative">
         <div className="max-w-7xl mx-auto">
@@ -615,86 +695,6 @@ export default function GuideveraLandingPage() {
             </div>
             <h3 className="text-xl font-bold mb-3">Placement Insights</h3>
             <p className="text-white/50 leading-relaxed">Know the absolute truth about average salary and highest package before you pay fees.</p>
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 7: COLLEGES SECTION */}
-      <section id="colleges" className="py-24 px-4 bg-[#121214] border-y border-white/5">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold mb-6">10+ Top Colleges — All in One Place</h2>
-            <p className="text-xl text-white/60">Browse Dehradun's best colleges with verified fees, ratings & placements</p>
-          </div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-            {colleges.slice(0, showAllColleges ? colleges.length : 6).map((college) => (
-              <div key={college.id} className="bg-[#1A1A1D] border border-white/10 rounded-2xl overflow-hidden hover:border-[#0EB4A6]/50 transition-all hover:-translate-y-1 hover:shadow-[0_10px_40px_-5px_rgba(14,180,166,0.2)] duration-300 flex flex-col h-full group">
-                <div className="h-56 relative overflow-hidden">
-                  <img src={college.image} alt={college.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1D] via-black/20 to-transparent"></div>
-                  <div className="absolute top-4 left-4">
-                    <span className="bg-[#0EB4A6] text-black text-xs font-black px-3 py-1.5 rounded-full uppercase tracking-wider shadow-lg">
-                      {college.tag}
-                    </span>
-                  </div>
-                  <div className="absolute top-4 right-4 flex items-center text-[#fbbf24] bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-xl text-sm font-bold shadow-lg border border-white/10">
-                    <Star size={14} className="fill-[#fbbf24] mr-1.5" />
-                    {college.rating}
-                  </div>
-                </div>
-                <div className="p-6 flex-grow relative -mt-4 bg-[#1A1A1D] rounded-t-3xl border-t border-white/5">
-                  <h3 className="text-2xl font-bold mb-1">{college.name}</h3>
-                  <p className="text-[#0EB4A6] font-medium mb-4">{college.fee}</p>
-                  
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {college.courses.slice(0, 3).map((course, idx) => (
-                      <span key={idx} className="bg-white/5 border border-white/10 text-white/70 text-xs px-2 py-1 rounded">
-                        {course}
-                      </span>
-                    ))}
-                    {college.courses.length > 3 && (
-                      <span className="bg-white/5 border border-white/10 text-white/70 text-xs px-2 py-1 rounded">
-                        +{college.courses.length - 3} more
-                      </span>
-                    )}
-                  </div>
-                </div>
-                <div className="p-6 pt-0 mt-auto">
-                  <button 
-                    onClick={() => {
-                      setApplyModal(college);
-                      setApplyForm({ name:'', phone:'', course: college.courses[0] || 'Other (Please Specify)', email:'', state:'' });
-                      setApplyStatus('idle');
-                    }}
-                    className="w-full bg-[#0EB4A6] hover:bg-[#0c9c90] text-black font-bold py-3 rounded-xl transition-colors shadow-[0_4px_14px_rgba(14,180,166,0.2)] hover:shadow-[0_4px_20px_rgba(14,180,166,0.4)]"
-                  >
-                    Apply Now
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {!showAllColleges && colleges.length > 6 && (
-            <div className="text-center mt-[-2rem] mb-16 relative z-10">
-              <button 
-                onClick={() => setShowAllColleges(true)} 
-                className="bg-[#1A1A1D] border border-white/20 hover:border-[#0EB4A6] hover:bg-white/5 text-white font-bold py-3.5 px-8 rounded-full transition-all duration-300 shadow-lg hover:shadow-[0_0_20px_rgba(14,180,166,0.2)]"
-              >
-                View More Colleges
-              </button>
-            </div>
-          )}
-
-          <div className="max-w-4xl mx-auto bg-gradient-to-r from-[#0EB4A6]/20 to-transparent border border-[#0EB4A6]/30 rounded-2xl p-8 md:p-12 text-center md:text-left flex flex-col md:flex-row items-center justify-between gap-6">
-            <div>
-              <h3 className="text-2xl md:text-3xl font-bold mb-2">🎉 FREE Expert Counseling — Limited Slots</h3>
-              <p className="text-white/70 text-lg">Don't pay ₹1,499. Get your counseling session absolutely free. Only for the first 100 students.</p>
-            </div>
-            <button onClick={scrollToLeadForm} className="bg-[#0EB4A6] hover:bg-[#0c9c90] text-black shrink-0 font-bold py-4 px-8 rounded-full text-lg shadow-[0_0_20px_rgba(14,180,166,0.3)] transition-transform hover:scale-105">
-              Book Free Session
-            </button>
           </div>
         </div>
       </section>
