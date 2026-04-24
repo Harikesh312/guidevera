@@ -40,6 +40,14 @@ export default function RootLayout({ children }) {
               "logo": "https://guidevera.com/guidevera-logo.png",
               "description": "India's #1 student-centric career guidance platform helping students find the right college and career path through psychometric tests and expert counseling.",
               "foundingCountry": "IN",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Dushera Ground premnagar",
+                "addressLocality": "Dehradun",
+                "addressRegion": "Uttarakhand",
+                "postalCode": "248001",
+                "addressCountry": "IN"
+              },
               "contactPoint": {
                 "@type": "ContactPoint",
                 "contactType": "Customer Support",
@@ -80,8 +88,10 @@ export default function RootLayout({ children }) {
               "description": "Guidevera helps Indian students choose the right college and career through psychometric assessments and expert counseling.",
               "address": {
                 "@type": "PostalAddress",
+                "streetAddress": "Dushera Ground premnagar",
                 "addressLocality": "Dehradun",
                 "addressRegion": "Uttarakhand",
+                "postalCode": "248001",
                 "addressCountry": "IN"
               },
               "hasOfferCatalog": {
