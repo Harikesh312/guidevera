@@ -2,6 +2,13 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Phone, CheckCircle, X, Star, Menu, ArrowRight, Brain, GraduationCap, Shield, BadgeCheck, BookOpen, Calculator, Calendar, Target, MessageCircle, ChevronDown } from 'lucide-react';
 import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin, FaYoutube } from 'react-icons/fa';
 import { FaWhatsapp, FaThreads } from 'react-icons/fa6';
+import emailjs from '@emailjs/browser';
+import CaptchaField from './components/CaptchaField';
+
+// EMAILJS SETUP - REPLACE THESE WITH YOUR ACTUAL IDS FROM EMAILJS.COM
+const EMAILJS_SERVICE_ID = "YOUR_SERVICE_ID";
+const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID";
+const EMAILJS_PUBLIC_KEY = "YOUR_PUBLIC_KEY";
 const API_URL = (() => {
   try {
     return process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
@@ -51,43 +58,72 @@ export default function GuideveraLandingPage() {
     return () => clearTimeout(timer);
   }, []);
 
-  const [heroForm, setHeroForm] = useState({ name: '', phone: '', email: '', message: '' });
+  const [heroForm, setHeroForm] = useState({ name: '', phone: '', email: '', qualification: '', stream: '', message: '' });
   const [heroStatus, setHeroStatus] = useState('idle');
 
   const [mainForm, setMainForm] = useState({ name: '', phone: '', email: '', qualification: '', stream: '', message: '' });
   const [mainStatus, setMainStatus] = useState('idle');
 
   const [applyModal, setApplyModal] = useState(null);
-  const [applyForm, setApplyForm] = useState({ name: '', phone: '', course: '', email: '', state: '' });
+  const [applyForm, setApplyForm] = useState({ name: '', phone: '', email: '', qualification: '', stream: '', message: '', course: '' });
   const [applyStatus, setApplyStatus] = useState('idle');
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  
+  // CAPTCHA STATES
+  const [heroCaptchaToken, setHeroCaptchaToken] = useState(null);
+  const [mainCaptchaToken, setMainCaptchaToken] = useState(null);
+  const [applyCaptchaToken, setApplyCaptchaToken] = useState(null);
+  
+  const [captchaError, setCaptchaError] = useState('');
 
-  const scrollToLeadForm = () => {
-    document.getElementById('lead-form')?.scrollIntoView({ behavior: 'smooth' });
+  // CAPTCHA REFS for resetting
+  const heroCaptchaRef = useRef(null);
+  const mainCaptchaRef = useRef(null);
+  const applyCaptchaRef = useRef(null);
+
+  const scrollToSection = (id) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
     setMobileMenuOpen(false);
   };
 
-
+  const scrollToLeadForm = () => scrollToSection('lead-form');
 
   const submitHeroForm = async (e) => {
     e.preventDefault();
+    if (!heroCaptchaToken) {
+      setCaptchaError('Please verify you are not a robot');
+      return;
+    }
+    setCaptchaError('');
     setHeroStatus('loading');
     try {
-      const res = await fetch(`${API_URL}/api/leads`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(heroForm)
-      });
-      if (res.ok) setHeroStatus('success');
-      else setHeroStatus('error');
-    } catch {
+      const res = await emailjs.send(
+        EMAILJS_SERVICE_ID.trim(),
+        EMAILJS_TEMPLATE_ID.trim(),
+        heroForm,
+        EMAILJS_PUBLIC_KEY.trim()
+      );
+      if (res.status === 200) {
+        setHeroStatus('success');
+        setHeroCaptchaToken(null);
+        heroCaptchaRef.current?.reset();
+      } else {
+        setHeroStatus('error');
+      }
+    } catch (err) {
+      console.error('EmailJS Error (Hero Form):', err.text || err);
       setHeroStatus('error');
     }
   };
 
   const submitMainForm = async (e) => {
     e.preventDefault();
+    if (!mainCaptchaToken) {
+      setCaptchaError('Please verify you are not a robot');
+      return;
+    }
+    setCaptchaError('');
     setMainStatus('loading');
     try {
       const payload = {
@@ -96,34 +132,53 @@ export default function GuideveraLandingPage() {
         email: mainForm.email,
         message: `Qualification: ${mainForm.qualification}, Stream: ${mainForm.stream}, Message: ${mainForm.message}`
       };
-      const res = await fetch(`${API_URL}/api/leads`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-      if (res.ok) setMainStatus('success');
-      else setMainStatus('error');
-    } catch {
+      const res = await emailjs.send(
+        EMAILJS_SERVICE_ID.trim(),
+        EMAILJS_TEMPLATE_ID.trim(),
+        payload,
+        EMAILJS_PUBLIC_KEY.trim()
+      );
+      if (res.status === 200) {
+        setMainStatus('success');
+        setMainCaptchaToken(null);
+        mainCaptchaRef.current?.reset();
+      } else {
+        setMainStatus('error');
+      }
+    } catch (err) {
+      console.error('EmailJS Error (Main Form):', err.text || err);
       setMainStatus('error');
     }
   };
 
   const submitApplyForm = async (e) => {
     e.preventDefault();
+    if (!applyCaptchaToken) {
+      setCaptchaError('Please verify you are not a robot');
+      return;
+    }
+    setCaptchaError('');
     setApplyStatus('loading');
     try {
       const payload = {
         ...applyForm,
         collegeName: applyModal.name
       };
-      const res = await fetch(`${API_URL}/api/college-apply`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-      if (res.ok) setApplyStatus('success');
-      else setApplyStatus('error');
-    } catch {
+      const res = await emailjs.send(
+        EMAILJS_SERVICE_ID.trim(),
+        EMAILJS_TEMPLATE_ID.trim(),
+        payload,
+        EMAILJS_PUBLIC_KEY.trim()
+      );
+      if (res.status === 200) {
+        setApplyStatus('success');
+        setApplyCaptchaToken(null);
+        applyCaptchaRef.current?.reset();
+      } else {
+        setApplyStatus('error');
+      }
+    } catch (err) {
+      console.error('EmailJS Error (Apply Form):', err.text || err);
       setApplyStatus('error');
     }
   };
@@ -133,7 +188,7 @@ export default function GuideveraLandingPage() {
       {/* HERO MODAL (Auto pop-up) */}
       {showHeroModal && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
-          <div className="bg-[#121214] border border-white/10 rounded-3xl p-6 md:p-8 shadow-2xl relative w-full max-w-md animate-[pulse-ring_0.3s_ease-out]">
+          <div className="bg-[#121214] border border-white/10 rounded-3xl p-6 md:p-8 shadow-2xl relative w-full max-w-md animate-[pulse-ring_0.3s_ease-out] overflow-hidden">
             <button onClick={() => setShowHeroModal(false)} className="absolute top-5 right-5 text-white/50 hover:text-white transition-colors z-10 bg-white/5 rounded-full p-1.5 hover:bg-white/10">
               <X size={20} />
             </button>
@@ -142,7 +197,7 @@ export default function GuideveraLandingPage() {
               <p className="text-white/60">Fill in details — we'll call you within 24 hours</p>
             </div>
 
-            {heroStatus === 'success' ? (
+             {heroStatus === 'success' ? (
               <div className="bg-green-400/10 border border-green-400/20 text-green-400 rounded-xl p-8 text-center space-y-4">
                 <CheckCircle size={48} className="mx-auto" />
                 <h4 className="text-xl font-bold">We'll call you within 24 hours! 🎉</h4>
@@ -150,28 +205,49 @@ export default function GuideveraLandingPage() {
                 <button onClick={() => setShowHeroModal(false)} className="mt-4 px-6 py-2 border border-green-400/30 rounded-full hover:bg-green-400/20 transition-colors">Close</button>
               </div>
             ) : (
-              <form onSubmit={submitHeroForm} className="space-y-5 relative z-20">
-                <div>
-                  <input type="text" required placeholder="Full Name" className="w-full bg-[#1A1A1D] border border-white/10 rounded-xl px-4 py-3.5 text-base text-white focus:outline-none focus:border-[#0EB4A6] transition-colors" value={heroForm.name} onChange={e => setHeroForm({...heroForm, name: e.target.value})} />
+              <form onSubmit={submitHeroForm} className="space-y-4 relative z-20">
+                <div className="grid grid-cols-2 gap-4">
+                  <input type="text" required placeholder="Full Name" className="w-full bg-[#1A1A1D] border border-white/10 rounded-xl px-4 py-3 text-base text-white focus:outline-none focus:border-[#0EB4A6]" value={heroForm.name} onChange={e => setHeroForm({...heroForm, name: e.target.value})} />
+                  <input type="tel" required placeholder="Phone" className="w-full bg-[#1A1A1D] border border-white/10 rounded-xl px-4 py-3 text-base text-white focus:outline-none focus:border-[#0EB4A6]" value={heroForm.phone} onChange={e => setHeroForm({...heroForm, phone: e.target.value})} />
                 </div>
-                <div>
-                  <input type="tel" required placeholder="Phone Number" className="w-full bg-[#1A1A1D] border border-white/10 rounded-xl px-4 py-3.5 text-base text-white focus:outline-none focus:border-[#0EB4A6] transition-colors" value={heroForm.phone} onChange={e => setHeroForm({...heroForm, phone: e.target.value})} />
+                <input type="email" placeholder="Email Address" className="w-full bg-[#1A1A1D] border border-white/10 rounded-xl px-4 py-3 text-base text-white focus:outline-none focus:border-[#0EB4A6]" value={heroForm.email} onChange={e => setHeroForm({...heroForm, email: e.target.value})} />
+                
+                <div className="grid grid-cols-2 gap-4">
+                  <select className="w-full bg-[#1A1A1D] border border-white/10 rounded-xl px-4 py-3 text-base text-white focus:outline-none focus:border-[#0EB4A6] appearance-none" value={heroForm.qualification} onChange={e => setHeroForm({...heroForm, qualification: e.target.value})}>
+                    <option value="">Qualification</option>
+                    <option value="Class 10">Class 10</option>
+                    <option value="Class 12">Class 12</option>
+                    <option value="Undergraduate">Undergraduate</option>
+                    <option value="Graduate">Graduate</option>
+                  </select>
+                  <select className="w-full bg-[#1A1A1D] border border-white/10 rounded-xl px-4 py-3 text-base text-white focus:outline-none focus:border-[#0EB4A6] appearance-none" value={heroForm.stream} onChange={e => setHeroForm({...heroForm, stream: e.target.value})}>
+                    <option value="">Stream</option>
+                    <option value="Science PCM">PCM</option>
+                    <option value="Science PCB">PCB</option>
+                    <option value="Commerce">Commerce</option>
+                    <option value="Arts">Arts</option>
+                    <option value="Engineering">B.Tech</option>
+                    <option value="Management">MBA/BBA</option>
+                  </select>
                 </div>
-                <div>
-                  <input type="email" placeholder="Email Address (Optional)" className="w-full bg-[#1A1A1D] border border-white/10 rounded-xl px-4 py-3.5 text-base text-white focus:outline-none focus:border-[#0EB4A6] transition-colors" value={heroForm.email} onChange={e => setHeroForm({...heroForm, email: e.target.value})} />
-                </div>
-                <div>
-                  <textarea placeholder="Message / Query" rows={2} className="w-full bg-[#1A1A1D] border border-white/10 rounded-xl px-4 py-3.5 text-base text-white focus:outline-none focus:border-[#0EB4A6] transition-colors resize-none" value={heroForm.message} onChange={e => setHeroForm({...heroForm, message: e.target.value})}></textarea>
-                </div>
-                {heroStatus === 'error' && <p className="text-red-400 text-sm">Oops! Something went wrong. Please try again.</p>}
-                <button type="submit" disabled={heroStatus === 'loading'} className="w-full bg-[#0EB4A6] hover:bg-[#0c9c90] text-black font-bold py-4 rounded-xl text-lg transition-transform active:scale-95 flex items-center justify-center disabled:opacity-70 disabled:active:scale-100 shadow-[0_0_20px_rgba(14,180,166,0.3)]">
+
+                <textarea placeholder="Any specific questions?" rows={2} className="w-full bg-[#1A1A1D] border border-white/10 rounded-xl px-4 py-3 text-base text-white focus:outline-none focus:border-[#0EB4A6] resize-none" value={heroForm.message} onChange={e => setHeroForm({...heroForm, message: e.target.value})}></textarea>
+                
+                <CaptchaField 
+                  ref={heroCaptchaRef}
+                  onVerify={setHeroCaptchaToken} 
+                  error={heroCaptchaToken ? '' : captchaError} 
+                />
+
+                {heroStatus === 'error' && <p className="text-red-400 text-sm text-center bg-red-400/5 py-2 rounded-lg">Something went wrong. Please try again.</p>}
+                
+                <button type="submit" disabled={heroStatus === 'loading'} className="w-full bg-[#0EB4A6] hover:bg-[#0c9c90] text-black font-bold py-4 rounded-xl text-lg transition-transform active:scale-95 flex items-center justify-center disabled:opacity-70 shadow-[0_0_20px_rgba(14,180,166,0.3)]">
                   {heroStatus === 'loading' ? (
                     <div className="w-6 h-6 border-2 border-black border-t-transparent rounded-full animate-spin"></div>
                   ) : (
                     <>Get Free Callback <ArrowRight className="ml-2" size={20} /></>
                   )}
                 </button>
-                <p className="text-center text-xs text-white/40 mt-3">No spam. No charges. 100% Free.</p>
               </form>
             )}
             <div className="absolute -inset-1 bg-gradient-to-r from-teal-500/10 to-purple-500/10 rounded-[2rem] blur-xl -z-10"></div>
@@ -208,14 +284,14 @@ export default function GuideveraLandingPage() {
             
             {/* Desktop Nav */}
             <div className="hidden md:flex items-center space-x-8">
-              <a href="#" className="text-white/80 hover:text-white transition-colors duration-200">Home</a>
-              <a href="#colleges" className="text-white/80 hover:text-white transition-colors duration-200">Colleges</a>
-              <button onClick={scrollToLeadForm} className="text-white/80 hover:text-white transition-colors duration-200">Counseling</button>
-              <a href="#" className="text-white/80 hover:text-white transition-colors duration-200">About Us</a>
+              <button onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})} className="text-white/80 hover:text-white transition-colors duration-200">Home</button>
+              <button onClick={() => scrollToSection('colleges')} className="text-white/80 hover:text-white transition-colors duration-200">Colleges</button>
+              <button onClick={() => scrollToSection('lead-form')} className="text-white/80 hover:text-white transition-colors duration-200">Counseling</button>
+              <button onClick={() => scrollToSection('about')} className="text-white/80 hover:text-white transition-colors duration-200">About Us</button>
             </div>
 
             <div className="hidden md:flex items-center space-x-4">
-              <button onClick={scrollToLeadForm} className="bg-[#0EB4A6] hover:bg-[#0c9c90] text-black font-bold py-2.5 px-6 rounded-full transition-transform hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(14,180,166,0.3)]">
+              <button onClick={() => scrollToSection('colleges')} className="bg-[#0EB4A6] hover:bg-[#0c9c90] text-black font-bold py-2.5 px-6 rounded-full transition-transform hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(14,180,166,0.3)]">
                 Apply Now
               </button>
             </div>
@@ -233,10 +309,10 @@ export default function GuideveraLandingPage() {
         {mobileMenuOpen && (
           <div className="md:hidden border-t border-white/10 bg-[#121214]">
             <div className="px-4 py-4 space-y-4">
-              <a href="#" className="block text-white/80 hover:text-white py-2">Home</a>
-              <a href="#colleges" onClick={() => setMobileMenuOpen(false)} className="block text-white/80 hover:text-white py-2">Colleges</a>
-              <button onClick={scrollToLeadForm} className="block w-full text-left text-white/80 hover:text-white py-2">Counseling</button>
-              <a href="#" className="block text-white/80 hover:text-white py-2">About Us</a>
+              <button onClick={() => {window.scrollTo({top: 0, behavior: 'smooth'}); setMobileMenuOpen(false);}} className="block w-full text-left text-white/80 hover:text-white py-2">Home</button>
+              <button onClick={() => scrollToSection('colleges')} className="block w-full text-left text-white/80 hover:text-white py-2">Colleges</button>
+              <button onClick={() => scrollToSection('lead-form')} className="block w-full text-left text-white/80 hover:text-white py-2">Counseling</button>
+              <button onClick={() => scrollToSection('about')} className="block w-full text-left text-white/80 hover:text-white py-2">About Us</button>
               <div className="pt-4 border-t border-white/5 space-y-3">
                 <button onClick={scrollToLeadForm} className="block w-full bg-[#0EB4A6] text-black font-bold rounded-full py-3">
                   Apply Now
@@ -252,46 +328,131 @@ export default function GuideveraLandingPage() {
         {/* Glow Blob */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#0EB4A6]/10 blur-[150px] rounded-full pointer-events-none"></div>
         
-        <div className="max-w-4xl mx-auto text-center relative z-10 space-y-8">
-          <div>
-            <div className="inline-flex items-center space-x-2 bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-sm text-teal-400 font-medium mb-8">
-              <span>🎓</span>
-              <span>India's #1 Career Guidance Platform</span>
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center relative z-10">
+          <div className="space-y-8 text-left">
+            <div>
+              <div className="inline-flex items-center space-x-2 bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-sm text-teal-400 font-medium mb-8">
+                <span>🎓</span>
+                <span>India's #1 Career Guidance Platform</span>
+              </div>
+              
+              <h1 className="text-4xl md:text-5xl lg:text-7xl font-black leading-tight tracking-tight mb-6">
+                Get Admitted to Your Dream College — <span className="text-[#0EB4A6]">With Expert Guidance</span>
+              </h1>
+              
+              <p className="text-lg md:text-xl text-white/60 leading-relaxed max-w-2xl">
+                Confused about which college or course to choose? Our experts guide 500+ students every year to find the perfect fit. Free counseling. Real results.
+              </p>
             </div>
-            
-            <h1 className="text-4xl md:text-5xl lg:text-7xl font-black leading-tight tracking-tight mb-6">
-              Get Admitted to Your Dream College — <span className="text-[#0EB4A6]">With Expert Guidance</span>
-            </h1>
-            
-            <p className="text-lg md:text-xl text-white/60 leading-relaxed max-w-3xl mx-auto">
-              Confused about which college or course to choose? Our experts guide 500+ students every year to find the perfect fit. Free counseling. Real results.
-            </p>
-          </div>
-            
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-white/80 pb-4">
-            <div className="flex items-center space-x-2">
-              <CheckCircle className="text-[#0EB4A6] shrink-0" size={20} />
-              <span className="text-base">Free Career Counseling</span>
+              
+            <div className="flex flex-col space-y-4 text-white/80 pb-4">
+              <div className="flex items-center space-x-2">
+                <CheckCircle className="text-[#0EB4A6] shrink-0" size={20} />
+                <span className="text-base">Free Career Counseling</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <CheckCircle className="text-[#0EB4A6] shrink-0" size={20} />
+                <span className="text-base">Personalized Profile</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <CheckCircle className="text-[#0EB4A6] shrink-0" size={20} />
+                <span className="text-base">10+ Top Colleges</span>
+              </div>
             </div>
-            <div className="hidden sm:block text-white/20">•</div>
-            <div className="flex items-center space-x-2">
-              <CheckCircle className="text-[#0EB4A6] shrink-0" size={20} />
-              <span className="text-base">Personalized Profile</span>
-            </div>
-            <div className="hidden sm:block text-white/20">•</div>
-            <div className="flex items-center space-x-2">
-              <CheckCircle className="text-[#0EB4A6] shrink-0" size={20} />
-              <span className="text-base">10+ Top Colleges</span>
+
+            <p className="text-sm text-white/40 font-medium">500+ students guided · 90% satisfaction · Free for limited time</p>
+
+            {/* Mobile-only CTA */}
+            <div className="lg:hidden pt-4">
+              <button onClick={() => setShowHeroModal(true)} className="w-full bg-[#0EB4A6] hover:bg-[#0c9c90] text-black font-bold py-4 rounded-xl text-lg flex items-center justify-center shadow-[0_0_20px_rgba(14,180,166,0.3)]">
+                Apply for Free Counseling <ArrowRight className="ml-2" size={20} />
+              </button>
             </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center">
-            <button onClick={() => setShowHeroModal(true)} className="bg-[#0EB4A6] hover:bg-[#0c9c90] text-black font-bold py-4 px-10 rounded-full text-lg transition-transform hover:scale-105 active:scale-95 shadow-[0_0_30px_rgba(14,180,166,0.4)] flex items-center justify-center">
-              Apply Now <ArrowRight className="ml-2" size={20} />
-            </button>
+          {/* RIGHT SIDE FORM - Hidden on mobile, visible on lg screens */}
+          <div className="hidden lg:block bg-[#1A1A1D] border border-white/10 rounded-3xl p-6 md:p-10 shadow-2xl relative">
+            <div className="text-center mb-8">
+              <h3 className="text-2xl md:text-3xl font-bold mb-2">Get Free Counseling</h3>
+              <p className="text-white/60">Fill in details — we'll call you within 24 hours</p>
+            </div>
+
+            {mainStatus === 'success' ? (
+              <div className="bg-green-400/10 border border-green-400/20 text-green-400 rounded-2xl p-8 text-center space-y-4">
+                <CheckCircle size={48} className="mx-auto" />
+                <h3 className="text-2xl font-bold">Submitted Successfully! 🎉</h3>
+                <p className="text-green-400/80">Our expert counselor will reach out to you within 24 hours.</p>
+                <button onClick={() => setMainStatus('idle')} className="mt-4 px-6 py-2 border border-green-400/30 rounded-full hover:bg-green-400/20 transition-colors">Submit another</button>
+              </div>
+            ) : (
+              <form onSubmit={submitMainForm} className="space-y-5">
+                <div className="grid md:grid-cols-2 gap-5">
+                  <div className="space-y-2">
+                    <label className="text-xs font-medium text-white/70 px-1 uppercase tracking-wider">Full Name *</label>
+                    <input type="text" required placeholder="Enter full name" className="w-full bg-[#121214] border border-white/10 rounded-xl px-4 py-3.5 text-base text-white focus:outline-none focus:border-[#0EB4A6] transition-all" value={mainForm.name} onChange={e => setMainForm({...mainForm, name: e.target.value})} />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-xs font-medium text-white/70 px-1 uppercase tracking-wider">Phone Number *</label>
+                    <input type="tel" required placeholder="10-digit mobile" className="w-full bg-[#121214] border border-white/10 rounded-xl px-4 py-3.5 text-base text-white focus:outline-none focus:border-[#0EB4A6] transition-all" value={mainForm.phone} onChange={e => setMainForm({...mainForm, phone: e.target.value})} />
+                  </div>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-5">
+                  <div className="space-y-2">
+                    <label className="text-xs font-medium text-white/70 px-1 uppercase tracking-wider">Email Address</label>
+                    <input type="email" placeholder="example@email.com" className="w-full bg-[#121214] border border-white/10 rounded-xl px-4 py-3.5 text-base text-white focus:outline-none focus:border-[#0EB4A6] transition-all" value={mainForm.email} onChange={e => setMainForm({...mainForm, email: e.target.value})} />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-xs font-medium text-white/70 px-1 uppercase tracking-wider">Qualification</label>
+                    <select className="w-full bg-[#121214] border border-white/10 rounded-xl px-4 py-3.5 text-base text-white focus:outline-none focus:border-[#0EB4A6] transition-all appearance-none" value={mainForm.qualification} onChange={e => setMainForm({...mainForm, qualification: e.target.value})}>
+                      <option value="">Select Qualification</option>
+                      <option value="Class 10">Class 10</option>
+                      <option value="Class 12">Class 12</option>
+                      <option value="Undergraduate">Undergraduate</option>
+                      <option value="Graduate">Graduate</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-xs font-medium text-white/70 px-1 uppercase tracking-wider">Stream / Course Interest</label>
+                  <select className="w-full bg-[#121214] border border-white/10 rounded-xl px-4 py-3.5 text-base text-white focus:outline-none focus:border-[#0EB4A6] transition-all appearance-none" value={mainForm.stream} onChange={e => setMainForm({...mainForm, stream: e.target.value})}>
+                    <option value="">Select Interest Area</option>
+                    <option value="Science PCM">Science (PCM)</option>
+                    <option value="Science PCB">Science (PCB)</option>
+                    <option value="Commerce">Commerce</option>
+                    <option value="Arts">Humanities / Arts</option>
+                    <option value="Engineering">Engineering (B.Tech/BCA)</option>
+                    <option value="Medicine">Medicine / Allied Health</option>
+                    <option value="MBA">Management (BBA/MBA)</option>
+                    <option value="Law">Law (LLB/BA LLB)</option>
+                    <option value="Other">Not Sure / Other</option>
+                  </select>
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-xs font-medium text-white/70 px-1 uppercase tracking-wider">Any questions?</label>
+                  <textarea placeholder="Tell us what you need help with..." rows={2} className="w-full bg-[#121214] border border-white/10 rounded-xl px-4 py-3.5 text-base text-white focus:outline-none focus:border-[#0EB4A6] transition-all resize-none" value={mainForm.message} onChange={e => setMainForm({...mainForm, message: e.target.value})}></textarea>
+                </div>
+
+                <CaptchaField 
+                  ref={mainCaptchaRef}
+                  onVerify={setMainCaptchaToken} 
+                  error={mainCaptchaToken ? '' : captchaError} 
+                />
+
+                <button type="submit" disabled={mainStatus === 'loading'} className="w-full bg-[#0EB4A6] hover:bg-[#0c9c90] text-black font-bold py-4 rounded-xl text-lg transition-transform active:scale-95 flex items-center justify-center disabled:opacity-70 shadow-[0_0_20px_rgba(14,180,166,0.3)]">
+                  {mainStatus === 'loading' ? (
+                    <div className="w-7 h-7 border-3 border-black border-t-transparent rounded-full animate-spin"></div>
+                  ) : (
+                    <>Get Free Expert Guidance <ArrowRight className="ml-2" size={20} /></>
+                  )}
+                </button>
+              </form>
+            )}
+            <div className="absolute -inset-1 bg-gradient-to-r from-teal-500/10 to-purple-500/10 rounded-[2rem] blur-xl -z-10"></div>
           </div>
-          
-          <p className="text-sm text-white/40 font-medium">500+ students guided · 90% satisfaction · Free for limited time</p>
         </div>
       </section>
 
@@ -352,7 +513,7 @@ export default function GuideveraLandingPage() {
       </section>
 
       {/* SECTION 5: SOLUTION SECTION */}
-      <section className="py-24 px-4 bg-[#121214] border-y border-white/5 relative">
+      <section id="about" className="py-24 px-4 bg-[#121214] border-y border-white/5 relative">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold mb-6">How Guidevera Solves This</h2>
@@ -735,6 +896,12 @@ export default function GuideveraLandingPage() {
                   <textarea placeholder="Tell us what you need help with..." rows={3} className="w-full bg-[#121214] border border-white/10 rounded-xl px-4 py-4 text-base text-white focus:outline-none focus:border-[#0EB4A6] focus:ring-1 focus:ring-[#0EB4A6] transition-all resize-none" value={mainForm.message} onChange={e => setMainForm({...mainForm, message: e.target.value})}></textarea>
                 </div>
 
+                <CaptchaField 
+                  ref={mainCaptchaRef}
+                  onVerify={setMainCaptchaToken} 
+                  error={mainCaptchaToken ? '' : captchaError} 
+                />
+
                 {mainStatus === 'error' && <p className="text-red-400 text-center font-medium bg-red-400/10 py-3 rounded-lg">Failed to submit. Please check your connection and try again.</p>}
 
                 <button type="submit" disabled={mainStatus === 'loading'} className="w-full bg-[#0EB4A6] hover:bg-[#0c9c90] text-black font-bold py-5 rounded-xl text-xl transition-transform active:scale-[0.98] flex items-center justify-center disabled:opacity-70 shadow-[0_0_20px_rgba(14,180,166,0.2)]">
@@ -797,8 +964,9 @@ export default function GuideveraLandingPage() {
           <div>
             <h4 className="font-bold text-lg mb-6 text-white">Platform</h4>
             <ul className="space-y-4 text-white/60">
-              <li><a href="#colleges" className="hover:text-[#0EB4A6] transition-colors">Browse Colleges</a></li>
-              <li><button onClick={() => setShowHeroModal(true)} className="hover:text-[#0EB4A6] transition-colors">Expert Counseling</button></li>
+              <li><button onClick={() => scrollToSection('colleges')} className="hover:text-[#0EB4A6] transition-colors">Browse Colleges</button></li>
+              <li><button onClick={() => scrollToSection('lead-form')} className="hover:text-[#0EB4A6] transition-colors">Expert Counseling</button></li>
+              <li><button onClick={() => scrollToSection('about')} className="hover:text-[#0EB4A6] transition-colors">Why Us</button></li>
             </ul>
           </div>
 
@@ -866,7 +1034,7 @@ export default function GuideveraLandingPage() {
               </button>
             </div>
             
-            <div className="p-6 overflow-y-auto">
+            <div className="p-6 overflow-y-auto no-scrollbar">
               {applyStatus === 'success' ? (
                 <div className="text-center py-10 space-y-4">
                   <CheckCircle size={64} className="mx-auto text-green-400" />
@@ -878,40 +1046,74 @@ export default function GuideveraLandingPage() {
                 </div>
               ) : (
                 <form onSubmit={submitApplyForm} className="space-y-4">
-                  <div>
-                    <label className="text-sm font-medium text-white/70 px-1 mb-1 block">Full Name *</label>
-                    <input type="text" required className="w-full bg-[#1A1A1D] border border-white/10 rounded-xl px-4 py-3 text-base text-white focus:outline-none focus:border-[#0EB4A6]" value={applyForm.name} onChange={e => setApplyForm({...applyForm, name: e.target.value})} />
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="space-y-1">
+                      <label className="text-xs font-medium text-white/70 px-1 uppercase tracking-wider">Full Name *</label>
+                      <input type="text" required className="w-full bg-[#1A1A1D] border border-white/10 rounded-xl px-4 py-3 text-base text-white focus:outline-none focus:border-[#0EB4A6]" value={applyForm.name} onChange={e => setApplyForm({...applyForm, name: e.target.value})} />
+                    </div>
+                    <div className="space-y-1">
+                      <label className="text-xs font-medium text-white/70 px-1 uppercase tracking-wider">Phone Number *</label>
+                      <input type="tel" required className="w-full bg-[#1A1A1D] border border-white/10 rounded-xl px-4 py-3 text-base text-white focus:outline-none focus:border-[#0EB4A6]" value={applyForm.phone} onChange={e => setApplyForm({...applyForm, phone: e.target.value})} />
+                    </div>
                   </div>
-                  <div>
-                    <label className="text-sm font-medium text-white/70 px-1 mb-1 block">Phone Number (10 digits) *</label>
-                    <input type="tel" pattern="[0-9]{10}" required className="w-full bg-[#1A1A1D] border border-white/10 rounded-xl px-4 py-3 text-base text-white focus:outline-none focus:border-[#0EB4A6]" value={applyForm.phone} onChange={e => setApplyForm({...applyForm, phone: e.target.value})} />
-                  </div>
-                  <div>
-                    <label className="text-sm font-medium text-white/70 px-1 mb-1 block">Email Address</label>
+                  
+                  <div className="space-y-1">
+                    <label className="text-xs font-medium text-white/70 px-1 uppercase tracking-wider">Email Address</label>
                     <input type="email" className="w-full bg-[#1A1A1D] border border-white/10 rounded-xl px-4 py-3 text-base text-white focus:outline-none focus:border-[#0EB4A6]" value={applyForm.email} onChange={e => setApplyForm({...applyForm, email: e.target.value})} />
                   </div>
-                  <div>
-                    <label className="text-sm font-medium text-white/70 px-1 mb-1 block">Select Course *</label>
+
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="space-y-1">
+                      <label className="text-xs font-medium text-white/70 px-1 uppercase tracking-wider">Qualification</label>
+                      <select required className="w-full bg-[#1A1A1D] border border-white/10 rounded-xl px-4 py-3 text-base text-white focus:outline-none focus:border-[#0EB4A6] appearance-none" value={applyForm.qualification} onChange={e => setApplyForm({...applyForm, qualification: e.target.value})}>
+                        <option value="">Select</option>
+                        <option value="Class 10">Class 10</option>
+                        <option value="Class 12">Class 12</option>
+                        <option value="Undergraduate">Undergraduate</option>
+                        <option value="Graduate">Graduate</option>
+                      </select>
+                    </div>
+                    <div className="space-y-1">
+                      <label className="text-xs font-medium text-white/70 px-1 uppercase tracking-wider">Stream</label>
+                      <select required className="w-full bg-[#1A1A1D] border border-white/10 rounded-xl px-4 py-3 text-base text-white focus:outline-none focus:border-[#0EB4A6] appearance-none" value={applyForm.stream} onChange={e => setApplyForm({...applyForm, stream: e.target.value})}>
+                        <option value="">Select</option>
+                        <option value="Science PCM">PCM</option>
+                        <option value="Science PCB">PCB</option>
+                        <option value="Commerce">Commerce</option>
+                        <option value="Arts">Arts</option>
+                        <option value="Engineering">B.Tech</option>
+                        <option value="Management">MBA/BBA</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="space-y-1">
+                    <label className="text-xs font-medium text-white/70 px-1 uppercase tracking-wider">Course for {applyModal.name} *</label>
                     <select required className="w-full bg-[#1A1A1D] border border-white/10 rounded-xl px-4 py-3 text-base text-white focus:outline-none focus:border-[#0EB4A6] appearance-none" value={applyForm.course} onChange={e => setApplyForm({...applyForm, course: e.target.value})}>
+                      <option value="">Select Course</option>
                       {applyModal.courses.map(c => <option key={c} value={c}>{c}</option>)}
                     </select>
                   </div>
-                  <div>
-                    <label className="text-sm font-medium text-white/70 px-1 mb-1 block">Your State *</label>
-                    <select required className="w-full bg-[#1A1A1D] border border-white/10 rounded-xl px-4 py-3 text-base text-white focus:outline-none focus:border-[#0EB4A6] appearance-none" value={applyForm.state} onChange={e => setApplyForm({...applyForm, state: e.target.value})}>
-                      <option value="">Select State</option>
-                      {INDIAN_STATES.map(s => <option key={s} value={s}>{s}</option>)}
-                    </select>
+
+                  <div className="space-y-1">
+                    <label className="text-xs font-medium text-white/70 px-1 uppercase tracking-wider">Questions (Optional)</label>
+                    <textarea placeholder="Any questions for this college?" rows={2} className="w-full bg-[#1A1A1D] border border-white/10 rounded-xl px-4 py-3 text-base text-white focus:outline-none focus:border-[#0EB4A6] resize-none" value={applyForm.message} onChange={e => setApplyForm({...applyForm, message: e.target.value})}></textarea>
                   </div>
+
+                  <CaptchaField 
+                    ref={applyCaptchaRef}
+                    onVerify={setApplyCaptchaToken} 
+                    error={applyCaptchaToken ? '' : captchaError} 
+                  />
                   
-                  {applyStatus === 'error' && <p className="text-red-400 text-sm">Failed to submit application. Please try again.</p>}
+                  {applyStatus === 'error' && <p className="text-red-400 text-sm text-center">Failed to submit. Please try again.</p>}
                   
                   <div className="pt-2">
-                    <button type="submit" disabled={applyStatus === 'loading'} className="w-full bg-[#0EB4A6] hover:bg-[#0c9c90] text-black font-bold py-4 rounded-xl text-lg transition-transform active:scale-95 flex items-center justify-center disabled:opacity-70">
+                    <button type="submit" disabled={applyStatus === 'loading'} className="w-full bg-[#0EB4A6] hover:bg-[#0c9c90] text-black font-bold py-4 rounded-xl text-lg transition-transform active:scale-95 flex items-center justify-center disabled:opacity-70 shadow-[0_0_20px_rgba(14,180,166,0.3)]">
                       {applyStatus === 'loading' ? (
                         <div className="w-6 h-6 border-2 border-black border-t-transparent rounded-full animate-spin"></div>
                       ) : (
-                        "Submit Application"
+                        "Confirm Application"
                       )}
                     </button>
                   </div>
