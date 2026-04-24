@@ -27,7 +27,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <meta name="google-site-verification" content="43d51a787e50b79d" />
+        <meta name="google-site-verification" content="VYkCV2EYTlPCB4egcJb2OmVG4dFFpjQZiZWaZpqmpXQ" />
         <link rel="icon" href="/guidevera-header.png" />
         <script
           type="application/ld+json"
