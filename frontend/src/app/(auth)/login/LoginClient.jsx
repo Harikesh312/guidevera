@@ -24,8 +24,8 @@ export default function LoginClient() {
     setIsLoading(true);
     try {
       const res = await axios.post(`${API_URL}/api/auth/login`, {
-        email: formData.email,
-        password: formData.password,
+        email: formData.email.trim().toLowerCase(),
+        password: formData.password.trim(),
       });
 
       localStorage.setItem("token", res.data.token);
@@ -61,7 +61,7 @@ export default function LoginClient() {
           <p className="text-white/40 text-sm text-center fade-up delay-2">Please enter your details to sign in.</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-5">
+        <form onSubmit={handleSubmit} className="space-y-5" suppressHydrationWarning>
           <div className="space-y-1.5 fade-up delay-2">
             <label className="text-xs text-white/70 font-medium">Email</label>
             <input
@@ -69,6 +69,7 @@ export default function LoginClient() {
               placeholder="Enter your email address"
               className="w-full bg-[#1A1A1D] border border-white/5 rounded-xl py-3.5 px-4 text-sm text-white placeholder:text-white/25 focus:outline-none focus:border-[#0EB4A6]/50 focus:ring-1 focus:ring-[#0EB4A6]/50 transition-all"
               required
+              suppressHydrationWarning
             />
           </div>
 
@@ -83,8 +84,9 @@ export default function LoginClient() {
                 placeholder="Enter your password"
                 className="w-full bg-[#1A1A1D] border border-white/5 rounded-xl py-3.5 pl-4 pr-10 text-sm text-white placeholder:text-white/25 focus:outline-none focus:border-[#0EB4A6]/50 focus:ring-1 focus:ring-[#0EB4A6]/50 transition-all"
                 required
+                suppressHydrationWarning
               />
-              <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-4 text-white/30 hover:text-white/60 transition-colors">
+              <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-4 text-white/30 hover:text-white/60 transition-colors" suppressHydrationWarning>
                 {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
               </button>
             </div>
@@ -94,6 +96,7 @@ export default function LoginClient() {
             <button
               type="submit" disabled={isLoading}
               className="login-btn w-full py-3.5 bg-gradient-to-r from-[#0EB4A6] to-[#0fdad3] text-black font-bold text-[15px] rounded-xl mt-2 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
+              suppressHydrationWarning
             >
               {isLoading ? (
                 <span className="flex items-center justify-center gap-2">
