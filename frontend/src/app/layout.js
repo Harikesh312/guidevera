@@ -1,5 +1,4 @@
 import { Geist, Geist_Mono } from "next/font/google";
-import Script from "next/script";
 import "./globals.css";
 import LeadWidget from "@/components/LeadWidget";
 
@@ -29,6 +28,20 @@ export default function RootLayout({ children }) {
       <head>
         <meta name="google-site-verification" content="VYkCV2EYTlPCB4egcJb2OmVG4dFFpjQZiZWaZpqmpXQ" />
         <link rel="icon" href="/guidevera-header.png" />
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-MYEVQF4QFX"
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-MYEVQF4QFX');
+            `
+          }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -143,18 +156,6 @@ export default function RootLayout({ children }) {
             })
           }}
         />
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-MYEVQF4QFX"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-MYEVQF4QFX');
-          `}
-        </Script>
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
