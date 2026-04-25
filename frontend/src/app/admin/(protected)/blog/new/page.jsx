@@ -23,10 +23,12 @@ import {
   List, ListOrdered, CheckSquare, Quote, Link as LinkIcon,
   Image as ImageIcon, Table as TableIcon, Minus, CodeSquare,
   Highlighter, Eraser, Undo, Redo, PenTool, X, ChevronDown, Check,
-  Save, Eye, Calendar, Clock, Lock, Settings, Type, LayoutTemplate, Share2
+  Save, Eye, Calendar, Clock, Lock, Settings, Type, LayoutTemplate, Share2, LogOut
 } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function BlogAdminPanel() {
+  const router = useRouter();
   const [title, setTitle] = useState("");
   const [saveState, setSaveState] = useState("saved"); // saved, saving, unsaved
   
@@ -212,6 +214,12 @@ export default function BlogAdminPanel() {
     return 'Paragraph';
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    router.push("/login");
+  };
+
   return (
     <div className="min-h-screen bg-[#0f0f1a] text-white font-['Plus_Jakarta_Sans',sans-serif]">
       {/* Top Toolbar */}
@@ -236,6 +244,13 @@ export default function BlogAdminPanel() {
           </div>
         </div>
         <div className="flex items-center gap-3">
+          <button 
+            className="px-4 py-2 rounded-lg border border-[#2a2a4a] hover:bg-[#ff4757]/10 hover:text-[#ff4757] hover:border-[#ff4757]/30 text-sm font-medium transition-colors flex items-center gap-2"
+            onClick={handleLogout}
+          >
+            <LogOut size={16} /> Logout
+          </button>
+          <div className="w-px h-6 bg-[#2a2a4a] mx-1"></div>
           <button 
             className="px-4 py-2 rounded-lg border border-[#2a2a4a] hover:bg-[#2a2a4a] text-sm font-medium transition-colors"
             onClick={() => setSaveState("saved")}
@@ -767,6 +782,9 @@ export default function BlogAdminPanel() {
 
       {/* Global Styles for Animations & Prose Overrides */}
       <style dangerouslySetInnerHTML={{__html: `
+        button {
+          cursor: pointer;
+        }
         @keyframes slide-in-right {
           from { transform: translateX(100%); }
           to { transform: translateX(0); }
