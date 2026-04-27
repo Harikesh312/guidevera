@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, MailWarning } from "lucide-react";
 import axios from "axios";
 import { useSearchParams } from "next/navigation";
 import API_URL from "@/lib/api";
@@ -13,6 +13,8 @@ export default function LoginClient() {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({ email: "", password: "" });
+  const [errorMsg, setErrorMsg] = useState("");
+  const [notVerified, setNotVerified] = useState(false);
   const searchParams = useSearchParams();
 
   const handleChange = (e) => {
@@ -43,7 +45,14 @@ export default function LoginClient() {
       else window.location.href = "/";
 
     } catch (err) {
-      alert(err.response?.data?.msg || "Login failed");
+      const data = err.response?.data;
+      if (err.response?.status === 403 && data?.isVerified === false) {
+        setNotVerified(true);
+        setErrorMsg(data.msg || "Email not verified. Please verify your email first.");
+      } else {
+        setNotVerified(false);
+        setErrorMsg(data?.msg || "Login failed");
+      }
     } finally {
       setIsLoading(false);
     }
@@ -60,6 +69,25 @@ export default function LoginClient() {
           <h1 className="text-2xl font-bold text-white mb-1.5 tracking-tight fade-up delay-1">Welcome Back</h1>
           <p className="text-white/40 text-sm text-center fade-up delay-2">Please enter your details to sign in.</p>
         </div>
+
+        {/* Error / Not-Verified Banner */}
+        {errorMsg && (
+          <div className={`flex items-start gap-3 rounded-xl px-4 py-3 mb-5 text-sm ${
+            notVerified
+              ? "bg-amber-500/10 border border-amber-500/20 text-amber-300"
+              : "bg-red-500/10 border border-red-500/20 text-red-300"
+          }`}>
+            <MailWarning className="w-4 h-4 mt-0.5 shrink-0" />
+            <div>
+              <p>{errorMsg}</p>
+              {notVerified && (
+                <Link href="/verify-email" className="underline font-semibold text-amber-200 hover:text-amber-100 mt-1 inline-block">
+                  Resend verification email →
+                </Link>
+              )}
+            </div>
+          </div>
+        )}
 
         <form onSubmit={handleSubmit} className="space-y-5" suppressHydrationWarning>
           <div className="space-y-1.5 fade-up delay-2">

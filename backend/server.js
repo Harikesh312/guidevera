@@ -7,7 +7,12 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: ["https://guidevera.com", "http://localhost:3000"],
+  origin: [
+    "https://guidevera.com",
+    "http://localhost:3000",  // Next.js frontend
+    "http://localhost:5173",  // Vite landing page (dev)
+    "http://localhost:4173",  // Vite landing page (preview)
+  ],
   credentials: true
 }));
 app.use(express.json());

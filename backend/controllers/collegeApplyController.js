@@ -15,7 +15,7 @@ exports.applyToCollege = async (req, res) => {
     // Email to Guidevera team
     await transporter.sendMail({
       from: process.env.EMAIL_USER,
-      to: 'contact@guidevera.com',
+      to: 'guidevera26@gmail.com',
       subject: `New College Application – ${name} → ${collegeName}`,
       html: `
         <h2>New College Application Inquiry</h2>

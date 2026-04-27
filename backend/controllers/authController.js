@@ -1,10 +1,10 @@
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const crypto = require('crypto');
+const { sendVerificationEmail, sendWelcomeEmail } = require('../utils/sendEmail');
 
-// @desc    Register a user
 // @route   POST /api/auth/register
-// @access  Public
 exports.register = async (req, res) => {
   try {
     const { name, email, password, role } = req.body;
@@ -12,15 +12,32 @@ exports.register = async (req, res) => {
     // Check if user exists
     let user = await User.findOne({ email });
     if (user) {
-      return res.status(400).json({ msg: 'User already exists' });
+      // If exists but not verified, resend verification email
+      if (!user.isVerified) {
+        const token = crypto.randomBytes(32).toString('hex');
+        user.verificationToken = token;
+        user.verificationTokenExpiry = Date.now() + 24 * 60 * 60 * 1000; // 24 hours
+        await user.save();
+        await sendVerificationEmail(email, user.name, token);
+        return res.status(200).json({
+          msg: 'Account exists but not verified. Verification email resent. Please check your inbox.'
+        });
+      }
+      return res.status(400).json({ msg: 'User already exists and is verified. Please login.' });
     }
 
-    // Create user instance
+    // Generate verification token
+    const verificationToken = crypto.randomBytes(32).toString('hex');
+
+    // Create user
     user = new User({
       name,
       email,
       password,
-      role
+      role: role || 'student',
+      isVerified: false,
+      verificationToken,
+      verificationTokenExpiry: Date.now() + 24 * 60 * 60 * 1000, // 24 hours
     });
 
     // Hash password
@@ -29,80 +46,127 @@ exports.register = async (req, res) => {
 
     await user.save();
 
-    // Create JWT
-    const payload = {
-      user: {
-        id: user.id,
-        role: user.role
-      }
-    };
+    // Send verification email
+    await sendVerificationEmail(email, name, verificationToken);
 
-    jwt.sign(
-      payload,
-      process.env.JWT_SECRET,
-      { expiresIn: 360000 },
-      (err, token) => {
-        if (err) throw err;
-        res.json({ token, user: { id: user.id, name: user.name, email: user.email, role: user.role } });
-      }
-    );
+    res.status(201).json({
+      msg: 'Registration successful! Please check your email to verify your account before logging in.'
+    });
   } catch (err) {
-    console.error(err.message);
-    res.status(500).send('Server Error');
+    console.error('Register error:', err.message);
+    res.status(500).json({ msg: 'Server error. Please try again.' });
   }
 };
 
-// @desc    Authenticate user & get token (Login)
 // @route   POST /api/auth/login
-// @access  Public
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    // Check for user
-    let user = await User.findOne({ email });
+    const user = await User.findOne({ email });
     if (!user) {
-      return res.status(400).json({ msg: 'Invalid Credentials' });
+      return res.status(400).json({ msg: 'Invalid credentials.' });
     }
 
-    // Match password
+    // Block login if not verified
+    if (!user.isVerified) {
+      return res.status(403).json({
+        msg: 'Email not verified. Please check your inbox and verify your email first.',
+        isVerified: false
+      });
+    }
+
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(400).json({ msg: 'Invalid Credentials' });
+      return res.status(400).json({ msg: 'Invalid credentials.' });
     }
 
-    // Create JWT
-    const payload = {
-      user: {
-        id: user.id,
-        role: user.role
-      }
-    };
+    const payload = { user: { id: user.id, role: user.role } };
 
-    jwt.sign(
-      payload,
-      process.env.JWT_SECRET,
-      { expiresIn: 360000 },
-      (err, token) => {
-        if (err) throw err;
-        res.json({ token, user: { id: user.id, name: user.name, email: user.email, role: user.role } });
-      }
-    );
+    jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: 360000 }, (err, token) => {
+      if (err) throw err;
+      res.json({
+        token,
+        user: { id: user.id, name: user.name, email: user.email, role: user.role }
+      });
+    });
   } catch (err) {
-    console.error(err.message);
-    res.status(500).send('Server Error');
+    console.error('Login error:', err.message);
+    res.status(500).json({ msg: 'Server error. Please try again.' });
   }
 };
 
-// @desc    Get logged in user
+// @route   GET /api/auth/verify-email?token=xxx
+exports.verifyEmail = async (req, res) => {
+  try {
+    const { token } = req.query;
+
+    if (!token) {
+      return res.status(400).json({ msg: 'Verification token is missing.' });
+    }
+
+    const user = await User.findOne({
+      verificationToken: token,
+      verificationTokenExpiry: { $gt: Date.now() }, // token not expired
+    });
+
+    if (!user) {
+      return res.status(400).json({
+        msg: 'Invalid or expired verification link. Please register again or request a new link.'
+      });
+    }
+
+    // Mark as verified and clear token
+    user.isVerified = true;
+    user.verificationToken = null;
+    user.verificationTokenExpiry = null;
+    await user.save();
+
+    // Send welcome email
+    await sendWelcomeEmail(user.email, user.name);
+
+    res.json({ msg: 'Email verified successfully! You can now login.', success: true });
+  } catch (err) {
+    console.error('Verify email error:', err.message);
+    res.status(500).json({ msg: 'Server error. Please try again.' });
+  }
+};
+
+// @route   POST /api/auth/resend-verification
+exports.resendVerification = async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({ msg: 'No account found with this email.' });
+    }
+
+    if (user.isVerified) {
+      return res.status(400).json({ msg: 'This email is already verified. Please login.' });
+    }
+
+    // Generate new token
+    const token = crypto.randomBytes(32).toString('hex');
+    user.verificationToken = token;
+    user.verificationTokenExpiry = Date.now() + 24 * 60 * 60 * 1000;
+    await user.save();
+
+    await sendVerificationEmail(email, user.name, token);
+
+    res.json({ msg: 'Verification email resent! Please check your inbox.' });
+  } catch (err) {
+    console.error('Resend verification error:', err.message);
+    res.status(500).json({ msg: 'Server error. Please try again.' });
+  }
+};
+
 // @route   GET /api/auth/me
-// @access  Private (Needs middleware, simplifying for now)
 exports.getMe = async (req, res) => {
   try {
-    // Basic implementation placeholder - in reality, requires a auth middleware to parse JWT
     res.json({ msg: 'Auth middleware needed for this route' });
   } catch (err) {
-    console.error(err.message);
     res.status(500).send('Server Error');
   }
 };

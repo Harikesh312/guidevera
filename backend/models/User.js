@@ -16,7 +16,19 @@ const UserSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    default: 'student', // student, admin
+    default: 'student',
+  },
+  isVerified: {
+    type: Boolean,
+    default: false,
+  },
+  verificationToken: {
+    type: String,
+    default: null,
+  },
+  verificationTokenExpiry: {
+    type: Date,
+    default: null,
   },
   createdAt: {
     type: Date,
