@@ -9,6 +9,7 @@ const app = express();
 app.use(cors({
   origin: [
     "https://guidevera.com",
+    "https://counsiling.guidevera.com",  // Landing page (production)
     "http://localhost:3000",  // Next.js frontend
     "http://localhost:5173",  // Vite landing page (dev)
     "http://localhost:4173",  // Vite landing page (preview)
