@@ -12,22 +12,8 @@ exports.register = async (req, res) => {
     // Check if user exists
     let user = await User.findOne({ email });
     if (user) {
-      // If exists but not verified, resend verification email
-      if (!user.isVerified) {
-        const token = crypto.randomBytes(32).toString('hex');
-        user.verificationToken = token;
-        user.verificationTokenExpiry = Date.now() + 24 * 60 * 60 * 1000; // 24 hours
-        await user.save();
-        await sendVerificationEmail(email, user.name, token);
-        return res.status(200).json({
-          msg: 'Account exists but not verified. Verification email resent. Please check your inbox.'
-        });
-      }
-      return res.status(400).json({ msg: 'User already exists and is verified. Please login.' });
+      return res.status(400).json({ msg: 'User already exists. Please login.' });
     }
-
-    // Generate verification token
-    const verificationToken = crypto.randomBytes(32).toString('hex');
 
     // Create user
     user = new User({
@@ -35,9 +21,7 @@ exports.register = async (req, res) => {
       email,
       password,
       role: role || 'student',
-      isVerified: false,
-      verificationToken,
-      verificationTokenExpiry: Date.now() + 24 * 60 * 60 * 1000, // 24 hours
+      isVerified: true, // Automatically verify
     });
 
     // Hash password
@@ -46,11 +30,8 @@ exports.register = async (req, res) => {
 
     await user.save();
 
-    // Send verification email
-    await sendVerificationEmail(email, name, verificationToken);
-
     res.status(201).json({
-      msg: 'Registration successful! Please check your email to verify your account before logging in.'
+      msg: 'Registration successful! You can now login.'
     });
   } catch (err) {
     console.error('Register error:', err.message);
@@ -66,14 +47,6 @@ exports.login = async (req, res) => {
     const user = await User.findOne({ email });
     if (!user) {
       return res.status(400).json({ msg: 'Invalid credentials.' });
-    }
-
-    // Block login if not verified
-    if (!user.isVerified) {
-      return res.status(403).json({
-        msg: 'Email not verified. Please check your inbox and verify your email first.',
-        isVerified: false
-      });
     }
 
     const isMatch = await bcrypt.compare(password, user.password);

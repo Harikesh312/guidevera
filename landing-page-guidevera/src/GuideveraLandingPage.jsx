@@ -655,7 +655,7 @@ export default function GuideveraLandingPage() {
             <ul className="space-y-4 text-white/60">
               <li className="flex items-center"><Phone size={16} className="mr-3 text-[#0EB4A6]" /> <a href="tel:+918979485801" className="hover:text-[#0EB4A6]">+91 89794 85801</a></li>
               <li className="flex items-center"><MessageCircle size={16} className="mr-3 text-[#0EB4A6]" /> <a href="https://wa.me/918979485801" className="hover:text-[#0EB4A6]">WhatsApp Us</a></li>
-              <li className="flex items-center"><BookOpen size={16} className="mr-3 text-[#0EB4A6]" /> hello@guidevera.com</li>
+              <li className="flex items-center"><BookOpen size={16} className="mr-3 text-[#0EB4A6]" /> contact@guidevera.com</li>
             </ul>
           </div>
         </div>

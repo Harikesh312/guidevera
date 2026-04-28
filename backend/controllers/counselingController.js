@@ -4,7 +4,7 @@ exports.bookCounseling = async (req, res) => {
   try {
     const { name, email, phone, city, qualification, stream, preferredDate, preferredTime } = req.body;
 
-    const transporter = nodemailer.createTransporter({
+    const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
         user: process.env.EMAIL_USER,
