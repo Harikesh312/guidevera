@@ -338,57 +338,8 @@ export default function HomeClient() {
             </Link>
           </div>
 
-          {/* Desktop Static Grid (4 Colleges) */}
-          <div className="hidden md:grid grid-cols-2 lg:grid-cols-4 gap-6 mt-4">
-            {[row1[0], row1[1], row1[2], row2[1]].map((col, idx) => (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
-                viewport={{ once: true }}
-                key={idx}
-                className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden shadow-lg flex flex-col group hover:bg-white/[0.07] transition-all hover:border-white/20"
-              >
-                <div className="relative w-full h-40 bg-[#121214] overflow-hidden">
-                  <Image src={col.img} alt={col.alt || col.name} fill sizes="288px" className="object-cover transition-transform duration-700 group-hover:scale-110" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#09090b] via-[#09090b]/50 to-transparent opacity-90" />
-                  <span className="absolute top-2 left-2 text-[10px] font-bold bg-[#0EB4A6] text-black px-2 py-0.5 rounded tracking-wide z-10">{col.tag}</span>
-                  <div className="absolute top-2 right-2 bg-black/60 backdrop-blur-md px-2 py-0.5 rounded border border-white/10 flex items-center gap-1 z-10">
-                    <Star className="w-3 h-3 fill-[#fbbf24] text-[#fbbf24]" />
-                    <span className="text-[10px] text-white/90 font-bold">{col.rating}</span>
-                  </div>
-                </div>
-                <div className="p-4 flex-1 flex flex-col">
-                  <h3 className="text-white text-lg font-bold leading-tight line-clamp-1 mb-1">{col.name}</h3>
-                  <p className="text-[#0EB4A6] text-xs font-medium mb-4">{col.courses}</p>
-                  
-                  <div className="grid grid-cols-2 gap-2 mt-auto">
-                    {col.slug ? (
-                      <Link href={`/colleges/${col.slug}`} className="w-full py-2 rounded-lg border border-white/10 text-xs font-medium hover:bg-white/10 transition-colors text-center cursor-pointer min-touch flex items-center justify-center">
-                        View Details
-                      </Link>
-                    ) : (
-                      <button disabled className="w-full py-2 rounded-lg border border-white/5 text-xs font-medium text-white/20 cursor-not-allowed">
-                        Coming Soon
-                      </button>
-                    )}
-                    
-                    {col.slug ? (
-                      <button suppressHydrationWarning onClick={() => openApplyModal(col)} className="w-full py-2 rounded-lg bg-[#0EB4A6] hover:bg-[#0c9c90] text-black text-xs font-bold transition-colors shadow-[0_2px_10px_rgba(14,180,166,0.3)] min-touch flex items-center justify-center cursor-pointer">
-                        Apply Now
-                      </button>
-                    ) : (
-                      <button disabled className="w-full py-2 rounded-lg bg-white/5 text-black text-xs font-bold cursor-not-allowed text-white/20">
-                        Waitlist
-                      </button>
-                    )}
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          <div className="md:hidden mt-4 overflow-hidden w-full relative">
+          {/* Marquee Rows — all screen sizes */}
+          <div className="mt-4 overflow-hidden w-full relative">
             <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-[#09090b] to-transparent z-10" />
             <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-[#09090b] to-transparent z-10" />
 
@@ -397,7 +348,8 @@ export default function HomeClient() {
               {[...row1, ...row1].map((col, idx) => (
                 <div
                   key={idx}
-                  className="flex-shrink-0 w-64 md:w-72 mx-3 bg-white/5 border border-white/10 rounded-2xl overflow-hidden shadow-lg flex flex-col group hover:bg-white/[0.07] transition-all hover:border-white/20"
+                  onClick={() => col.slug && router.push(`/colleges/${col.slug}`)}
+                  className={`flex-shrink-0 w-64 md:w-72 mx-3 bg-white/5 border border-white/10 rounded-2xl overflow-hidden shadow-lg flex flex-col group hover:bg-white/[0.07] transition-all hover:border-white/20 ${col.slug ? 'cursor-pointer' : ''}`}
                 >
                   <div className="relative w-full h-36 md:h-40 bg-[#121214] overflow-hidden">
                     <Image src={col.img} alt={col.alt || col.name} fill sizes="288px" className="object-cover transition-transform duration-700 group-hover:scale-110" />
@@ -414,7 +366,7 @@ export default function HomeClient() {
                     
                     <div className="grid grid-cols-2 gap-2 mt-auto">
                       {col.slug ? (
-                        <Link href={`/colleges/${col.slug}`} className="w-full py-2 rounded-lg border border-white/10 text-[11px] md:text-xs font-medium hover:bg-white/10 transition-colors text-center cursor-pointer min-touch flex items-center justify-center">
+                        <Link href={`/colleges/${col.slug}`} onClick={(e) => e.stopPropagation()} className="w-full py-2 rounded-lg border border-white/10 text-[11px] md:text-xs font-medium hover:bg-white/10 transition-colors text-center cursor-pointer min-touch flex items-center justify-center">
                           View Details
                         </Link>
                       ) : (
@@ -424,7 +376,7 @@ export default function HomeClient() {
                       )}
                       
                       {col.slug ? (
-                        <button onClick={() => router.push(`/colleges/${col.slug}`)} className="w-full py-2 rounded-lg bg-[#0EB4A6] hover:bg-[#0c9c90] text-black text-[11px] md:text-xs font-bold transition-colors shadow-[0_2px_10px_rgba(14,180,166,0.3)] min-touch flex items-center justify-center cursor-pointer">
+                        <button suppressHydrationWarning onClick={(e) => { e.stopPropagation(); openApplyModal(col); }} className="w-full py-2 rounded-lg bg-[#0EB4A6] hover:bg-[#0c9c90] text-black text-[11px] md:text-xs font-bold transition-colors shadow-[0_2px_10px_rgba(14,180,166,0.3)] min-touch flex items-center justify-center cursor-pointer">
                           Apply Now
                         </button>
                       ) : (
@@ -443,7 +395,8 @@ export default function HomeClient() {
               {[...row2, ...row2].map((col, idx) => (
                 <div
                   key={idx}
-                  className="flex-shrink-0 w-64 md:w-72 mx-3 bg-white/5 border border-white/10 rounded-2xl overflow-hidden shadow-lg flex flex-col group hover:bg-white/[0.07] transition-all hover:border-white/20"
+                  onClick={() => col.slug && router.push(`/colleges/${col.slug}`)}
+                  className={`flex-shrink-0 w-64 md:w-72 mx-3 bg-white/5 border border-white/10 rounded-2xl overflow-hidden shadow-lg flex flex-col group hover:bg-white/[0.07] transition-all hover:border-white/20 ${col.slug ? 'cursor-pointer' : ''}`}
                 >
                   <div className="relative w-full h-36 md:h-40 bg-[#121214] overflow-hidden">
                     <Image src={col.img} alt={col.alt || col.name} fill sizes="288px" className="object-cover transition-transform duration-700 group-hover:scale-110" />
@@ -460,7 +413,7 @@ export default function HomeClient() {
                     
                     <div className="grid grid-cols-2 gap-2 mt-auto">
                       {col.slug ? (
-                        <Link href={`/colleges/${col.slug}`} className="w-full py-2 rounded-lg border border-white/10 text-[11px] md:text-xs font-medium hover:bg-white/10 transition-colors text-center cursor-pointer min-touch flex items-center justify-center">
+                        <Link href={`/colleges/${col.slug}`} onClick={(e) => e.stopPropagation()} className="w-full py-2 rounded-lg border border-white/10 text-[11px] md:text-xs font-medium hover:bg-white/10 transition-colors text-center cursor-pointer min-touch flex items-center justify-center">
                           View Details
                         </Link>
                       ) : (
@@ -470,7 +423,7 @@ export default function HomeClient() {
                       )}
                       
                       {col.slug ? (
-                        <button onClick={() => router.push(`/colleges/${col.slug}`)} className="w-full py-2 rounded-lg bg-[#0EB4A6] hover:bg-[#0c9c90] text-black text-[11px] md:text-xs font-bold transition-colors shadow-[0_2px_10px_rgba(14,180,166,0.3)] min-touch flex items-center justify-center cursor-pointer">
+                        <button onClick={(e) => { e.stopPropagation(); openApplyModal(col); }} className="w-full py-2 rounded-lg bg-[#0EB4A6] hover:bg-[#0c9c90] text-black text-[11px] md:text-xs font-bold transition-colors shadow-[0_2px_10px_rgba(14,180,166,0.3)] min-touch flex items-center justify-center cursor-pointer">
                           Apply Now
                         </button>
                       ) : (
@@ -484,7 +437,7 @@ export default function HomeClient() {
               ))}
             </div>
 
-            <div className="md:hidden flex justify-center mt-6 pb-2 relative z-20">
+            <div className="flex justify-center mt-6 pb-2 relative z-20">
               <Link href="/colleges" className="flex items-center gap-2 text-sm font-medium text-[#0EB4A6] hover:text-[#0c9c90] bg-[#0EB4A6]/5 border border-[#0EB4A6]/20 hover:bg-[#0EB4A6]/10 px-8 py-3 rounded-full transition-all active:scale-95 cursor-pointer">
                 View All Colleges <ChevronRight size={18} />
               </Link>

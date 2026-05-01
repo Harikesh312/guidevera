@@ -29,10 +29,18 @@ export default function SignupClient() {
     if (!formData.agreed) { alert("Please agree to the Terms of Service"); return; }
     setIsLoading(true);
     try {
+      // 1. Register
       await axios.post(`${API_URL}/api/auth/register`, {
         name: formData.name, email: formData.email, password: formData.password, role: "student"
       });
-      router.push("/login?registered=true");
+      // 2. Auto-login
+      const loginRes = await axios.post(`${API_URL}/api/auth/login`, {
+        email: formData.email, password: formData.password
+      });
+      localStorage.setItem("token", loginRes.data.token);
+      localStorage.setItem("user", JSON.stringify(loginRes.data.user));
+      // 3. Redirect to home
+      router.push("/");
     } catch (err) {
       alert(err.response?.data?.msg || "Registration failed");
     } finally {
