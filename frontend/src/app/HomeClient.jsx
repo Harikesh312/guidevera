@@ -140,18 +140,18 @@ export default function HomeClient() {
   };
 
   const row1 = [
-    { id: 1, name: "DBUU", slug: "dbuu", img: "/images/dbuu.jpg", alt: "DBUU campus - Dev Bhoomi Uttarakhand University Dehradun", rating: "4.3", tag: "TOP RANKED", courses: "B.Tech | MBA | BHM | BAMS", coursesList: ["B.Tech","MBA","BHM","BAMS","BCA","B.Pharm","LLB","B.Sc Agriculture"] },
-    { id: 2, name: "Uttranchal University", slug: "uttranchal-university", img: "/images/Uttranchal-University.jpg", alt: "Uttranchal University campus - NAAC A+ college Dehradun", rating: "4.5", tag: "NAAC A+", courses: "B.Tech | MBA | Law", coursesList: ["B.Tech","MBA","BA LLB","B.Pharm","B.Sc Agriculture","BCA","BHM","B.Sc Nursing"] },
-    { id: 3, name: "Graphic Era", slug: "graphic-era", img: "/images/graphic-era.jpg", alt: "Graphic Era University campus - NIRF Top 50 college Dehradun", rating: "4.7", tag: "NIRF TOP 50", courses: "B.Tech | BCA | BHM", coursesList: ["B.Tech","MBA","BHM","BCA","BBA","B.Des","LLB","M.Tech"] },
-    { id: 4, name: "DBS Global", slug: "dbs-global", img: "/images/DBS.jpg", alt: "DBS Global University campus - Top B-School Dehradun", rating: "4.8", tag: "TOP B-SCHOOL", courses: "MBA | BBA | B.Tech", coursesList: ["MBA","BBA","B.Tech AI/ML","BCA","B.Com","B.Sc Agriculture","LLB","B.Pharm"] },
-    { id: 5, name: "Tulas Institute", slug: "tulas-institute", img: "/images/Tulas-Institute.jpg", alt: "Tulas Institute campus - NAAC A+ engineering college Dehradun", rating: "4.7", tag: "NAAC A+", courses: "B.Tech | BCA | MBA", coursesList: ["B.Tech","MBA","BBA","BCA","MCA","B.Sc Agriculture","B.Pharm"] },
-    { id: 6, name: "ITM Dehradun", slug: "itm-dehradun", img: "/images/itm.jpg", alt: "ITM Dehradun campus - AICTE approved IT college", rating: "4.5", tag: "AICTE APPROVED", courses: "BCA | B.Sc IT | MBA", coursesList: ["BCA","BBA","B.Sc IT","BHM","B.Sc Animation","B.Com","MCA","M.Sc IT"] }
+    { id: 1, name: "DBUU", slug: "dev-bhoomi-uttarakhand-university-dehradun", img: "/images/dbuu.jpg", alt: "DBUU campus - Dev Bhoomi Uttarakhand University Dehradun", rating: "4.3", tag: "TOP RANKED", courses: "B.Tech | MBA | BHM | BAMS", coursesList: ["B.Tech","MBA","BHM","BAMS","BCA","B.Pharm","LLB","B.Sc Agriculture"] },
+    { id: 2, name: "Uttranchal University", slug: "uttranchal-university-dehradun", img: "/images/Uttranchal-University.jpg", alt: "Uttranchal University campus - NAAC A+ college Dehradun", rating: "4.5", tag: "NAAC A+", courses: "B.Tech | MBA | Law", coursesList: ["B.Tech","MBA","BA LLB","B.Pharm","B.Sc Agriculture","BCA","BHM","B.Sc Nursing"] },
+    { id: 3, name: "Graphic Era", slug: "graphic-era-university-dehradun", img: "/images/graphic-era.jpg", alt: "Graphic Era University campus - NIRF Top 50 college Dehradun", rating: "4.7", tag: "NIRF TOP 50", courses: "B.Tech | BCA | BHM", coursesList: ["B.Tech","MBA","BHM","BCA","BBA","B.Des","LLB","M.Tech"] },
+    { id: 4, name: "DBS Global", slug: "dbs-global-university-dehradun", img: "/images/DBS.jpg", alt: "DBS Global University campus - Top B-School Dehradun", rating: "4.8", tag: "TOP B-SCHOOL", courses: "MBA | BBA | B.Tech", coursesList: ["MBA","BBA","B.Tech AI/ML","BCA","B.Com","B.Sc Agriculture","LLB","B.Pharm"] },
+    { id: 5, name: "Tulas Institute", slug: "tulas-institute-dehradun", img: "/images/Tulas-Institute.jpg", alt: "Tulas Institute campus - NAAC A+ engineering college Dehradun", rating: "4.7", tag: "NAAC A+", courses: "B.Tech | BCA | MBA", coursesList: ["B.Tech","MBA","BBA","BCA","MCA","B.Sc Agriculture","B.Pharm"] },
+    { id: 6, name: "ITM Dehradun", slug: "itm-university-dehradun", img: "/images/itm.jpg", alt: "ITM Dehradun campus - AICTE approved IT college", rating: "4.5", tag: "AICTE APPROVED", courses: "BCA | B.Sc IT | MBA", coursesList: ["BCA","BBA","B.Sc IT","BHM","B.Sc Animation","B.Com","MCA","M.Sc IT"] }
   ];
 
   const row2 = [
-    { id: 7, name: "Shivalik College", slug: "shivalik-college", img: "/images/shivalik-college.jpg", alt: "Shivalik College of Engineering campus - Dehradun", rating: "4.6", tag: "NAAC A+", courses: "B.Tech | M.Tech | BCA", coursesList: ["B.Tech","M.Tech","BCA","MBA","BBA","B.Pharm","B.Sc Agriculture","B.Ed"] },
-    { id: 8, name: "IMS Unision", slug: "ims-unision", img: "/images/DBS.jpg", alt: "IMS Unision University campus - Top B-School Dehradun", rating: "4.6", tag: "TOP B-SCHOOL", courses: "MBA | BBA | BA LLB", coursesList: ["MBA","BBA","BA LLB","BBA LLB","LLM","BHM","BCA","BAJMC","B.Com"] },
-    { id: 9, name: "Dolphin Institute", slug: "dolphin-institute", img: "/images/Dolphin-college.jpg", alt: "Dolphin Institute campus - NAAC A+ Dehradun", rating: "4.7", tag: "NAAC A+", courses: "BPT | B.Sc Agriculture", coursesList: ["BPT","B.Sc Biotechnology","B.Sc Agriculture","B.Sc Forestry","B.Sc MLT","B.Ed","MPT","M.Sc Microbiology"] },
+    { id: 7, name: "Shivalik College", slug: "shivalik-college-of-engineering-dehradun", img: "/images/shivalik-college.jpg", alt: "Shivalik College of Engineering campus - Dehradun", rating: "4.6", tag: "NAAC A+", courses: "B.Tech | M.Tech | BCA", coursesList: ["B.Tech","M.Tech","BCA","MBA","BBA","B.Pharm","B.Sc Agriculture","B.Ed"] },
+    { id: 8, name: "IMS Unision", slug: "ims-unision-university-dehradun", img: "/images/DBS.jpg", alt: "IMS Unision University campus - Top B-School Dehradun", rating: "4.6", tag: "TOP B-SCHOOL", courses: "MBA | BBA | BA LLB", coursesList: ["MBA","BBA","BA LLB","BBA LLB","LLM","BHM","BCA","BAJMC","B.Com"] },
+    { id: 9, name: "Dolphin Institute", slug: "dolphin-institute-dehradun", img: "/images/Dolphin-college.jpg", alt: "Dolphin Institute campus - NAAC A+ Dehradun", rating: "4.7", tag: "NAAC A+", courses: "BPT | B.Sc Agriculture", coursesList: ["BPT","B.Sc Biotechnology","B.Sc Agriculture","B.Sc Forestry","B.Sc MLT","B.Ed","MPT","M.Sc Microbiology"] },
     { id: 10, name: "JBIT Dehradun", slug: "jbit-dehradun", img: "/images/Tulas-Institute.jpg", alt: "JBIT Dehradun campus - engineering college Uttarakhand", rating: "4.5", tag: "AICTE APPROVED", courses: "B.Tech | BCA | Pharmacy", coursesList: ["B.Tech","M.Tech","MBA","BBA","B.Pharm","D.Pharm","B.Sc Agriculture","Diploma"] },
     { id: 11, name: "Alpine College", slug: null, img: "/images/DBS.jpg", alt: "Alpine College campus - Dehradun", rating: "4.4", tag: "COMING SOON", courses: "Diploma | Engineering", coursesList: [] },
   ];
@@ -303,7 +303,7 @@ export default function HomeClient() {
                 suppressHydrationWarning
               />
             </div>
-            <button onClick={handleHomeSearch} suppressHydrationWarning className="bg-[#0EB4A6] hover:bg-[#0c9c90] text-white px-8 py-3.5 rounded-full font-medium transition-all shadow-[0_0_15px_rgba(14,180,166,0.4)] w-full sm:w-auto cursor-pointer">
+            <button onClick={handleHomeSearch} disabled={!homeSearch.trim()} suppressHydrationWarning className={`px-8 py-3.5 rounded-full font-medium transition-all w-full sm:w-auto ${homeSearch.trim() ? 'bg-[#0EB4A6] hover:bg-[#0c9c90] text-white shadow-[0_0_15px_rgba(14,180,166,0.4)] cursor-pointer' : 'bg-[#0EB4A6]/40 text-white/50 cursor-not-allowed'}`}>
               Search
             </button>
           </motion.div>
@@ -374,7 +374,7 @@ export default function HomeClient() {
                     )}
                     
                     {col.slug ? (
-                      <button onClick={() => openApplyModal(col)} className="w-full py-2 rounded-lg bg-[#0EB4A6] hover:bg-[#0c9c90] text-black text-xs font-bold transition-colors shadow-[0_2px_10px_rgba(14,180,166,0.3)] min-touch flex items-center justify-center cursor-pointer">
+                      <button suppressHydrationWarning onClick={() => openApplyModal(col)} className="w-full py-2 rounded-lg bg-[#0EB4A6] hover:bg-[#0c9c90] text-black text-xs font-bold transition-colors shadow-[0_2px_10px_rgba(14,180,166,0.3)] min-touch flex items-center justify-center cursor-pointer">
                         Apply Now
                       </button>
                     ) : (

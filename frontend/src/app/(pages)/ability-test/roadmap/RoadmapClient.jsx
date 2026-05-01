@@ -195,41 +195,30 @@ export default function RoadmapClient() {
                 <p className="text-xs text-white/40 mb-2">Top Colleges</p>
                 <ul className="space-y-2">
                   {(course.topColleges || []).map((col, j) => {
-                    const guideveraColleges = [
-                      "dbuu", "uttranchal university", "graphic era", "dbs global", 
-                      "tulas institute", "itm dehradun", "shivalik college", "ims unision", 
-                      "dolphin institute", "jbit dehradun"
-                    ];
-                    
-                    const isGuidevera = guideveraColleges.some(c => col.toLowerCase().includes(c)) || col.toLowerCase().includes("alpine");
-                    let finalSlug = null;
                     const cLower = col.toLowerCase();
-                    if (cLower.includes("uttranchal")) finalSlug = "uttranchal-university";
-                    else if (cLower.includes("dbs")) finalSlug = "dbs-global";
-                    else if (cLower.includes("tulas")) finalSlug = "tulas-institute";
-                    else if (cLower.includes("graphic")) finalSlug = "graphic-era";
-                    else if (cLower.includes("itm")) finalSlug = "itm-dehradun";
-                    else if (cLower.includes("shivalik")) finalSlug = "shivalik-college";
-                    else if (cLower.includes("ims")) finalSlug = "ims-unision";
-                    else if (cLower.includes("dolphin")) finalSlug = "dolphin-institute";
-                    else if (cLower.includes("jbit")) finalSlug = "jbit-dehradun";
-                    else if (cLower.includes("dbuu")) finalSlug = "dbuu";
+                    let finalSlug = null;
+                    if (cLower.includes("uttranchal")) finalSlug = "uttranchal-university-dehradun";
+                    else if (cLower.includes("dbs") || cLower.includes("doon business")) finalSlug = "dbs-global-university-dehradun";
+                    else if (cLower.includes("tulas")) finalSlug = "tulas-institute-dehradun";
+                    else if (cLower.includes("graphic era")) finalSlug = "graphic-era-university-dehradun";
+                    else if (cLower.includes("itm")) finalSlug = "itm-university-dehradun";
+                    else if (cLower.includes("shivalik")) finalSlug = "shivalik-college-of-engineering-dehradun";
+                    else if (cLower.includes("ims") || cLower.includes("unision")) finalSlug = "ims-unision-university-dehradun";
+                    else if (cLower.includes("dolphin")) finalSlug = "dolphin-institute-dehradun";
+                    else if (cLower.includes("jbit") || cLower.includes("jb institute")) finalSlug = "jbit-dehradun";
+                    else if (cLower.includes("dbuu") || cLower.includes("dev bhoomi")) finalSlug = "dev-bhoomi-uttarakhand-university-dehradun";
+
+                    // Only show colleges that are on Guidevera
+                    if (!finalSlug) return null;
 
                     return (
                       <li key={j} className="flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-2 text-sm text-white/60">
                         <div className="flex items-center gap-2">
                           <span className="w-1.5 h-1.5 rounded-full bg-[#0EB4A6]" /> {col}
                         </div>
-                        {isGuidevera && finalSlug && (
-                          <Link href={`/colleges/${finalSlug}`} className="inline-flex w-fit items-center text-[10px] text-[#0EB4A6] hover:bg-[#0EB4A6]/20 transition-colors ml-0 sm:ml-1 bg-[#0EB4A6]/10 px-2 py-0.5 rounded-full border border-[#0EB4A6]/20 font-medium">
-                            Explore on Guidevera <ChevronRight className="w-3 h-3 ml-0.5" />
-                          </Link>
-                        )}
-                        {isGuidevera && !finalSlug && (
-                          <span className="inline-flex w-fit items-center text-[10px] text-[#0EB4A6]/70 ml-0 sm:ml-1 bg-white/5 px-2 py-0.5 rounded-full border border-white/10 font-medium">
-                            Coming Soon on Guidevera
-                          </span>
-                        )}
+                        <Link href={`/colleges/${finalSlug}`} className="inline-flex w-fit items-center text-[10px] text-[#0EB4A6] hover:bg-[#0EB4A6]/20 transition-colors ml-0 sm:ml-1 bg-[#0EB4A6]/10 px-2 py-0.5 rounded-full border border-[#0EB4A6]/20 font-medium">
+                          Explore on Guidevera <ChevronRight className="w-3 h-3 ml-0.5" />
+                        </Link>
                       </li>
                     );
                   })}

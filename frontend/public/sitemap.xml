@@ -28,49 +28,49 @@
     <priority>0.9</priority>
   </url>
 
-  <!-- College Detail Pages -->
+  <!-- College Detail Pages (SEO-friendly URLs) -->
   <url>
-    <loc>https://guidevera.com/colleges/dbuu</loc>
+    <loc>https://guidevera.com/colleges/dev-bhoomi-uttarakhand-university-dehradun</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://guidevera.com/colleges/uttranchal-university</loc>
+    <loc>https://guidevera.com/colleges/uttranchal-university-dehradun</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://guidevera.com/colleges/graphic-era</loc>
+    <loc>https://guidevera.com/colleges/graphic-era-university-dehradun</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://guidevera.com/colleges/dbs-global</loc>
+    <loc>https://guidevera.com/colleges/dbs-global-university-dehradun</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://guidevera.com/colleges/tulas-institute</loc>
+    <loc>https://guidevera.com/colleges/tulas-institute-dehradun</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://guidevera.com/colleges/itm-dehradun</loc>
+    <loc>https://guidevera.com/colleges/itm-university-dehradun</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://guidevera.com/colleges/shivalik-college</loc>
+    <loc>https://guidevera.com/colleges/shivalik-college-of-engineering-dehradun</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://guidevera.com/colleges/ims-unision</loc>
+    <loc>https://guidevera.com/colleges/ims-unision-university-dehradun</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://guidevera.com/colleges/dolphin-institute</loc>
+    <loc>https://guidevera.com/colleges/dolphin-institute-dehradun</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

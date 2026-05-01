@@ -1,6 +1,6 @@
 export const collegesData = {
-  dbuu: {
-    slug: "dbuu",
+  "dev-bhoomi-uttarakhand-university-dehradun": {
+    slug: "dev-bhoomi-uttarakhand-university-dehradun",
     name: "Dev Bhoomi Uttarakhand University",
     shortName: "DBUU",
     location: "Dehradun, Uttarakhand",
@@ -122,8 +122,8 @@ DBUU offers 120+ programs across 11 schools in Engineering, Management, Pharmacy
   // ─────────────────────────────────────────────────────────────────────
   // UTTARANCHAL UNIVERSITY — corrected from official website uudoon.in
   // ─────────────────────────────────────────────────────────────────────
-  "uttranchal-university": {
-    slug: "uttranchal-university",
+  "uttranchal-university-dehradun": {
+    slug: "uttranchal-university-dehradun",
     name: "Uttaranchal University",
     shortName: "UU",
     location: "Premnagar, Dehradun, Uttarakhand",
@@ -252,8 +252,8 @@ With 24+ years of educational experience (roots tracing back to 2002), the unive
   // ─────────────────────────────────────────────────────────────────────
   // GRAPHIC ERA UNIVERSITY — new entry from official website geu.ac.in
   // ─────────────────────────────────────────────────────────────────────
-  "graphic-era": {
-    slug: "graphic-era",
+  "graphic-era-university-dehradun": {
+    slug: "graphic-era-university-dehradun",
     name: "Graphic Era (Deemed to be University)",
     shortName: "GEU",
     location: "Dehradun, Uttarakhand",
@@ -392,8 +392,8 @@ GEU has 50,000+ alumni working at marquee brands like Apple, Google, Microsoft, 
   // ─────────────────────────────────────────────────────────────────────
   // ITM DEHRADUN
   // ─────────────────────────────────────────────────────────────────────
-  "itm-dehradun": {
-    slug: "itm-dehradun",
+  "itm-university-dehradun": {
+    slug: "itm-university-dehradun",
     name: "Institute of Technology and Management",
     shortName: "ITM",
     location: "Dehradun, Uttarakhand",
@@ -518,8 +518,8 @@ GEU has 50,000+ alumni working at marquee brands like Apple, Google, Microsoft, 
   // ─────────────────────────────────────────────────────────────────────
   // DBS GLOBAL UNIVERSITY
   // ─────────────────────────────────────────────────────────────────────
-  "dbs-global": {
-    slug: "dbs-global",
+  "dbs-global-university-dehradun": {
+    slug: "dbs-global-university-dehradun",
     name: "DBS Global University",
     shortName: "DGU",
     location: "Selaqui, Dehradun, Uttarakhand",
@@ -619,8 +619,8 @@ GEU has 50,000+ alumni working at marquee brands like Apple, Google, Microsoft, 
   // ─────────────────────────────────────────────────────────────────────
   // TULAS INSTITUTE
   // ─────────────────────────────────────────────────────────────────────
-  "tulas-institute": {
-    slug: "tulas-institute",
+  "tulas-institute-dehradun": {
+    slug: "tulas-institute-dehradun",
     name: "Tulas Institute",
     shortName: "Tulas",
     location: "Dhoolkot, Selakui, Doon Valley, Dehradun, Uttarakhand",
@@ -721,8 +721,8 @@ GEU has 50,000+ alumni working at marquee brands like Apple, Google, Microsoft, 
   // ─────────────────────────────────────────────────────────────────────
   // SHIVALIK COLLEGE OF ENGINEERING
   // ─────────────────────────────────────────────────────────────────────
-  "shivalik-college": {
-    slug: "shivalik-college",
+  "shivalik-college-of-engineering-dehradun": {
+    slug: "shivalik-college-of-engineering-dehradun",
     name: "Shivalik College of Engineering",
     shortName: "SCE",
     location: "Shimla Bypass Road, Sherpur, Dehradun, Uttarakhand",
@@ -824,8 +824,8 @@ GEU has 50,000+ alumni working at marquee brands like Apple, Google, Microsoft, 
   // ─────────────────────────────────────────────────────────────────────
   // IMS UNISON UNIVERSITY
   // ─────────────────────────────────────────────────────────────────────
-  "ims-unision": {
-    slug: "ims-unision",
+  "ims-unision-university-dehradun": {
+    slug: "ims-unision-university-dehradun",
     name: "IMS Unison University",
     shortName: "IUU",
     location: "Makkawala Greens, Mussoorie Diversion Road, Dehradun",
@@ -930,8 +930,8 @@ GEU has 50,000+ alumni working at marquee brands like Apple, Google, Microsoft, 
   // ─────────────────────────────────────────────────────────────────────
   // DOLPHIN INSTITUTE
   // ─────────────────────────────────────────────────────────────────────
-  "dolphin-institute": {
-    slug: "dolphin-institute",
+  "dolphin-institute-dehradun": {
+    slug: "dolphin-institute-dehradun",
     name: "Dolphin (PG) Institute of Biomedical & Natural Sciences",
     shortName: "Dolphin",
     location: "Manduwala, Chakrata Road, Dehradun (Near Suddowala)",

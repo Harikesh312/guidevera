@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { User, Mail, Phone, Lock, Eye, EyeOff, CheckCircle, Check } from "lucide-react";
@@ -9,11 +10,10 @@ import API_URL from "@/lib/api";
 
 
 export default function SignupClient() {
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [verificationPending, setVerificationPending] = useState(false);
-  const [registeredEmail, setRegisteredEmail] = useState("");
   const [formData, setFormData] = useState({
     name: "", email: "", phone: "", password: "", confirmPassword: "", agreed: false
   });
@@ -32,8 +32,7 @@ export default function SignupClient() {
       await axios.post(`${API_URL}/api/auth/register`, {
         name: formData.name, email: formData.email, password: formData.password, role: "student"
       });
-      setRegisteredEmail(formData.email);
-      setVerificationPending(true);
+      router.push("/login?registered=true");
     } catch (err) {
       alert(err.response?.data?.msg || "Registration failed");
     } finally {
@@ -43,35 +42,6 @@ export default function SignupClient() {
 
   const inputClass = "w-full bg-[#1A1A1D] border border-white/5 rounded-xl py-3 pl-10 pr-4 text-sm text-white placeholder:text-white/25 focus:outline-none focus:border-[#0EB4A6]/50 focus:ring-1 focus:ring-[#0EB4A6]/50 transition-all";
 
-  // ── Verification Pending Screen ──────────────────────────────────────────
-  if (verificationPending) {
-    return (
-      <div className="min-h-screen bg-[#09090b] flex flex-col items-center justify-center p-4 font-sans relative overflow-hidden">
-        <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-[#0EB4A6]/5 blur-[120px] rounded-full pointer-events-none" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-[#0EB4A6]/5 blur-[100px] rounded-full pointer-events-none" />
-        <div className="bg-[#121214] border border-white/5 rounded-3xl p-10 w-full max-w-md relative z-10 shadow-2xl text-center">
-          <div className="mb-6 flex justify-center">
-            <div className="w-20 h-20 rounded-full bg-[#0EB4A6]/10 flex items-center justify-center">
-              <Mail className="w-10 h-10 text-[#0EB4A6]" />
-            </div>
-          </div>
-          <h1 className="text-2xl font-bold text-white mb-2">Check Your Inbox 📬</h1>
-          <p className="text-white/50 text-sm leading-relaxed mb-2">
-            We sent a verification link to
-          </p>
-          <p className="text-[#0EB4A6] font-semibold text-sm mb-6 break-all">{registeredEmail}</p>
-          <p className="text-white/30 text-xs mb-8">
-            Click the link in the email to verify your account. The link expires in <strong className="text-white/50">24 hours</strong>.
-          </p>
-          <Link href="/login" className="inline-block w-full py-3.5 bg-gradient-to-r from-[#0EB4A6] to-[#0fdad3] text-black font-bold text-[15px] rounded-xl transition-all hover:opacity-90 active:scale-95">
-            Go to Login →
-          </Link>
-          <p className="text-white/20 text-xs mt-4">Didn&apos;t receive it? Check spam or <Link href="/verify-email" className="text-[#0EB4A6] hover:underline">resend verification</Link></p>
-        </div>
-        <p className="text-white/20 text-[10px] mt-6">© 2026 Guidevera. All rights reserved.</p>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-[#09090b] flex flex-col items-center justify-center p-4 selection:bg-[#0EB4A6] selection:text-white font-sans relative overflow-hidden">
@@ -86,7 +56,8 @@ export default function SignupClient() {
         </div>
 
         <form onSubmit={handleSubmit}>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+          <div className="space-y-4 mb-4">
+            {/* Row 1: Full Name (full width) */}
             <div className="space-y-1.5 fade-up delay-2">
               <label className="text-xs text-white/70 font-medium">Full Name</label>
               <div className="relative flex items-center">
@@ -94,40 +65,48 @@ export default function SignupClient() {
                 <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Enter your full name" className={inputClass} required />
               </div>
             </div>
-            <div className="space-y-1.5 fade-up delay-2">
-              <label className="text-xs text-white/70 font-medium">Email Address</label>
-              <div className="relative flex items-center">
-                <Mail className="absolute left-3.5 w-4 h-4 text-white/40" />
-                <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="name@gmail.com" className={inputClass} required />
+
+            {/* Row 2: Email + Phone */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-1.5 fade-up delay-2">
+                <label className="text-xs text-white/70 font-medium">Email Address</label>
+                <div className="relative flex items-center">
+                  <Mail className="absolute left-3.5 w-4 h-4 text-white/40" />
+                  <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="name@gmail.com" className={inputClass} required />
+                </div>
+              </div>
+              <div className="space-y-1.5 fade-up delay-3">
+                <label className="text-xs text-white/70 font-medium">Phone Number</label>
+                <div className="relative flex items-center">
+                  <Phone className="absolute left-3.5 w-4 h-4 text-white/40" />
+                  <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="+91 9XXXXXXXXX" className={inputClass} />
+                </div>
               </div>
             </div>
-            <div className="space-y-1.5 fade-up delay-3">
-              <label className="text-xs text-white/70 font-medium">Phone Number</label>
-              <div className="relative flex items-center">
-                <Phone className="absolute left-3.5 w-4 h-4 text-white/40" />
-                <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="+91 9XXXXXXXXX" className={inputClass} />
+
+            {/* Row 3: Password + Confirm Password */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-1.5 fade-up delay-3">
+                <label className="text-xs text-white/70 font-medium">Password</label>
+                <div className="relative flex items-center">
+                  <Lock className="absolute left-3.5 w-4 h-4 text-white/40" />
+                  <input type={showPassword ? "text" : "password"} name="password" value={formData.password} onChange={handleChange} placeholder="••••••••"
+                    className="w-full bg-[#1A1A1D] border border-white/5 rounded-xl py-3 pl-10 pr-10 text-sm text-white placeholder:text-white/25 focus:outline-none focus:border-[#0EB4A6]/50 focus:ring-1 focus:ring-[#0EB4A6]/50 transition-all" required />
+                  <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3.5 text-white/30 hover:text-white/60 transition-colors">
+                    {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  </button>
+                </div>
               </div>
-            </div>
-            <div className="space-y-1.5 fade-up delay-3">
-              <label className="text-xs text-white/70 font-medium">Password</label>
-              <div className="relative flex items-center">
-                <Lock className="absolute left-3.5 w-4 h-4 text-white/40" />
-                <input type={showPassword ? "text" : "password"} name="password" value={formData.password} onChange={handleChange} placeholder="••••••••"
-                  className="w-full bg-[#1A1A1D] border border-white/5 rounded-xl py-3 pl-10 pr-10 text-sm text-white placeholder:text-white/25 focus:outline-none focus:border-[#0EB4A6]/50 focus:ring-1 focus:ring-[#0EB4A6]/50 transition-all" required />
-                <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3.5 text-white/30 hover:text-white/60 transition-colors">
-                  {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                </button>
-              </div>
-            </div>
-            <div className="space-y-1.5 fade-up delay-3 md:col-span-2">
-              <label className="text-xs text-white/70 font-medium">Confirm Password</label>
-              <div className="relative flex items-center">
-                <CheckCircle className="absolute left-3.5 w-4 h-4 text-white/40" />
-                <input type={showConfirmPassword ? "text" : "password"} name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} placeholder="••••••••"
-                  className="w-full bg-[#1A1A1D] border border-white/5 rounded-xl py-3 pl-10 pr-10 text-sm text-white placeholder:text-white/25 focus:outline-none focus:border-[#0EB4A6]/50 focus:ring-1 focus:ring-[#0EB4A6]/50 transition-all" required />
-                <button type="button" onClick={() => setShowConfirmPassword(!showConfirmPassword)} className="absolute right-3.5 text-white/30 hover:text-white/60 transition-colors">
-                  {showConfirmPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                </button>
+              <div className="space-y-1.5 fade-up delay-3">
+                <label className="text-xs text-white/70 font-medium">Confirm Password</label>
+                <div className="relative flex items-center">
+                  <CheckCircle className="absolute left-3.5 w-4 h-4 text-white/40" />
+                  <input type={showConfirmPassword ? "text" : "password"} name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} placeholder="••••••••"
+                    className="w-full bg-[#1A1A1D] border border-white/5 rounded-xl py-3 pl-10 pr-10 text-sm text-white placeholder:text-white/25 focus:outline-none focus:border-[#0EB4A6]/50 focus:ring-1 focus:ring-[#0EB4A6]/50 transition-all" required />
+                  <button type="button" onClick={() => setShowConfirmPassword(!showConfirmPassword)} className="absolute right-3.5 text-white/30 hover:text-white/60 transition-colors">
+                    {showConfirmPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -138,7 +117,7 @@ export default function SignupClient() {
               {formData.agreed && <Check className="w-3 h-3 text-black" strokeWidth={3} />}
             </button>
             <span className="text-xs text-white/40 leading-relaxed">
-              I agree to the <Link href="#" className="text-[#0EB4A6] hover:underline">Terms of Service</Link> and <Link href="#" className="text-[#0EB4A6] hover:underline">Privacy Policy</Link>
+              I agree to the <Link href="/terms" className="text-[#0EB4A6] hover:underline">Terms of Service</Link> and <Link href="/privacy" className="text-[#0EB4A6] hover:underline">Privacy Policy</Link>
             </span>
           </div>
 

@@ -110,11 +110,11 @@ export default function CounselingClient() {
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
                   <label className="text-xs text-white/50 mb-1 block">Full Name</label>
-                  <input name="name" type="text" required placeholder="John Doe" onChange={handleChange} value={formData.name} className={inputClass} />
+                  <input name="name" type="text" required placeholder="Your Name" onChange={handleChange} value={formData.name} className={inputClass} />
                 </div>
                 <div>
                   <label className="text-xs text-white/50 mb-1 block">Email Address</label>
-                  <input name="email" type="email" required placeholder="john@example.com" onChange={handleChange} value={formData.email} className={inputClass} />
+                  <input name="email" type="email" required placeholder="name@example.com" onChange={handleChange} value={formData.email} className={inputClass} />
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
