@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, ChevronDown, LogOut, Settings, Map, Brain } from "lucide-react";
+import { Menu, X, ChevronDown, LogOut, Settings, Map, Brain, LayoutDashboard } from "lucide-react";
 import API_URL from "@/lib/api";
 
 
@@ -109,6 +109,17 @@ export default function Navbar() {
 
                       {/* Menu Items */}
                       <div className="p-1.5">
+                        {/* Admin Panel – only for admin role */}
+                        {user.role === 'admin' && (
+                          <Link
+                            href="/admin"
+                            onClick={() => setIsProfileOpen(false)}
+                            className="flex items-center gap-2.5 px-3 py-2 text-sm text-[#0EB4A6] hover:text-[#0c9c90] hover:bg-[#0EB4A6]/5 rounded-xl transition-colors font-semibold"
+                          >
+                            <LayoutDashboard className="w-4 h-4 shrink-0" />
+                            Admin Panel
+                          </Link>
+                        )}
                         <Link
                           href="#"
                           onClick={() => setIsProfileOpen(false)}
@@ -199,6 +210,11 @@ export default function Navbar() {
                     <p className="text-xs text-white/40 truncate">{user.email}</p>
                   </div>
                 </div>
+                {user.role === 'admin' && (
+                  <Link href="/admin" className="text-sm text-[#0EB4A6] font-semibold flex items-center gap-2" onClick={() => setIsMenuOpen(false)}>
+                    <LayoutDashboard className="w-4 h-4" /> Admin Panel
+                  </Link>
+                )}
                 <Link href="#" className="text-sm text-white/60 hover:text-white transition-colors flex items-center gap-2" onClick={() => setIsMenuOpen(false)}>
                   <Settings className="w-4 h-4" /> Profile &amp; Settings
                 </Link>
