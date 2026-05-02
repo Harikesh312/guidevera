@@ -6,16 +6,33 @@ require('dotenv').config();
 const app = express();
 
 // Middleware
+const allowedOrigins = [
+  "https://guidevera.com",
+  "https://www.guidevera.com",
+  "https://counsiling.guidevera.com",
+  "https://counseling.guidevera.com",
+  "http://localhost:3000",
+  "http://localhost:5173",
+  "http://localhost:4173",
+];
+
 app.use(cors({
-  origin: [
-    "https://guidevera.com",
-    "https://counsiling.guidevera.com",  // Landing page (production)
-    "http://localhost:3000",  // Next.js frontend
-    "http://localhost:5173",  // Vite landing page (dev)
-    "http://localhost:4173",  // Vite landing page (preview)
-  ],
-  credentials: true
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl)
+    if (!origin) return callback(null, true);
+    
+    if (allowedOrigins.indexOf(origin) !== -1 || origin.endsWith(".guidevera.com")) {
+      callback(null, true);
+    } else {
+      console.warn(`CORS blocked for origin: ${origin}`);
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
+
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
@@ -37,4 +54,22 @@ app.get('/', (req, res) => {
 });
 
 const PORT = process.env.PORT || 5000;
+
+// Global Error Handler
+app.use((err, req, res, next) => {
+  console.error('Unhandled Error:', err);
+  
+  // Ensure CORS headers are present even on errors
+  const origin = req.headers.origin;
+  if (origin && (allowedOrigins.includes(origin) || origin.endsWith(".guidevera.com"))) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+  }
+
+  res.status(err.status || 500).json({
+    success: false,
+    message: err.message || 'Internal Server Error'
+  });
+});
+
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
