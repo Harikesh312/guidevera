@@ -197,7 +197,7 @@ export default function RoadmapClient() {
                   {(course.topColleges || []).map((col, j) => {
                     const cLower = col.toLowerCase();
                     let finalSlug = null;
-                    if (cLower.includes("uttranchal")) finalSlug = "uttranchal-university-dehradun";
+                    if (cLower.includes("uttaranchal") || cLower.includes("uttranchal")) finalSlug = "uttaranchal-university-dehradun";
                     else if (cLower.includes("dbs") || cLower.includes("doon business")) finalSlug = "dbs-global-university-dehradun";
                     else if (cLower.includes("tulas")) finalSlug = "tulas-institute-dehradun";
                     else if (cLower.includes("graphic era")) finalSlug = "graphic-era-university-dehradun";

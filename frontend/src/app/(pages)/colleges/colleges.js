@@ -27,7 +27,7 @@ export default function CollegesPage() {
     },
     {
       id: 2,
-      name: "Uttranchal University",
+      name: "Uttaranchal University",
       location: "Uttarakhand, Dehradun",
       description: "Known for academic excellence in B.Tech, MBA, and Law across the region.",
       feeLabel: "Semester Fees",

@@ -77,6 +77,7 @@ export default function Navbar() {
               <Link href="/" className={`text-sm font-medium transition-colors ${pathname === "/" ? "text-white" : "text-white/60 hover:text-[#0EB4A6]"}`}>Home</Link>
               <Link href="/colleges" className={`text-sm font-medium transition-colors ${pathname === "/colleges" ? "text-white" : "text-white/60 hover:text-[#0EB4A6]"}`}>Colleges</Link>
               <Link href="/counseling" className={`text-sm font-medium transition-colors ${pathname === "/counseling" ? "text-white" : "text-white/60 hover:text-[#0EB4A6]"}`}>Counseling</Link>
+              <Link href="/blog" className={`text-sm font-medium transition-colors ${pathname === "/blog" ? "text-white" : "text-white/60 hover:text-[#0EB4A6]"}`}>Blog</Link>
               <Link href="/ability-test" className={`text-sm font-medium transition-colors ${pathname === "/ability-test" ? "text-white" : "text-white/60 hover:text-[#0EB4A6]"}`}>Exams</Link>
               <Link href="/about" className={`text-sm font-medium transition-colors ${pathname === "/about" ? "text-white" : "text-white/60 hover:text-[#0EB4A6]"}`}>About Us</Link>
             </div>
@@ -183,6 +184,7 @@ export default function Navbar() {
             <Link href="/" className={`text-sm font-medium transition-colors ${pathname === "/" ? "text-white" : "text-white/60 hover:text-[#0EB4A6]"}`} onClick={() => setIsMenuOpen(false)}>Home</Link>
             <Link href="/colleges" className={`text-sm font-medium transition-colors ${pathname === "/colleges" ? "text-white" : "text-white/60 hover:text-[#0EB4A6]"}`} onClick={() => setIsMenuOpen(false)}>Colleges</Link>
             <Link href="/counseling" className={`text-sm font-medium transition-colors ${pathname === "/counseling" ? "text-white" : "text-white/60 hover:text-[#0EB4A6]"}`} onClick={() => setIsMenuOpen(false)}>Counseling</Link>
+            <Link href="/blog" className={`text-sm font-medium transition-colors ${pathname === "/blog" ? "text-white" : "text-white/60 hover:text-[#0EB4A6]"}`} onClick={() => setIsMenuOpen(false)}>Blog</Link>
             <Link href="/ability-test" className={`text-sm font-medium transition-colors ${pathname === "/ability-test" ? "text-white" : "text-white/60 hover:text-[#0EB4A6]"}`} onClick={() => setIsMenuOpen(false)}>Exams</Link>
             <Link href="/about" className={`text-sm font-medium transition-colors ${pathname === "/about" ? "text-white" : "text-white/60 hover:text-[#0EB4A6]"}`} onClick={() => setIsMenuOpen(false)}>About Us</Link>
             <hr className="border-white/10" />

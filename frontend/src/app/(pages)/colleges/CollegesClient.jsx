@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { MapPin, Star, ChevronDown, ArrowRight, Filter, Search as SearchIcon, ChevronLeft, X, CheckCircle } from "lucide-react";
+import { MapPin, Star, ChevronDown, ArrowRight, Filter, Search as SearchIcon, ChevronLeft, X, CheckCircle, GraduationCap, Briefcase, BookOpen, Stethoscope } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "../../../components/Navbar";
 import Footer from "../../../components/Footer";
@@ -72,16 +72,16 @@ export default function CollegesClient() {
       courses: ["B.Tech","MBA","BHM","BAMS","BCA","B.Pharm","LLB","B.Sc Agriculture"]
     },
     {
-      id: 2, slug: "uttranchal-university-dehradun", name: "Uttranchal University", location: "Uttarakhand, Dehradun",
-      alt: "Uttranchal University Dehradun - NAAC A+ College for B.Tech MBA Law",
+      id: 2, slug: "uttaranchal-university-dehradun", name: "Uttaranchal University", location: "Uttarakhand, Dehradun",
+      alt: "Uttaranchal University Dehradun - NAAC A+ College for B.Tech MBA Law",
       description: "NAAC A+ accredited. Known for B.Tech, MBA, Law, and Agriculture across the region.",
       feeLabel: "Average Fees", fee: "₹1.8L – 2.5L/yr", image: "/images/Uttranchal-University.jpg", rating: "4.5", tag: "NAAC A+",
       courses: ["B.Tech","MBA","BA LLB","B.Pharm","B.Sc Agriculture","BCA","BHM","B.Sc Nursing"]
     },
     {
       id: 3, slug: "graphic-era-university-dehradun", name: "Graphic Era University", location: "Uttarakhand, Dehradun",
-      alt: "Graphic Era University Dehradun - NIRF Top 50 College for B.Tech BCA BHM",
-      description: "NIRF Top 50 University. NAAC A+ accredited with outstanding placement records.",
+      alt: "Graphic Era University Dehradun - Top NAAC A+ College for B.Tech BCA BHM",
+      description: "NIRF Top 50 University. NAAC A+ accredited. Famous for B.Tech, MBA, and outstanding placement records.",
       feeLabel: "Average Fees", fee: "₹2.5L – 3.5L/yr", image: "/images/graphic-era.jpg", rating: "4.7", tag: "NIRF TOP 50",
       courses: ["B.Tech","MBA","BHM","BCA","BBA","B.Des","LLB","M.Tech"]
     },
@@ -273,6 +273,28 @@ export default function CollegesClient() {
               <ArrowRight className="w-5 h-5" />
             </button>
           </div>
+
+          {!appliedSearchQuery && (
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4 }}
+              className="flex flex-wrap items-center justify-center gap-6 mt-6 text-sm text-white/40"
+            >
+              <button onClick={() => { setSearchInput('B.Tech'); setAppliedSearchQuery('B.Tech'); }} className="flex items-center gap-2 hover:text-[#0EB4A6] transition-colors group">
+                <GraduationCap size={16} className="group-hover:scale-110 transition-transform" /> B.Tech
+              </button>
+              <button onClick={() => { setSearchInput('Medical'); setAppliedSearchQuery('Medical'); }} className="flex items-center gap-2 hover:text-[#0EB4A6] transition-colors group">
+                <Stethoscope size={16} className="group-hover:scale-110 transition-transform" /> Medical
+              </button>
+              <button onClick={() => { setSearchInput('Law'); setAppliedSearchQuery('Law'); }} className="flex items-center gap-2 hover:text-[#0EB4A6] transition-colors group">
+                <Briefcase size={16} className="group-hover:scale-110 transition-transform" /> Law
+              </button>
+              <button onClick={() => { setSearchInput('MBA'); setAppliedSearchQuery('MBA'); }} className="flex items-center gap-2 hover:text-[#0EB4A6] transition-colors group">
+                <BookOpen size={16} className="group-hover:scale-110 transition-transform" /> MBA
+              </button>
+            </motion.div>
+          )}
         </motion.div>
 
 
@@ -354,11 +376,11 @@ export default function CollegesClient() {
 
           <div className="space-y-4">
             {[
-              { q: "Which are the top colleges in Dehradun?", a: "The top colleges in Dehradun include Graphic Era University (NIRF Top 50), Uttranchal University (NAAC A+), Dev Bhoomi Uttarakhand University, DBS Global University, Tulas Institute, IMS Unision University, ITM Dehradun, and Shivalik College of Engineering." },
-              { q: "Which colleges in Uttarakhand have NAAC A+ rating?", a: "NAAC A+ rated colleges in Uttarakhand include Uttranchal University, Tulas Institute, Shivalik College of Engineering, and Dolphin Institute." },
-              { q: "Which are the best MBA colleges in Dehradun?", a: "The best MBA colleges in Dehradun include DBS Global University, IMS Unision University, Uttranchal University, DBUU, and Tulas Institute — all listed on Guidevera with complete details." },
+              { q: "Which are the top colleges in Dehradun?", a: "The top colleges in Dehradun include Graphic Era University (NIRF Top 50), Uttaranchal University (NAAC A+), Dev Bhoomi Uttarakhand University, DBS Global University, Tulas Institute, IMS Unision University, ITM Dehradun, and Shivalik College of Engineering." },
+              { q: "Which colleges in Uttarakhand have NAAC A+ rating?", a: "NAAC A+ rated colleges in Uttarakhand include Uttaranchal University, Tulas Institute, Shivalik College of Engineering, and Dolphin Institute." },
+              { q: "Which are the best MBA colleges in Dehradun?", a: "The best MBA colleges in Dehradun include DBS Global University, IMS Unision University, Uttaranchal University, DBUU, and Tulas Institute — all listed on Guidevera with complete details." },
               { q: "How do I choose the right college in Uttarakhand?", a: "Guidevera helps you choose the right college through a psychometric ability test, personalized career report, and one-on-one expert counseling — so your college choice is backed by data and not just guesswork." },
-              { q: "Which are the best B.Tech colleges in Dehradun?", a: "The best B.Tech colleges in Dehradun include Graphic Era University, Uttranchal University, DBUU, Tulas Institute, Shivalik College, and ITM Dehradun — all AICTE approved with strong placement records." },
+              { q: "Which are the best B.Tech colleges in Dehradun?", a: "The best B.Tech colleges in Dehradun include Graphic Era University, Uttaranchal University, DBUU, Tulas Institute, Shivalik College, and ITM Dehradun — all AICTE approved with strong placement records." },
             ].map((faq, i) => (
               <FAQAccordion key={i} question={faq.q} answer={faq.a} />
             ))}
@@ -376,7 +398,7 @@ export default function CollegesClient() {
         "numberOfItems": 10,
         "itemListElement": [
           { "@type": "ListItem", "position": 1, "name": "Graphic Era University", "url": "https://guidevera.com/colleges/graphic-era-university-dehradun" },
-          { "@type": "ListItem", "position": 2, "name": "Uttranchal University", "url": "https://guidevera.com/colleges/uttranchal-university-dehradun" },
+          { "@type": "ListItem", "position": 2, "name": "Uttaranchal University", "url": "https://guidevera.com/colleges/uttaranchal-university-dehradun" },
           { "@type": "ListItem", "position": 3, "name": "Dev Bhoomi Uttarakhand University", "url": "https://guidevera.com/colleges/dev-bhoomi-uttarakhand-university-dehradun" },
           { "@type": "ListItem", "position": 4, "name": "DBS Global University", "url": "https://guidevera.com/colleges/dbs-global-university-dehradun" },
           { "@type": "ListItem", "position": 5, "name": "Tulas Institute", "url": "https://guidevera.com/colleges/tulas-institute-dehradun" },
@@ -393,10 +415,10 @@ export default function CollegesClient() {
         "@context": "https://schema.org",
         "@type": "FAQPage",
         "mainEntity": [
-          { "@type": "Question", "name": "Which are the top colleges in Dehradun?", "acceptedAnswer": { "@type": "Answer", "text": "Top colleges in Dehradun include Graphic Era University (NIRF Top 50), Uttranchal University (NAAC A+), DBUU, DBS Global University, Tulas Institute, IMS Unision, ITM Dehradun, and Shivalik College." } },
-          { "@type": "Question", "name": "Which colleges in Uttarakhand have NAAC A+ rating?", "acceptedAnswer": { "@type": "Answer", "text": "NAAC A+ rated colleges include Uttranchal University, Tulas Institute, Shivalik College of Engineering, and Dolphin Institute." } },
-          { "@type": "Question", "name": "Which are the best MBA colleges in Dehradun?", "acceptedAnswer": { "@type": "Answer", "text": "Best MBA colleges in Dehradun include DBS Global University, IMS Unision University, Uttranchal University, DBUU, and Tulas Institute." } },
-          { "@type": "Question", "name": "Which are the best B.Tech colleges in Dehradun?", "acceptedAnswer": { "@type": "Answer", "text": "Best B.Tech colleges include Graphic Era University, Uttranchal University, DBUU, Tulas Institute, Shivalik College, and ITM Dehradun — all AICTE approved." } },
+          { "@type": "Question", "name": "Which are the top colleges in Dehradun?", "acceptedAnswer": { "@type": "Answer", "text": "Top colleges in Dehradun include Graphic Era University (NIRF Top 50), Uttaranchal University (NAAC A+), DBUU, DBS Global University, Tulas Institute, IMS Unision, ITM Dehradun, and Shivalik College." } },
+          { "@type": "Question", "name": "Which colleges in Uttarakhand have NAAC A+ rating?", "acceptedAnswer": { "@type": "Answer", "text": "NAAC A+ rated colleges include Uttaranchal University, Tulas Institute, Shivalik College of Engineering, and Dolphin Institute." } },
+          { "@type": "Question", "name": "Which are the best MBA colleges in Dehradun?", "acceptedAnswer": { "@type": "Answer", "text": "Best MBA colleges in Dehradun include DBS Global University, IMS Unision University, Uttaranchal University, DBUU, and Tulas Institute." } },
+          { "@type": "Question", "name": "Which are the best B.Tech colleges in Dehradun?", "acceptedAnswer": { "@type": "Answer", "text": "Best B.Tech colleges include Graphic Era University, Uttaranchal University, DBUU, Tulas Institute, Shivalik College, and ITM Dehradun — all AICTE approved." } },
         ]
       })}} />
 

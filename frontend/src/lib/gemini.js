@@ -63,7 +63,7 @@ Generate a structured career roadmap in the following EXACT JSON format. Do not 
 Make it specific, actionable, and encouraging. Include exactly 3 top careers, 2 recommended courses, and 4 roadmap phases.
 IMPORTANT: When recommending colleges in 'topColleges', you MUST ONLY suggest from this exact list — do NOT suggest any colleges outside this list:
 1. Dev Bhoomi Uttarakhand University (DBUU)
-2. Uttranchal University
+2. Uttaranchal University
 3. Graphic Era University
 4. DBS Global University
 5. Tulas Institute

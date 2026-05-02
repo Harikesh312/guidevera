@@ -64,3 +64,12 @@ input, select, textarea, button {
 .login-btn:hover::before { left: 100%; }
 .login-btn:hover { transform: translateY(-1px); }
 .login-btn:active { transform: translateY(0px); }
+
+/* Hide scrollbar utility */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

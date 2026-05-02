@@ -122,8 +122,8 @@ DBUU offers 120+ programs across 11 schools in Engineering, Management, Pharmacy
   // ─────────────────────────────────────────────────────────────────────
   // UTTARANCHAL UNIVERSITY — corrected from official website uudoon.in
   // ─────────────────────────────────────────────────────────────────────
-  "uttranchal-university-dehradun": {
-    slug: "uttranchal-university-dehradun",
+  "uttaranchal-university-dehradun": {
+    slug: "uttaranchal-university-dehradun",
     name: "Uttaranchal University",
     shortName: "UU",
     location: "Premnagar, Dehradun, Uttarakhand",
@@ -259,7 +259,7 @@ With 24+ years of educational experience (roots tracing back to 2002), the unive
     location: "Dehradun, Uttarakhand",
     established: "1993",
     campus: "Central Dehradun (Rajaji National Park Border)",
-    ranking: "NIRF Rank 48 – University | NIRF Rank 52 – Engineering (2025)",
+    ranking: "NIRF Rank 48 | Top B.Tech & MBA College in Dehradun",
     guarantee: "Outstanding Placement Record",
     tag: "NAAC A+ | NIRF TOP 50",
     rating: "4.7",

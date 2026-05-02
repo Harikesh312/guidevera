@@ -18,6 +18,8 @@ import {
   GraduationCap,
   BookOpen,
   Briefcase,
+  Monitor,
+  Stethoscope,
   ChevronRight,
   ChevronDown,
   X,
@@ -141,7 +143,7 @@ export default function HomeClient() {
 
   const row1 = [
     { id: 1, name: "DBUU", slug: "dev-bhoomi-uttarakhand-university-dehradun", img: "/images/dbuu.jpg", alt: "DBUU campus - Dev Bhoomi Uttarakhand University Dehradun", rating: "4.3", tag: "TOP RANKED", courses: "B.Tech | MBA | BHM | BAMS", coursesList: ["B.Tech","MBA","BHM","BAMS","BCA","B.Pharm","LLB","B.Sc Agriculture"] },
-    { id: 2, name: "Uttranchal University", slug: "uttranchal-university-dehradun", img: "/images/Uttranchal-University.jpg", alt: "Uttranchal University campus - NAAC A+ college Dehradun", rating: "4.5", tag: "NAAC A+", courses: "B.Tech | MBA | Law", coursesList: ["B.Tech","MBA","BA LLB","B.Pharm","B.Sc Agriculture","BCA","BHM","B.Sc Nursing"] },
+    { id: 2, name: "Uttaranchal University", slug: "uttaranchal-university-dehradun", img: "/images/Uttranchal-University.jpg", alt: "Uttaranchal University campus - NAAC A+ college Dehradun", rating: "4.5", tag: "NAAC A+", courses: "B.Tech | MBA | Law", coursesList: ["B.Tech","MBA","BA LLB","B.Pharm","B.Sc Agriculture","BCA","BHM","B.Sc Nursing"] },
     { id: 3, name: "Graphic Era", slug: "graphic-era-university-dehradun", img: "/images/graphic-era.jpg", alt: "Graphic Era University campus - NIRF Top 50 college Dehradun", rating: "4.7", tag: "NIRF TOP 50", courses: "B.Tech | BCA | BHM", coursesList: ["B.Tech","MBA","BHM","BCA","BBA","B.Des","LLB","M.Tech"] },
     { id: 4, name: "DBS Global", slug: "dbs-global-university-dehradun", img: "/images/DBS.jpg", alt: "DBS Global University campus - Top B-School Dehradun", rating: "4.8", tag: "TOP B-SCHOOL", courses: "MBA | BBA | B.Tech", coursesList: ["MBA","BBA","B.Tech AI/ML","BCA","B.Com","B.Sc Agriculture","LLB","B.Pharm"] },
     { id: 5, name: "Tulas Institute", slug: "tulas-institute-dehradun", img: "/images/Tulas-Institute.jpg", alt: "Tulas Institute campus - NAAC A+ engineering college Dehradun", rating: "4.7", tag: "NAAC A+", courses: "B.Tech | BCA | MBA", coursesList: ["B.Tech","MBA","BBA","BCA","MCA","B.Sc Agriculture","B.Pharm"] },
@@ -314,10 +316,18 @@ export default function HomeClient() {
             transition={{ duration: 0.8, delay: 0.5 }}
             className="flex flex-wrap items-center justify-center gap-6 text-sm text-white/60"
           >
-            <div onClick={() => router.push('/colleges')} className="flex items-center gap-2 hover:text-white transition-colors cursor-pointer"><GraduationCap size={18} /> B.Tech</div>
-            <div onClick={() => router.push('/colleges')} className="flex items-center gap-2 hover:text-white transition-colors cursor-pointer"><Brain size={18} /> Science</div>
-            <div onClick={() => router.push('/colleges')} className="flex items-center gap-2 hover:text-white transition-colors cursor-pointer"><Briefcase size={18} /> Law</div>
-            <div onClick={() => router.push('/colleges')} className="flex items-center gap-2 hover:text-white transition-colors cursor-pointer"><BookOpen size={18} /> MBA</div>
+            <div onClick={() => router.push('/colleges?search=B.Tech')} className="flex items-center gap-2 hover:text-white transition-colors cursor-pointer group">
+              <GraduationCap size={18} className="group-hover:text-[#0EB4A6] transition-colors" /> B.Tech
+            </div>
+            <div onClick={() => router.push('/colleges?search=Medical')} className="flex items-center gap-2 hover:text-white transition-colors cursor-pointer group">
+              <Stethoscope size={18} className="group-hover:text-[#0EB4A6] transition-colors" /> Medical
+            </div>
+            <div onClick={() => router.push('/colleges?search=Law')} className="flex items-center gap-2 hover:text-white transition-colors cursor-pointer group">
+              <Briefcase size={18} className="group-hover:text-[#0EB4A6] transition-colors" /> Law
+            </div>
+            <div onClick={() => router.push('/colleges?search=MBA')} className="flex items-center gap-2 hover:text-white transition-colors cursor-pointer group">
+              <BookOpen size={18} className="group-hover:text-[#0EB4A6] transition-colors" /> MBA
+            </div>
           </motion.div>
         </div>
       </section>
@@ -327,15 +337,13 @@ export default function HomeClient() {
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#0EB4A6]/5 rounded-full blur-[100px] pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
-            <div className="max-w-2xl">
+            <div className="max-w-2xl lg:max-w-none">
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 tracking-tight">Top Rated Colleges <span className="text-[#0EB4A6]">in Uttarakhand</span> &amp; India</h2>
               <p className="text-white/60 text-lg">
                 Explore our handpicked list of NAAC A+, NIRF-ranked, and AICTE-approved colleges across Uttarakhand offering B.Tech, MBA, BCA, Law, and more.
               </p>
             </div>
-            <Link href="/colleges" className="hidden md:flex items-center gap-2 text-[#0EB4A6] hover:text-[#0c9c90] font-medium transition-colors whitespace-nowrap">
-              View All Colleges <ChevronRight size={18} />
-            </Link>
+
           </div>
 
           {/* Marquee Rows — all screen sizes */}
@@ -619,13 +627,13 @@ export default function HomeClient() {
                 { name: "Arjun Mehta", detail: "MBA, DBS Global University", stars: 5, quote: "The counseling session helped me choose between 3 MBA colleges. Best decision of my life, got into an amazing corporate role." },
                 { name: "Priya Negi", detail: "BHM, Graphic Era", stars: 4, quote: "Coming from a small town, I had no idea which hospitality college to pick. Guidevera mapped it perfectly according to my budget and goals." },
                 { name: "Karan Bisht", detail: "BCA, ITM Dehradun", stars: 5, quote: "The AI roadmap showed me which certifications to do alongside my BCA. Got placed at ₹4 LPA directly from campus!" },
-                { name: "Sneha Rawat", detail: "BAMS, Uttranchal University", stars: 4, quote: "I was being pushed toward engineering by family. Guidevera helped me stand my ground with data. I'm thriving in medicine now." }
+                { name: "Sneha Rawat", detail: "BAMS, Uttaranchal University", stars: 4, quote: "I was being pushed toward engineering by family. Guidevera helped me stand my ground with data. I'm thriving in medicine now." }
               ], ...[
                 { name: "Riya Sharma", detail: "B.Tech CSE, DBUU", stars: 5, quote: "I was completely confused between engineering and design. Guidevera's ability test gave me clarity about where my true skills lie." },
                 { name: "Arjun Mehta", detail: "MBA, DBS Global University", stars: 5, quote: "The counseling session helped me choose between 3 MBA colleges. Best decision of my life, got into an amazing corporate role." },
                 { name: "Priya Negi", detail: "BHM, Graphic Era", stars: 4, quote: "Coming from a small town, I had no idea which hospitality college to pick. Guidevera mapped it perfectly according to my budget and goals." },
                 { name: "Karan Bisht", detail: "BCA, ITM Dehradun", stars: 5, quote: "The AI roadmap showed me which certifications to do alongside my BCA. Got placed at ₹4 LPA directly from campus!" },
-                { name: "Sneha Rawat", detail: "BAMS, Uttranchal University", stars: 4, quote: "I was being pushed toward engineering by family. Guidevera helped me stand my ground with data. I'm thriving in medicine now." }
+                { name: "Sneha Rawat", detail: "BAMS, Uttaranchal University", stars: 4, quote: "I was being pushed toward engineering by family. Guidevera helped me stand my ground with data. I'm thriving in medicine now." }
               ]].map((story, i) => (
                 <div 
                   key={i}
@@ -674,7 +682,7 @@ export default function HomeClient() {
             />
             <FAQItem 
               question="Which colleges are listed on Guidevera?" 
-              answer="We list top-rated colleges across Uttarakhand and India — including Graphic Era (NIRF Top 50), Uttranchal University (NAAC A+), DBS Global, Tulas Institute, and more." 
+              answer="We list top-rated colleges across Uttarakhand and India — including Graphic Era (Best for B.Tech & MBA), Uttaranchal University (NAAC A+), DBS Global, Tulas Institute, and more." 
             />
             <FAQItem 
               question="Is Guidevera free to use?" 
