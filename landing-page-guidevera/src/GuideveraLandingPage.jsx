@@ -22,7 +22,7 @@ const INDIAN_STATES = [
 
 const colleges = [
   { id:1, name:"DBUU", slug:"dbuu", rating:"4.3", tag:"TOP RANKED", fee:"₹1.5L–2.0L/yr", courses:["B.Tech","MBA","BHM","BAMS","BCA","B.Pharm","LLB"], image: "/images/dbuu.jpg" },
-  { id:2, name:"Uttranchal University", slug:"uttranchal-university", rating:"4.5", tag:"NAAC A+", fee:"₹1.8L–2.5L/yr", courses:["B.Tech","MBA","BA LLB","BCA","BHM","B.Sc Nursing"], image: "/images/Uttranchal-University.jpg" },
+  { id:2, name:"Uttaranchal University", slug:"uttaranchal-university", rating:"4.5", tag:"NAAC A+", fee:"₹1.8L–2.5L/yr", courses:["B.Tech","MBA","BA LLB","BCA","BHM","B.Sc Nursing"], image: "/images/Uttranchal-University.jpg" },
   { id:3, name:"Graphic Era", slug:"graphic-era", rating:"4.7", tag:"NIRF TOP 50", fee:"₹2.5L–3.5L/yr", courses:["B.Tech","MBA","BCA","BBA","B.Des","LLB"], image: "/images/graphic-era.jpg" },
   { id:4, name:"DBS Global", slug:"dbs-global", rating:"4.8", tag:"TOP B-SCHOOL", fee:"₹3.0L–4.0L/yr", courses:["MBA","BBA","B.Tech AI/ML","BCA","B.Com","LLB"], image: "/images/DBS.jpg" },
   { id:5, name:"Tulas Institute", slug:"tulas-institute", rating:"4.7", tag:"NAAC A+", fee:"₹1.5L–1.8L/yr", courses:["B.Tech","MBA","BBA","BCA","B.Sc Agriculture"], image: "/images/Tulas-Institute.jpg" },
@@ -39,7 +39,7 @@ const testimonials = [
   { id: 2, name: "Arjun Mehta", course: "MBA, DBS Global", rating: 5, text: "The counseling session helped me choose between 3 MBA colleges. Got into an amazing corporate role." },
   { id: 3, name: "Priya Negi", course: "BHM, Graphic Era", rating: 4, text: "Coming from a small town, I had no idea which college to pick. Guidevera mapped it perfectly." },
   { id: 4, name: "Karan Bisht", course: "BCA, ITM Dehradun", rating: 5, text: "The AI roadmap showed me which certifications to get. Placed at ₹4 LPA directly from campus!" },
-  { id: 5, name: "Sneha Rawat", course: "BAMS, Uttranchal", rating: 4, text: "Guidevera helped me stand my ground against family pressure. I'm thriving in medicine now." }
+  { id: 5, name: "Sneha Rawat", course: "BAMS, Uttaranchal", rating: 4, text: "Guidevera helped me stand my ground against family pressure. I'm thriving in medicine now." }
 ];
 
 export default function GuideveraLandingPage() {
