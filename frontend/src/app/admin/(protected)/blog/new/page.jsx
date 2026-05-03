@@ -18,14 +18,14 @@ import { Color } from "@tiptap/extension-color";
 import { TextStyle } from "@tiptap/extension-text-style";
 import { Highlight } from "@tiptap/extension-highlight";
 import { CharacterCount } from "@tiptap/extension-character-count";
-import { 
-  Bold, Italic, Underline as UnderlineIcon, Strikethrough, Code, 
+import {
+  Bold, Italic, Underline as UnderlineIcon, Strikethrough, Code,
   AlignLeft, AlignCenter, AlignRight, AlignJustify,
   List, ListOrdered, CheckSquare, Quote, Link as LinkIcon,
   Image as ImageIcon, Table as TableIcon, Minus, CodeSquare,
   Highlighter, Eraser, Undo, Redo, PenTool, X, ChevronDown, Check,
   Save, Eye, Calendar, Clock, Lock, Settings, Type, LayoutTemplate, Share2, LogOut, Loader2,
-  Star, Trash2, User, ArrowLeft
+  Star, Trash2, User, ArrowLeft, Plus
 } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense } from "react";
@@ -38,8 +38,8 @@ export function BlogAdminPanel() {
   const isEditMode = !!editSlug;
 
   const [title, setTitle] = useState("");
-  const [saveState, setSaveState] = useState("saved"); // saved, saving, unsaved
-  
+  const [saveState, setSaveState] = useState("saved");
+
   // Sidebar states
   const [toc, setToc] = useState([]);
   const [includeToc, setIncludeToc] = useState(true);
@@ -57,19 +57,19 @@ export function BlogAdminPanel() {
   const [metaDesc, setMetaDesc] = useState("");
   const [slug, setSlug] = useState("");
   const [focusKeyword, setFocusKeyword] = useState("");
-  
+
   // Categories and Tags
   const [selectedCategory, setSelectedCategory] = useState("");
   const [tags, setTags] = useState([]);
   const [tagInput, setTagInput] = useState("");
-  
+
   // Blog Settings
   const [allowComments, setAllowComments] = useState(true);
   const [featuredPost, setFeaturedPost] = useState(false);
   const [showAuthorInfo, setShowAuthorInfo] = useState(true);
-  const [readingTimeMode, setReadingTimeMode] = useState("auto"); // auto, manual
+  const [readingTimeMode, setReadingTimeMode] = useState("auto");
   const [manualReadingTime, setManualReadingTime] = useState("");
-  const [visibility, setVisibility] = useState("public"); // public, private, password
+  const [visibility, setVisibility] = useState("public");
   const [password, setPassword] = useState("");
 
   // Modals
@@ -83,7 +83,7 @@ export function BlogAdminPanel() {
     immediatelyRender: false,
     extensions: [
       StarterKit.configure({
-        heading: false, // configure custom heading below
+        heading: false,
       }),
       Heading.configure({
         levels: [1, 2, 3, 4, 5, 6],
@@ -118,18 +118,19 @@ export function BlogAdminPanel() {
     content: '',
     onUpdate: ({ editor }) => {
       setSaveState("unsaved");
-      // Generate TOC
-      const headings = [];
-      editor.state.doc.descendants((node, pos) => {
-        if (node.type.name === 'heading' && node.attrs.level <= 3) {
-          headings.push({
-            level: node.attrs.level,
-            text: node.textContent,
-            id: `heading-${pos}`
-          });
-        }
-      });
-      setToc(headings);
+      if (toc.length === 0) {
+        const headings = [];
+        editor.state.doc.descendants((node, pos) => {
+          if (node.type.name === 'heading' && node.attrs.level <= 3) {
+            headings.push({
+              level: node.attrs.level,
+              text: node.textContent,
+              id: `heading-${pos}`
+            });
+          }
+        });
+        setToc(headings);
+      }
     },
     editorProps: {
       attributes: {
@@ -137,8 +138,6 @@ export function BlogAdminPanel() {
       },
     },
   });
-
-  // wordCount and readTime moved below !editor check
 
   // Pre-fill state for Edit Mode
   useEffect(() => {
@@ -179,7 +178,6 @@ export function BlogAdminPanel() {
         setReadingTimeMode('manual');
         setManualReadingTime(String(b.readingTime));
       }
-      // Pre-fill TipTap editor content
       editor.commands.setContent(b.content || '');
     };
     load();
@@ -204,8 +202,6 @@ export function BlogAdminPanel() {
       coverImage: coverImageUrl || coverImage || '',
       coverAlt,
       authorName,
-      authorRole,
-      authorBio,
       category: selectedCategory,
       tags,
       status: statusOverride,
@@ -213,6 +209,7 @@ export function BlogAdminPanel() {
       password,
       featuredPost,
       readingTime: readingTimeMode === 'manual' ? parseInt(manualReadingTime) || readTime : readTime,
+      tableOfContents: toc,
       publishDate: publishDate ? new Date(`${publishDate}T${publishTime || '00:00'}`) : new Date(),
     };
     const res = await fetch(`${API_URL}/api/blog`, {
@@ -251,11 +248,9 @@ export function BlogAdminPanel() {
   const handleCoverUpload = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
-
     setIsUploading(true);
     const formData = new FormData();
     formData.append('image', file);
-
     try {
       const token = localStorage.getItem('token');
       const res = await fetch(`${API_URL}/api/blog/admin/upload`, {
@@ -307,10 +302,8 @@ export function BlogAdminPanel() {
     input.onchange = async (e) => {
       const file = e.target.files[0];
       if (!file) return;
-
       const formData = new FormData();
       formData.append('image', file);
-
       try {
         const token = localStorage.getItem('token');
         const res = await fetch(`${API_URL}/api/blog/admin/upload`, {
@@ -336,7 +329,19 @@ export function BlogAdminPanel() {
     editor.chain().focus().insertTable({ rows: 3, cols: 3, withHeaderRow: true }).run();
   };
 
-  // !editor check moved above
+  const syncToc = () => {
+    const headings = [];
+    editor.state.doc.descendants((node, pos) => {
+      if (node.type.name === 'heading' && node.attrs.level <= 3) {
+        headings.push({
+          level: node.attrs.level,
+          text: node.textContent,
+          id: `heading-${pos}`
+        });
+      }
+    });
+    setToc(headings);
+  };
 
   const currentHeadingLevel = () => {
     if (editor.isActive('heading', { level: 1 })) return 'H1';
@@ -354,12 +359,18 @@ export function BlogAdminPanel() {
     router.push("/login");
   };
 
+  const levelColors = {
+    1: { bg: 'bg-[#0EB4A6]/15', border: 'border-[#0EB4A6]/40', text: 'text-[#0EB4A6]' },
+    2: { bg: 'bg-purple-500/10', border: 'border-purple-500/30', text: 'text-purple-400' },
+    3: { bg: 'bg-blue-500/10', border: 'border-blue-500/30', text: 'text-blue-400' },
+  };
+
   return (
     <div className="min-h-screen bg-[#0f0f1a] text-white font-['Plus_Jakarta_Sans',sans-serif]">
       {/* Top Toolbar */}
       <div className="sticky top-0 z-40 bg-[#1a1a2e]/95 backdrop-blur-md border-b border-[#2a2a4a] px-6 py-4 flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <button 
+          <button
             onClick={() => router.push('/admin/blog')}
             className="p-2 rounded-lg hover:bg-[#2a2a4a] text-[#a0a0c0] hover:text-white transition-colors cursor-pointer"
             title="Back to Blog List"
@@ -392,14 +403,14 @@ export function BlogAdminPanel() {
           </div>
         </div>
         <div className="flex items-center gap-3">
-          <button 
+          <button
             className="px-4 py-2 rounded-lg border border-[#2a2a4a] hover:bg-[#ff4757]/10 hover:text-[#ff4757] hover:border-[#ff4757]/30 text-sm font-medium transition-colors flex items-center gap-2 cursor-pointer"
             onClick={handleLogout}
           >
             <LogOut size={16} /> Logout
           </button>
           <div className="w-px h-6 bg-[#2a2a4a] mx-1"></div>
-          <button 
+          <button
             className="px-4 py-2 rounded-lg border border-[#2a2a4a] hover:bg-[#2a2a4a] text-sm font-medium transition-colors cursor-pointer"
             onClick={async () => {
               setSaveState('saving');
@@ -410,13 +421,13 @@ export function BlogAdminPanel() {
           >
             Save Draft
           </button>
-          <button 
+          <button
             className="px-4 py-2 rounded-lg border border-[#2a2a4a] hover:bg-[#2a2a4a] text-sm font-medium transition-colors flex items-center gap-2 cursor-pointer"
             onClick={() => setShowPreview(true)}
           >
             <Eye size={16} /> Preview
           </button>
-          <button 
+          <button
             className="px-6 py-2 rounded-lg bg-gradient-to-r from-[#0EB4A6] to-[#0b8f84] hover:from-[#0b8f84] hover:to-[#097b71] text-white text-sm font-bold shadow-[0_0_20px_rgba(14,180,166,0.3)] hover:shadow-[0_0_25px_rgba(14,180,166,0.5)] transition-all flex items-center gap-2 cursor-pointer"
             onClick={() => setShowPublishModal(true)}
           >
@@ -430,9 +441,9 @@ export function BlogAdminPanel() {
         <div className="flex-1 min-w-0 space-y-6">
           {/* Title Input */}
           <div className="bg-[#1a1a2e] border border-[#2a2a4a] rounded-2xl p-8 shadow-xl">
-            <input 
-              type="text" 
-              placeholder="Enter post title..." 
+            <input
+              type="text"
+              placeholder="Enter post title..."
               className="w-full bg-transparent text-4xl font-bold text-white placeholder:text-[#2a2a4a] focus:outline-none mb-4"
               value={title}
               onChange={(e) => {
@@ -445,8 +456,8 @@ export function BlogAdminPanel() {
                 <LayoutTemplate size={14} className="text-[#0EB4A6]" />
                 <span>Permalink: </span>
                 <span className="text-[#0EB4A6] hover:underline cursor-pointer">guidevera.com/blog/</span>
-                <input 
-                  type="text" 
+                <input
+                  type="text"
                   className="bg-transparent border-b border-[#2a2a4a] focus:border-[#0EB4A6] focus:outline-none px-1 text-[#0EB4A6] w-auto inline-block"
                   value={slug}
                   onChange={(e) => setSlug(e.target.value)}
@@ -513,8 +524,8 @@ export function BlogAdminPanel() {
           {/* Editor Canvas */}
           <div className="bg-[#1a1a2e] border border-[#2a2a4a] rounded-2xl p-10 shadow-2xl min-h-[700px] relative">
             <EditorContent editor={editor} />
-            
-            {/* Bubble Menu for quick formatting */}
+
+            {/* Bubble Menu */}
             {editor && (
               <BubbleMenu editor={editor} tippyOptions={{ duration: 100 }}>
                 <div className="bg-[#1a1a2e] border border-[#2a2a4a] rounded-xl shadow-2xl flex items-center p-1 gap-1 overflow-hidden backdrop-blur-md">
@@ -542,6 +553,7 @@ export function BlogAdminPanel() {
 
         {/* Sidebar */}
         <div className="w-[380px] shrink-0 space-y-6">
+
           {/* Publish Section */}
           <div className="bg-[#1a1a2e] border border-[#2a2a4a] rounded-2xl overflow-hidden shadow-xl">
             <div className="bg-[#2a2a4a]/30 px-6 py-4 border-b border-[#2a2a4a] flex items-center gap-2 font-bold">
@@ -551,29 +563,20 @@ export function BlogAdminPanel() {
               <div className="space-y-2">
                 <label className="text-xs font-bold text-[#a0a0c0] uppercase tracking-wider">Visibility</label>
                 <div className="grid grid-cols-3 gap-2">
-                  <button 
-                    onClick={() => setVisibility("public")} 
-                    className={`py-2 rounded-lg text-xs font-bold border transition-all ${visibility === "public" ? "bg-[#0EB4A6] border-[#0EB4A6] text-white" : "bg-[#0f0f1a] border-[#2a2a4a] text-[#a0a0c0]"}`}
-                  >
-                    Public
-                  </button>
-                  <button 
-                    onClick={() => setVisibility("private")} 
-                    className={`py-2 rounded-lg text-xs font-bold border transition-all ${visibility === "private" ? "bg-[#0EB4A6] border-[#0EB4A6] text-white" : "bg-[#0f0f1a] border-[#2a2a4a] text-[#a0a0c0]"}`}
-                  >
-                    Private
-                  </button>
-                  <button 
-                    onClick={() => setVisibility("password")} 
-                    className={`py-2 rounded-lg text-xs font-bold border transition-all ${visibility === "password" ? "bg-[#0EB4A6] border-[#0EB4A6] text-white" : "bg-[#0f0f1a] border-[#2a2a4a] text-[#a0a0c0]"}`}
-                  >
-                    Password
-                  </button>
+                  {["public", "private", "password"].map((v) => (
+                    <button
+                      key={v}
+                      onClick={() => setVisibility(v)}
+                      className={`py-2 rounded-lg text-xs font-bold border transition-all capitalize ${visibility === v ? "bg-[#0EB4A6] border-[#0EB4A6] text-white" : "bg-[#0f0f1a] border-[#2a2a4a] text-[#a0a0c0]"}`}
+                    >
+                      {v}
+                    </button>
+                  ))}
                 </div>
                 {visibility === "password" && (
-                  <input 
-                    type="password" 
-                    placeholder="Enter password..." 
+                  <input
+                    type="password"
+                    placeholder="Enter password..."
                     className="w-full bg-[#0f0f1a] border border-[#2a2a4a] rounded-lg px-4 py-2 text-sm text-white mt-2"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
@@ -586,8 +589,8 @@ export function BlogAdminPanel() {
                 <div className="flex gap-2">
                   <div className="flex-1 relative">
                     <Calendar size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#a0a0c0] pointer-events-none" />
-                    <input 
-                      type="date" 
+                    <input
+                      type="date"
                       className="w-full bg-[#0f0f1a] border border-[#2a2a4a] rounded-lg pl-9 pr-3 py-2 text-sm text-white focus:outline-none"
                       value={publishDate}
                       onChange={(e) => setPublishDate(e.target.value)}
@@ -595,8 +598,8 @@ export function BlogAdminPanel() {
                   </div>
                   <div className="flex-1 relative">
                     <Clock size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#a0a0c0] pointer-events-none" />
-                    <input 
-                      type="time" 
+                    <input
+                      type="time"
                       className="w-full bg-[#0f0f1a] border border-[#2a2a4a] rounded-lg pl-9 pr-3 py-2 text-sm text-white focus:outline-none"
                       value={publishTime}
                       onChange={(e) => setPublishTime(e.target.value)}
@@ -610,7 +613,7 @@ export function BlogAdminPanel() {
                   <Star size={16} className={featuredPost ? "text-yellow-500 fill-yellow-500" : "text-[#a0a0c0]"} />
                   <span className="text-sm font-medium">Featured Post</span>
                 </div>
-                <button 
+                <button
                   onClick={() => setFeaturedPost(!featuredPost)}
                   className={`w-10 h-5 rounded-full transition-all relative ${featuredPost ? "bg-[#0EB4A6]" : "bg-[#2a2a4a]"}`}
                 >
@@ -619,6 +622,111 @@ export function BlogAdminPanel() {
               </div>
             </div>
           </div>
+
+          {/* ── Table of Contents ── */}
+          <div className="bg-[#1a1a2e] border border-[#2a2a4a] rounded-2xl overflow-hidden shadow-xl">
+            {/* Header */}
+            <div className="px-5 py-3.5 border-b border-[#2a2a4a] flex items-center justify-between bg-[#2a2a4a]/20">
+              <div className="flex items-center gap-2">
+                <LayoutTemplate size={15} className="text-[#0EB4A6]" />
+                <span className="text-sm font-bold">Table of Contents</span>
+                {toc.length > 0 && (
+                  <span className="text-[10px] font-bold bg-[#0EB4A6]/15 text-[#0EB4A6] border border-[#0EB4A6]/25 px-1.5 py-0.5 rounded-md">
+                    {toc.length}
+                  </span>
+                )}
+              </div>
+              <button
+                onClick={syncToc}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#0EB4A6]/10 text-[#0EB4A6] border border-[#0EB4A6]/20 text-[10px] font-bold hover:bg-[#0EB4A6] hover:text-black hover:border-[#0EB4A6] transition-all"
+              >
+                <Undo size={10} className="rotate-90" />
+                Sync
+              </button>
+            </div>
+
+            <div className="p-4 space-y-3">
+              {/* Empty State */}
+              {toc.length === 0 ? (
+                <div className="flex flex-col items-center justify-center py-8 rounded-xl border border-dashed border-[#2a2a4a] bg-[#0f0f1a]/40">
+                  <LayoutTemplate size={28} className="text-[#2a2a4a] mb-2.5" />
+                  <p className="text-xs font-semibold text-white/30 mb-1">No headings found</p>
+                  <p className="text-[10px] text-[#a0a0c0]/60 mb-4 text-center px-6">
+                    Click Sync to pull headings from your content
+                  </p>
+                  <button
+                    onClick={() => setToc([{ level: 2, text: '', id: `heading-${Date.now()}` }])}
+                    className="flex items-center gap-1.5 text-[11px] text-[#0EB4A6] font-bold hover:text-white transition-colors"
+                  >
+                    <Plus size={12} /> Add manually
+                  </button>
+                </div>
+              ) : (
+                /* TOC Items */
+                <div className="space-y-1.5 max-h-[300px] overflow-y-auto pr-0.5 custom-scrollbar">
+                  {toc.map((item, index) => {
+                    const lc = levelColors[item.level] || levelColors[3];
+                    const indent = (item.level - 1) * 12;
+                    return (
+                      <div
+                        key={index}
+                        className="flex items-center gap-2 group"
+                        style={{ paddingLeft: `${indent}px` }}
+                      >
+                        {/* H-level selector */}
+                        <div className="relative shrink-0">
+                          <select
+                            value={item.level}
+                            onChange={(e) => {
+                              const newToc = [...toc];
+                              newToc[index].level = parseInt(e.target.value);
+                              setToc(newToc);
+                            }}
+                            className={`appearance-none w-10 h-7 rounded-md border text-[11px] font-black text-center outline-none cursor-pointer focus:ring-0 transition-colors ${lc.bg} ${lc.border} ${lc.text}`}
+                          >
+                            <option value={1} className="bg-[#1a1a2e] text-[#0EB4A6]">H1</option>
+                            <option value={2} className="bg-[#1a1a2e] text-purple-400">H2</option>
+                            <option value={3} className="bg-[#1a1a2e] text-blue-400">H3</option>
+                          </select>
+                        </div>
+
+                        {/* Label input */}
+                        <input
+                          type="text"
+                          value={item.text}
+                          onChange={(e) => {
+                            const newToc = [...toc];
+                            newToc[index].text = e.target.value;
+                            setToc(newToc);
+                          }}
+                          placeholder="Section label..."
+                          className="flex-1 min-w-0 bg-[#0f0f1a] border border-[#2a2a4a] rounded-lg px-2.5 py-1.5 text-xs text-white placeholder:text-white/15 focus:outline-none focus:border-[#0EB4A6]/40 transition-colors"
+                        />
+
+                        {/* Delete */}
+                        <button
+                          onClick={() => setToc(toc.filter((_, i) => i !== index))}
+                          className="shrink-0 p-1.5 rounded-lg text-white/10 hover:text-red-400 hover:bg-red-400/10 transition-all opacity-0 group-hover:opacity-100"
+                          title="Remove"
+                        >
+                          <Trash2 size={13} />
+                        </button>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+
+              {/* Add item button */}
+              <button
+                onClick={() => setToc([...toc, { level: 2, text: '', id: `heading-${Date.now()}` }])}
+                className="w-full py-2 rounded-xl border border-dashed border-[#2a2a4a] hover:border-[#0EB4A6]/40 hover:bg-[#0EB4A6]/5 text-[#a0a0c0] hover:text-[#0EB4A6] text-[11px] font-bold transition-all flex items-center justify-center gap-1.5"
+              >
+                <Plus size={13} /> Add Item
+              </button>
+            </div>
+          </div>
+          {/* ── End Table of Contents ── */}
 
           {/* Featured Image */}
           <div className="bg-[#1a1a2e] border border-[#2a2a4a] rounded-2xl overflow-hidden shadow-xl">
@@ -631,14 +739,14 @@ export function BlogAdminPanel() {
                   <>
                     <img src={coverImageUrl || coverImage} className="w-full h-full object-cover" alt="Cover" />
                     <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
-                      <button onClick={() => {setCoverImage(null); setCoverImageUrl("");}} className="p-3 bg-red-500 text-white rounded-full hover:scale-110 transition-transform"><Trash2 size={20} /></button>
+                      <button onClick={() => { setCoverImage(null); setCoverImageUrl(""); }} className="p-3 bg-red-500 text-white rounded-full hover:scale-110 transition-transform"><Trash2 size={20} /></button>
                       <button onClick={() => setImageUrlInput(true)} className="p-3 bg-[#0EB4A6] text-white rounded-full hover:scale-110 transition-transform"><LinkIcon size={20} /></button>
                     </div>
                   </>
                 ) : isUploading ? (
                   <div className="flex flex-col items-center gap-2">
                     <Loader2 className="w-8 h-8 text-[#0EB4A6] animate-spin" />
-                    <span className="text-xs font-bold text-[#a0a0c0]">Please wait, uploading...</span>
+                    <span className="text-xs font-bold text-[#a0a0c0]">Uploading...</span>
                   </div>
                 ) : (
                   <>
@@ -648,12 +756,12 @@ export function BlogAdminPanel() {
                   </>
                 )}
               </div>
-              
+
               {imageUrlInput && (
                 <div className="mt-4 flex gap-2">
-                  <input 
-                    type="text" 
-                    placeholder="Enter image URL..." 
+                  <input
+                    type="text"
+                    placeholder="Enter image URL..."
                     className="flex-1 bg-[#0f0f1a] border border-[#2a2a4a] rounded-lg px-4 py-2 text-xs text-white"
                     value={coverImageUrl}
                     onChange={(e) => setCoverImageUrl(e.target.value)}
@@ -664,8 +772,8 @@ export function BlogAdminPanel() {
 
               <div className="mt-4 space-y-2">
                 <label className="text-[10px] font-bold text-[#a0a0c0] uppercase tracking-wider">Alt Text (SEO)</label>
-                <input 
-                  type="text" 
+                <input
+                  type="text"
                   className="w-full bg-[#0f0f1a] border border-[#2a2a4a] rounded-lg px-4 py-2 text-xs text-white"
                   placeholder="Describe image..."
                   value={coverAlt}
@@ -683,32 +791,13 @@ export function BlogAdminPanel() {
             <div className="p-6 space-y-4">
               <div className="space-y-2">
                 <label className="text-[10px] font-bold text-[#a0a0c0] uppercase tracking-wider">Display Name</label>
-                <input 
-                  type="text" 
+                <input
+                  type="text"
                   className="w-full bg-[#0f0f1a] border border-[#2a2a4a] rounded-lg px-4 py-2 text-sm text-white"
                   placeholder="Author Name"
                   value={authorName}
                   onChange={(e) => setAuthorName(e.target.value)}
                 />
-              </div>
-              <div className="space-y-2">
-                <label className="text-[10px] font-bold text-[#a0a0c0] uppercase tracking-wider">Author Role</label>
-                <input 
-                  type="text" 
-                  className="w-full bg-[#0f0f1a] border border-[#2a2a4a] rounded-lg px-4 py-2 text-sm text-white"
-                  placeholder="e.g. Senior Career Expert"
-                  value={authorRole}
-                  onChange={(e) => setAuthorRole(e.target.value)}
-                />
-              </div>
-              <div className="space-y-2">
-                <label className="text-[10px] font-bold text-[#a0a0c0] uppercase tracking-wider">Bio Snippet</label>
-                <textarea 
-                  className="w-full bg-[#0f0f1a] border border-[#2a2a4a] rounded-lg px-4 py-2 text-sm text-white min-h-[80px]"
-                  placeholder="Short author bio..."
-                  value={authorBio}
-                  onChange={(e) => setAuthorBio(e.target.value)}
-                ></textarea>
               </div>
             </div>
           </div>
@@ -724,7 +813,7 @@ export function BlogAdminPanel() {
                   <label className="text-[10px] font-bold text-[#a0a0c0] uppercase tracking-wider">Meta Description</label>
                   <span className={`text-[10px] font-bold ${getMetaColor()}`}>{metaDesc.length} / 155</span>
                 </div>
-                <textarea 
+                <textarea
                   className="w-full bg-[#0f0f1a] border border-[#2a2a4a] rounded-lg px-4 py-2 text-sm text-white min-h-[100px] focus:border-[#0EB4A6] transition-colors"
                   placeholder="Brief summary for search engines..."
                   value={metaDesc}
@@ -734,7 +823,7 @@ export function BlogAdminPanel() {
 
               <div className="space-y-2">
                 <label className="text-[10px] font-bold text-[#a0a0c0] uppercase tracking-wider">Category</label>
-                <select 
+                <select
                   className="w-full bg-[#0f0f1a] border border-[#2a2a4a] rounded-lg px-4 py-2 text-sm text-white focus:outline-none"
                   value={selectedCategory}
                   onChange={(e) => setSelectedCategory(e.target.value)}
@@ -757,8 +846,8 @@ export function BlogAdminPanel() {
                     </span>
                   ))}
                 </div>
-                <input 
-                  type="text" 
+                <input
+                  type="text"
                   className="w-full bg-[#0f0f1a] border border-[#2a2a4a] rounded-lg px-4 py-2 text-sm text-white"
                   placeholder="Press enter to add tags..."
                   value={tagInput}
@@ -777,8 +866,8 @@ export function BlogAdminPanel() {
           <div className="bg-[#1a1a2e] border border-[#2a2a4a] rounded-2xl w-full max-w-md overflow-hidden shadow-2xl animate-in fade-in zoom-in-95 duration-200">
             <div className="p-6">
               <h2 className="text-xl font-bold mb-4">Insert Link</h2>
-              <input 
-                type="text" 
+              <input
+                type="text"
                 className="w-full bg-[#0f0f1a] border border-[#2a2a4a] rounded-xl px-4 py-3 text-sm text-white mb-4 focus:border-[#0EB4A6] outline-none"
                 placeholder="https://example.com"
                 value={linkUrl}
@@ -786,7 +875,7 @@ export function BlogAdminPanel() {
                 autoFocus
               />
               <div className="flex items-center gap-3 mb-6">
-                <button 
+                <button
                   onClick={() => setLinkNewTab(!linkNewTab)}
                   className={`w-10 h-5 rounded-full transition-all relative ${linkNewTab ? "bg-[#0EB4A6]" : "bg-[#2a2a4a]"}`}
                 >
@@ -812,7 +901,7 @@ export function BlogAdminPanel() {
               <div className="h-4 w-px bg-[#2a2a4a]"></div>
               <span className="text-white font-bold">{title || "Untitled Post"}</span>
             </div>
-            <button 
+            <button
               onClick={() => setShowPreview(false)}
               className="p-2 bg-[#ff4757]/10 text-[#ff4757] rounded-full hover:bg-[#ff4757] hover:text-white transition-all"
             >
@@ -826,14 +915,30 @@ export function BlogAdminPanel() {
                 <span className="text-white/40 text-xs flex items-center gap-2"><Clock size={14} /> {readTime} min read</span>
               </div>
               <h1 className="text-4xl md:text-6xl font-bold mb-10 text-white tracking-tight">{title || "Your Amazing Title Here"}</h1>
-              
+
               <div className="flex items-center gap-4 mb-12 py-8 border-y border-white/5">
                 <div className="w-12 h-12 rounded-full bg-[#0EB4A6] flex items-center justify-center text-black font-bold text-xl">{authorName.charAt(0) || "G"}</div>
                 <div>
                   <p className="font-bold text-white">{authorName || "Guidevera Author"}</p>
-                  <p className="text-xs text-white/40">{authorRole || "Expert Contributor"}</p>
+                  <p className="text-xs text-white/40">Verified Publisher</p>
                 </div>
               </div>
+
+              {toc.length > 0 && (
+                <div className="mb-12 p-8 bg-white/5 rounded-3xl border border-white/10">
+                  <h3 className="text-xl font-bold mb-6 text-white flex items-center gap-2">
+                    <LayoutTemplate size={20} className="text-[#0EB4A6]" /> Table of Contents
+                  </h3>
+                  <ul className="space-y-3">
+                    {toc.map((item, i) => (
+                      <li key={i} style={{ paddingLeft: `${(item.level - 1) * 1.5}rem` }}>
+                        <span className="text-[#0EB4A6]/60 mr-2 text-xs font-bold">H{item.level}</span>
+                        <span className="text-white/70 hover:text-[#0EB4A6] transition-colors cursor-pointer text-sm">{item.text}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
 
               {coverImage && (
                 <div className="w-full aspect-video rounded-3xl overflow-hidden mb-12 shadow-2xl">
@@ -856,8 +961,8 @@ export function BlogAdminPanel() {
                 <Share2 size={24} />
               </div>
               <h2 className="text-2xl font-bold text-white mb-2">{isEditMode ? 'Update Post?' : 'Ready to Publish?'}</h2>
-              <p className="text-[#a0a0c0] text-sm mb-6">Review your post details before making it live to the world.</p>
-              
+              <p className="text-[#a0a0c0] text-sm mb-6">Review your post details before making it live.</p>
+
               <div className="bg-[#0f0f1a] rounded-xl p-4 mb-6 border border-[#2a2a4a]">
                 {coverImage && <img src={coverImage} className="w-full h-32 object-cover rounded-lg mb-4" />}
                 <h4 className="font-bold text-white mb-2 line-clamp-2">{title || "Untitled Blog Post"}</h4>
@@ -868,12 +973,12 @@ export function BlogAdminPanel() {
                   <div className="text-[#a0a0c0]">Visibility:</div><div className="text-white text-right capitalize">{visibility}</div>
                 </div>
               </div>
-              
+
               <div className="flex gap-3">
                 <button onClick={() => setShowPublishModal(false)} className="flex-1 px-4 py-3 rounded-lg border border-[#2a2a4a] hover:bg-[#2a2a4a] text-white font-medium transition-colors">
                   Go Back
                 </button>
-                <button 
+                <button
                   onClick={async () => {
                     const result = await saveBlog('published');
                     if (result.success) {
@@ -883,7 +988,7 @@ export function BlogAdminPanel() {
                     } else {
                       alert('Publish failed: ' + result.message);
                     }
-                  }} 
+                  }}
                   className="flex-1 px-4 py-3 rounded-lg bg-gradient-to-r from-[#0EB4A6] to-[#0b8f84] hover:from-[#0b8f84] hover:to-[#097b71] text-white font-bold shadow-[0_0_20px_rgba(14,180,166,0.3)] flex items-center justify-center gap-2 transition-all"
                 >
                   {isEditMode ? 'Update Post' : 'Publish Now'} <Check size={18} strokeWidth={3} />
@@ -894,59 +999,24 @@ export function BlogAdminPanel() {
         </div>
       )}
 
-      {/* Global Styles for Animations & Prose Overrides */}
+      {/* Global Styles */}
       <style dangerouslySetInnerHTML={{__html: `
-        button {
-          cursor: pointer;
-        }
-        @keyframes slide-in-right {
-          from { transform: translateX(100%); }
-          to { transform: translateX(0); }
-        }
-        .animate-slide-in-right {
-          animation: slide-in-right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .custom-scrollbar::-webkit-scrollbar {
-          width: 4px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-          background: transparent;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-          background: #2a2a4a;
-          border-radius: 20px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-          background: #3a3a5a;
-        }
-        .no-scrollbar::-webkit-scrollbar {
-          display: none;
-        }
+        button { cursor: pointer; }
+        .custom-scrollbar::-webkit-scrollbar { width: 3px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #2a2a4a; border-radius: 20px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #3a3a5a; }
         .prose-invert h1, .prose-invert h2, .prose-invert h3, .prose-invert h4 {
-          color: white !important;
-          margin-top: 2em !important;
-          margin-bottom: 1em !important;
+          color: white !important; margin-top: 2em !important; margin-bottom: 1em !important;
         }
-        .prose-invert p {
-          color: rgba(255, 255, 255, 0.7) !important;
-          line-height: 1.8 !important;
-          margin-bottom: 1.5em !important;
-        }
-        .prose-invert img {
-          border-radius: 1.5rem !important;
-          margin: 2em 0 !important;
-        }
+        .prose-invert p { color: rgba(255,255,255,0.7) !important; line-height: 1.8 !important; margin-bottom: 1.5em !important; }
+        .prose-invert img { border-radius: 1.5rem !important; margin: 2em 0 !important; }
         .prose-invert blockquote {
-          border-left-color: #0EB4A6 !important;
-          background: rgba(14, 180, 166, 0.05) !important;
-          padding: 1.5em !important;
-          border-radius: 0 1rem 1rem 0 !important;
-          font-style: italic !important;
+          border-left-color: #0EB4A6 !important; background: rgba(14,180,166,0.05) !important;
+          padding: 1.5em !important; border-radius: 0 1rem 1rem 0 !important; font-style: italic !important;
         }
-        .prose-invert a {
-          color: #0EB4A6 !important;
-          text-underline-offset: 4px !important;
-        }
+        .prose-invert a { color: #0EB4A6 !important; text-underline-offset: 4px !important; }
+        select option { background: #1a1a2e; }
       `}} />
     </div>
   );

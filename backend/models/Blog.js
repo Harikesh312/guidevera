@@ -17,6 +17,11 @@ const BlogSchema = new mongoose.Schema({
   password: { type: String, default: '' },
   featuredPost: { type: Boolean, default: false },
   readingTime: { type: Number, default: 1 },
+  tableOfContents: [{
+    level: { type: Number },
+    text: { type: String },
+    id: { type: String }
+  }],
   publishDate: { type: Date, default: Date.now },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },

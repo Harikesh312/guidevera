@@ -17,6 +17,7 @@ export default function BlogDetailClient({ slug }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [shareStatus, setShareStatus] = useState("idle"); // idle, copied
+  const [recommendations, setRecommendations] = useState([]);
 
   useEffect(() => {
     const fetchBlog = async () => {
@@ -27,6 +28,13 @@ export default function BlogDetailClient({ slug }) {
         if (data.success) {
           setBlog(data.blog);
           document.title = `${data.blog.title} | Guidevera Blog`;
+          
+          // Fetch recommendations
+          const recRes = await fetch(`${API_URL}/api/blog`);
+          const recData = await recRes.json();
+          if (recData.success) {
+            setRecommendations(recData.blogs.filter(b => b.slug !== slug).slice(0, 3));
+          }
         } else {
           setError(true);
         }
@@ -150,7 +158,7 @@ export default function BlogDetailClient({ slug }) {
                 </div>
                 <div>
                   <p className="font-bold text-white leading-tight">{blog.authorName}</p>
-                  <p className="text-xs text-white/40 mt-1">{blog.authorRole || 'Contributor'}</p>
+                  <p className="text-xs text-white/40 mt-1">Verified Publisher</p>
                 </div>
               </div>
               <div className="flex items-center gap-6 text-white/40 text-sm">
@@ -166,6 +174,36 @@ export default function BlogDetailClient({ slug }) {
                 </div>
               </div>
             </div>
+
+            {/* Table of Contents */}
+            {blog.tableOfContents && blog.tableOfContents.length > 0 && (
+              <div className="mb-12 p-8 bg-[#121214] rounded-3xl border border-white/5 relative overflow-hidden group">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-[#0EB4A6]/5 blur-[60px] rounded-full pointer-events-none" />
+                <h3 className="text-xl font-bold mb-6 text-white flex items-center gap-2">
+                   <Star size={20} className="text-[#0EB4A6]" /> Table of Contents
+                </h3>
+                <nav className="space-y-4">
+                  {blog.tableOfContents.map((item, i) => (
+                    <a 
+                      key={i} 
+                      href={`#${item.id}`}
+                      className="block text-white/60 hover:text-[#0EB4A6] transition-colors text-sm md:text-base font-medium flex items-center gap-3"
+                      style={{ paddingLeft: `${(item.level - 1) * 1.5}rem` }}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        const element = document.getElementById(item.id);
+                        if (element) {
+                          element.scrollIntoView({ behavior: 'smooth' });
+                        }
+                      }}
+                    >
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#0EB4A6]/30" />
+                      {item.text}
+                    </a>
+                  ))}
+                </nav>
+              </div>
+            )}
 
             {/* Rendered HTML Content */}
             <div className="blog-content-wrapper relative">
@@ -267,20 +305,56 @@ export default function BlogDetailClient({ slug }) {
             {/* Author Bio Card */}
             <div className="bg-[#121214] border border-white/5 rounded-3xl p-6 shadow-xl relative overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 bg-[#0EB4A6]/5 blur-[60px] rounded-full pointer-events-none" />
-              <h3 className="text-sm font-bold text-white/30 uppercase tracking-widest mb-6">About the Author</h3>
+              <h3 className="text-sm font-bold text-white/30 uppercase tracking-widest mb-6">About Guidevera</h3>
               <div className="flex items-center gap-4 mb-4">
                 <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#0EB4A6] to-[#0fdad3] flex items-center justify-center text-black font-bold text-2xl shadow-lg">
-                  {blog.authorName.charAt(0)}
+                  G
                 </div>
                 <div>
-                  <h4 className="font-bold text-white text-lg leading-tight">{blog.authorName}</h4>
-                  <p className="text-xs text-[#0EB4A6] mt-1 font-medium">{blog.authorRole}</p>
+                  <h4 className="font-bold text-white text-lg leading-tight">Guidevera</h4>
+                  <p className="text-xs text-[#0EB4A6] mt-1 font-medium">Career Excellence Platform</p>
                 </div>
               </div>
-              <p className="text-sm text-white/60 leading-relaxed italic">
-                {blog.authorBio || "Regular contributor at Guidevera, helping students navigate their career paths with expert insights."}
+              <p className="text-sm text-white/60 leading-relaxed">
+                Guidevera provides scientifically validated ability assessments, expert career counseling, and data-driven college recommendations — replacing guesswork with clarity for your future.
               </p>
             </div>
+
+            {/* Recommendations Section */}
+            {recommendations.length > 0 && (
+              <div className="bg-[#121214] border border-white/5 rounded-3xl p-6 shadow-xl space-y-6">
+                <h3 className="text-sm font-bold text-white/30 uppercase tracking-widest flex items-center gap-2">
+                  <Star size={14} className="text-[#fbbf24]" /> More for You
+                </h3>
+                <div className="space-y-6">
+                  {recommendations.map((rec) => (
+                    <Link key={rec.slug} href={`/blog/${rec.slug}`} className="block group">
+                      <div className="flex gap-4">
+                        <div className="w-20 h-20 shrink-0 rounded-xl overflow-hidden relative border border-white/5">
+                          <Image 
+                            src={rec.coverImage || '/images/dbuu.jpg'} 
+                            alt={rec.title}
+                            fill
+                            className="object-cover group-hover:scale-110 transition-transform duration-500"
+                          />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <h4 className="text-sm font-bold text-white group-hover:text-[#0EB4A6] transition-colors line-clamp-2 leading-snug mb-1">
+                            {rec.title}
+                          </h4>
+                          <p className="text-[10px] text-white/40 uppercase tracking-wider font-bold">
+                            {rec.category || 'General'}
+                          </p>
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+                <Link href="/blog" className="block w-full py-3 text-center border border-white/10 rounded-xl text-xs font-bold hover:bg-white/5 transition-all text-[#0EB4A6]">
+                  View All Blogs
+                </Link>
+              </div>
+            )}
 
             {/* Tags Card */}
             {blog.tags && blog.tags.length > 0 && (
