@@ -79,6 +79,109 @@ DBUU offers 120+ programs across 11 schools in Engineering, Management, Pharmacy
       "24x7 Security",
     ],
 
+    // ── SEO DATA ──
+    seo: {
+      title: "Dev Bhoomi Uttarakhand University Dehradun — Courses, Fees, Admission 2026 | Guidevera",
+      description: "Dev Bhoomi Uttarakhand University (DBUU) Dehradun — #1 in Uttarakhand Professional Education. Check B.Tech, MBA, BHM courses, fees & admission 2026.",
+      canonical: "https://guidevera.com/colleges/dev-bhoomi-uttarakhand-university-dehradun",
+      ogTitle: "DBUU Dehradun — Courses, Fees & Admission 2026 | Guidevera",
+      ogDescription: "#1 Uttarakhand Professional Education | 120+ Courses | 40 LPA Highest Placement.",
+      ogImage: "https://guidevera.com/colleges/dbuu-banner.jpg",
+      twitterTitle: "DBUU Dehradun — Courses, Fees & Admission 2026 | Guidevera",
+      twitterDescription: "#1 Uttarakhand | B.Tech, MBA, BHM, Law. Check fees & admission on Guidevera.",
+      twitterImage: "https://guidevera.com/colleges/dbuu-banner.jpg",
+    },
+    h1: "Dev Bhoomi Uttarakhand University (DBUU) Dehradun — #1 in Uttarakhand | Admission 2026",
+    subtext: "Dev Bhoomi Uttarakhand University (DBUU), Dehradun is ranked #1 in Uttarakhand for Professional Education by Education World Rankings 2025-26. Established in 2005, DBUU is spread across a 42-acre campus offering 120+ programmes in Engineering, Management, Law, Pharmacy, Hotel Management and more — with 850+ recruiter tie-ups and 15,500+ placement offers.",
+
+    highlights: [
+      { label: "Established", value: "2005" },
+      { label: "Type", value: "Private University" },
+      { label: "Location", value: "Dev Bhoomi Campus, Chakrata Road, Manduwala, Dehradun — 248007" },
+      { label: "Approved By", value: "UGC, AICTE, PCI, INC, BCI, CoA, UAU, IPC" },
+      { label: "Campus Size", value: "42 Acres" },
+      { label: "Rankings", value: "#1 Uttarakhand Professional Education (Education World 2025-26) | #66 Engineering (Times)" },
+      { label: "Highest Placement", value: "Rs 40 LPA" },
+      { label: "Placement Rate", value: "80-85%" },
+      { label: "Total Placement Offers", value: "15,500+" },
+      { label: "Recruiter Tie-Ups", value: "850+" },
+      { label: "Top Recruiters", value: "Adobe, Amazon, Accenture, Deloitte, Infosys, Wipro, TCS, HCL, Decathlon" },
+      { label: "Total Courses", value: "120+ Programmes across 11 Schools" },
+    ],
+
+    coursesFees: {
+      heading: "DBUU Dehradun — Courses & Fees 2026",
+      rows: [
+        { course: "B.Tech (CSE)", duration: "4 Years", totalFees: "Rs 7 Lakhs" },
+        { course: "B.Tech (Other)", duration: "4 Years", totalFees: "Rs 3 - 7.6 Lakhs" },
+        { course: "MBA", duration: "2 Years", totalFees: "Rs 1,40,000 (Rs 70k/semester)" },
+        { course: "BHM", duration: "4 Years", totalFees: "Rs 4.87 Lakhs" },
+        { course: "BBA", duration: "3-4 Years", totalFees: "Rs 3.71 - 5.67 Lakhs" },
+        { course: "B.Sc Nursing", duration: "4 Years", totalFees: "Rs 9.87 Lakhs" },
+        { course: "BAMS", duration: "5.5 Years", totalFees: "Rs 1,50,000 per year" },
+        { course: "B.Arch", duration: "5 Years", totalFees: "Contact University" },
+      ],
+    },
+
+    admission: {
+      heading: "DBUU Dehradun — Admission Process 2026",
+      intro: "DBUU admissions 2026 are open for all courses. Admission is merit-based. Applications can be submitted online through the official DBUU website. DBUU also conducts its own entrance test — DBUU-CET (Common Entrance Test).",
+      table: [
+        { course: "B.Tech", exam: "JEE Main / DBUU-CET | Min 55% in Class 12 PCM" },
+        { course: "MBA", exam: "CAT / MAT / XAT / CMAT | Graduation min 45%" },
+        { course: "BAMS", exam: "NEET (mandatory)" },
+        { course: "B.Arch", exam: "NATA / JEE Paper 2" },
+        { course: "B.Sc Nursing", exam: "NEET / Merit based" },
+        { course: "PhD", exam: "NET / SET / GATE / GPAT + Interview" },
+      ],
+      scholarships: "Domicile Scholarships, Meritorious Scholarships, Category Scholarships, JEE Rank based, CUET Score based, Girl students, Defence wards, Sports achievers.",
+    },
+
+    placementRecord: {
+      heading: "DBUU Dehradun — Placement Record",
+      stats: [
+        { label: "Highest Package", value: "Rs 40 LPA" },
+        { label: "Median Package", value: "Rs 5 to 8 LPA" },
+        { label: "Placement Rate", value: "80-85%" },
+        { label: "Total Placement Offers", value: "15,500+" },
+        { label: "Total Recruiters", value: "850+" },
+      ],
+      topRecruiters: ["Adobe", "Amazon", "Accenture", "Deloitte", "Infosys", "Wipro", "TCS", "HCL", "Decathlon"],
+    },
+
+    faq: {
+      heading: "Frequently Asked Questions — DBUU Dehradun",
+      items: [
+        { question: "What is the ranking of Dev Bhoomi Uttarakhand University?", answer: "DBUU is ranked #1 in Uttarakhand for Professional Education by Education World Rankings 2025-26 and #66 under Engineering Institutes in India by Times Rankings 2025." },
+        { question: "What are the B.Tech fees at DBUU Dehradun?", answer: "B.Tech fees at DBUU Dehradun range from Rs 3 Lakhs to Rs 7.6 Lakhs for 4 years depending on specialization. CSE fees approximately Rs 7 Lakhs total." },
+        { question: "What is the placement record of DBUU Dehradun?", answer: "DBUU has a placement rate of 80-85% with highest package of Rs 40 LPA. Over 15,500 placement offers through 850+ recruiter tie-ups." },
+        { question: "Is DBUU approved by UGC and AICTE?", answer: "Yes — Dev Bhoomi Uttarakhand University is recognized by UGC, AICTE, PCI, INC, BCI and Council of Architecture (CoA)." },
+        { question: "What courses are offered at DBUU Dehradun?", answer: "DBUU offers 120+ programmes including B.Tech, MBA, BHM, BBA, BAMS, B.Arch, Law, Pharmacy and more across 11 constituent schools." },
+        { question: "How to apply to DBUU Dehradun?", answer: "Apply online at the official DBUU website or get free counseling through Guidevera for help choosing the right course and securing admission." },
+      ],
+    },
+
+    schema: {
+      educationalOrg: {
+        "@context": "https://schema.org",
+        "@type": "EducationalOrganization",
+        "name": "Dev Bhoomi Uttarakhand University",
+        "url": "https://dbuu.ac.in",
+        "description": "#1 in Uttarakhand Professional Education. 120+ programs, 42-acre campus, 850+ recruiters, 15500+ placement offers.",
+        "address": { "@type": "PostalAddress", "streetAddress": "Dev Bhoomi Campus, Chakrata Road, Manduwala", "addressLocality": "Dehradun", "addressRegion": "Uttarakhand", "postalCode": "248007", "addressCountry": "IN" },
+        "foundingDate": "2005",
+        "sameAs": ["https://dbuu.ac.in"]
+      },
+      faqPage: {
+        "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
+          { "@type": "Question", "name": "What is the ranking of Dev Bhoomi Uttarakhand University?", "acceptedAnswer": { "@type": "Answer", "text": "#1 Uttarakhand Professional Education (Education World 2025-26)." } },
+          { "@type": "Question", "name": "What are the B.Tech fees at DBUU Dehradun?", "acceptedAnswer": { "@type": "Answer", "text": "B.Tech fees Rs 3-7.6 Lakhs for 4 years." } },
+          { "@type": "Question", "name": "What is the placement record of DBUU?", "acceptedAnswer": { "@type": "Answer", "text": "80-85% placement rate, highest Rs 40 LPA, 15,500+ offers." } },
+          { "@type": "Question", "name": "Is DBUU approved by UGC and AICTE?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — UGC, AICTE, PCI, INC, BCI and CoA approved." } }
+        ]
+      },
+    },
+
     admissionUpdates: [
       { label: "Admissions Open 2026", date: "Apply Now" },
       { label: "Scholarship Test", date: "August 2026" },
@@ -208,6 +311,107 @@ With 24+ years of educational experience (roots tracing back to 2002), the unive
       "24x7 Security",
       "Green Campus",
     ],
+
+    // ── SEO DATA ──
+    seo: {
+      title: "Uttaranchal University Dehradun — Courses, Fees, Admission 2026 | Guidevera",
+      description: "Uttaranchal University Dehradun — NAAC A+, 29,000+ students. Check B.Tech, MBA, Law, Pharmacy courses, fees, placements & admission 2026 on Guidevera.",
+      canonical: "https://guidevera.com/colleges/uttaranchal-university-dehradun",
+      ogTitle: "Uttaranchal University Dehradun — Courses, Fees & Admission 2026",
+      ogDescription: "NAAC A+ | 29,000+ Students | NIRF #75 Pharmacy | Highest Placement Rs 1.5 Crore.",
+      ogImage: "https://guidevera.com/colleges/uttaranchal-banner.jpg",
+      twitterTitle: "Uttaranchal University Dehradun — Courses, Fees & Admission 2026",
+      twitterDescription: "NAAC A+ | B.Tech, MBA, Law, Pharmacy. Check fees & admission on Guidevera.",
+      twitterImage: "https://guidevera.com/colleges/uttaranchal-banner.jpg",
+    },
+    h1: "Uttaranchal University Dehradun — NAAC A+ | 150+ Courses | Admission 2026",
+    subtext: "Uttaranchal University (UU), Dehradun is Uttarakhand's first NAAC A+ university — established in 2013 and serving 29,000+ students. Offering 150+ courses in Engineering, Law, Management, Pharmacy, Nursing and more. NIRF ranked #75 in Pharmacy 2025. Highest placement package of Rs 1.5 Crore.",
+
+    highlights: [
+      { label: "Established", value: "2013" },
+      { label: "Type", value: "Private University" },
+      { label: "Location", value: "Arcadia Grant, P.O. Chandanwari, Premnagar, Dehradun — 248007" },
+      { label: "Approved By", value: "UGC, AICTE, BCI, PCI, INC, AIU, QCI, ICAR" },
+      { label: "NAAC Grade", value: "A+ (First university in Uttarakhand to receive NAAC A+)" },
+      { label: "NIRF Ranking 2025", value: "#75 Pharmacy | #201-300 Engineering | #5 in Uttarakhand" },
+      { label: "Total Students", value: "29,000+" },
+      { label: "Highest Placement", value: "Rs 1.5 Crore (2025)" },
+      { label: "Companies Visited", value: "750+ companies for placements 2025" },
+      { label: "Total Courses", value: "150+ Courses across 12 Streams" },
+    ],
+
+    coursesFees: {
+      heading: "Uttaranchal University Dehradun — Courses & Fees 2026",
+      rows: [
+        { course: "B.Tech (CSE)", duration: "4 Years", totalFees: "Rs 10.84 - 12.02 Lakhs" },
+        { course: "B.Tech (Civil)", duration: "4 Years", totalFees: "Rs 6.34 Lakhs" },
+        { course: "MBA", duration: "2 Years", totalFees: "Rs 5.43 Lakhs" },
+        { course: "LLB (Hons)", duration: "3 Years", totalFees: "Rs 4.13 Lakhs" },
+        { course: "B.Pharma", duration: "4 Years", totalFees: "Rs 1,77,300 per annum" },
+        { course: "B.Sc Nursing", duration: "4 Years", totalFees: "Rs 10.2 Lakhs" },
+        { course: "BBA", duration: "3 Years", totalFees: "Contact University" },
+        { course: "BCA", duration: "3 Years", totalFees: "Rs 5,00,000" },
+      ],
+    },
+
+    admission: {
+      heading: "Uttaranchal University Dehradun — Admission Process 2026",
+      intro: "Uttaranchal University admissions 2026 are open for UG, PG, Diploma and PhD courses. Admission is merit-based with national entrance exam scores. Registration fee Rs 1,200. 25% seats reserved for Uttarakhand state quota.",
+      table: [
+        { course: "B.Tech", exam: "JEE Main / CUET / UUEE" },
+        { course: "MBA", exam: "CAT / MAT / XAT / CMAT / CUET PG" },
+        { course: "Law (BA LLB)", exam: "CLAT / CUET / Direct Admission" },
+        { course: "B.Pharma", exam: "GPAT / Direct Merit" },
+        { course: "B.Sc Nursing", exam: "NEET / Direct Merit" },
+        { course: "PhD", exam: "UGC NET / GATE / SLET + Interview" },
+      ],
+      eligibility: "B.Tech — Class 12 with PCM, minimum 50% | MBA — Graduation minimum 60% | Law — Class 12 any stream",
+      scholarships: "Up to 30% scholarship based on merit. Special 25% for Uttarakhand domicile students. Extra scholarships for girl students, defence wards, siblings, and alumni families.",
+    },
+
+    placementRecord: {
+      heading: "Uttaranchal University Dehradun — Placement Record",
+      stats: [
+        { label: "Highest Package (2025)", value: "Rs 1.5 Crore" },
+        { label: "Total Students Placed (2025)", value: "2,356+" },
+        { label: "Companies Visited", value: "750+" },
+        { label: "Placement Rate", value: "Strong across all departments" },
+      ],
+      topRecruiters: ["Multiple MNCs and top Indian companies across IT, Law, Management, Pharma"],
+    },
+
+    faq: {
+      heading: "Frequently Asked Questions — Uttaranchal University Dehradun",
+      items: [
+        { question: "What is the NIRF ranking of Uttaranchal University?", answer: "NIRF 2025 — #75 in Pharmacy category, #201-300 in Engineering, #5 in Uttarakhand overall." },
+        { question: "What are the B.Tech fees at Uttaranchal University Dehradun?", answer: "B.Tech CSE total fees range from Rs 10.84 to Rs 12.02 Lakhs for 4 years. Uttarakhand domicile students get 25% scholarship." },
+        { question: "Is Uttaranchal University NAAC A+ accredited?", answer: "Yes — Uttaranchal University was the FIRST university in Uttarakhand to receive NAAC A+ grade in its first cycle." },
+        { question: "What courses are available at Uttaranchal University?", answer: "B.Tech, MBA, LLB, BBA, BCA, B.Pharma, B.Sc Nursing, M.Tech, LLM and 150+ more courses across 12 streams." },
+        { question: "What is the highest placement package at Uttaranchal University?", answer: "Highest placement package is Rs 1.5 Crore (2025). More than 750 companies participated in campus placements." },
+        { question: "How to apply to Uttaranchal University Dehradun?", answer: "Apply online at the official UU website or get free counseling through Guidevera to choose the right course and college." },
+      ],
+    },
+
+    schema: {
+      educationalOrg: {
+        "@context": "https://schema.org",
+        "@type": "EducationalOrganization",
+        "name": "Uttaranchal University",
+        "url": "https://uttaranchaluniversity.ac.in",
+        "description": "NAAC A+ private university in Dehradun — first in Uttarakhand to receive NAAC A+. Offering 150+ courses in Engineering, Law, Management, Pharmacy and more.",
+        "address": { "@type": "PostalAddress", "streetAddress": "Arcadia Grant, P.O. Chandanwari, Premnagar", "addressLocality": "Dehradun", "addressRegion": "Uttarakhand", "postalCode": "248007", "addressCountry": "IN" },
+        "foundingDate": "2013",
+        "sameAs": ["https://uttaranchaluniversity.ac.in"]
+      },
+      faqPage: {
+        "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
+          { "@type": "Question", "name": "What is the NIRF ranking of Uttaranchal University?", "acceptedAnswer": { "@type": "Answer", "text": "NIRF 2025 — #75 Pharmacy, #201-300 Engineering." } },
+          { "@type": "Question", "name": "What are the B.Tech fees at Uttaranchal University?", "acceptedAnswer": { "@type": "Answer", "text": "B.Tech CSE fees Rs 10.84-12.02 Lakhs for 4 years." } },
+          { "@type": "Question", "name": "Is Uttaranchal University NAAC A+ accredited?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — first university in Uttarakhand to receive NAAC A+ grade." } },
+          { "@type": "Question", "name": "What is the highest placement at Uttaranchal University?", "acceptedAnswer": { "@type": "Answer", "text": "Highest placement Rs 1.5 Crore in 2025. 750+ companies visited." } }
+        ]
+      },
+    },
 
     admissionUpdates: [
       { label: "Admissions Open 2025–26", date: "Apply Now" },
@@ -348,6 +552,107 @@ GEU has 50,000+ alumni working at marquee brands like Apple, Google, Microsoft, 
       "DST Technology Incubator",
       "24x7 Security",
     ],
+
+    // ── SEO DATA ──
+    seo: {
+      title: "Graphic Era University Dehradun — Courses, Fees, Admission 2026 | Guidevera",
+      description: "Graphic Era University Dehradun — NIRF #48, NAAC A+. Check B.Tech, MBA, BCA, MCA courses, fees ₹9.67L, placements 85 LPA & admission 2026.",
+      canonical: "https://guidevera.com/colleges/graphic-era-university-dehradun",
+      ogTitle: "Graphic Era University Dehradun — Courses, Fees & Admission 2026",
+      ogDescription: "NIRF #48 | NAAC A+ | Highest Placement 85 LPA | 178+ Courses.",
+      ogImage: "https://guidevera.com/colleges/graphic-era-banner.jpg",
+      twitterTitle: "Graphic Era University Dehradun — Courses, Fees & Admission 2026",
+      twitterDescription: "NIRF #48 | NAAC A+ | B.Tech, MBA, BCA, MCA. Check details on Guidevera.",
+      twitterImage: "https://guidevera.com/colleges/graphic-era-banner.jpg",
+    },
+    h1: "Graphic Era University Dehradun — NIRF #48 | NAAC A+ | Admission 2026",
+    subtext: "Graphic Era University (GEU), Dehradun is one of India's top private deemed-to-be universities — ranked #48 nationally by NIRF 2025 and accredited NAAC A+. Offering 178+ courses across Engineering, Management, Design, Science and more — with highest placement of Rs 85 LPA.",
+
+    highlights: [
+      { label: "Established", value: "1993" },
+      { label: "Type", value: "Private Deemed-to-be University" },
+      { label: "Location", value: "566/6, Bell Road, Clement Town, Dehradun — 248002" },
+      { label: "Approved By", value: "UGC, AICTE, NBA, NAAC" },
+      { label: "NAAC Grade", value: "A+" },
+      { label: "NIRF Ranking 2025", value: "#48 University | #52 Engineering | #52 Management" },
+      { label: "Highest Placement", value: "Rs 85 LPA" },
+      { label: "Average Placement", value: "Rs 7.5 LPA" },
+      { label: "Top Recruiters", value: "Google, Amazon, Adobe, Walmart, Atlassian, Suzuki, Jio" },
+      { label: "Total Courses", value: "178+ Courses across 14 Streams" },
+    ],
+
+    coursesFees: {
+      heading: "Graphic Era University Dehradun — Courses & Fees 2026",
+      rows: [
+        { course: "B.Tech", duration: "4 Years", totalFees: "Rs 9,67,227" },
+        { course: "MBA", duration: "2 Years", totalFees: "Rs 4,48,000" },
+        { course: "BCA", duration: "3 Years", totalFees: "Rs 3,39,000" },
+        { course: "BBA", duration: "3 Years", totalFees: "Rs 3,78,000" },
+        { course: "MCA", duration: "2 Years", totalFees: "Rs 4,45,000" },
+        { course: "M.Tech", duration: "2 Years", totalFees: "Rs 2,27,300" },
+        { course: "B.Sc", duration: "3 Years", totalFees: "Rs 2,82,000" },
+        { course: "B.Com", duration: "3 Years", totalFees: "Rs 3,78,300" },
+        { course: "BHM", duration: "4 Years", totalFees: "Rs 5,07,700" },
+        { course: "MHM", duration: "2 Years", totalFees: "Rs 1,46,600" },
+      ],
+    },
+
+    admission: {
+      heading: "Graphic Era University Dehradun — Admission Process 2026",
+      intro: "Admissions 2026 are open for UG and PG courses. Admission is based on merit and entrance exam scores. Application fee is Rs 1,500.",
+      table: [
+        { course: "B.Tech", exam: "JEE Main / GECET" },
+        { course: "MBA", exam: "CAT / MAT / XAT / CMAT / NMAT" },
+        { course: "M.Tech", exam: "GATE" },
+        { course: "MCA", exam: "CUET / University Test" },
+        { course: "PhD", exam: "GATE / NET / SLET / University Test" },
+      ],
+      eligibility: "B.Tech — Class 12 with PCM, minimum 75% | MBA — Graduation minimum 65%",
+    },
+
+    placementRecord: {
+      heading: "Graphic Era University Dehradun — Placement Record",
+      stats: [
+        { label: "Highest Package", value: "Rs 85 LPA" },
+        { label: "Average Package", value: "Rs 7.5 LPA" },
+        { label: "B.Tech Highest Package", value: "Rs 61.99 LPA" },
+        { label: "Total Students Placed", value: "3,950+" },
+      ],
+      topRecruiters: ["Google", "Amazon", "Adobe", "Walmart", "Atlassian", "Suzuki", "Jio", "Ashok Leyland"],
+    },
+
+    faq: {
+      heading: "Frequently Asked Questions — Graphic Era University Dehradun",
+      items: [
+        { question: "What is the NIRF ranking of Graphic Era University?", answer: "NIRF 2025 — #48 University category, #52 Engineering and Management — top university in Uttarakhand." },
+        { question: "What are the B.Tech fees at Graphic Era University?", answer: "Total B.Tech fees approximately Rs 9,67,227 for 4 years. Per semester Rs 1,40,700 to Rs 2,13,800." },
+        { question: "What is the highest placement at Graphic Era University?", answer: "Highest placement Rs 85 LPA, average Rs 7.5 LPA. Top recruiters — Google, Amazon, Adobe, Atlassian." },
+        { question: "Is Graphic Era University NAAC accredited?", answer: "Yes — NAAC A+ grade. Also approved by UGC, AICTE and NBA." },
+        { question: "What entrance exams accepted for B.Tech at GEU?", answer: "JEE Main and GECET (university's own entrance test for admission and scholarships)." },
+        { question: "How to apply to Graphic Era University Dehradun?", answer: "Apply online at GEU official website or get free expert help through Guidevera's counseling service." },
+      ],
+    },
+
+    schema: {
+      educationalOrg: {
+        "@context": "https://schema.org",
+        "@type": "EducationalOrganization",
+        "name": "Graphic Era University",
+        "url": "https://geu.ac.in",
+        "description": "NIRF #48, NAAC A+ private deemed university in Dehradun offering 178+ courses.",
+        "address": { "@type": "PostalAddress", "streetAddress": "566/6 Bell Road Clement Town", "addressLocality": "Dehradun", "addressRegion": "Uttarakhand", "postalCode": "248002", "addressCountry": "IN" },
+        "foundingDate": "1993",
+        "sameAs": ["https://geu.ac.in"]
+      },
+      faqPage: {
+        "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
+          { "@type": "Question", "name": "What is the NIRF ranking of Graphic Era University Dehradun?", "acceptedAnswer": { "@type": "Answer", "text": "NIRF 2025 — #48 University, #52 Engineering." } },
+          { "@type": "Question", "name": "What are the B.Tech fees at Graphic Era University?", "acceptedAnswer": { "@type": "Answer", "text": "Rs 9,67,227 total for 4 years." } },
+          { "@type": "Question", "name": "What is the highest placement at Graphic Era University?", "acceptedAnswer": { "@type": "Answer", "text": "Rs 85 LPA highest, Rs 7.5 LPA average." } },
+          { "@type": "Question", "name": "Is Graphic Era University NAAC accredited?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, NAAC A+ grade, UGC and AICTE approved." } }
+        ]
+      },
+    },
 
     admissionUpdates: [
       { label: "Admissions Open 2026", date: "Apply Now" },

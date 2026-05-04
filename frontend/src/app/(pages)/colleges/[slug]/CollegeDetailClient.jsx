@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { MapPin, Star, ExternalLink, ChevronLeft, GraduationCap, Clock, IndianRupee, Users, Building2, Wifi, Utensils, Dumbbell, HeartPulse, BedDouble, Bus, Shield, BadgeCheck, TrendingUp, BookOpen, Phone, CheckCircle, X } from "lucide-react";
+import { MapPin, Star, ExternalLink, ChevronLeft, ChevronDown, GraduationCap, Clock, IndianRupee, Users, Building2, Wifi, Utensils, Dumbbell, HeartPulse, BedDouble, Bus, Shield, BadgeCheck, TrendingUp, BookOpen, Phone, CheckCircle, X, Award, FileText, HelpCircle } from "lucide-react";
 import { AnimatePresence } from "framer-motion";
 import Navbar from "../../../../components/Navbar";
 import Footer from "../../../../components/Footer";
@@ -26,6 +26,7 @@ export default function CollegeDetailClient({ college }) {
   const [applyModalOpen, setApplyModalOpen] = useState(false);
   const [form, setForm] = useState({ name: "", phone: "", course: "", customCourse: "", email: "", state: "" });
   const [formStatus, setFormStatus] = useState("idle");
+  const [openFaq, setOpenFaq] = useState(null);
 
   const tabs = ["College Info", "Placements", "Infrastructure", "Reviews"];
 
@@ -137,12 +138,12 @@ export default function CollegeDetailClient({ college }) {
             <div className="absolute inset-0 bg-gradient-to-t from-[#09090b] via-[#09090b]/80 to-[#09090b]/30" />
           </div>
           
-          <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10 pt-28">
-            <Link href="/colleges" className="flex absolute top-0 left-4 sm:left-6 lg:left-8 items-center gap-2 text-white/70 hover:text-white transition-colors text-sm bg-black/40 px-4 py-2 rounded-full border border-white/10 backdrop-blur-md w-max">
+          <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10 pt-16">
+            <Link href="/colleges" className="flex items-center gap-2 text-white/70 hover:text-white transition-colors text-sm bg-black/40 px-4 py-2 rounded-full border border-white/10 backdrop-blur-md w-max mb-8">
               <ChevronLeft className="w-4 h-4" /> Back to Colleges
             </Link>
 
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mt-14 sm:mt-0">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
               <div className="max-w-3xl">
                 <div className="flex items-center gap-3 mb-4 flex-wrap">
                   <span className="bg-[#0EB4A6] text-black text-xs font-bold px-3 py-1.5 rounded tracking-widest">{college.tag}</span>
@@ -154,7 +155,10 @@ export default function CollegeDetailClient({ college }) {
                   <span className="bg-white/10 backdrop-blur-md px-3 py-1.5 rounded border border-white/10 text-xs text-white/80 font-medium">{college.ranking}</span>
                 </div>
                 
-                <h1 className="text-2xl md:text-5xl font-bold mb-3 tracking-tight">{college.name}</h1>
+                <h1 className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-3 tracking-tight leading-tight">{college.h1 || college.name}</h1>
+                {college.subtext && (
+                  <p className="text-white/70 text-sm md:text-base leading-relaxed mb-3 max-w-2xl">{college.subtext}</p>
+                )}
                 
                 <div className="flex items-center gap-4 text-white/60 text-sm md:text-base">
                   <div className="flex items-center gap-1.5"><MapPin className="w-4 h-4" /> {college.location}</div>
@@ -190,6 +194,21 @@ export default function CollegeDetailClient({ college }) {
             </div>
           </div>
         </div>
+
+        {/* ── COLLEGE HIGHLIGHTS SECTION ── */}
+        {college.highlights && college.highlights.length > 0 && (
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <h2 className="text-xl md:text-2xl font-bold mb-6 flex items-center gap-2"><Award className="w-5 h-5 text-[#0EB4A6]" /> College Highlights</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {college.highlights.map((item, i) => (
+                <div key={i} className="bg-[#121214] border border-white/5 rounded-xl p-4 flex flex-col gap-1 hover:border-[#0EB4A6]/30 transition-colors">
+                  <span className="text-xs text-white/40 uppercase tracking-wider">{item.label}</span>
+                  <span className="text-sm font-semibold text-white/90">{item.value}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Tabs & Content */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
@@ -310,6 +329,94 @@ export default function CollegeDetailClient({ college }) {
                       </div>
                     )}
                   </div>
+
+                  {/* ── COURSES & FEES TABLE ── */}
+                  {college.coursesFees && (
+                    <div className="bg-[#121214] border border-white/5 rounded-2xl p-6 md:p-8">
+                      <h2 className="text-xl font-bold mb-6">{college.coursesFees.heading}</h2>
+                      <div className="overflow-x-auto">
+                        <table className="w-full text-left">
+                          <thead>
+                            <tr className="border-b border-white/10">
+                              <th className="pb-3 text-xs text-white/50 uppercase tracking-wider font-semibold">Course</th>
+                              <th className="pb-3 text-xs text-white/50 uppercase tracking-wider font-semibold">Duration</th>
+                              <th className="pb-3 text-xs text-white/50 uppercase tracking-wider font-semibold">Total Fees</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {college.coursesFees.rows.map((row, i) => (
+                              <tr key={i} className="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
+                                <td className="py-3 text-sm font-medium text-white/90">{row.course}</td>
+                                <td className="py-3 text-sm text-white/60">{row.duration}</td>
+                                <td className="py-3 text-sm font-semibold text-[#0EB4A6]">{row.totalFees}</td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* ── ADMISSION DETAILS SECTION ── */}
+                  {college.admission && (
+                    <div className="bg-[#121214] border border-white/5 rounded-2xl p-6 md:p-8">
+                      <h2 className="text-xl font-bold mb-4 flex items-center gap-2"><FileText className="w-5 h-5 text-[#0EB4A6]" /> {college.admission.heading}</h2>
+                      <p className="text-white/70 text-sm leading-relaxed mb-6">{college.admission.intro}</p>
+                      <div className="overflow-x-auto mb-6">
+                        <table className="w-full text-left">
+                          <thead>
+                            <tr className="border-b border-white/10">
+                              <th className="pb-3 text-xs text-white/50 uppercase tracking-wider font-semibold">Course</th>
+                              <th className="pb-3 text-xs text-white/50 uppercase tracking-wider font-semibold">Entrance Exam Accepted</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {college.admission.table.map((row, i) => (
+                              <tr key={i} className="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
+                                <td className="py-3 text-sm font-medium text-white/90">{row.course}</td>
+                                <td className="py-3 text-sm text-white/60">{row.exam}</td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                      {college.admission.eligibility && (
+                        <div className="bg-[#0EB4A6]/5 border border-[#0EB4A6]/20 rounded-xl p-4 mb-4">
+                          <p className="text-sm text-white/80"><span className="font-semibold text-[#0EB4A6]">Eligibility:</span> {college.admission.eligibility}</p>
+                        </div>
+                      )}
+                      {college.admission.scholarships && (
+                        <div className="bg-white/5 border border-white/10 rounded-xl p-4">
+                          <p className="text-sm text-white/80"><span className="font-semibold text-[#fbbf24]">Scholarships:</span> {college.admission.scholarships}</p>
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {/* ── PLACEMENT RECORD SECTION ── */}
+                  {college.placementRecord && (
+                    <div className="bg-[#121214] border border-white/5 rounded-2xl p-6 md:p-8">
+                      <h2 className="text-xl font-bold mb-6 flex items-center gap-2"><TrendingUp className="w-5 h-5 text-[#0EB4A6]" /> {college.placementRecord.heading}</h2>
+                      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6">
+                        {college.placementRecord.stats.map((stat, i) => (
+                          <div key={i} className="bg-[#09090b] border border-white/5 rounded-xl p-4 text-center">
+                            <p className="text-lg md:text-xl font-bold text-[#0EB4A6] mb-1">{stat.value}</p>
+                            <p className="text-xs text-white/50 uppercase tracking-wider">{stat.label}</p>
+                          </div>
+                        ))}
+                      </div>
+                      {college.placementRecord.topRecruiters && (
+                        <div>
+                          <h4 className="text-sm font-semibold text-white/50 uppercase tracking-wider mb-3">Top Recruiters</h4>
+                          <div className="flex flex-wrap gap-2">
+                            {college.placementRecord.topRecruiters.map((r, i) => (
+                              <span key={i} className="bg-white/5 border border-white/10 px-3 py-1.5 rounded-lg text-xs font-medium hover:bg-white/10 transition-colors">{r}</span>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </motion.div>
               )}
 
@@ -477,6 +584,38 @@ export default function CollegeDetailClient({ college }) {
             </div>
           </div>
         </div>
+        {/* ── FAQ SECTION ── */}
+        {college.faq && college.faq.items && college.faq.items.length > 0 && (
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <h2 className="text-xl md:text-2xl font-bold mb-8 flex items-center gap-2"><HelpCircle className="w-5 h-5 text-[#0EB4A6]" /> {college.faq.heading}</h2>
+            <div className="space-y-3">
+              {college.faq.items.map((item, i) => (
+                <div key={i} className="bg-[#121214] border border-white/5 rounded-xl overflow-hidden hover:border-white/10 transition-colors">
+                  <button
+                    onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                    className="w-full flex items-center justify-between p-5 text-left cursor-pointer"
+                  >
+                    <span className="font-medium text-sm md:text-base text-white/90 pr-4">{item.question}</span>
+                    <ChevronDown className={`w-5 h-5 text-white/40 shrink-0 transition-transform duration-200 ${openFaq === i ? 'rotate-180' : ''}`} />
+                  </button>
+                  <AnimatePresence>
+                    {openFaq === i && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.2 }}
+                        className="overflow-hidden"
+                      >
+                        <p className="px-5 pb-5 text-sm text-white/60 leading-relaxed">{item.answer}</p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </main>
 
       <Footer />
