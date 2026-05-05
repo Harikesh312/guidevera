@@ -132,48 +132,48 @@ export default function CollegeDetailClient({ college }) {
 
       <main className="pt-24 pb-20">
         {/* Full-width hero image */}
-        <div className="relative w-full h-auto min-h-[450px] md:min-h-[500px] md:h-[60vh] flex flex-col justify-end">
+        <div className="relative w-full h-auto min-h-[450px] md:min-h-[550px] lg:min-h-[65vh] flex flex-col justify-end">
           <div className="absolute inset-0 z-0">
             <Image src={college.heroImage} alt={college.name} fill className="object-cover" priority />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#09090b] via-[#09090b]/80 to-[#09090b]/30" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#09090b] via-[#09090b]/90 to-[#09090b]/40" />
           </div>
           
-          <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10 pt-16">
-            <Link href="/colleges" className="flex items-center gap-2 text-white/70 hover:text-white transition-colors text-sm bg-black/40 px-4 py-2 rounded-full border border-white/10 backdrop-blur-md w-max mb-8">
+          <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10 pt-24">
+            <Link href="/colleges" className="flex items-center gap-2 text-white/70 hover:text-white transition-colors text-sm bg-black/40 px-4 py-2 rounded-full border border-white/10 backdrop-blur-md w-max mb-6">
               <ChevronLeft className="w-4 h-4" /> Back to Colleges
             </Link>
 
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-              <div className="max-w-3xl">
-                <div className="flex items-center gap-3 mb-4 flex-wrap">
-                  <span className="bg-[#0EB4A6] text-black text-xs font-bold px-3 py-1.5 rounded tracking-widest">{college.tag}</span>
-                  <div className="bg-white/10 backdrop-blur-md px-3 py-1.5 rounded border border-white/10 flex items-center gap-1.5">
+            <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8">
+              <div className="w-full lg:max-w-4xl">
+                <div className="flex items-center gap-2 md:gap-3 mb-4 flex-wrap">
+                  {college.tag && <span className="bg-[#0EB4A6] text-black text-xs font-bold px-3 py-1.5 rounded tracking-widest whitespace-nowrap">{college.tag}</span>}
+                  <div className="bg-white/10 backdrop-blur-md px-3 py-1.5 rounded border border-white/10 flex items-center gap-1.5 whitespace-nowrap">
                     <Star className="w-3.5 h-3.5 fill-[#fbbf24] text-[#fbbf24]" />
                     <span className="text-xs font-bold">{college.rating} Rating</span>
                   </div>
-                  <span className="bg-white/10 backdrop-blur-md px-3 py-1.5 rounded border border-white/10 text-xs text-white/80 font-medium">Est. {college.established}</span>
-                  <span className="bg-white/10 backdrop-blur-md px-3 py-1.5 rounded border border-white/10 text-xs text-white/80 font-medium">{college.ranking}</span>
+                  <span className="bg-white/10 backdrop-blur-md px-3 py-1.5 rounded border border-white/10 text-xs text-white/80 font-medium whitespace-nowrap">Est. {college.established}</span>
+                  {college.ranking && <span className="bg-white/10 backdrop-blur-md px-3 py-1.5 rounded border border-white/10 text-xs text-white/80 font-medium">{college.ranking}</span>}
                 </div>
                 
-                <h1 className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-3 tracking-tight leading-tight">{college.h1 || college.name}</h1>
+                <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-4 tracking-tight leading-snug">{college.h1 || college.name}</h1>
                 {college.subtext && (
-                  <p className="text-white/70 text-sm md:text-base leading-relaxed mb-3 max-w-2xl">{college.subtext}</p>
+                  <p className="text-white/70 text-sm md:text-base leading-relaxed mb-4 lg:pr-8">{college.subtext}</p>
                 )}
                 
-                <div className="flex items-center gap-4 text-white/60 text-sm md:text-base">
-                  <div className="flex items-center gap-1.5"><MapPin className="w-4 h-4" /> {college.location}</div>
-                  <div className="hidden sm:flex items-center gap-1.5"><BadgeCheck className="w-4 h-4 text-[#0EB4A6]" /> {college.guarantee}</div>
+                <div className="flex items-center gap-4 text-white/60 text-sm md:text-base flex-wrap">
+                  <div className="flex items-center gap-1.5"><MapPin className="w-4 h-4 shrink-0" /> {college.location}</div>
+                  <div className="hidden sm:flex items-center gap-1.5"><BadgeCheck className="w-4 h-4 text-[#0EB4A6] shrink-0" /> {college.guarantee}</div>
                 </div>
               </div>
               
-              <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0 w-full sm:w-auto">
+              <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0 w-full lg:w-auto mt-4 lg:mt-0">
                 <button
                   onClick={() => { if (requireAuth('/ability-test')) router.push('/ability-test'); }}
-                  className="w-full sm:w-auto px-6 py-3.5 bg-[#0EB4A6] hover:bg-[#0c9c90] text-black font-bold rounded-xl transition-all shadow-[0_0_20px_rgba(14,180,166,0.3)]"
+                  className="w-full sm:w-auto px-6 py-3.5 bg-[#0EB4A6] hover:bg-[#0c9c90] text-black font-bold rounded-xl transition-all shadow-[0_0_20px_rgba(14,180,166,0.3)] whitespace-nowrap"
                 >
                   Start Ability Test
                 </button>
-                <button onClick={openApplyModal} className="w-full sm:w-auto justify-center px-6 py-3.5 bg-white text-black font-bold rounded-xl hover:bg-white/90 transition-all flex items-center gap-2 cursor-pointer">
+                <button onClick={openApplyModal} className="w-full sm:w-auto justify-center px-6 py-3.5 bg-white text-black font-bold rounded-xl hover:bg-white/90 transition-all flex items-center gap-2 cursor-pointer whitespace-nowrap">
                   Apply Now <ExternalLink className="w-4 h-4" />
                 </button>
               </div>

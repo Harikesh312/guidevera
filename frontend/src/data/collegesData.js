@@ -883,6 +883,110 @@ GEU has 50,000+ alumni working at marquee brands like Apple, Google, Microsoft, 
 
     amenities: ["Wi-Fi Campus", "Hostel Boys & Girls", "Library", "Labs", "Sports Ground", "Cafeteria", "Medical Facility", "Transport", "24x7 Security"],
 
+    seo: {
+      title: "DBS Global University Dehradun — Courses, Fees, Admission 2026 | Guidevera",
+      description: "DBS Global University Dehradun — formerly Doon Business School. Check MBA, B.Tech, BBA, BCA courses, fees Rs 8.15-19.1L, highest placement 21 LPA & admission 2026.",
+      canonical: "https://guidevera.com/colleges/dbs-global-university-dehradun",
+      ogTitle: "DBS Global University Dehradun — Courses, Fees & Admission 2026",
+      ogDescription: "Formerly Doon Business School | 122 Courses | 95% MBA Placement | 350+ Recruiters.",
+      ogImage: "https://guidevera.com/colleges/dbs-global-banner.jpg",
+      twitterTitle: "DBS Global University Dehradun — Courses, Fees & Admission 2026",
+      twitterDescription: "MBA, B.Tech, BBA, BCA — 122 courses, 95% placement, 350+ recruiters.",
+      twitterImage: "https://guidevera.com/colleges/dbs-global-banner.jpg",
+    },
+    h1: "DBS Global University Dehradun — India's Top B-School | 122 Courses | Admission 2026",
+    subtext: "DBS Global University (DGU), Dehradun — formerly Doon Business School — is one of North India's leading private universities offering industry-integrated, research-driven education. UGC recognized and AICTE approved, DGU offers 122+ courses in Management, Engineering, Law, Agriculture, Pharmacy and more. Ranked 5th Best Institution in North India for Management by India Today. Highest placement Rs 21 LPA with 95% MBA placement rate and 350+ recruiters.",
+
+    highlights: [
+      { label: "Established", value: "2007 (formerly Doon Business School)" },
+      { label: "Type", value: "Private University" },
+      { label: "Location", value: "MI-122, Behind Pharma City, Selaqui, Dehradun — 248011" },
+      { label: "Approved By", value: "UGC, AICTE, BCI, PCI, AIU, AACSB" },
+      { label: "Rankings", value: "5th Best Institution North India for Management (India Today) | 6th Best Private B-School Value for Money (Business Today) | 2nd Best Future Orientation in India (India Today)" },
+      { label: "Highest Placement", value: "Rs 21 LPA (MBA Rs 21 LPA | B.Tech Rs 24 LPA CTC)" },
+      { label: "Average Placement", value: "Rs 6.5 LPA (Median Rs 6 LPA)" },
+      { label: "MBA Placement Rate", value: "95%" },
+      { label: "Total Recruiters", value: "350+ companies visited for placements" },
+      { label: "Total Courses", value: "122+ Courses across 12 Streams" },
+      { label: "International Tie-Ups", value: "Singapore Management University, UCSI Malaysia, EM Normandie Dubai" },
+    ],
+
+    coursesFees: {
+      heading: "DBS Global University Dehradun — Courses & Fees 2026",
+      rows: [
+        { course: "MBA (General)", duration: "2 Years", totalFees: "Rs 8.15 - 9.05 Lakhs" },
+        { course: "MBA (International Business)", duration: "2 Years", totalFees: "Rs 12.6 Lakhs" },
+        { course: "BBA", duration: "3 Years", totalFees: "Rs 5.71 - 8.01 Lakhs" },
+        { course: "BBA + MBA (Integrated)", duration: "5 Years", totalFees: "Rs 18.01 Lakhs" },
+        { course: "B.Tech (CSE)", duration: "4 Years", totalFees: "Rs 7 - 16 Lakhs" },
+        { course: "BCA", duration: "3 Years", totalFees: "Rs 3.84 - 4.12 Lakhs" },
+        { course: "B.Com", duration: "3 Years", totalFees: "Rs 7.18 Lakhs" },
+        { course: "BA LLB", duration: "5 Years", totalFees: "Contact University" },
+        { course: "B.Sc Agriculture", duration: "4 Years", totalFees: "Rs 4.5 - 7.1 Lakhs" },
+        { course: "PhD", duration: "3 Years", totalFees: "Rs 3.3 - 4.3 Lakhs" },
+      ],
+    },
+
+    admission: {
+      heading: "DBS Global University Dehradun — Admission Process 2026",
+      intro: "DBS Global University admissions 2026 are open for all UG, PG and PhD courses. Applications can be submitted online at dgu.ac. Application fee Rs 1,200 (PhD: Rs 750). Selection is based on merit and entrance exam scores.",
+      table: [
+        { course: "MBA", exam: "CAT / GMAT / NMAT / CMAT / XAT / GRE / DBS Entrance Exam + Personal Interview" },
+        { course: "B.Tech", exam: "JEE Main / DBS Entrance Exam | Class 12 PCM minimum 55%" },
+        { course: "BBA", exam: "CUET-UG / DBS Entrance Exam + Personal Interview" },
+        { course: "Law (BA LLB)", exam: "CLAT / AILET / CUET / DBS Entrance Exam" },
+        { course: "M.Tech / MCA", exam: "GATE / CUET PG / DBS Entrance Exam" },
+        { course: "PhD", exam: "NET / GATE / GPAT / ICAR + Interview | Application fee Rs 1,200" },
+      ],
+    },
+
+    placementRecord: {
+      heading: "DBS Global University Dehradun — Placement Record",
+      stats: [
+        { label: "Highest Package (MBA)", value: "Rs 21 LPA" },
+        { label: "B.Tech Highest CTC", value: "Rs 24 LPA" },
+        { label: "Average Package", value: "Rs 6.5 LPA" },
+        { label: "Median Package", value: "Rs 6 LPA" },
+        { label: "MBA Placement Rate", value: "95%" },
+        { label: "Total Recruiters", value: "350+ companies" },
+        { label: "Summer Internships", value: "683 internships offered" },
+      ],
+      topRecruiters: ["Adani", "Aditya Birla", "Deloitte", "EY", "Zara", "IDBI Bank", "Axis Bank", "Amazon", "Accenture"],
+    },
+
+    faq: {
+      heading: "Frequently Asked Questions — DBS Global University Dehradun",
+      items: [
+        { question: "What was DBS Global University formerly known as?", answer: "DBS Global University was formerly known as Doon Business School (DBS). It was established in 2007 and rebranded as DBS Global University after expanding beyond management courses." },
+        { question: "What are the MBA fees at DBS Global University Dehradun?", answer: "MBA fees at DBS Global University range from Rs 8.15 Lakhs to Rs 19.1 Lakhs for 2 years depending on specialization. MBA International Business fees are Rs 12.6 Lakhs." },
+        { question: "What is the placement record of DBS Global University?", answer: "DBS Global University achieved a 95% MBA placement rate in 2025. Highest package is Rs 21 LPA with average Rs 6.5 LPA. Over 350 companies visited for campus placements." },
+        { question: "Is DBS Global University UGC and AICTE approved?", answer: "Yes — DBS Global University is recognized by UGC and courses are approved by AICTE, BCI and PCI. It is also a member of AIU and AACSB." },
+        { question: "Does DBS Global University offer international exposure?", answer: "Yes — DBS Global offers global academic visits to Singapore Management University, UCSI Malaysia, and EM Normandie Dubai as part of the MBA programme." },
+        { question: "How to apply to DBS Global University Dehradun?", answer: "Apply online at dgu.ac or get free admission counseling through Guidevera to find the right course and secure your seat." },
+      ],
+    },
+
+    schema: {
+      educationalOrg: {
+        "@context": "https://schema.org",
+        "@type": "EducationalOrganization",
+        "name": "DBS Global University",
+        "url": "https://dgu.ac",
+        "description": "Formerly Doon Business School — private university in Dehradun offering 122+ courses in Management, Engineering, Law and more. 95% MBA placement rate, 350+ recruiters.",
+        "address": { "@type": "PostalAddress", "streetAddress": "MI-122, Behind Pharma City, Selaqui", "addressLocality": "Dehradun", "addressRegion": "Uttarakhand", "postalCode": "248011", "addressCountry": "IN" },
+        "foundingDate": "2007",
+        "sameAs": ["https://dgu.ac"]
+      },
+      faqPage: {
+        "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
+          { "@type": "Question", "name": "What was DBS Global University formerly known as?", "acceptedAnswer": { "@type": "Answer", "text": "Formerly Doon Business School, established in 2007." } },
+          { "@type": "Question", "name": "What are the MBA fees at DBS Global University Dehradun?", "acceptedAnswer": { "@type": "Answer", "text": "MBA fees Rs 8.15-19.1 Lakhs for 2 years depending on specialization." } },
+          { "@type": "Question", "name": "What is the placement record of DBS Global University?", "acceptedAnswer": { "@type": "Answer", "text": "95% MBA placement rate, highest Rs 21 LPA, 350+ recruiters." } },
+          { "@type": "Question", "name": "Is DBS Global University UGC and AICTE approved?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — UGC recognized, AICTE and BCI approved, AIU and AACSB member." } }
+        ]
+      },
+    },
+
     admissionUpdates: [
       { label: "Admissions Open 2026", date: "Apply Now" },
     ],
@@ -984,6 +1088,110 @@ GEU has 50,000+ alumni working at marquee brands like Apple, Google, Microsoft, 
     ],
 
     amenities: ["Wi-Fi Campus", "1 Girls Hostel + 6 Boys Hostels", "Two Libraries", "Smart Classrooms", "Sports Ground", "Cafeteria", "Gym (paid)", "7 Clubs", "24x7 Security"],
+
+    seo: {
+      title: "Tulas Institute Dehradun — Courses, Fees, Admission 2026 | Guidevera",
+      description: "Tulas Institute Dehradun — NAAC A+, AICTE Approved. Check B.Tech, MBA, BCA, BBA courses, fees Rs 4.42-6.60L, highest placement 36.5 LPA & admission 2026.",
+      canonical: "https://guidevera.com/colleges/tulas-institute-dehradun",
+      ogTitle: "Tulas Institute Dehradun — Courses, Fees & Admission 2026",
+      ogDescription: "NAAC A+ | AICTE Approved | B.Tech fees Rs 4.42-6.60L | Highest placement 36.5 LPA | 750+ recruiters.",
+      ogImage: "https://guidevera.com/colleges/tulas-banner.jpg",
+      twitterTitle: "Tulas Institute Dehradun — Courses, Fees & Admission 2026",
+      twitterDescription: "NAAC A+ | B.Tech, MBA, BCA — 100% placement support, 750+ recruiters.",
+      twitterImage: "https://guidevera.com/colleges/tulas-banner.jpg",
+    },
+    h1: "Tulas Institute Dehradun — NAAC A+ | AICTE Approved | 100% Placement Support | Admission 2026",
+    subtext: "Tulas Institute, Dehradun is a NAAC A+ accredited, AICTE-approved private engineering and management college established in 2006 by Rishabh Educational Trust. Spread across a 22-acre lush green campus in Doon Valley, Tulas Institute offers B.Tech, MBA, BCA, BBA, B.Pharma and more — affiliated to VMSB Uttarakhand Technical University. Highest placement package Rs 36.5 LPA with 750+ recruitment partners and 100% placement support for all eligible students.",
+
+    highlights: [
+      { label: "Established", value: "2006 (Rishabh Educational Trust)" },
+      { label: "Type", value: "Private Engineering & Management College" },
+      { label: "Location", value: "Vill. Dhoolkot, P.O. Selaqui, Chakrata Road, Dehradun — 248011" },
+      { label: "Approved By", value: "AICTE, UGC, PCI, NBA" },
+      { label: "NAAC Grade", value: "A+" },
+      { label: "Affiliated To", value: "VMSB Uttarakhand Technical University | Sri Dev Suman Uttarakhand University" },
+      { label: "Rankings", value: "#65 B.Tech Outlook 2024 | #122 B.Tech Times 2025 | #151 B.Tech India Today 2024" },
+      { label: "Highest Placement", value: "Rs 36.5 LPA" },
+      { label: "Average Placement", value: "Rs 5.60 LPA" },
+      { label: "Placement Rate", value: "100% (for eligible students)" },
+      { label: "Total Recruiters", value: "750+ companies" },
+      { label: "Campus Size", value: "22 Acres | 55,000+ library volumes | Microsoft Innovation Centre" },
+    ],
+
+    coursesFees: {
+      heading: "Tulas Institute Dehradun — Courses & Fees 2026",
+      rows: [
+        { course: "B.Tech (CSE / AI & ML / Data Science)", duration: "4 Years", totalFees: "Rs 4.42 - 6.60 Lakhs" },
+        { course: "B.Tech (Civil / Mechanical / ECE)", duration: "4 Years", totalFees: "Rs 4.42 - 5.50 Lakhs" },
+        { course: "MBA", duration: "2 Years", totalFees: "Rs 3.00 - 6.74 Lakhs" },
+        { course: "BBA", duration: "3 Years", totalFees: "Rs 95,000 per year" },
+        { course: "BCA", duration: "3 Years", totalFees: "Rs 90,000 - 1,40,000 per year" },
+        { course: "B.Pharma", duration: "4 Years", totalFees: "Contact Institute" },
+        { course: "M.Tech", duration: "2 Years", totalFees: "Contact Institute (GATE required)" },
+        { course: "MCA", duration: "2 Years", totalFees: "Contact Institute" },
+        { course: "B.Sc / M.Sc Agriculture", duration: "4 / 2 Years", totalFees: "Rs 90,000 - 1,40,000 per year" },
+        { course: "Diploma Courses", duration: "1-3 Years", totalFees: "Rs 93,000 onwards" },
+      ],
+    },
+
+    admission: {
+      heading: "Tulas Institute Dehradun — Admission Process 2026",
+      intro: "Tulas Institute Dehradun admissions 2026 are open for all UG and PG courses. Apply online through Uttarakhand Technical University portal or directly at Tulas Institute. Minimum 45-50% marks in Class 12 required for UG courses.",
+      table: [
+        { course: "B.Tech", exam: "JEE Main / UKSEE / UBTER-JEEP | Class 12 PCM minimum 45-50%" },
+        { course: "MBA", exam: "CAT / MAT / CMAT / UKSEE / Direct Merit | Graduation minimum 50%" },
+        { course: "M.Tech", exam: "GATE / NET required" },
+        { course: "BBA / BCA", exam: "Class 12 Merit + Personal Interview" },
+        { course: "B.Pharma", exam: "NEET / Merit Based" },
+      ],
+      scholarships: "Merit-Cum-Means Scholarship | AICTE Pragati Scholarship (female students) | Postmatric Scholarships for minorities, SC/ST, OBC | Uttarakhand domicile scholarships | Sports achievement scholarships.",
+    },
+
+    placementRecord: {
+      heading: "Tulas Institute Dehradun — Placement Record",
+      stats: [
+        { label: "Highest Package", value: "Rs 36.5 LPA" },
+        { label: "Average Package", value: "Rs 5.60 LPA" },
+        { label: "B.Tech Median Package (NIRF)", value: "Rs 3.50 LPA" },
+        { label: "B.Tech Placed Students", value: "110 out of 120 eligible (NIRF 2025)" },
+        { label: "Placement Rate", value: "100% (placement support for all eligible students)" },
+        { label: "Total Recruiters", value: "750+ companies" },
+      ],
+      topRecruiters: ["Byju's", "HCL", "Wipro", "Oracle", "Deutsche Bank", "Google", "AWS", "Grant Thornton", "HSBC", "Hero", "Intel", "Siemens", "Vivo", "JustDial"],
+    },
+
+    faq: {
+      heading: "Frequently Asked Questions — Tulas Institute Dehradun",
+      items: [
+        { question: "Is Tulas Institute Dehradun NAAC accredited?", answer: "Yes — Tulas Institute Dehradun is accredited with NAAC A+ grade — the highest accreditation in Uttarakhand. It is also AICTE approved and NBA accredited." },
+        { question: "What are the B.Tech fees at Tulas Institute Dehradun?", answer: "B.Tech fees at Tulas Institute Dehradun range from Rs 4.42 Lakhs to Rs 6.60 Lakhs for 4 years depending on specialization. Annual fees range from Rs 1.25 to Rs 1.75 Lakhs." },
+        { question: "What is the highest placement package at Tulas Institute Dehradun?", answer: "Highest placement package at Tulas Institute Dehradun is Rs 36.5 LPA. Average package is Rs 5.60 LPA. Over 750 companies participate in campus placements every year." },
+        { question: "What B.Tech specializations are offered at Tulas Institute Dehradun?", answer: "Tulas Institute offers B.Tech in CSE, CSE (AI & ML), CSE (Data Science), Civil Engineering, Mechanical Engineering, Electronics & Communication Engineering and more." },
+        { question: "What entrance exam is accepted for B.Tech at Tulas Institute?", answer: "Tulas Institute accepts JEE Main, UKSEE and UBTER-JEEP scores for B.Tech admission. Candidates can also apply through Uttarakhand Technical University counselling." },
+        { question: "How to apply to Tulas Institute Dehradun?", answer: "Apply online at Uttarakhand Technical University portal or Tulas Institute website. Get free admission counseling through Guidevera to choose the right course and secure your seat." },
+      ],
+    },
+
+    schema: {
+      educationalOrg: {
+        "@context": "https://schema.org",
+        "@type": "EducationalOrganization",
+        "name": "Tulas Institute",
+        "url": "https://tulas.edu.in",
+        "description": "NAAC A+ accredited, AICTE approved engineering and management college in Dehradun. Highest placement Rs 36.5 LPA, 750+ recruiters, 100% placement support.",
+        "address": { "@type": "PostalAddress", "streetAddress": "Vill. Dhoolkot, P.O. Selaqui, Chakrata Road", "addressLocality": "Dehradun", "addressRegion": "Uttarakhand", "postalCode": "248011", "addressCountry": "IN" },
+        "foundingDate": "2006",
+        "sameAs": ["https://tulas.edu.in"]
+      },
+      faqPage: {
+        "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
+          { "@type": "Question", "name": "Is Tulas Institute Dehradun NAAC accredited?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — NAAC A+ grade, AICTE approved and NBA accredited." } },
+          { "@type": "Question", "name": "What are the B.Tech fees at Tulas Institute Dehradun?", "acceptedAnswer": { "@type": "Answer", "text": "B.Tech fees Rs 4.42-6.60 Lakhs for 4 years." } },
+          { "@type": "Question", "name": "What is the highest placement at Tulas Institute Dehradun?", "acceptedAnswer": { "@type": "Answer", "text": "Highest Rs 36.5 LPA, average Rs 5.60 LPA, 750+ recruiters." } },
+          { "@type": "Question", "name": "What B.Tech specializations are offered at Tulas Institute?", "acceptedAnswer": { "@type": "Answer", "text": "CSE, CSE AI & ML, Data Science, Civil, Mechanical, ECE and more." } }
+        ]
+      },
+    },
 
     admissionUpdates: [
       { label: "Admissions Open 2026", date: "Apply Now" },
@@ -1192,6 +1400,107 @@ GEU has 50,000+ alumni working at marquee brands like Apple, Google, Microsoft, 
     ],
 
     amenities: ["Wi-Fi Campus", "Boys & Girls Hostel", "Library", "AC Classrooms", "Cafeteria", "TV & Recreation Rooms", "Coffee Vending Machines", "Washing Machines", "24x7 Security", "Gym"],
+
+    seo: {
+      title: "IMS Unison University Dehradun — Courses, Fees, Admission 2026 | Guidevera",
+      description: "IMS Unison University Dehradun — #1 in Uttarakhand (Education World 2025-26). NAAC A | MBA, BBA, BA LLB, BHM courses | Highest placement 16.65 LPA | Admission 2026.",
+      canonical: "https://guidevera.com/colleges/ims-unision-university-dehradun",
+      ogTitle: "IMS Unison University Dehradun — Courses, Fees & Admission 2026",
+      ogDescription: "#1 Uttarakhand (Education World 2025-26) | NAAC A | MBA, Law, BBA, BHM | 90% Placement.",
+      ogImage: "https://guidevera.com/colleges/ims-unison-banner.jpg",
+      twitterTitle: "IMS Unison University Dehradun — Courses, Fees & Admission 2026",
+      twitterDescription: "#1 Uttarakhand | MBA, Law, BBA, BHM. Check fees & admission on Guidevera.",
+      twitterImage: "https://guidevera.com/colleges/ims-unison-banner.jpg",
+    },
+    h1: "IMS Unison University Dehradun — #1 in Uttarakhand | MBA & Law | Admission 2026",
+    subtext: "IMS Unison University (IUU), Dehradun has a rich legacy of 28+ years in higher education — established in 1996 as Institute of Management Studies and recognized as a private university in 2013. Ranked #1 in Uttarakhand and #2 in India by Education World Indian Higher Education Rankings 2025-26. Offering MBA, BBA, BA LLB, BHM, BCA, Mass Communication and more through 5 specialized schools. 90%+ placement rate with 300+ top recruiters.",
+
+    highlights: [
+      { label: "Established", value: "1996 (as IMS) | University status 2013" },
+      { label: "Type", value: "Private University" },
+      { label: "Location", value: "Makkawala Greens, Mussoorie Diversion Road, Dehradun — 248009" },
+      { label: "Approved By", value: "UGC, AICTE, BCI, AIU" },
+      { label: "NAAC Grade", value: "A" },
+      { label: "Rankings 2025-26", value: "#1 Uttarakhand (Education World) | #2 India (Education World) | #8 Top 40 Private B-Schools (Times) | #5 Placements BBA (Times) | #16 Management Overall (Times B-School 2026)" },
+      { label: "Highest Placement", value: "Rs 16.65 LPA" },
+      { label: "Average Placement", value: "Rs 5.86 LPA" },
+      { label: "Placement Rate", value: "90%+" },
+      { label: "Top Recruiters", value: "Audi, Sony, Berger Paints, Times of India, ITC, HDFC Bank, Wipro, TCS, Mahindra, JW Marriott" },
+      { label: "Total Courses", value: "20+ Programmes through 5 Schools" },
+    ],
+
+    coursesFees: {
+      heading: "IMS Unison University Dehradun — Courses & Fees 2026",
+      rows: [
+        { course: "MBA", duration: "2 Years", totalFees: "Rs 7.94 Lakhs" },
+        { course: "BBA (Hons)", duration: "3 Years", totalFees: "Rs 3.34 - 6.61 Lakhs" },
+        { course: "BA LLB (Hons)", duration: "5 Years", totalFees: "Contact University" },
+        { course: "BBA LLB (Hons)", duration: "5 Years", totalFees: "Contact University" },
+        { course: "BCA", duration: "3 Years", totalFees: "Rs 3.34 - 6.61 Lakhs" },
+        { course: "BHM", duration: "4 Years", totalFees: "Contact University" },
+        { course: "B.Com (Hons)", duration: "3 Years", totalFees: "Rs 4.17 Lakhs" },
+        { course: "BAJMC (Mass Communication)", duration: "3 Years", totalFees: "Contact University" },
+        { course: "LLM", duration: "2 Years", totalFees: "Rs 1.22 - 6.48 Lakhs" },
+        { course: "PhD", duration: "3 Years", totalFees: "Rs 5.78 Lakhs" },
+      ],
+    },
+
+    admission: {
+      heading: "IMS Unison University Dehradun — Admission Process 2026",
+      intro: "IMS Unison University admissions 2026 are open till July 31, 2026. Application fee Rs 1,000. 25% seats reserved for Uttarakhand domicile students. Merit-based admission with entrance exam scores.",
+      table: [
+        { course: "MBA", exam: "CAT / XAT / GMAT / CMAT / MAT / UAT + GD + PI | Graduation minimum 50%" },
+        { course: "BBA / B.Com / BCA", exam: "10+2 Merit + Personal Interview | Class 12 minimum marks required" },
+        { course: "BA LLB / BBA LLB", exam: "CLAT / LSAT / Direct Merit | Class 12 any stream" },
+        { course: "LLM", exam: "CLAT PG / CUET PG + Academic Merit" },
+        { course: "PhD", exam: "UGC-NET / GATE / SLET / IUU Entrance + Interview" },
+      ],
+      scholarships: "Merit scholarships for Class 12 toppers. 25% seats for Uttarakhand state quota. Special scholarships for girl students and sports achievers.",
+    },
+
+    placementRecord: {
+      heading: "IMS Unison University Dehradun — Placement Record",
+      stats: [
+        { label: "Highest Package (2024)", value: "Rs 16.65 LPA" },
+        { label: "Average Package", value: "Rs 5.86 LPA" },
+        { label: "Placement Rate", value: "90%+" },
+        { label: "Total Recruiters", value: "300+ companies" },
+      ],
+      topRecruiters: ["Audi", "Sony", "Berger Paints", "Times of India", "ITC", "HDFC", "Wipro", "TCS", "Mahindra", "JW Marriott", "JustDial"],
+    },
+
+    faq: {
+      heading: "Frequently Asked Questions — IMS Unison University Dehradun",
+      items: [
+        { question: "What is the ranking of IMS Unison University Dehradun?", answer: "IMS Unison University is ranked #1 in Uttarakhand and #2 in India by Education World Indian Higher Education Rankings 2025-26. Also ranked #8 among Top 40 Private B-Schools by Times B-School Survey 2025." },
+        { question: "What are the MBA fees at IMS Unison University?", answer: "MBA fees at IMS Unison University Dehradun are Rs 7.94 Lakhs for 2 years. Annual registration fee is Rs 1,000. Application is open till July 31, 2026." },
+        { question: "What is the placement record of IMS Unison University?", answer: "IMS Unison University has a 90%+ placement rate with highest package Rs 16.65 LPA and average Rs 5.86 LPA. 300+ companies visited for campus placements including Audi, Sony and ITC." },
+        { question: "Is IMS Unison University good for Law (BA LLB)?", answer: "Yes — IMS Unison University has a dedicated School of Law offering BA LLB and BBA LLB programmes. It is Bar Council of India (BCI) approved and ranked among top law colleges in North India." },
+        { question: "What courses are offered at IMS Unison University?", answer: "MBA, BBA, BA LLB, BBA LLB, BCA, BHM, B.Com, BAJMC (Mass Communication), LLM, MA and PhD through 5 specialized schools." },
+        { question: "How to apply to IMS Unison University Dehradun?", answer: "Apply online at iuu.ac before July 31, 2026 or get free counseling through Guidevera to choose the right programme and get admission guidance." },
+      ],
+    },
+
+    schema: {
+      educationalOrg: {
+        "@context": "https://schema.org",
+        "@type": "EducationalOrganization",
+        "name": "IMS Unison University",
+        "url": "https://iuu.ac",
+        "description": "#1 in Uttarakhand (Education World 2025-26). NAAC A university offering MBA, Law, BBA, BHM and more. 90%+ placement rate, 300+ recruiters.",
+        "address": { "@type": "PostalAddress", "streetAddress": "Makkawala Greens, Mussoorie Diversion Road", "addressLocality": "Dehradun", "addressRegion": "Uttarakhand", "postalCode": "248009", "addressCountry": "IN" },
+        "foundingDate": "1996",
+        "sameAs": ["https://iuu.ac"]
+      },
+      faqPage: {
+        "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
+          { "@type": "Question", "name": "What is the ranking of IMS Unison University Dehradun?", "acceptedAnswer": { "@type": "Answer", "text": "#1 Uttarakhand, #2 India by Education World 2025-26." } },
+          { "@type": "Question", "name": "What are the MBA fees at IMS Unison University?", "acceptedAnswer": { "@type": "Answer", "text": "MBA fees Rs 7.94 Lakhs for 2 years." } },
+          { "@type": "Question", "name": "What is the placement record of IMS Unison University?", "acceptedAnswer": { "@type": "Answer", "text": "90%+ placement rate, highest Rs 16.65 LPA, 300+ recruiters." } },
+          { "@type": "Question", "name": "Is IMS Unison University good for Law (BA LLB)?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — BCI approved School of Law, top law college in North India." } }
+        ]
+      },
+    },
 
     admissionUpdates: [
       { label: "Admissions Open 2026", date: "Apply Now" },
