@@ -108,8 +108,8 @@ export default function GuideveraLandingPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             <div className="flex-shrink-0 flex items-center">
-              <a href="/" className="text-2xl font-black bg-gradient-to-r from-teal-400 to-[#0EB4A6] bg-clip-text text-transparent">
-                Guidevera
+              <a href="/" className="-ml-2 block">
+                <img src="/guidevera-logo.png" alt="Guidevera Logo" className="object-contain w-[180px] h-auto" />
               </a>
             </div>
             
@@ -604,12 +604,14 @@ export default function GuideveraLandingPage() {
       </section>
 
       {/* SECTION 12: FOOTER */}
-      <footer className="bg-[#09090b] border-t border-white/10 pt-20 pb-10 px-4">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16 mb-16">
-          <div className="md:col-span-1">
-            <a href="/" className="text-3xl font-black bg-gradient-to-r from-teal-400 to-[#0EB4A6] bg-clip-text text-transparent block mb-4">
-              Guidevera
-            </a>
+      <footer className="bg-[#09090b] border-t border-white/10 pt-16 pb-10 px-4">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between gap-12 mb-16">
+          <div className="w-full md:w-auto md:max-w-sm">
+            <div className="flex-shrink-0 flex items-center mb-4">
+              <a href="/" className="-ml-2 block">
+                <img src="/guidevera-logo.png" alt="Guidevera Logo" className="object-contain w-[180px] h-auto" />
+              </a>
+            </div>
             <p className="text-white/60 mb-6 font-medium">Your True Guide for Career Clarity.</p>
             <div className="flex flex-wrap items-center gap-2 mt-4">
               <a href="https://www.linkedin.com/company/guidevera" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:border-[#0A66C2] transition-colors group">
@@ -641,22 +643,24 @@ export default function GuideveraLandingPage() {
             </div>
           </div>
 
-          <div>
-            <h4 className="font-bold text-lg mb-6 text-white">Platform</h4>
-            <ul className="space-y-4 text-white/60">
-              <li><button onClick={() => scrollToSection('colleges')} className="hover:text-[#0EB4A6] transition-colors">Browse Colleges</button></li>
-              <li><button onClick={() => scrollToSection('lead-form')} className="hover:text-[#0EB4A6] transition-colors">Expert Counseling</button></li>
-              <li><button onClick={() => scrollToSection('about')} className="hover:text-[#0EB4A6] transition-colors">Why Us</button></li>
-            </ul>
-          </div>
+          <div className="w-full md:w-auto flex flex-col sm:flex-row gap-12 sm:gap-24 lg:gap-32">
+            <div>
+              <h4 className="font-bold text-lg mb-6 mt-10 text-white">Platform</h4>
+              <ul className="space-y-4 text-white/60">
+                <li><button onClick={() => scrollToSection('colleges')} className="hover:text-[#0EB4A6] transition-colors">Browse Colleges</button></li>
+                <li><button onClick={() => scrollToSection('lead-form')} className="hover:text-[#0EB4A6] transition-colors">Expert Counseling</button></li>
+                <li><button onClick={() => scrollToSection('about')} className="hover:text-[#0EB4A6] transition-colors">Why Us</button></li>
+              </ul>
+            </div>
 
-          <div>
-            <h4 className="font-bold text-lg mb-6 text-white">Contact</h4>
-            <ul className="space-y-4 text-white/60">
-              <li className="flex items-center"><Phone size={16} className="mr-3 text-[#0EB4A6]" /> <a href="tel:+918979485801" className="hover:text-[#0EB4A6]">+91 89794 85801</a></li>
-              <li className="flex items-center"><MessageCircle size={16} className="mr-3 text-[#0EB4A6]" /> <a href="https://wa.me/918979485801" className="hover:text-[#0EB4A6]">WhatsApp Us</a></li>
-              <li className="flex items-center"><BookOpen size={16} className="mr-3 text-[#0EB4A6]" /> contact@guidevera.com</li>
-            </ul>
+            <div>
+              <h4 className="font-bold text-lg mb-6 mt-10 text-white">Contact</h4>
+              <ul className="space-y-4 text-white/60">
+                <li className="flex items-center"><Phone size={16} className="mr-3 text-[#0EB4A6]" /> <a href="tel:+918979485801" className="hover:text-[#0EB4A6]">+91 89794 85801</a></li>
+                <li className="flex items-center"><MessageCircle size={16} className="mr-3 text-[#0EB4A6]" /> <a href="https://wa.me/918979485801" className="hover:text-[#0EB4A6]">WhatsApp Us</a></li>
+                <li className="flex items-center"><BookOpen size={16} className="mr-3 text-[#0EB4A6]" /> contact@guidevera.com</li>
+              </ul>
+            </div>
           </div>
         </div>
 
