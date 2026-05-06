@@ -780,6 +780,109 @@ GEU has 50,000+ alumni working at marquee brands like Apple, Google, Microsoft, 
       "Transport",
     ],
 
+    seo: {
+      title: "ITM Dehradun — Courses, Fees, Admission 2026 | Guidevera",
+      description: "ITM Dehradun — Uttarakhand's first IT education institute, est. 2002. AICTE approved. BCA, BBA, B.Sc IT, MBA, Hotel Management. Fees Rs 43K-3.36L. Admission 2026.",
+      canonical: "https://guidevera.com/colleges/itm-university-dehradun",
+      ogTitle: "ITM Dehradun — Courses, Fees & Admission 2026",
+      ogDescription: "Uttarakhand's first IT institute | AICTE Approved | BCA, BBA, MBA, Hotel Management | Highest placement Rs 15 LPA.",
+      ogImage: "https://guidevera.com/colleges/itm-banner.jpg",
+      twitterTitle: "ITM Dehradun — Courses, Fees & Admission 2026",
+      twitterDescription: "Uttarakhand's first IT institute. BCA, BBA, MBA, Hotel Management. Check fees & admission.",
+      twitterImage: "https://guidevera.com/colleges/itm-banner.jpg",
+    },
+    h1: "ITM Dehradun — Uttarakhand's First IT Institute | BCA, BBA, MBA | Admission 2026",
+    subtext: "Institute of Technology & Management (ITM), Dehradun is a pioneering private institution established in 2002 — the first institute in Uttarakhand to offer specialized IT education. AICTE approved and affiliated with HNB Garhwal Central University and Sri Dev Suman Uttarakhand University. Offering BCA, BBA, B.Sc IT, MBA, Hotel Management, Animation and more across 25+ courses. Highest placement Rs 15 LPA with 90% placement rate and 4,200+ industry connections.",
+    highlights: [
+      { label: "Established", value: "2002" },
+      { label: "Type", value: "Private College" },
+      { label: "Location", value: "60, Chakrata Road, opp. Back Gate of Doon School Campus, Yamuna Colony, Dehradun" },
+      { label: "Approved By", value: "AICTE" },
+      { label: "Affiliated To", value: "HNB Garhwal Central University | Sri Dev Suman Uttarakhand University" },
+      { label: "Distinction", value: "First institute in Uttarakhand to offer specialized IT education" },
+      { label: "Rankings", value: "#46 BBA Institutes in India (Times of India 2025)" },
+      { label: "Highest Placement", value: "Rs 15 LPA" },
+      { label: "Average Placement", value: "Rs 4 LPA" },
+      { label: "Placement Rate", value: "90%" },
+      { label: "Industry Connections", value: "4,200+ industries" },
+      { label: "Top Recruiters", value: "Wipro, TCS, Byju's, Amazon, Accenture, Indigo Airlines, Capgemini, IBM Daksh, Genpact" },
+    ],
+    coursesFees: {
+      heading: "ITM Dehradun — Courses & Fees 2026",
+      rows: [
+        { course: "BCA", duration: "3 Years", totalFees: "Rs 3.36 Lakhs" },
+        { course: "BBA", duration: "3 Years", totalFees: "Rs 3.36 Lakhs" },
+        { course: "B.Sc IT", duration: "3 Years", totalFees: "Rs 3.00 Lakhs" },
+        { course: "B.Sc Animation", duration: "3 Years", totalFees: "Rs 3.00 Lakhs" },
+        { course: "BHM (Hotel Management)", duration: "4 Years", totalFees: "Rs 2.80 Lakhs" },
+        { course: "MBA", duration: "2 Years", totalFees: "Rs 3.32 Lakhs" },
+        { course: "M.Sc IT", duration: "2 Years", totalFees: "Contact Institute" },
+        { course: "B.Com", duration: "3 Years", totalFees: "Rs 43,000 per year" },
+        { course: "BA", duration: "3 Years", totalFees: "Rs 43,000 - 1.14 Lakhs total" },
+        { course: "Diploma Hotel Management", duration: "1 Year", totalFees: "Contact Institute" },
+      ],
+    },
+    admission: {
+      heading: "ITM Dehradun — Admission Process 2026",
+      intro: "ITM Dehradun admissions 2026 are open for all UG and PG courses. Admission is merit-based on a first-come, first-served basis. No specific entrance exam required for most courses. Eligibility: minimum 45-50% in Class 12 for UG courses; graduation for PG courses.",
+      table: [
+        { course: "BCA / B.Sc IT / BBA", exam: "Class 12 any stream, minimum 45-50% | Merit based + document verification" },
+        { course: "MBA", exam: "Graduation in any stream | Merit + Personal Interview" },
+        { course: "BHM (Hotel Management)", exam: "Class 12 any stream | Merit based" },
+        { course: "M.Sc IT", exam: "B.Sc IT / BCA / B.Sc CS | Merit based" },
+      ],
+      scholarships: "Merit scholarships 5% to 30% of tuition fees available for eligible students. Government scholarships for SC/ST/OBC also accepted.",
+    },
+    placementRecord: {
+      heading: "ITM Dehradun — Placement Record",
+      stats: [
+        { label: "Highest Package (2024)", value: "Rs 15 LPA" },
+        { label: "Average Package", value: "Rs 4 LPA" },
+        { label: "Students Placed (2024)", value: "121 students | 28 companies visited" },
+        { label: "Placement Rate", value: "90%" },
+        { label: "Industry Connections", value: "4,200+ industries" },
+      ],
+      topRecruiters: ["Wipro", "TCS", "Byju's", "Amazon", "Accenture", "Indigo Airlines", "Capgemini", "Hindustan Times", "Jaro Education", "Genpact", "Federal Bank", "IndiaMart"],
+    },
+    faq: {
+      heading: "Frequently Asked Questions — ITM Dehradun",
+      items: [
+        { question: "What is ITM Dehradun known for?", answer: "ITM Dehradun (Institute of Technology & Management) is known for being the first institute in Uttarakhand to offer specialized IT education, established in 2002. It is AICTE approved with 4,200+ industry connections and a 90% placement rate." },
+        { question: "What are the BCA fees at ITM Dehradun?", answer: "BCA fees at ITM Dehradun are Rs 3.36 Lakhs for 3 years. The admission is merit-based with no entrance exam required. Minimum 45% marks in Class 12 are required." },
+        { question: "What is the placement record at ITM Dehradun?", answer: "ITM Dehradun has a 90% placement rate with highest package Rs 15 LPA and average Rs 4 LPA. Top recruiters include Wipro, TCS, Amazon, Accenture and Indigo Airlines." },
+        { question: "Is ITM Dehradun AICTE approved?", answer: "Yes — ITM Dehradun is approved by AICTE and affiliated with HNB Garhwal Central University and Sri Dev Suman Uttarakhand University." },
+        { question: "What courses are offered at ITM Dehradun?", answer: "ITM Dehradun offers BCA, BBA, B.Sc IT, B.Sc Animation, BHM (Hotel Management), MBA, M.Sc IT, B.Com, BA and Diploma in Hotel Management." },
+        { question: "How to apply to ITM Dehradun?", answer: "Apply online at itmddn.in or get free counseling through Guidevera to choose the right course and get admission support." },
+      ],
+    },
+    schema: {
+      educationalOrg: {
+        "@context": "https://schema.org",
+        "@type": "EducationalOrganization",
+        "name": "Institute of Technology and Management Dehradun",
+        "url": "https://itmddn.in",
+        "description": "Uttarakhand's first IT education institute. AICTE approved. BCA, BBA, MBA, Hotel Management.",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "60, Chakrata Road, opp. Doon School, Yamuna Colony",
+          "addressLocality": "Dehradun",
+          "addressRegion": "Uttarakhand",
+          "addressCountry": "IN"
+        },
+        "foundingDate": "2002",
+        "sameAs": ["https://itmddn.in"]
+      },
+      faqPage: {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "What is ITM Dehradun known for?", "acceptedAnswer": { "@type": "Answer", "text": "First IT education institute in Uttarakhand, est. 2002. AICTE approved, 90% placement rate." } },
+          { "@type": "Question", "name": "What are the BCA fees at ITM Dehradun?", "acceptedAnswer": { "@type": "Answer", "text": "BCA fees Rs 3.36 Lakhs for 3 years. Merit-based admission, min 45% in Class 12." } },
+          { "@type": "Question", "name": "What is the placement record at ITM Dehradun?", "acceptedAnswer": { "@type": "Answer", "text": "90% placement rate, highest Rs 15 LPA, average Rs 4 LPA." } },
+          { "@type": "Question", "name": "Is ITM Dehradun AICTE approved?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — AICTE approved, affiliated with HNB Garhwal and Sri Dev Suman Universities." } }
+        ]
+      }
+    },
     admissionUpdates: [
       { label: "Admissions Open 2026–27", date: "Apply Now" },
       { label: "TCS iON Certifications", date: "Every Semester" },
@@ -1296,6 +1399,110 @@ GEU has 50,000+ alumni working at marquee brands like Apple, Google, Microsoft, 
 
     amenities: ["Wi-Fi Campus", "Newton House + CV Raman Hostel", "Gym", "Library", "Basketball Ground", "Cafeteria", "Medical Services", "Transport", "24x7 Security"],
 
+    seo: {
+      title: "Shivalik College of Engineering Dehradun — Courses, Fees, Admission 2026 | Guidevera",
+      description: "Shivalik College of Engineering Dehradun — NAAC A+, AICTE Approved. B.Tech, BBA, BCA, MBA courses. Fees Rs 5.81-8.17L. Highest placement Rs 42 LPA. Admission 2026.",
+      canonical: "https://guidevera.com/colleges/shivalik-college-of-engineering-dehradun",
+      ogTitle: "Shivalik College of Engineering Dehradun — Courses, Fees & Admission 2026",
+      ogDescription: "NAAC A+ | AICTE Approved | B.Tech CSE Rs 8.17L | Highest Rs 42 LPA | 92% Placement | 500+ Recruiters.",
+      ogImage: "https://guidevera.com/colleges/shivalik-banner.jpg",
+      twitterTitle: "Shivalik College of Engineering Dehradun — Courses, Fees & Admission 2026",
+      twitterDescription: "NAAC A+ | B.Tech, BBA, BCA, MBA | 92% placement, Rs 42 LPA highest.",
+      twitterImage: "https://guidevera.com/colleges/shivalik-banner.jpg",
+    },
+    h1: "Shivalik College of Engineering Dehradun — NAAC A+ | B.Tech CSE, AI & ML | Admission 2026",
+    subtext: "Shivalik College of Engineering (SCE), Dehradun is a NAAC A+ accredited, AICTE approved private engineering college established in 2008 — spread across an 18-acre campus on Shimla Bypass Road. SCE offers B.Tech in CSE, AI & ML, Data Science, Civil, Mechanical and ECE alongside BBA, BCA, MBA and B.Sc Agriculture. Ranked #68 B.Tech by Times of India 2025 and #3 Engineering college in Uttarakhand by Times. Highest placement Rs 42 LPA with 92% placement rate and 500+ recruiters.",
+    highlights: [
+      { label: "Established", value: "2008" },
+      { label: "Type", value: "Private Engineering College" },
+      { label: "Location", value: "Shiniwala, P.O. Sherpur, Shimla Road, Dehradun — 248197" },
+      { label: "Approved By", value: "AICTE, UGC" },
+      { label: "Affiliated To", value: "Uttarakhand Technical University (UTU)" },
+      { label: "NAAC Grade", value: "A+" },
+      { label: "Rankings", value: "#68 B.Tech Times 2025 | #3 Engineering Uttarakhand (Times) | #134 B.Tech Outlook | #2 Engineering Uttarakhand (Times)" },
+      { label: "Highest Placement", value: "Rs 42 LPA" },
+      { label: "Average Placement", value: "Rs 7 LPA" },
+      { label: "Placement Rate", value: "92%" },
+      { label: "Total Recruiters", value: "500+ companies" },
+      { label: "Distinctions", value: "First college in North India to establish Robotics Lab in collaboration with IIT Mumbai | First DELL EMC center of Academic Excellence in Dehradun | IBM System Centre of Excellence for Cloud Computing" },
+    ],
+    coursesFees: {
+      heading: "Shivalik College of Engineering Dehradun — Courses & Fees 2026",
+      rows: [
+        { course: "B.Tech CSE", duration: "4 Years", totalFees: "Rs 8.17 Lakhs" },
+        { course: "B.Tech Civil Engineering", duration: "4 Years", totalFees: "Rs 5.81 Lakhs" },
+        { course: "B.Tech (AI & ML / Data Science / ECE / Mechanical)", duration: "4 Years", totalFees: "Rs 5.81 - 8.17 Lakhs" },
+        { course: "BBA", duration: "3 Years", totalFees: "Rs 3.12 Lakhs" },
+        { course: "BCA", duration: "3 Years", totalFees: "Rs 3.12 Lakhs (approx)" },
+        { course: "MBA", duration: "2 Years", totalFees: "Rs 4.67 Lakhs" },
+        { course: "B.Sc Hons Agriculture", duration: "4 Years", totalFees: "Rs 4.00 Lakhs" },
+        { course: "Polytechnic (CSE / Mechanical)", duration: "3 Years", totalFees: "Rs 3.58 - 4.20 Lakhs" },
+        { course: "B.Pharma", duration: "4 Years", totalFees: "Contact College" },
+      ],
+    },
+    admission: {
+      heading: "Shivalik College of Engineering Dehradun — Admission Process 2026",
+      intro: "Shivalik College of Engineering Dehradun admissions 2026 are open. Apply online at shivalikcollege.edu.in. Application fee Rs 1,000. Eligibility: minimum 45% in Class 12 with PCM for B.Tech.",
+      table: [
+        { course: "B.Tech", exam: "JEE Main / UKSEE / Shivalik Entrance Test | Class 12 PCM minimum 45%" },
+        { course: "MBA", exam: "CAT / MAT / XAT / CMAT / NMAT / Shivalik Entrance Test | Graduation required" },
+        { course: "BBA / BCA", exam: "Class 12 any stream | Merit based" },
+        { course: "B.Sc Agriculture", exam: "Class 12 with Biology/Agriculture | Merit based" },
+        { course: "Polytechnic", exam: "Class 10 minimum 50% | UBTER JEEP / Merit based" },
+      ],
+      scholarships: "Merit-based scholarships, government scholarships for SC/ST/OBC/Minority students, AICTE scholarships and Uttarakhand domicile scholarships available.",
+    },
+    placementRecord: {
+      heading: "Shivalik College of Engineering Dehradun — Placement Record",
+      stats: [
+        { label: "Highest Package", value: "Rs 42 LPA" },
+        { label: "Average Package", value: "Rs 7 LPA" },
+        { label: "Placement Rate", value: "92%" },
+        { label: "Total Recruiters", value: "500+ companies" },
+        { label: "Alumni Placed", value: "2,500+ alumni placed worldwide" },
+      ],
+      topRecruiters: ["Google", "Amazon", "L&T", "HCL", "Dell", "Oracle", "Bosch", "Accenture", "TCS", "Infosys", "Capgemini", "IBM", "TATA Motors", "Hitachi", "ExtraMarks"],
+    },
+    faq: {
+      heading: "Frequently Asked Questions — Shivalik College of Engineering Dehradun",
+      items: [
+        { question: "Is Shivalik College of Engineering NAAC accredited?", answer: "Yes — Shivalik College of Engineering Dehradun is accredited NAAC A+ and is AICTE approved. It is affiliated with Uttarakhand Technical University (UTU)." },
+        { question: "What are the B.Tech fees at Shivalik College Dehradun?", answer: "B.Tech CSE fees at Shivalik College of Engineering are Rs 8.17 Lakhs for 4 years. B.Tech Civil fees are Rs 5.81 Lakhs. Annual fee ranges from Rs 1.30 Lakhs to Rs 5.59 Lakhs depending on specialization." },
+        { question: "What is the placement record at Shivalik College of Engineering?", answer: "Shivalik College achieved 92% placement rate with highest package Rs 42 LPA and average Rs 7 LPA. Over 500 companies visit annually and 2,500+ alumni placed worldwide." },
+        { question: "What B.Tech specializations are available at Shivalik College?", answer: "B.Tech specializations include CSE, AI & ML, Data Science, Civil Engineering, Mechanical Engineering, and Electronics & Communication Engineering (ECE)." },
+        { question: "What makes Shivalik College of Engineering unique?", answer: "SCE is the first college in North India to establish a Robotics Lab in collaboration with IIT Mumbai, first DELL EMC center in Dehradun, and IBM System Centre of Excellence for Cloud Computing." },
+        { question: "How to apply to Shivalik College of Engineering Dehradun?", answer: "Apply online at shivalikcollege.edu.in or get free counseling through Guidevera for expert help with course selection and admission process." },
+      ],
+    },
+    schema: {
+      educationalOrg: {
+        "@context": "https://schema.org",
+        "@type": "EducationalOrganization",
+        "name": "Shivalik College of Engineering",
+        "url": "https://shivalikcollege.edu.in",
+        "description": "NAAC A+ engineering college in Dehradun. B.Tech, BBA, BCA, MBA. 92% placement, Rs 42 LPA highest, 500+ recruiters.",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Shiniwala, P.O. Sherpur, Shimla Road",
+          "addressLocality": "Dehradun",
+          "addressRegion": "Uttarakhand",
+          "postalCode": "248197",
+          "addressCountry": "IN"
+        },
+        "foundingDate": "2008",
+        "sameAs": ["https://shivalikcollege.edu.in"]
+      },
+      faqPage: {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Is Shivalik College of Engineering NAAC accredited?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — NAAC A+, AICTE approved, affiliated with UTU." } },
+          { "@type": "Question", "name": "What are the B.Tech fees at Shivalik College Dehradun?", "acceptedAnswer": { "@type": "Answer", "text": "B.Tech CSE fees Rs 8.17 Lakhs, Civil Rs 5.81 Lakhs for 4 years." } },
+          { "@type": "Question", "name": "What is the placement record at Shivalik College?", "acceptedAnswer": { "@type": "Answer", "text": "92% placement rate, Rs 42 LPA highest, Rs 7 LPA average, 500+ companies." } },
+          { "@type": "Question", "name": "What B.Tech specializations are available at Shivalik?", "acceptedAnswer": { "@type": "Answer", "text": "CSE, AI & ML, Data Science, Civil, Mechanical, ECE." } }
+        ]
+      }
+    },
     admissionUpdates: [
       { label: "Admissions Open 2026", date: "Apply Now" },
     ],
@@ -1606,6 +1813,111 @@ GEU has 50,000+ alumni working at marquee brands like Apple, Google, Microsoft, 
 
     amenities: ["Wi-Fi Campus", "2 Boys + 1 Girls Hostel", "Library (PNB ATM on campus)", "Labs", "Badminton Court", "Gym", "Cafeteria", "Medicinal Plant Garden", "24x7 Security", "Transport"],
 
+    seo: {
+      title: "Dolphin PG Institute Dehradun — Courses, Fees, Admission 2026 | Guidevera",
+      description: "Dolphin PG Institute Dehradun — NAAC A+, est. 2002. BPT, B.Sc, M.Sc, B.Ed, MBA courses in Biomedical & Natural Sciences. UGC Autonomous. Admission 2026 on Guidevera.",
+      canonical: "https://guidevera.com/colleges/dolphin-institute-dehradun",
+      ogTitle: "Dolphin PG Institute Dehradun — Courses, Fees & Admission 2026",
+      ogDescription: "NAAC A+ | UGC Autonomous | BPT, B.Sc, M.Sc, B.Ed, MBA | 250+ Recruiters | Dehradun.",
+      ogImage: "https://guidevera.com/colleges/dolphin-banner.jpg",
+      twitterTitle: "Dolphin PG Institute Dehradun — Courses, Fees & Admission 2026",
+      twitterDescription: "NAAC A+ UGC Autonomous institute. BPT, B.Sc, M.Sc, B.Ed, MBA. Check fees & admission.",
+      twitterImage: "https://guidevera.com/colleges/dolphin-banner.jpg",
+    },
+    h1: "Dolphin PG Institute Dehradun — NAAC A+ | BPT, B.Sc, M.Sc | UGC Autonomous | Admission 2026",
+    subtext: "Dolphin PG Institute of Biomedical & Natural Sciences (DIBNS), Dehradun is Uttarakhand's first self-financed autonomous educational institution — established in 2002 and accredited NAAC A+ with CGPA 3.42. Located on a 7-acre campus near Chakrata Road, DIBNS offers 55+ courses in BPT (Physiotherapy), B.Sc, M.Sc, B.Ed, MBA, B.Com and more across Biomedical Sciences, Natural Sciences, Commerce and Education. Affiliated to HNB Garhwal Central University with UGC Autonomous status and NEP 2020 fully implemented.",
+    highlights: [
+      { label: "Established", value: "2002" },
+      { label: "Type", value: "Private Autonomous Institution" },
+      { label: "Location", value: "Manduwala, Near Suddowala, Chakrata Road, Dehradun — 248007" },
+      { label: "Approved By", value: "UGC, IAP (Indian Association of Physiotherapists), NCTE, Uttarakhand State Govt" },
+      { label: "Affiliated To", value: "HNB Garhwal Central University, Srinagar" },
+      { label: "NAAC Grade", value: "A+ (CGPA 3.42 — 2nd Cycle)" },
+      { label: "Distinction", value: "First self-financed autonomous educational institution in Uttarakhand | NEP 2020 fully implemented" },
+      { label: "Total Courses", value: "55+ Courses across 9 Streams" },
+      { label: "Total Recruiters", value: "250+ recruiters" },
+      { label: "Library", value: "23,400 books | 5,000 e-journals | 95,000 e-books | 16 departmental libraries" },
+      { label: "Campus", value: "7 Acres | Wi-Fi | Specialized labs for Biotechnology, Microbiology, Biochemistry, Physiotherapy" },
+    ],
+    coursesFees: {
+      heading: "Dolphin PG Institute Dehradun — Courses & Fees 2026",
+      rows: [
+        { course: "BPT (Physiotherapy)", duration: "4.5 Years", totalFees: "Contact Institute" },
+        { course: "B.Sc Hons (Various streams)", duration: "4 Years", totalFees: "Rs 3.62 - 4.02 Lakhs" },
+        { course: "B.Sc (3-year programs)", duration: "3 Years", totalFees: "Rs 1.73 - 2.50 Lakhs" },
+        { course: "M.Sc (Various streams)", duration: "2 Years", totalFees: "Rs 1.93 - 2.33 Lakhs" },
+        { course: "MPT (Master of Physiotherapy)", duration: "2 Years", totalFees: "Contact Institute" },
+        { course: "MBA", duration: "2 Years", totalFees: "Rs 3.53 Lakhs" },
+        { course: "B.Ed", duration: "2 Years", totalFees: "Contact Institute" },
+        { course: "B.Com Hons", duration: "3 Years", totalFees: "Rs 1.73 Lakhs (approx)" },
+        { course: "M.Com", duration: "2 Years", totalFees: "Contact Institute" },
+        { course: "PhD", duration: "3 Years", totalFees: "Contact Institute" },
+      ],
+    },
+    admission: {
+      heading: "Dolphin PG Institute Dehradun — Admission Process 2026",
+      intro: "Dolphin PG Institute Dehradun admissions 2026 are open. Applications available online and offline at dolphininstitute.ac.in. Admission is purely merit-based on qualifying examination marks. B.Ed admissions involve entrance test as per state government and NCTE rules.",
+      table: [
+        { course: "BPT (Physiotherapy)", exam: "Class 12 with Physics, Chemistry & Biology | Merit based" },
+        { course: "B.Sc / B.Sc Hons", exam: "Class 12 with Science (PCB/PCM/PCBM) | Merit based | Minimum 50%" },
+        { course: "M.Sc", exam: "B.Sc in relevant stream | Merit based" },
+        { course: "MBA", exam: "Graduation any stream minimum 50% | Merit + Interview" },
+        { course: "B.Ed", exam: "Graduation minimum 50% | Entrance test + State Govt rules" },
+        { course: "PhD", exam: "PG in relevant stream | Entrance test + Interview" },
+      ],
+      scholarships: "Scholarships for meritorious students (CUET/Board scores), Uttarakhand & hill terrain students, single girl children, sports achievers, defence personnel wards, economically weaker sections, and alumni scholarships.",
+    },
+    placementRecord: {
+      heading: "Dolphin PG Institute Dehradun — Placement Record",
+      stats: [
+        { label: "Placement Cell", value: "Dedicated Training & Placement Cell with 250+ recruiter network" },
+        { label: "Placement Support", value: "Personality development, communication skills, mock interviews, GD sessions" },
+        { label: "Industry Connect", value: "Regular guest lectures, industry visits, internships" },
+        { label: "Top Sectors", value: "Healthcare, Pharmaceuticals, Biomedical, Education, Research, Commerce" },
+        { label: "Entrepreneurship", value: "Students supported to access bank loan facilities for startups" },
+      ],
+      topRecruiters: ["Fortis Healthcare", "Max Hospital", "AIIMS", "Cipla", "Apollo", "Patanjali", "Torrent Pharma", "Punjab Agro Venture"],
+    },
+    faq: {
+      heading: "Frequently Asked Questions — Dolphin PG Institute Dehradun",
+      items: [
+        { question: "What is the NAAC grade of Dolphin PG Institute Dehradun?", answer: "Dolphin PG Institute is accredited NAAC A+ with CGPA 3.42 in the 2nd cycle — making it one of the top science institutes in Uttarakhand. It also has UGC Autonomous status." },
+        { question: "Is Dolphin PG Institute the first autonomous institution in Uttarakhand?", answer: "Yes — Dolphin PG Institute of Biomedical & Natural Sciences, Dehradun is the first self-financed autonomous educational institution in Uttarakhand, affiliated with HNB Garhwal Central University." },
+        { question: "What courses are offered at Dolphin PG Institute Dehradun?", answer: "Dolphin PG Institute offers 55+ courses including BPT (Physiotherapy), B.Sc, M.Sc, MBA, B.Ed, B.Com, M.Com and PhD across Biomedical Sciences, Natural Sciences, Commerce and Education." },
+        { question: "What is the BPT course at Dolphin Institute Dehradun?", answer: "BPT (Bachelor of Physiotherapy) at Dolphin PG Institute is a 4.5-year programme approved by the Indian Association of Physiotherapists (IAP). It is one of the most sought-after healthcare courses in Uttarakhand." },
+        { question: "What is the fee structure at Dolphin PG Institute?", answer: "Fees at Dolphin PG Institute range from Rs 1.73 Lakhs for B.Sc 3-year programmes to Rs 4.02 Lakhs for B.Sc Hons 4-year programmes. MBA fees are Rs 3.53 Lakhs for 2 years." },
+        { question: "How to apply to Dolphin PG Institute Dehradun?", answer: "Apply online or offline at dolphininstitute.ac.in. Admission is merit-based. Get free counseling through Guidevera to find the right science or healthcare course." },
+      ],
+    },
+    schema: {
+      educationalOrg: {
+        "@context": "https://schema.org",
+        "@type": "EducationalOrganization",
+        "name": "Dolphin PG Institute of Biomedical and Natural Sciences",
+        "url": "https://dolphininstitute.ac.in",
+        "description": "NAAC A+ (CGPA 3.42), UGC Autonomous. First self-financed autonomous institution in Uttarakhand. BPT, B.Sc, M.Sc, MBA, B.Ed.",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Manduwala, Near Suddowala, Chakrata Road",
+          "addressLocality": "Dehradun",
+          "addressRegion": "Uttarakhand",
+          "postalCode": "248007",
+          "addressCountry": "IN"
+        },
+        "foundingDate": "2002",
+        "sameAs": ["https://dolphininstitute.ac.in"]
+      },
+      faqPage: {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "What is the NAAC grade of Dolphin PG Institute Dehradun?", "acceptedAnswer": { "@type": "Answer", "text": "NAAC A+ with CGPA 3.42, 2nd cycle. UGC Autonomous status." } },
+          { "@type": "Question", "name": "Is Dolphin PG Institute the first autonomous institution in Uttarakhand?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — first self-financed autonomous institution in Uttarakhand affiliated with HNB Garhwal University." } },
+          { "@type": "Question", "name": "What courses are offered at Dolphin PG Institute Dehradun?", "acceptedAnswer": { "@type": "Answer", "text": "55+ courses: BPT, B.Sc, M.Sc, MBA, B.Ed, B.Com, M.Com, PhD." } },
+          { "@type": "Question", "name": "What is the BPT course at Dolphin Institute Dehradun?", "acceptedAnswer": { "@type": "Answer", "text": "BPT (Bachelor of Physiotherapy) — 4.5 years, IAP approved, top healthcare course in Uttarakhand." } }
+        ]
+      }
+    },
     admissionUpdates: [
       { label: "Admissions Open 2026", date: "Apply Now" },
     ],
@@ -1707,6 +2019,110 @@ GEU has 50,000+ alumni working at marquee brands like Apple, Google, Microsoft, 
 
     amenities: ["24hr Wi-Fi Campus", "Boys Hostel (500+ capacity)", "Girls Hostel (300+ capacity)", "Central Library", "Gym", "Cricket Ground", "Basketball Court", "Football Ground", "Cafeteria (Veg + Non-Veg + Chinese)", "Medical Clinic", "Transport", "Bank Facility"],
 
+    seo: {
+      title: "JBIT Dehradun — JB Institute of Technology | Courses, Fees, Admission 2026 | Guidevera",
+      description: "JBIT Dehradun — NAAC A, AICTE Approved. B.Tech CSE, AI & ML, Civil, Mechanical. Fees Rs 3.72L for 4 years. Highest placement Rs 30 LPA. Admission 2026.",
+      canonical: "https://guidevera.com/colleges/jbit-dehradun",
+      ogTitle: "JBIT Dehradun — B.Tech, MBA, Pharmacy | Courses, Fees & Admission 2026",
+      ogDescription: "NAAC A | AICTE Approved | B.Tech Rs 3.72L | Highest Rs 30 LPA | 83%+ Placement | 150+ Recruiters.",
+      ogImage: "https://guidevera.com/colleges/jbit-banner.jpg",
+      twitterTitle: "JBIT Dehradun — B.Tech, MBA, Pharmacy | Courses, Fees 2026",
+      twitterDescription: "NAAC A | AICTE Approved | Affordable B.Tech Rs 3.72L | Check fees & admission on Guidevera.",
+      twitterImage: "https://guidevera.com/colleges/jbit-banner.jpg",
+    },
+    h1: "JBIT Dehradun — JB Institute of Technology | NAAC A | Affordable B.Tech | Admission 2026",
+    subtext: "JB Institute of Technology (JBIT), Dehradun is a NAAC A graded, AICTE approved private technical institute established in 2009 by Jai Bhagwan Educational Society. Spread across a 25-acre campus in the foothills of the Himalayas on NH-07, JBIT offers B.Tech, MBA, M.Tech, B.Pharma, B.Sc Agriculture and more. Affiliated with VMSB Uttarakhand Technical University and Sri Dev Suman Uttarakhand University. Ranked #157 B.Tech India Today 2024 with 83%+ placement rate and B.Tech fees as low as Rs 3.72 Lakhs for 4 years — best value engineering college in Dehradun.",
+    highlights: [
+      { label: "Established", value: "2009 (Jai Bhagwan Educational Society)" },
+      { label: "Type", value: "Private Engineering & Technical Institute" },
+      { label: "Location", value: "23 Milestone, NH-07, Chakrata Road, Shankarpur, Dehradun — 248197" },
+      { label: "Approved By", value: "AICTE, PCI (Pharmacy Council of India), MoE (MHRD)" },
+      { label: "Affiliated To", value: "VMSB Uttarakhand Technical University | Sri Dev Suman Uttarakhand University" },
+      { label: "NAAC Grade", value: "A" },
+      { label: "Rankings", value: "#157 B.Tech Private Colleges (India Today 2024) | #107 B.Tech Outlook 2023 | #142 B.Tech Times 2023 | Top Engineering College Dehradun" },
+      { label: "Highest Placement", value: "Rs 30 LPA" },
+      { label: "Average Placement", value: "Rs 4.4 LPA" },
+      { label: "Placement Rate", value: "83% - 96.69%" },
+      { label: "Total Recruiters", value: "150+ companies" },
+      { label: "Campus", value: "25 Acres | Boys hostel 500 capacity | Girls hostel 300 capacity" },
+    ],
+    coursesFees: {
+      heading: "JBIT Dehradun — Courses & Fees 2026",
+      rows: [
+        { course: "B.Tech (CSE, AI & ML, ECE, Civil, Mechanical, EE)", duration: "4 Years", totalFees: "Rs 3.72 Lakhs" },
+        { course: "B.Tech Lateral Entry", duration: "3 Years", totalFees: "Rs 1.86 Lakhs" },
+        { course: "MBA", duration: "2 Years", totalFees: "Rs 2.52 Lakhs" },
+        { course: "M.Tech", duration: "2 Years", totalFees: "Rs 1.94 Lakhs (approx)" },
+        { course: "B.Pharma", duration: "4 Years", totalFees: "Rs 2.50 Lakhs (approx)" },
+        { course: "D.Pharma", duration: "2 Years", totalFees: "Contact Institute" },
+        { course: "B.Sc Agriculture", duration: "4 Years", totalFees: "Contact Institute" },
+        { course: "Polytechnic", duration: "3 Years", totalFees: "Rs 1.61 Lakhs" },
+        { course: "Diploma (various)", duration: "1-3 Years", totalFees: "Rs 70,000 onwards" },
+      ],
+    },
+    admission: {
+      heading: "JBIT Dehradun — Admission Process 2026",
+      intro: "JBIT Dehradun admissions 2026 are open. Apply online at jbitdoon.com. Application fee Rs 1,000. Admission is merit and entrance exam based. Minimum 45-50% in Class 12 required for engineering courses.",
+      table: [
+        { course: "B.Tech", exam: "JEE Main / UKSEE / UBTER JEEP | Class 12 PCM minimum 45-50%" },
+        { course: "MBA", exam: "CAT / MAT / CMAT / UKSEE / Merit | Graduation required" },
+        { course: "M.Tech", exam: "GATE / UKSEE | B.Tech in relevant stream" },
+        { course: "B.Pharma", exam: "Merit based | Class 12 with PCB/PCM minimum 45%" },
+        { course: "Polytechnic / Diploma", exam: "Class 10 minimum | UBTER JEEP / Merit" },
+      ],
+      scholarships: "Merit scholarships for general and GATE score-based scholarships for M.Tech. Government scholarships for SC/ST/OBC students also accepted.",
+    },
+    placementRecord: {
+      heading: "JBIT Dehradun — Placement Record",
+      stats: [
+        { label: "Highest Package", value: "Rs 30 LPA" },
+        { label: "Average Package", value: "Rs 4.4 LPA" },
+        { label: "Placement Rate", value: "83% - 96.69%" },
+        { label: "Total Offers", value: "250+ job offers" },
+        { label: "Total Recruiters", value: "150+ companies" },
+      ],
+      topRecruiters: ["TCS", "Wipro", "Infosys", "Tech Mahindra", "HCL", "Cognizant", "Amazon", "IBM", "Accenture", "UpGrad", "Genpact", "Jio", "Hero Cycles", "Sony India", "Reliance Jio", "Capgemini", "Birlasoft"],
+    },
+    faq: {
+      heading: "Frequently Asked Questions — JBIT Dehradun",
+      items: [
+        { question: "What is the NAAC grade of JBIT Dehradun?", answer: "JBIT Dehradun (JB Institute of Technology) holds a NAAC 'A' grade accreditation. It is also AICTE approved and PCI approved." },
+        { question: "What are the B.Tech fees at JBIT Dehradun?", answer: "B.Tech fees at JBIT Dehradun are Rs 3.72 Lakhs for 4 years — making it one of the most affordable NAAC A accredited engineering colleges in Dehradun at Rs 92,000 per year." },
+        { question: "What is the placement record at JBIT Dehradun?", answer: "JBIT Dehradun has a placement rate of 83-96.69% with highest package Rs 30 LPA and average Rs 4.4 LPA. 150+ companies including TCS, Amazon, Wipro, Infosys visit for campus placements." },
+        { question: "What B.Tech specializations are offered at JBIT Dehradun?", answer: "B.Tech specializations at JBIT include CSE, AI & ML, Civil Engineering, Mechanical Engineering, Electrical Engineering, and Electronics & Communication Engineering (ECE)." },
+        { question: "Is JBIT Dehradun good for affordable engineering education?", answer: "Yes — JBIT Dehradun offers NAAC A accredited B.Tech at just Rs 3.72 Lakhs total for 4 years — one of the most affordable quality engineering programs in Uttarakhand. Hostel fees Rs 62,000-70,000 per year." },
+        { question: "How to apply to JBIT Dehradun?", answer: "Apply online at jbitdoon.com or get free counseling through Guidevera to find the right engineering course and secure admission." },
+      ],
+    },
+    schema: {
+      educationalOrg: {
+        "@context": "https://schema.org",
+        "@type": "EducationalOrganization",
+        "name": "JB Institute of Technology",
+        "url": "https://jbitdoon.com",
+        "description": "NAAC A, AICTE approved engineering college in Dehradun. B.Tech Rs 3.72L, highest placement Rs 30 LPA, 83%+ placement rate.",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "23 Milestone, NH-07, Chakrata Road, Shankarpur",
+          "addressLocality": "Dehradun",
+          "addressRegion": "Uttarakhand",
+          "postalCode": "248197",
+          "addressCountry": "IN"
+        },
+        "foundingDate": "2009",
+        "sameAs": ["https://jbitdoon.com"]
+      },
+      faqPage: {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "What is the NAAC grade of JBIT Dehradun?", "acceptedAnswer": { "@type": "Answer", "text": "NAAC A grade, AICTE approved, PCI approved." } },
+          { "@type": "Question", "name": "What are the B.Tech fees at JBIT Dehradun?", "acceptedAnswer": { "@type": "Answer", "text": "B.Tech Rs 3.72 Lakhs for 4 years — Rs 92,000/year, most affordable NAAC A college in Dehradun." } },
+          { "@type": "Question", "name": "What is the placement record at JBIT Dehradun?", "acceptedAnswer": { "@type": "Answer", "text": "83-96.69% placement rate, highest Rs 30 LPA, average Rs 4.4 LPA, 150+ recruiters." } },
+          { "@type": "Question", "name": "What B.Tech specializations are offered at JBIT?", "acceptedAnswer": { "@type": "Answer", "text": "CSE, AI & ML, Civil, Mechanical, Electrical, ECE." } }
+        ]
+      }
+    },
     admissionUpdates: [
       { label: "Admissions Open 2026", date: "Apply Now" },
     ],

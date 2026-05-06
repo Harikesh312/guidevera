@@ -203,7 +203,7 @@ export default function HomeClient() {
               initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.95, opacity: 0 }}
               className="bg-[#121214] border border-white/10 rounded-2xl p-6 md:p-8 w-full max-w-md relative"
             >
-              <button onClick={closeApplyModal} className="absolute top-4 right-4 text-white/40 hover:text-white transition-colors">
+              <button suppressHydrationWarning onClick={closeApplyModal} className="absolute top-4 right-4 text-white/40 hover:text-white transition-colors">
                 <X className="w-5 h-5" />
               </button>
 
@@ -212,7 +212,7 @@ export default function HomeClient() {
                   <CheckCircle className="w-16 h-16 text-[#0EB4A6] mx-auto mb-4" />
                   <h3 className="text-xl font-bold mb-2">Application Submitted!</h3>
                   <p className="text-white/60">We'll call you within 24 hours!</p>
-                  <button onClick={closeApplyModal} className="mt-6 px-6 py-2.5 bg-[#0EB4A6] text-black font-semibold rounded-full">Done</button>
+                  <button suppressHydrationWarning onClick={closeApplyModal} className="mt-6 px-6 py-2.5 bg-[#0EB4A6] text-black font-semibold rounded-full">Done</button>
                 </div>
               ) : (
                 <>
@@ -234,7 +234,7 @@ export default function HomeClient() {
                       {INDIAN_STATES.map(s => <option key={s} value={s} className="bg-[#121214]">{s}</option>)}
                     </select>
                     {formStatus === "error" && <p className="text-red-400 text-xs">Failed to submit. Please try again.</p>}
-                    <button type="submit" disabled={formStatus === "loading"} className="w-full py-3.5 bg-[#0EB4A6] hover:bg-[#0c9c90] text-black font-bold rounded-xl transition-all shadow-[0_0_20px_rgba(14,180,166,0.3)] disabled:opacity-50">
+                    <button suppressHydrationWarning type="submit" disabled={formStatus === "loading"} className="w-full py-3.5 bg-[#0EB4A6] hover:bg-[#0c9c90] text-black font-bold rounded-xl transition-all shadow-[0_0_20px_rgba(14,180,166,0.3)] disabled:opacity-50">
                       {formStatus === "loading" ? "Submitting..." : "Request Callback"}
                     </button>
                   </form>
@@ -378,7 +378,7 @@ export default function HomeClient() {
                           View Details
                         </Link>
                       ) : (
-                        <button disabled className="w-full py-2 rounded-lg border border-white/5 text-[11px] md:text-xs font-medium text-white/20 cursor-not-allowed">
+                        <button suppressHydrationWarning disabled className="w-full py-2 rounded-lg border border-white/5 text-[11px] md:text-xs font-medium text-white/20 cursor-not-allowed">
                           Coming Soon
                         </button>
                       )}
@@ -388,7 +388,7 @@ export default function HomeClient() {
                           Apply Now
                         </button>
                       ) : (
-                        <button disabled className="w-full py-2 rounded-lg bg-white/5 text-black text-[11px] md:text-xs font-bold cursor-not-allowed text-white/20">
+                        <button suppressHydrationWarning disabled className="w-full py-2 rounded-lg bg-white/5 text-black text-[11px] md:text-xs font-bold cursor-not-allowed text-white/20">
                           Waitlist
                         </button>
                       )}
@@ -425,17 +425,17 @@ export default function HomeClient() {
                           View Details
                         </Link>
                       ) : (
-                        <button disabled className="w-full py-2 rounded-lg border border-white/5 text-[11px] md:text-xs font-medium text-white/20 cursor-not-allowed">
+                        <button suppressHydrationWarning disabled className="w-full py-2 rounded-lg border border-white/5 text-[11px] md:text-xs font-medium text-white/20 cursor-not-allowed">
                           Coming Soon
                         </button>
                       )}
                       
                       {col.slug ? (
-                        <button onClick={(e) => { e.stopPropagation(); openApplyModal(col); }} className="w-full py-2 rounded-lg bg-[#0EB4A6] hover:bg-[#0c9c90] text-black text-[11px] md:text-xs font-bold transition-colors shadow-[0_2px_10px_rgba(14,180,166,0.3)] min-touch flex items-center justify-center cursor-pointer">
+                        <button suppressHydrationWarning onClick={(e) => { e.stopPropagation(); openApplyModal(col); }} className="w-full py-2 rounded-lg bg-[#0EB4A6] hover:bg-[#0c9c90] text-black text-[11px] md:text-xs font-bold transition-colors shadow-[0_2px_10px_rgba(14,180,166,0.3)] min-touch flex items-center justify-center cursor-pointer">
                           Apply Now
                         </button>
                       ) : (
-                        <button disabled className="w-full py-2 rounded-lg bg-white/5 text-black text-[11px] md:text-xs font-bold cursor-not-allowed text-white/20">
+                        <button suppressHydrationWarning disabled className="w-full py-2 rounded-lg bg-white/5 text-black text-[11px] md:text-xs font-bold cursor-not-allowed text-white/20">
                           Waitlist
                         </button>
                       )}
